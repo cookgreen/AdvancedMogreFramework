@@ -1,0 +1,12 @@
+E:\Visual Studio 2013\Projects\Mogre Advanced Framework\Mogre Advanced Framework\bin\Debug\Advanced_Moge_Framework.exe
+E:\Visual Studio 2013\Projects\Mogre Advanced Framework\Mogre Advanced Framework\bin\Debug\Advanced_Moge_Framework.pdb
+E:\Visual Studio 2013\Projects\Mogre Advanced Framework\Mogre Advanced Framework\bin\Debug\Mogre-Procedural.dll
+E:\Visual Studio 2013\Projects\Mogre Advanced Framework\Mogre Advanced Framework\bin\Debug\Mogre.dll
+E:\Visual Studio 2013\Projects\Mogre Advanced Framework\Mogre Advanced Framework\bin\Debug\MogreFramework.dll
+E:\Visual Studio 2013\Projects\Mogre Advanced Framework\Mogre Advanced Framework\bin\Debug\Mogre_Procedural.MogreBites.dll
+E:\Visual Studio 2013\Projects\Mogre Advanced Framework\Mogre Advanced Framework\bin\Debug\MOIS.dll
+E:\Visual Studio 2013\Projects\Mogre Advanced Framework\Mogre Advanced Framework\bin\Debug\Mogre.xml
+E:\Visual Studio 2013\Projects\Mogre Advanced Framework\Mogre Advanced Framework\obj\Debug\Advanced_Moge_Framework.exe
+E:\Visual Studio 2013\Projects\Mogre Advanced Framework\Mogre Advanced Framework\obj\Debug\Advanced_Moge_Framework.pdb
+E:\Visual Studio 2013\Projects\Mogre Advanced Framework\Mogre Advanced Framework\bin\Debug\Advanced_Moge_Framework.exe.config
+E:\Visual Studio 2013\Projects\Mogre Advanced Framework\Mogre Advanced Framework\obj\Debug\Mogre Advanced Framework.csprojResolveAssemblyReference.cache
