@@ -10,3 +10,13 @@ E:\Visual Studio 2013\Projects\Mogre Advanced Framework\Mogre Advanced Framework
 E:\Visual Studio 2013\Projects\Mogre Advanced Framework\Mogre Advanced Framework\obj\Debug\Advanced_Moge_Framework.pdb
 E:\Visual Studio 2013\Projects\Mogre Advanced Framework\Mogre Advanced Framework\bin\Debug\Advanced_Moge_Framework.exe.config
 E:\Visual Studio 2013\Projects\Mogre Advanced Framework\Mogre Advanced Framework\obj\Debug\Mogre Advanced Framework.csprojResolveAssemblyReference.cache
+E:\Respority\Advanced_Mogre_Framework\Advanced_Mogre_Framework\Mogre Advanced Framework\bin\Debug\Advanced_Moge_Framework.exe.config
+E:\Respority\Advanced_Mogre_Framework\Advanced_Mogre_Framework\Mogre Advanced Framework\obj\Debug\Advanced_Moge_Framework.exe
+E:\Respority\Advanced_Mogre_Framework\Advanced_Mogre_Framework\Mogre Advanced Framework\obj\Debug\Advanced_Moge_Framework.pdb
+E:\Respority\Advanced_Mogre_Framework\Advanced_Mogre_Framework\Mogre Advanced Framework\bin\Debug\Advanced_Moge_Framework.exe
+E:\Respority\Advanced_Mogre_Framework\Advanced_Mogre_Framework\Mogre Advanced Framework\bin\Debug\Advanced_Moge_Framework.pdb
+E:\Respority\Advanced_Mogre_Framework\Advanced_Mogre_Framework\Mogre Advanced Framework\bin\Debug\Mogre.dll
+E:\Respority\Advanced_Mogre_Framework\Advanced_Mogre_Framework\Mogre Advanced Framework\bin\Debug\Mogre_Procedural.MogreBites.dll
+E:\Respority\Advanced_Mogre_Framework\Advanced_Mogre_Framework\Mogre Advanced Framework\bin\Debug\MOIS.dll
+E:\Respority\Advanced_Mogre_Framework\Advanced_Mogre_Framework\Mogre Advanced Framework\bin\Debug\Mogre.xml
+E:\Respority\Advanced_Mogre_Framework\Advanced_Mogre_Framework\Mogre Advanced Framework\obj\Debug\Mogre Advanced Framework.csprojResolveAssemblyReference.cache
