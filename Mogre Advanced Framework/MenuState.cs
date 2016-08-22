@@ -17,6 +17,7 @@ namespace Mogre_Advanced_Framework
         public override void enter()
         {
             AdvancedMogreFramework.m_pLog.LogMessage("Entering MenuState...");
+            m_bQuit = false;
  
             m_pSceneMgr = AdvancedMogreFramework.m_pRoot.CreateSceneManager(Mogre.SceneType.ST_GENERIC, "MenuSceneMgr");
             ColourValue cvAmbineLight=new ColourValue(0.7f,0.7f,0.7f);

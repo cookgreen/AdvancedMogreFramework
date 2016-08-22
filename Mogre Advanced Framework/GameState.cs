@@ -87,10 +87,10 @@ namespace Mogre_Advanced_Framework
         public override void exit()
         {
             AdvancedMogreFramework.m_pLog.LogMessage("Leaving GameState...");
- 
-            m_pSceneMgr.DestroyCamera(m_pCamera);
-            m_pSceneMgr.DestroyQuery(m_pRSQ);
+
             if(m_pSceneMgr!=null)
+                m_pSceneMgr.DestroyCamera(m_pCamera);
+                m_pSceneMgr.DestroyQuery(m_pRSQ);
                 AdvancedMogreFramework.m_pRoot.DestroySceneManager(m_pSceneMgr);
         }
         public override bool pause()

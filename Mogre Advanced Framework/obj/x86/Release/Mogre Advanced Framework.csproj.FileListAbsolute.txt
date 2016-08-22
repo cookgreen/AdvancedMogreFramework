@@ -18,3 +18,12 @@ E:\Respority\Advanced_Mogre_Framework\Advanced_Mogre_Framework\Mogre Advanced Fr
 E:\Respority\Advanced_Mogre_Framework\Advanced_Mogre_Framework\Mogre Advanced Framework\bin\x86\Release\MOIS.dll
 E:\Respority\Advanced_Mogre_Framework\Advanced_Mogre_Framework\Mogre Advanced Framework\bin\x86\Release\Mogre.xml
 E:\Respority\Advanced_Mogre_Framework\Advanced_Mogre_Framework\Mogre Advanced Framework\obj\x86\Release\Mogre Advanced Framework.csprojResolveAssemblyReference.cache
+E:\Respority\AdvancedMogreFramework\Mogre Advanced Framework\bin\x86\Release\Advanced_Moge_Framework.exe.config
+E:\Respority\AdvancedMogreFramework\Mogre Advanced Framework\obj\x86\Release\Advanced_Moge_Framework.exe
+E:\Respority\AdvancedMogreFramework\Mogre Advanced Framework\obj\x86\Release\Advanced_Moge_Framework.pdb
+E:\Respority\AdvancedMogreFramework\Mogre Advanced Framework\bin\x86\Release\Advanced_Moge_Framework.exe
+E:\Respority\AdvancedMogreFramework\Mogre Advanced Framework\bin\x86\Release\Advanced_Moge_Framework.pdb
+E:\Respority\AdvancedMogreFramework\Mogre Advanced Framework\bin\x86\Release\Mogre.dll
+E:\Respority\AdvancedMogreFramework\Mogre Advanced Framework\bin\x86\Release\Mogre_Procedural.MogreBites.dll
+E:\Respority\AdvancedMogreFramework\Mogre Advanced Framework\bin\x86\Release\Mogre.xml
+E:\Respority\AdvancedMogreFramework\Mogre Advanced Framework\obj\x86\Release\Mogre Advanced Framework.csprojResolveAssemblyReference.cache

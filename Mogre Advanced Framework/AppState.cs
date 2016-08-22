@@ -17,7 +17,7 @@ namespace Mogre_Advanced_Framework
 
         public virtual AppState findByName(String stateName) { return null; }
         public virtual void changeAppState(AppState state) { }
-        public virtual bool pushAppState(AppState state) { return true; }
+        public virtual bool pushAppState(AppState state) { return false; }
         public virtual void popAppState() { }
         public virtual void pauseAppState() { }
         public virtual void shutdown() { }
@@ -38,7 +38,7 @@ namespace Mogre_Advanced_Framework
  
 	    public virtual void enter(){}
 	    public virtual void exit(){}
-	    public virtual bool pause(){return true;}
+	    public virtual bool pause(){return false;}
 	    public virtual void resume(){}
         public virtual void update(double timeSinceLastFrame) { }
         public AppState(){}
