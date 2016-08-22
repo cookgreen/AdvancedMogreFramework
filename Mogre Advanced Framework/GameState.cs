@@ -31,8 +31,8 @@ namespace Mogre_Advanced_Framework
         public override void enter()
         {
             AdvancedMogreFramework.m_pLog.LogMessage("Entering GameState...");
- 
-            AdvancedMogreFramework.m_pRoot.CreateSceneManager(SceneType.ST_GENERIC, "GameSceneMgr");
+
+            m_pSceneMgr=AdvancedMogreFramework.m_pRoot.CreateSceneManager(SceneType.ST_GENERIC, "GameSceneMgr");
             ColourValue cvAmbineLight=new ColourValue(0.7f,0.7f,0.7f);
             m_pSceneMgr.AmbientLight=cvAmbineLight;//(Ogre::ColourValue(0.7f, 0.7f, 0.7f));
  
@@ -51,6 +51,7 @@ namespace Mogre_Advanced_Framework
 
             AdvancedMogreFramework.m_pViewport.Camera=m_pCamera;
             m_pCurrentObject = null;
+
  
             buildGUI();
  
@@ -179,6 +180,12 @@ namespace Mogre_Advanced_Framework
             chatModes.Insert(chatModes.Count,"Wireframe mode");
             chatModes.Insert(chatModes.Count,"Point mode");
             AdvancedMogreFramework.m_pTrayMgr.createLongSelectMenu(TrayLocation.TL_TOPRIGHT, "ChatModeSelMenu", "ChatMode", 200, 3, chatModes);
+
+            AdvancedMogreFramework.m_pMouse.MouseMoved += new MouseListener.MouseMovedHandler(mouseMoved);
+            AdvancedMogreFramework.m_pMouse.MousePressed += new MouseListener.MousePressedHandler(mousePressed);
+            AdvancedMogreFramework.m_pMouse.MouseReleased += new MouseListener.MouseReleasedHandler(mouseReleased);
+            AdvancedMogreFramework.m_pKeyboard.KeyPressed += new KeyListener.KeyPressedHandler(keyPressed);
+            AdvancedMogreFramework.m_pKeyboard.KeyReleased += new KeyListener.KeyReleasedHandler(keyReleased);
         }
 
         public bool keyPressed(KeyEvent keyEventRef)
