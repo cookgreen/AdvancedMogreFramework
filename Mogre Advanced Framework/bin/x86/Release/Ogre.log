@@ -1,66 +1,66 @@
-10:10:40: Creating resource group General
-10:10:40: Creating resource group Internal
-10:10:40: Creating resource group Autodetect
-10:10:40: SceneManagerFactory for type 'DefaultSceneManager' registered.
-10:10:40: Registering ResourceManager for type Material
-10:10:40: Registering ResourceManager for type Mesh
-10:10:40: Registering ResourceManager for type Skeleton
-10:10:40: MovableObjectFactory for type 'ParticleSystem' registered.
-10:10:40: OverlayElementFactory for type Panel registered.
-10:10:40: OverlayElementFactory for type BorderPanel registered.
-10:10:40: OverlayElementFactory for type TextArea registered.
-10:10:40: Registering ResourceManager for type Font
-10:10:40: ArchiveFactory for archive type FileSystem registered.
-10:10:40: ArchiveFactory for archive type Zip registered.
-10:10:40: DDS codec registering
-10:10:40: FreeImage version: 3.13.1
-10:10:40: This program uses FreeImage, a free, open source image library supporting all common bitmap formats. See http://freeimage.sourceforge.net for details
-10:10:40: Supported formats: bmp,ico,jpg,jif,jpeg,jpe,jng,koa,iff,lbm,mng,pbm,pbm,pcd,pcx,pgm,pgm,png,ppm,ppm,ras,tga,targa,tif,tiff,wap,wbmp,wbm,psd,cut,xbm,xpm,gif,hdr,g3,sgi,exr,j2k,j2c,jp2,pfm,pct,pict,pic,bay,bmq,cr2,crw,cs1,dc2,dcr,dng,erf,fff,hdr,k25,kdc,mdc,mos,mrw,nef,orf,pef,pxn,raf,raw,rdc,sr2,srf,arw,3fr,cine,ia,kc2,mef,nrw,qtk,rw2,sti,drf,dsc,ptx,cap,iiq,rwz
-10:10:40: PVRTC codec registering
-10:10:40: Registering ResourceManager for type HighLevelGpuProgram
-10:10:40: Registering ResourceManager for type Compositor
-10:10:40: MovableObjectFactory for type 'Entity' registered.
-10:10:40: MovableObjectFactory for type 'Light' registered.
-10:10:40: MovableObjectFactory for type 'BillboardSet' registered.
-10:10:40: MovableObjectFactory for type 'ManualObject' registered.
-10:10:40: MovableObjectFactory for type 'BillboardChain' registered.
-10:10:40: MovableObjectFactory for type 'RibbonTrail' registered.
-10:10:40: Loading library .\RenderSystem_Direct3D9
-10:10:40: Installing plugin: D3D9 RenderSystem
-10:10:40: D3D9 : Direct3D9 Rendering Subsystem created.
-10:10:40: D3D9: Driver Detection Starts
-10:10:40: D3D9: Driver Detection Ends
-10:10:40: Plugin successfully installed
-10:10:40: Loading library .\RenderSystem_GL
-10:10:40: Installing plugin: GL RenderSystem
-10:10:40: OpenGL Rendering Subsystem created.
-10:10:41: Plugin successfully installed
-10:10:41: Loading library .\Plugin_ParticleFX
-10:10:41: Installing plugin: ParticleFX
-10:10:41: Particle Emitter Type 'Point' registered
-10:10:41: Particle Emitter Type 'Box' registered
-10:10:41: Particle Emitter Type 'Ellipsoid' registered
-10:10:41: Particle Emitter Type 'Cylinder' registered
-10:10:41: Particle Emitter Type 'Ring' registered
-10:10:41: Particle Emitter Type 'HollowEllipsoid' registered
-10:10:41: Particle Affector Type 'LinearForce' registered
-10:10:41: Particle Affector Type 'ColourFader' registered
-10:10:41: Particle Affector Type 'ColourFader2' registered
-10:10:41: Particle Affector Type 'ColourImage' registered
-10:10:41: Particle Affector Type 'ColourInterpolator' registered
-10:10:41: Particle Affector Type 'Scaler' registered
-10:10:41: Particle Affector Type 'Rotator' registered
-10:10:41: Particle Affector Type 'DirectionRandomiser' registered
-10:10:41: Particle Affector Type 'DeflectorPlane' registered
-10:10:41: Plugin successfully installed
-10:10:41: Loading library .\Plugin_BSPSceneManager
-10:10:41: Installing plugin: BSP Scene Manager
-10:10:41: Plugin successfully installed
-10:10:41: Loading library .\Plugin_OctreeSceneManager
-10:10:41: Installing plugin: Octree & Terrain Scene Manager
-10:10:41: Plugin successfully installed
-10:10:41: Loading library .\Plugin_CgProgramManager
-10:10:41: Installing plugin: Cg Program Manager
-10:10:41: Plugin successfully installed
-10:10:41: *-*-* OGRE Initialising
-10:10:41: *-*-* Version 1.7.1 (Cthugha)
+10:50:33: Creating resource group General
+10:50:33: Creating resource group Internal
+10:50:33: Creating resource group Autodetect
+10:50:33: SceneManagerFactory for type 'DefaultSceneManager' registered.
+10:50:33: Registering ResourceManager for type Material
+10:50:33: Registering ResourceManager for type Mesh
+10:50:33: Registering ResourceManager for type Skeleton
+10:50:33: MovableObjectFactory for type 'ParticleSystem' registered.
+10:50:33: OverlayElementFactory for type Panel registered.
+10:50:33: OverlayElementFactory for type BorderPanel registered.
+10:50:33: OverlayElementFactory for type TextArea registered.
+10:50:33: Registering ResourceManager for type Font
+10:50:33: ArchiveFactory for archive type FileSystem registered.
+10:50:33: ArchiveFactory for archive type Zip registered.
+10:50:33: DDS codec registering
+10:50:33: FreeImage version: 3.13.1
+10:50:33: This program uses FreeImage, a free, open source image library supporting all common bitmap formats. See http://freeimage.sourceforge.net for details
+10:50:33: Supported formats: bmp,ico,jpg,jif,jpeg,jpe,jng,koa,iff,lbm,mng,pbm,pbm,pcd,pcx,pgm,pgm,png,ppm,ppm,ras,tga,targa,tif,tiff,wap,wbmp,wbm,psd,cut,xbm,xpm,gif,hdr,g3,sgi,exr,j2k,j2c,jp2,pfm,pct,pict,pic,bay,bmq,cr2,crw,cs1,dc2,dcr,dng,erf,fff,hdr,k25,kdc,mdc,mos,mrw,nef,orf,pef,pxn,raf,raw,rdc,sr2,srf,arw,3fr,cine,ia,kc2,mef,nrw,qtk,rw2,sti,drf,dsc,ptx,cap,iiq,rwz
+10:50:33: PVRTC codec registering
+10:50:33: Registering ResourceManager for type HighLevelGpuProgram
+10:50:33: Registering ResourceManager for type Compositor
+10:50:33: MovableObjectFactory for type 'Entity' registered.
+10:50:33: MovableObjectFactory for type 'Light' registered.
+10:50:33: MovableObjectFactory for type 'BillboardSet' registered.
+10:50:33: MovableObjectFactory for type 'ManualObject' registered.
+10:50:33: MovableObjectFactory for type 'BillboardChain' registered.
+10:50:33: MovableObjectFactory for type 'RibbonTrail' registered.
+10:50:33: Loading library .\RenderSystem_Direct3D9
+10:50:33: Installing plugin: D3D9 RenderSystem
+10:50:33: D3D9 : Direct3D9 Rendering Subsystem created.
+10:50:33: D3D9: Driver Detection Starts
+10:50:33: D3D9: Driver Detection Ends
+10:50:33: Plugin successfully installed
+10:50:33: Loading library .\RenderSystem_GL
+10:50:33: Installing plugin: GL RenderSystem
+10:50:33: OpenGL Rendering Subsystem created.
+10:50:34: Plugin successfully installed
+10:50:34: Loading library .\Plugin_ParticleFX
+10:50:34: Installing plugin: ParticleFX
+10:50:34: Particle Emitter Type 'Point' registered
+10:50:34: Particle Emitter Type 'Box' registered
+10:50:34: Particle Emitter Type 'Ellipsoid' registered
+10:50:34: Particle Emitter Type 'Cylinder' registered
+10:50:34: Particle Emitter Type 'Ring' registered
+10:50:34: Particle Emitter Type 'HollowEllipsoid' registered
+10:50:34: Particle Affector Type 'LinearForce' registered
+10:50:34: Particle Affector Type 'ColourFader' registered
+10:50:34: Particle Affector Type 'ColourFader2' registered
+10:50:34: Particle Affector Type 'ColourImage' registered
+10:50:34: Particle Affector Type 'ColourInterpolator' registered
+10:50:34: Particle Affector Type 'Scaler' registered
+10:50:34: Particle Affector Type 'Rotator' registered
+10:50:34: Particle Affector Type 'DirectionRandomiser' registered
+10:50:34: Particle Affector Type 'DeflectorPlane' registered
+10:50:34: Plugin successfully installed
+10:50:34: Loading library .\Plugin_BSPSceneManager
+10:50:34: Installing plugin: BSP Scene Manager
+10:50:34: Plugin successfully installed
+10:50:34: Loading library .\Plugin_OctreeSceneManager
+10:50:34: Installing plugin: Octree & Terrain Scene Manager
+10:50:34: Plugin successfully installed
+10:50:34: Loading library .\Plugin_CgProgramManager
+10:50:34: Installing plugin: Cg Program Manager
+10:50:34: Plugin successfully installed
+10:50:34: *-*-* OGRE Initialising
+10:50:34: *-*-* Version 1.7.1 (Cthugha)

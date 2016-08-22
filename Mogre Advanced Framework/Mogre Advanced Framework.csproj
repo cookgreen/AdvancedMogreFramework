@@ -65,8 +65,9 @@
     <Reference Include="Mogre_Procedural.MogreBites">
       <HintPath>..\..\..\..\Respority\MogreSDK\bin\Release\Mogre_Procedural.MogreBites.dll</HintPath>
     </Reference>
-    <Reference Include="MOIS">
-      <HintPath>..\..\..\..\Respority\MogreSDK\bin\Release\MOIS.dll</HintPath>
+    <Reference Include="MOIS, Version=1.1.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\MogreSDK\bin\Release\MOIS.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
