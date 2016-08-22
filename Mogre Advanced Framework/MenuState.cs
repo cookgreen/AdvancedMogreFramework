@@ -41,6 +41,10 @@ namespace Mogre_Advanced_Framework
             AdvancedMogreFramework.m_pTrayMgr.createLabel(TrayLocation.TL_TOP, "MenuLbl", "Menu mode", 250);
 
             AdvancedMogreFramework.m_pMouse.MouseMoved += new MouseListener.MouseMovedHandler(mouseMoved);
+            AdvancedMogreFramework.m_pMouse.MousePressed += new MouseListener.MousePressedHandler(mousePressed);
+            AdvancedMogreFramework.m_pMouse.MouseReleased += new MouseListener.MouseReleasedHandler(mouseReleased);
+            AdvancedMogreFramework.m_pKeyboard.KeyPressed += new KeyListener.KeyPressedHandler(keyPressed);
+            AdvancedMogreFramework.m_pKeyboard.KeyReleased += new KeyListener.KeyReleasedHandler(keyReleased);
             //AdvancedMogreFramework.m_pKeyboard.KeyPressed += new KeyListener.KeyPressedHandler(keyPressed);
             createScene();
         }

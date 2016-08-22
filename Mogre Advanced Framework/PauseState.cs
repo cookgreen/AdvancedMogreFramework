@@ -42,6 +42,12 @@ namespace Mogre_Advanced_Framework
             AdvancedMogreFramework.m_pTrayMgr.createButton(TrayLocation.TL_CENTER, "BackToMenuBtn", "Return to Menu", 250);
             AdvancedMogreFramework.m_pTrayMgr.createButton(TrayLocation.TL_CENTER, "ExitBtn", "Exit AdvancedOgreFramework", 250);
             AdvancedMogreFramework.m_pTrayMgr.createLabel(TrayLocation.TL_TOP, "PauseLbl", "Pause mode", 250);
+
+            AdvancedMogreFramework.m_pMouse.MouseMoved += new MouseListener.MouseMovedHandler(mouseMoved);
+            AdvancedMogreFramework.m_pMouse.MousePressed += new MouseListener.MousePressedHandler(mousePressed);
+            AdvancedMogreFramework.m_pMouse.MouseReleased += new MouseListener.MouseReleasedHandler(mouseReleased);
+            AdvancedMogreFramework.m_pKeyboard.KeyPressed += new KeyListener.KeyPressedHandler(keyPressed);
+            AdvancedMogreFramework.m_pKeyboard.KeyReleased += new KeyListener.KeyReleasedHandler(keyReleased);
  
             m_bQuit = false;
  
