@@ -49,8 +49,8 @@ namespace Mogre_Advanced_Framework
             AdvancedMogreFramework.m_pMouse.MouseReleased += new MouseListener.MouseReleasedHandler(mouseReleased);
             AdvancedMogreFramework.m_pKeyboard.KeyPressed += new KeyListener.KeyPressedHandler(keyPressed);
             AdvancedMogreFramework.m_pKeyboard.KeyReleased += new KeyListener.KeyReleasedHandler(keyReleased);
- 
-            m_bQuit = false;
+
+            m_bQuestionActive = true;
  
             createScene();
         }
@@ -108,8 +108,9 @@ namespace Mogre_Advanced_Framework
         {
             if(button.getName() == "ExitBtn")
             {
-                AdvancedMogreFramework.m_pTrayMgr.showYesNoDialog("Sure?", "Really leave?");
-                m_bQuestionActive = true;
+                //AdvancedMogreFramework.m_pTrayMgr.showYesNoDialog("Sure?", "Really leave?");
+                //m_bQuestionActive = true;
+                shutdown();
             }
             else if(button.getName() == "BackToGameBtn")
             {

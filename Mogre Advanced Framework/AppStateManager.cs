@@ -87,15 +87,8 @@ namespace Mogre_Advanced_Framework
                     //AdvancedMogreFramework.m_pMouse.Capture();
  
 			        m_ActiveStateStack.Last().update(timeSinceLastFrame);
-                    try
-                    {
-                        AdvancedMogreFramework.m_pKeyboard.Capture();
-                        AdvancedMogreFramework.m_pMouse.Capture();
-                    }
-                    catch(Exception e)
-                    {
-
-                    }
+                    AdvancedMogreFramework.m_pKeyboard.Capture();
+                    AdvancedMogreFramework.m_pMouse.Capture();
                     AdvancedMogreFramework.updateOgre(timeSinceLastFrame);
                     if (AdvancedMogreFramework.m_pRoot != null)
                     {
