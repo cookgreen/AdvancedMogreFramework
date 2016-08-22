@@ -111,9 +111,14 @@ namespace Mogre_Advanced_Framework
  
 	    public void moveCamera()
         {
-            if(AdvancedMogreFramework.m_pKeyboard.IsKeyDown(KeyCode.KC_LSHIFT))
-                m_pCamera.MoveRelative(m_TranslateVector);
-            m_pCamera.MoveRelative(m_TranslateVector / 10);
+            try
+            {
+                if (AdvancedMogreFramework.m_pKeyboard.IsKeyDown(KeyCode.KC_LSHIFT))
+                    m_pCamera.MoveRelative(m_TranslateVector);
+                m_pCamera.MoveRelative(m_TranslateVector / 10);
+            }
+            catch (Exception e)
+            { }
         }
         public void getInput()
         {
@@ -340,29 +345,34 @@ namespace Mogre_Advanced_Framework
         public override void update(double timeSinceLastFrame)
         {
             m_FrameEvent.timeSinceLastFrame = (float)timeSinceLastFrame;
-            AdvancedMogreFramework.m_pTrayMgr.frameRenderingQueued(m_FrameEvent);
+            if (AdvancedMogreFramework.m_pTrayMgr != null)
+            {
+                AdvancedMogreFramework.m_pTrayMgr.frameRenderingQueued(m_FrameEvent);
+            }
  
             if(m_bQuit == true)
             {
                 popAppState();
                 return;
             }
-
-            if (!AdvancedMogreFramework.m_pTrayMgr.isDialogVisible())
+            if (AdvancedMogreFramework.m_pTrayMgr != null)
             {
-                if(m_pDetailsPanel.isVisible())
+                if (!AdvancedMogreFramework.m_pTrayMgr.isDialogVisible())
                 {
-                    m_pDetailsPanel.setParamValue(0, m_pCamera.DerivedPosition.x.ToString());
-                    m_pDetailsPanel.setParamValue(1, m_pCamera.DerivedPosition.y.ToString());
-                    m_pDetailsPanel.setParamValue(2, m_pCamera.DerivedPosition.z.ToString());
-                    m_pDetailsPanel.setParamValue(3, m_pCamera.DerivedOrientation.w.ToString());
-                    m_pDetailsPanel.setParamValue(4, m_pCamera.DerivedOrientation.x.ToString());
-                    m_pDetailsPanel.setParamValue(5, m_pCamera.DerivedOrientation.y.ToString());
-                    m_pDetailsPanel.setParamValue(6, m_pCamera.DerivedOrientation.z.ToString());
-                    if(m_bSettingsMode)
-                        m_pDetailsPanel.setParamValue(7, "Buffered Input");
-                    else
-                        m_pDetailsPanel.setParamValue(7, "Un-Buffered Input");
+                    if (m_pDetailsPanel.isVisible())
+                    {
+                        m_pDetailsPanel.setParamValue(0, m_pCamera.DerivedPosition.x.ToString());
+                        m_pDetailsPanel.setParamValue(1, m_pCamera.DerivedPosition.y.ToString());
+                        m_pDetailsPanel.setParamValue(2, m_pCamera.DerivedPosition.z.ToString());
+                        m_pDetailsPanel.setParamValue(3, m_pCamera.DerivedOrientation.w.ToString());
+                        m_pDetailsPanel.setParamValue(4, m_pCamera.DerivedOrientation.x.ToString());
+                        m_pDetailsPanel.setParamValue(5, m_pCamera.DerivedOrientation.y.ToString());
+                        m_pDetailsPanel.setParamValue(6, m_pCamera.DerivedOrientation.z.ToString());
+                        if (m_bSettingsMode)
+                            m_pDetailsPanel.setParamValue(7, "Buffered Input");
+                        else
+                            m_pDetailsPanel.setParamValue(7, "Un-Buffered Input");
+                    }
                 }
             }
  

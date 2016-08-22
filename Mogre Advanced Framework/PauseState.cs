@@ -112,11 +112,11 @@ namespace Mogre_Advanced_Framework
             }
             else if(button.getName() == "BackToGameBtn")
             {
-                popAllAndPushAppState(findByName("GameState"));
+                popAllAndPushAppState<PauseState>(findByName("GameState"));
                 m_bQuit = true;
             }
             else if(button.getName() == "BackToMenuBtn")
-                popAllAndPushAppState(findByName("MenuState"));
+                popAllAndPushAppState<PauseState>(findByName("MenuState"));
         }
         public override void yesNoDialogClosed(string question, bool yesHit)
         {

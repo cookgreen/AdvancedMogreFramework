@@ -10,7 +10,7 @@ namespace Mogre_Advanced_Framework
 {
     class AdvancedMogreFramework 
     {
-        public static Root m_pRoot=new Root();
+        public static Root m_pRoot;
         public static RenderWindow m_pRenderWnd;
         public static Viewport m_pViewport;
         public static Log m_pLog;
@@ -36,10 +36,10 @@ namespace Mogre_Advanced_Framework
          }
         ~AdvancedMogreFramework()
         {
-            LogManager.Singleton.LogMessage("Shutdown OGRE...");
-            if (AdvancedMogreFramework.m_pTrayMgr != null) m_pTrayMgr = null;
-            if (AdvancedMogreFramework.m_pInputMgr != null) InputManager.DestroyInputSystem(m_pInputMgr);
-            if (AdvancedMogreFramework.m_pRoot != null) m_pRoot = null;
+            //LogManager.Singleton.LogMessage("Shutdown OGRE...");
+            //if (AdvancedMogreFramework.m_pTrayMgr != null) m_pTrayMgr = null;
+            //if (AdvancedMogreFramework.m_pInputMgr != null) InputManager.DestroyInputSystem(m_pInputMgr);
+            //if (AdvancedMogreFramework.m_pRoot != null) m_pRoot = null;
         }
 
         public static bool initOgre(String wndTitle)

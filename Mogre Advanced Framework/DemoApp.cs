@@ -17,7 +17,7 @@ namespace Mogre_Advanced_Framework
 
         public void startDemo()
         {
-            new AdvancedMogreFramework();
+            AdvancedMogreFramework amf=new AdvancedMogreFramework();
             if (!AdvancedMogreFramework.initOgre("AdvancedMogreFramework"))
 		        return;
 

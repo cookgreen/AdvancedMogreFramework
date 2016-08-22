@@ -21,7 +21,7 @@ namespace Mogre_Advanced_Framework
         public virtual void popAppState() { }
         public virtual void pauseAppState() { }
         public virtual void shutdown() { }
-        public virtual void popAllAndPushAppState(AppState state) { }
+        public virtual void popAllAndPushAppState<T>(AppState state) where T:AppState { }
 };
     class AppState :SdkTrayListener
     {
@@ -48,7 +48,7 @@ namespace Mogre_Advanced_Framework
         protected bool pushAppState(AppState state) { return m_pParent.pushAppState(state); }
         protected void popAppState() { m_pParent.popAppState(); }
         protected void shutdown() { m_pParent.shutdown(); }
-        protected void popAllAndPushAppState(AppState state) { m_pParent.popAllAndPushAppState(state); }
+        protected void popAllAndPushAppState<T>(AppState state) where T:AppState{ m_pParent.popAllAndPushAppState<T>(state); }
 
         protected AppStateListener m_pParent;
 

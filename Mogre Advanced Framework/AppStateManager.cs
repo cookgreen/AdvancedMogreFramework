@@ -26,14 +26,14 @@ namespace Mogre_Advanced_Framework
              while (m_ActiveStateStack.Count!=0)
              {
                  m_ActiveStateStack.Last().exit();
-                 m_ActiveStateStack.RemoveAt(m_ActiveStateStack.Count());
+                 m_ActiveStateStack.RemoveAt(m_ActiveStateStack.Count()-1);
              }
 
              while (m_States.Count!=0)
              {
                  si = m_States.Last();
                  si.state.destroy();
-                 m_States.RemoveAt(m_States.Count());
+                 m_States.RemoveAt(m_States.Count()-1);
              }
          }
 
@@ -83,14 +83,24 @@ namespace Mogre_Advanced_Framework
 		        {
                     startTime = (int)AdvancedMogreFramework.m_pTimer.MicrosecondsCPU;
 
-                    AdvancedMogreFramework.m_pKeyboard.Capture();
-                    AdvancedMogreFramework.m_pMouse.Capture();
+                    //AdvancedMogreFramework.m_pKeyboard.Capture();
+                    //AdvancedMogreFramework.m_pMouse.Capture();
  
 			        m_ActiveStateStack.Last().update(timeSinceLastFrame);
+                    try
+                    {
+                        AdvancedMogreFramework.m_pKeyboard.Capture();
+                        AdvancedMogreFramework.m_pMouse.Capture();
+                    }
+                    catch(Exception e)
+                    {
 
+                    }
                     AdvancedMogreFramework.updateOgre(timeSinceLastFrame);
-                    AdvancedMogreFramework.m_pRoot.RenderOneFrame();
-
+                    if (AdvancedMogreFramework.m_pRoot != null)
+                    {
+                        AdvancedMogreFramework.m_pRoot.RenderOneFrame();
+                    }
                     timeSinceLastFrame = (int)AdvancedMogreFramework.m_pTimer.MillisecondsCPU - startTime;
 		        }
 		        else
@@ -143,12 +153,12 @@ namespace Mogre_Advanced_Framework
              else
                  shutdown();
          }
-         public override void popAllAndPushAppState(AppState state)
+         public override void popAllAndPushAppState<T>(AppState state)
         {
             while (m_ActiveStateStack.Count != 0)
             {
                 m_ActiveStateStack.Last().exit();
-                m_ActiveStateStack.RemoveAt(m_ActiveStateStack.Count());
+                m_ActiveStateStack.RemoveAt(m_ActiveStateStack.Count()-1);
             }
 
             pushAppState(state);
