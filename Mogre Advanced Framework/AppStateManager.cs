@@ -142,7 +142,7 @@ namespace Mogre_Advanced_Framework
              if (m_ActiveStateStack.Count != 0)
              {
                  m_ActiveStateStack.Last().exit();
-                 m_ActiveStateStack.RemoveAt(m_ActiveStateStack.Count());
+                 m_ActiveStateStack.RemoveAt(m_ActiveStateStack.Count()-1);
              }
 
              if (m_ActiveStateStack.Count != 0)
