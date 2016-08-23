@@ -7,8 +7,8 @@
     <ProjectGuid>{80C99E43-EE9B-45DA-95F0-13DC9B608ADF}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Advanced_Moge_Framework</RootNamespace>
-    <AssemblyName>Advanced_Moge_Framework</AssemblyName>
+    <RootNamespace>AdvancedMogreFramework</RootNamespace>
+    <AssemblyName>AdvancedMogreFramework</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -97,11 +97,11 @@
     <Compile Include="AppStateManager.cs" />
     <Compile Include="DemoApp.cs" />
     <Compile Include="GameState.cs" />
-    <Compile Include="Helper.cs" />
     <Compile Include="MenuState.cs" />
     <Compile Include="PauseState.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RMogre.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -130,7 +130,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy /Y "$(TargetPath)" E:\Respority\MogreSDK\bin\$(ConfigurationName)\$(TargetFileName)</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

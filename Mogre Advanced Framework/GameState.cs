@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Mogre;
-using Helper;
+using RMOgre;
 using MOIS;
 using Mogre_Procedural.MogreBites;
 

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mogre Advanced Framework", "Mogre Advanced Framework\Mogre Advanced Framework.csproj", "{80C99E43-EE9B-45DA-95F0-13DC9B608ADF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedMogreFramework", "Mogre Advanced Framework\AdvancedMogreFramework.csproj", "{80C99E43-EE9B-45DA-95F0-13DC9B608ADF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
