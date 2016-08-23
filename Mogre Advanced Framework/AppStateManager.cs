@@ -39,18 +39,10 @@ namespace Mogre_Advanced_Framework
 
           public override void manageAppState(String stateName, AppState state)
          {
-             try
-	        {
 		        state_info new_state_info;
 		        new_state_info.name = stateName;
 		        new_state_info.state = state;
-		        m_States.Insert(m_States.Count(),new_state_info);		
-	        }
-	        catch(Exception e)
-	        {
-		        //delete state;
-		        //throw Exception(Exception.ERR_INTERNAL_ERROR, "Error while trying to manage a new AppState\n" + Ogre::String(e.what()), "AppStateManager.cpp (39)");
-	        }
+		        m_States.Insert(m_States.Count(),new_state_info);
          }
 
          public override AppState findByName(String stateName)

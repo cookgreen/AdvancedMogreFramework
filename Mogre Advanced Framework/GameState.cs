@@ -111,14 +111,9 @@ namespace Mogre_Advanced_Framework
  
 	    public void moveCamera()
         {
-            try
-            {
                 if (AdvancedMogreFramework.m_pKeyboard.IsKeyDown(KeyCode.KC_LSHIFT))
                     m_pCamera.MoveRelative(m_TranslateVector);
                 m_pCamera.MoveRelative(m_TranslateVector / 10);
-            }
-            catch (Exception e)
-            { }
         }
         public void getInput()
         {
@@ -401,7 +396,7 @@ namespace Mogre_Advanced_Framework
         RaySceneQuery m_pRSQ;
         SceneNode m_pCurrentObject;
         Entity m_pCurrentEntity;
-        bool m_bLMouseDown, m_bRMouseDown;
+        bool m_bRMouseDown,m_bLMouseDown;
         bool m_bSettingsMode;
     }
 }

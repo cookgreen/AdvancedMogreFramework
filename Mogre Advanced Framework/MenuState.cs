@@ -5,6 +5,7 @@ using Mogre;
 using MOIS;
 using Mogre_Procedural.MogreBites;
 
+
 namespace Mogre_Advanced_Framework
 {
     class MenuState : AppState
@@ -33,6 +34,8 @@ namespace Mogre_Advanced_Framework
  
             AdvancedMogreFramework.m_pViewport.Camera=m_pCamera;
 
+            
+
             AdvancedMogreFramework.m_pTrayMgr.destroyAllWidgets();
             AdvancedMogreFramework.m_pTrayMgr.showFrameStats(TrayLocation.TL_BOTTOMLEFT);
             AdvancedMogreFramework.m_pTrayMgr.showLogo(TrayLocation.TL_BOTTOMRIGHT);
@@ -46,7 +49,6 @@ namespace Mogre_Advanced_Framework
             AdvancedMogreFramework.m_pMouse.MouseReleased += new MouseListener.MouseReleasedHandler(mouseReleased);
             AdvancedMogreFramework.m_pKeyboard.KeyPressed += new KeyListener.KeyPressedHandler(keyPressed);
             AdvancedMogreFramework.m_pKeyboard.KeyReleased += new KeyListener.KeyReleasedHandler(keyReleased);
-            //AdvancedMogreFramework.m_pKeyboard.KeyPressed += new KeyListener.KeyPressedHandler(keyPressed);
             createScene();
         }
         public void createScene()
@@ -66,7 +68,7 @@ namespace Mogre_Advanced_Framework
 
         public bool keyPressed(KeyEvent keyEventRef)
         {
-            if(AdvancedMogreFramework.m_pKeyboard.IsKeyDown(KeyCode.KC_ESCAPE))
+            if(AdvancedMogreFramework.m_pKeyboard.IsKeyDown(MOIS.KeyCode.KC_ESCAPE))
             {
                 m_bQuit = true;
                 return true;

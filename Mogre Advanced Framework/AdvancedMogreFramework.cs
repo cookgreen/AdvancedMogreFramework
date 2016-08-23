@@ -102,6 +102,9 @@ namespace Mogre_Advanced_Framework
             ResourceGroupManager.Singleton.InitialiseAllResourceGroups(); 
  
             m_pTrayMgr = new SdkTrayManager("AOFTrayMgr", m_pRenderWnd, m_pMouse, null);
+            //m_pGui = Gui.Instance;
+
+            //Gui.Initialise()
  
             m_pTimer = new Timer();
             m_pTimer.Reset();
@@ -122,7 +125,7 @@ namespace Mogre_Advanced_Framework
                 return true;
             }
  
-            if(m_pKeyboard.IsKeyDown(KeyCode.KC_O))
+            if(m_pKeyboard.IsKeyDown(MOIS.KeyCode.KC_O))
             {
                 if(m_pTrayMgr.isLogoVisible())
                 {
