@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Advanced_Moge_Framework</RootNamespace>
     <AssemblyName>Advanced_Moge_Framework</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -59,15 +59,17 @@
     </StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Mogre">
-      <HintPath>..\..\..\..\Respority\MogreSDK\bin\Release\Mogre.dll</HintPath>
+    <Reference Include="Mogre, Version=1.7.1.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\MogreSDK_1_7_4\binary\Mogre.dll</HintPath>
     </Reference>
-    <Reference Include="Mogre_Procedural.MogreBites">
-      <HintPath>..\..\..\..\Respority\MogreSDK\bin\Release\Mogre_Procedural.MogreBites.dll</HintPath>
+    <Reference Include="Mogre_Procedural.MogreBites, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Visual Studio 2013\Projects\Mogre_Procedural.MogreBites\Mogre_Procedural.MogreBites\bin\x86\Release\Mogre_Procedural.MogreBites.dll</HintPath>
     </Reference>
     <Reference Include="MOIS, Version=1.1.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\MogreSDK\bin\Release\MOIS.dll</HintPath>
+      <HintPath>..\..\MogreSDK\bin\Release\MOIS.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
