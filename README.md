@@ -3,7 +3,7 @@
 An advanced Framework for mogre
 
 ##How to use it?
-load this solution file with your visual studio 2013 and compile it
+load this solution file with your visual studio(2010 later) and compile it
 
 ##Requires##
 * Mogre(include in the Mogre SDK)
