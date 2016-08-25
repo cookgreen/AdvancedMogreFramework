@@ -1,0 +1,9 @@
+E:\Respority\AdvancedMogreFramework\Mogre Advanced Framework\bin\x86\Release\AdvancedMogreFramework.exe
+E:\Respority\AdvancedMogreFramework\Mogre Advanced Framework\bin\x86\Release\AdvancedMogreFramework.pdb
+E:\Respority\AdvancedMogreFramework\Mogre Advanced Framework\bin\x86\Release\Mogre.dll
+E:\Respority\AdvancedMogreFramework\Mogre Advanced Framework\bin\x86\Release\Mogre_Procedural.MogreBites.dll
+E:\Respority\AdvancedMogreFramework\Mogre Advanced Framework\bin\x86\Release\Mogre.pdb
+E:\Respority\AdvancedMogreFramework\Mogre Advanced Framework\bin\x86\Release\Mogre_Procedural.MogreBites.pdb
+E:\Respority\AdvancedMogreFramework\Mogre Advanced Framework\obj\x86\Release\AdvancedMogreFramework.csprojResolveAssemblyReference.cache
+E:\Respority\AdvancedMogreFramework\Mogre Advanced Framework\obj\x86\Release\AdvancedMogreFramework.exe
+E:\Respority\AdvancedMogreFramework\Mogre Advanced Framework\obj\x86\Release\AdvancedMogreFramework.pdb
