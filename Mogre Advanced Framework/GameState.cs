@@ -30,9 +30,9 @@ namespace Mogre_Advanced_Framework
 
         public override void enter()
         {
-            AdvancedMogreFramework.m_pLog.LogMessage("Entering GameState...");
+            AdvancedMogreFramework.Singleton.m_pLog.LogMessage("Entering GameState...");
 
-            m_pSceneMgr=AdvancedMogreFramework.m_pRoot.CreateSceneManager(SceneType.ST_GENERIC, "GameSceneMgr");
+            m_pSceneMgr=AdvancedMogreFramework.Singleton.m_pRoot.CreateSceneManager(SceneType.ST_GENERIC, "GameSceneMgr");
             ColourValue cvAmbineLight=new ColourValue(0.7f,0.7f,0.7f);
             m_pSceneMgr.AmbientLight=cvAmbineLight;//(Ogre::ColourValue(0.7f, 0.7f, 0.7f));
  
@@ -47,9 +47,9 @@ namespace Mogre_Advanced_Framework
             m_pCamera.LookAt(vectorCameraLookAt);
             m_pCamera.NearClipDistance=5;
  
-            m_pCamera.AspectRatio=AdvancedMogreFramework.m_pViewport.ActualWidth / AdvancedMogreFramework.m_pViewport.ActualHeight;
+            m_pCamera.AspectRatio=AdvancedMogreFramework.Singleton.m_pViewport.ActualWidth / AdvancedMogreFramework.Singleton.m_pViewport.ActualHeight;
 
-            AdvancedMogreFramework.m_pViewport.Camera=m_pCamera;
+            AdvancedMogreFramework.Singleton.m_pViewport.Camera=m_pCamera;
             m_pCurrentObject = null;
 
  
@@ -86,32 +86,32 @@ namespace Mogre_Advanced_Framework
         }
         public override void exit()
         {
-            AdvancedMogreFramework.m_pLog.LogMessage("Leaving GameState...");
+            AdvancedMogreFramework.Singleton.m_pLog.LogMessage("Leaving GameState...");
 
             if(m_pSceneMgr!=null)
                 m_pSceneMgr.DestroyCamera(m_pCamera);
                 m_pSceneMgr.DestroyQuery(m_pRSQ);
-                AdvancedMogreFramework.m_pRoot.DestroySceneManager(m_pSceneMgr);
+                AdvancedMogreFramework.Singleton.m_pRoot.DestroySceneManager(m_pSceneMgr);
         }
         public override bool pause()
         {
-            AdvancedMogreFramework.m_pLog.LogMessage("Pausing GameState...");
+            AdvancedMogreFramework.Singleton.m_pLog.LogMessage("Pausing GameState...");
  
             return true;
         }
         public override void resume()
         {
-            AdvancedMogreFramework.m_pLog.LogMessage("Resuming GameState...");
+            AdvancedMogreFramework.Singleton.m_pLog.LogMessage("Resuming GameState...");
  
             buildGUI();
 
-            AdvancedMogreFramework.m_pViewport.Camera=m_pCamera;
+            AdvancedMogreFramework.Singleton.m_pViewport.Camera=m_pCamera;
             m_bQuit = false;
         }
  
 	    public void moveCamera()
         {
-                if (AdvancedMogreFramework.m_pKeyboard.IsKeyDown(KeyCode.KC_LSHIFT))
+                if (AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_LSHIFT))
                     m_pCamera.MoveRelative(m_TranslateVector);
                 m_pCamera.MoveRelative(m_TranslateVector / 10);
         }
@@ -120,42 +120,42 @@ namespace Mogre_Advanced_Framework
             if(m_bSettingsMode == false)
             {
                 Angle angleCameraRoll;
-                if(AdvancedMogreFramework.m_pKeyboard.IsKeyDown(KeyCode.KC_A))
+                if(AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_A))
                     m_TranslateVector.x = -m_MoveScale;
  
-                if(AdvancedMogreFramework.m_pKeyboard.IsKeyDown(KeyCode.KC_D))
+                if(AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_D))
                     m_TranslateVector.x = m_MoveScale;
  
-                if(AdvancedMogreFramework.m_pKeyboard.IsKeyDown(KeyCode.KC_W))
+                if(AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_W))
                     m_TranslateVector.z = -m_MoveScale;
  
-                if(AdvancedMogreFramework.m_pKeyboard.IsKeyDown(KeyCode.KC_S))
+                if(AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_S))
                     m_TranslateVector.z = m_MoveScale;
  
-                if(AdvancedMogreFramework.m_pKeyboard.IsKeyDown(KeyCode.KC_Q))
+                if(AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_Q))
                     m_TranslateVector.y = -m_MoveScale;
  
-                if(AdvancedMogreFramework.m_pKeyboard.IsKeyDown(KeyCode.KC_E))
+                if(AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_E))
                     m_TranslateVector.y = m_MoveScale;
  
         //camera roll
-                if(AdvancedMogreFramework.m_pKeyboard.IsKeyDown(KeyCode.KC_Z))
+                if(AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_Z))
                     m_pCamera.Roll(angleCameraRoll=new Angle(-m_MoveScale));
  
-                if(AdvancedMogreFramework.m_pKeyboard.IsKeyDown(KeyCode.KC_X))
+                if(AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_X))
                     m_pCamera.Roll(angleCameraRoll=new Angle(m_MoveScale));
  
         //reset roll
-                if (AdvancedMogreFramework.m_pKeyboard.IsKeyDown(KeyCode.KC_C))
+                if (AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_C))
                     m_pCamera.Roll(-(m_pCamera.RealOrientation.Roll));
             }
         }
         public void buildGUI()
         {
-            AdvancedMogreFramework.m_pTrayMgr.showFrameStats(TrayLocation.TL_BOTTOMLEFT);
-            AdvancedMogreFramework.m_pTrayMgr.showLogo(TrayLocation.TL_BOTTOMRIGHT);
-            AdvancedMogreFramework.m_pTrayMgr.createLabel(TrayLocation.TL_TOP, "GameLbl", "Game mode", 250);
-            AdvancedMogreFramework.m_pTrayMgr.showCursor();
+            AdvancedMogreFramework.Singleton.m_pTrayMgr.showFrameStats(TrayLocation.TL_BOTTOMLEFT);
+            AdvancedMogreFramework.Singleton.m_pTrayMgr.showLogo(TrayLocation.TL_BOTTOMRIGHT);
+            AdvancedMogreFramework.Singleton.m_pTrayMgr.createLabel(TrayLocation.TL_TOP, "GameLbl", "Game mode", 250);
+            AdvancedMogreFramework.Singleton.m_pTrayMgr.showCursor();
  
             List<string> items=new List<string>();
             items.Insert(items.Count,"cam.pX");
@@ -167,78 +167,78 @@ namespace Mogre_Advanced_Framework
             items.Insert(items.Count,"cam.oZ");
             items.Insert(items.Count,"Mode");
 
-            m_pDetailsPanel = AdvancedMogreFramework.m_pTrayMgr.createParamsPanel(TrayLocation.TL_TOPLEFT, "DetailsPanel", 200, items.ToArray());
+            m_pDetailsPanel = AdvancedMogreFramework.Singleton.m_pTrayMgr.createParamsPanel(TrayLocation.TL_TOPLEFT, "DetailsPanel", 200, items.ToArray());
             m_pDetailsPanel.show();
  
             string infoText = "[TAB] - Switch input mode\n\n[W] - Forward / Mode up\n[S] - Backwards/ Mode down\n[A] - Left\n";
             infoText.Insert(infoText.Length,"[D] - Right\n\nPress [SHIFT] to move faster\n\n[O] - Toggle FPS / logo\n");
             infoText.Insert(infoText.Length,"[Print] - Take screenshot\n\n[ESC] - Exit");
-            AdvancedMogreFramework.m_pTrayMgr.createTextBox(TrayLocation.TL_RIGHT, "InfoPanel", infoText, 300, 220);
+            AdvancedMogreFramework.Singleton.m_pTrayMgr.createTextBox(TrayLocation.TL_RIGHT, "InfoPanel", infoText, 300, 220);
  
             StringVector chatModes=new StringVector();
             chatModes.Insert(chatModes.Count,"Solid mode");
             chatModes.Insert(chatModes.Count,"Wireframe mode");
             chatModes.Insert(chatModes.Count,"Point mode");
-            AdvancedMogreFramework.m_pTrayMgr.createLongSelectMenu(TrayLocation.TL_TOPRIGHT, "ChatModeSelMenu", "ChatMode", 200, 3, chatModes);
+            AdvancedMogreFramework.Singleton.m_pTrayMgr.createLongSelectMenu(TrayLocation.TL_TOPRIGHT, "ChatModeSelMenu", "ChatMode", 200, 3, chatModes);
 
-            AdvancedMogreFramework.m_pMouse.MouseMoved += new MouseListener.MouseMovedHandler(mouseMoved);
-            AdvancedMogreFramework.m_pMouse.MousePressed += new MouseListener.MousePressedHandler(mousePressed);
-            AdvancedMogreFramework.m_pMouse.MouseReleased += new MouseListener.MouseReleasedHandler(mouseReleased);
-            AdvancedMogreFramework.m_pKeyboard.KeyPressed += new KeyListener.KeyPressedHandler(keyPressed);
-            AdvancedMogreFramework.m_pKeyboard.KeyReleased += new KeyListener.KeyReleasedHandler(keyReleased);
+            AdvancedMogreFramework.Singleton.m_pMouse.MouseMoved += new MouseListener.MouseMovedHandler(mouseMoved);
+            AdvancedMogreFramework.Singleton.m_pMouse.MousePressed += new MouseListener.MousePressedHandler(mousePressed);
+            AdvancedMogreFramework.Singleton.m_pMouse.MouseReleased += new MouseListener.MouseReleasedHandler(mouseReleased);
+            AdvancedMogreFramework.Singleton.m_pKeyboard.KeyPressed += new KeyListener.KeyPressedHandler(keyPressed);
+            AdvancedMogreFramework.Singleton.m_pKeyboard.KeyReleased += new KeyListener.KeyReleasedHandler(keyReleased);
         }
 
         public bool keyPressed(KeyEvent keyEventRef)
         {
             if(m_bSettingsMode == true)
             {
-                if(AdvancedMogreFramework.m_pKeyboard.IsKeyDown(KeyCode.KC_S))
+                if(AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_S))
                 {
-                    SelectMenu pMenu = (SelectMenu)AdvancedMogreFramework.m_pTrayMgr.getWidget("ChatModeSelMenu");
+                    SelectMenu pMenu = (SelectMenu)AdvancedMogreFramework.Singleton.m_pTrayMgr.getWidget("ChatModeSelMenu");
                     if(pMenu.getSelectionIndex() + 1 < (int)pMenu.getNumItems())
                         pMenu.selectItem((uint)pMenu.getSelectionIndex() + 1);
                 }
  
-                if(AdvancedMogreFramework.m_pKeyboard.IsKeyDown(KeyCode.KC_W))
+                if(AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_W))
                 {
-                    SelectMenu pMenu = (SelectMenu)AdvancedMogreFramework.m_pTrayMgr.getWidget("ChatModeSelMenu");
+                    SelectMenu pMenu = (SelectMenu)AdvancedMogreFramework.Singleton.m_pTrayMgr.getWidget("ChatModeSelMenu");
                     if(pMenu.getSelectionIndex() - 1 >= 0)
                         pMenu.selectItem((uint)pMenu.getSelectionIndex() - 1);
                 }
              }
  
-            if(AdvancedMogreFramework.m_pKeyboard.IsKeyDown(KeyCode.KC_ESCAPE))
+            if(AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_ESCAPE))
             {
                 pushAppState(findByName("PauseState"));
                 return true;
             }
  
-            if(AdvancedMogreFramework.m_pKeyboard.IsKeyDown(KeyCode.KC_I))
+            if(AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_I))
             {
                 if(m_pDetailsPanel.getTrayLocation() == TrayLocation.TL_NONE)
                 {
-                    AdvancedMogreFramework.m_pTrayMgr.moveWidgetToTray(m_pDetailsPanel, TrayLocation.TL_TOPLEFT, 0);
+                    AdvancedMogreFramework.Singleton.m_pTrayMgr.moveWidgetToTray(m_pDetailsPanel, TrayLocation.TL_TOPLEFT, 0);
                     m_pDetailsPanel.show();
                 }
                 else
                 {
-                    AdvancedMogreFramework.m_pTrayMgr.removeWidgetFromTray(m_pDetailsPanel);
+                    AdvancedMogreFramework.Singleton.m_pTrayMgr.removeWidgetFromTray(m_pDetailsPanel);
                     m_pDetailsPanel.hide();
                 }
             }
  
-            if(AdvancedMogreFramework.m_pKeyboard.IsKeyDown(KeyCode.KC_TAB))
+            if(AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_TAB))
             {
                 m_bSettingsMode = !m_bSettingsMode;
                 return true;
             }
  
-            if(m_bSettingsMode && AdvancedMogreFramework.m_pKeyboard.IsKeyDown(KeyCode.KC_RETURN) ||
-                AdvancedMogreFramework.m_pKeyboard.IsKeyDown(KeyCode.KC_NUMPADENTER))
+            if(m_bSettingsMode && AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_RETURN) ||
+                AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_NUMPADENTER))
             {
             }
  
-            if(!m_bSettingsMode || (m_bSettingsMode && !AdvancedMogreFramework.m_pKeyboard.IsKeyDown(KeyCode.KC_O)))
+            if(!m_bSettingsMode || (m_bSettingsMode && !AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_O)))
                 AdvancedMogreFramework.Singleton.keyPressed(keyEventRef);
  
                 return true;
@@ -251,7 +251,7 @@ namespace Mogre_Advanced_Framework
 
         public bool mouseMoved(MouseEvent evt)
         {
-            if (AdvancedMogreFramework.m_pTrayMgr.injectMouseMove(evt)) return true;
+            if (AdvancedMogreFramework.Singleton.m_pTrayMgr.injectMouseMove(evt)) return true;
  
             if(m_bRMouseDown)
             {
@@ -265,7 +265,7 @@ namespace Mogre_Advanced_Framework
         }
         public bool mousePressed(MouseEvent evt, MouseButtonID id)
         {
-            if (AdvancedMogreFramework.m_pTrayMgr.injectMouseDown(evt, id)) return true;
+            if (AdvancedMogreFramework.Singleton.m_pTrayMgr.injectMouseDown(evt, id)) return true;
  
             if(id == MouseButtonID.MB_Left)
             {
@@ -281,7 +281,7 @@ namespace Mogre_Advanced_Framework
         }
 	    public bool mouseReleased(MouseEvent evt, MouseButtonID id)
         {
-            if (AdvancedMogreFramework.m_pTrayMgr.injectMouseUp(evt, id)) return true;
+            if (AdvancedMogreFramework.Singleton.m_pTrayMgr.injectMouseUp(evt, id)) return true;
  
             if(id == MouseButtonID.MB_Left)
             {
@@ -303,8 +303,8 @@ namespace Mogre_Advanced_Framework
                 m_pCurrentEntity.GetSubEntity(1).SetMaterial(m_pOgreHeadMat);
             }
  
-            Ray mouseRay = m_pCamera.GetCameraToViewportRay(AdvancedMogreFramework.m_pMouse.MouseState.X.abs / (float)evt.state.width,
-            AdvancedMogreFramework.m_pMouse.MouseState.Y.abs / (float)evt.state.height);
+            Ray mouseRay = m_pCamera.GetCameraToViewportRay(AdvancedMogreFramework.Singleton.m_pMouse.MouseState.X.abs / (float)evt.state.width,
+            AdvancedMogreFramework.Singleton.m_pMouse.MouseState.Y.abs / (float)evt.state.height);
             m_pRSQ.Ray=mouseRay;
             //m_pRSQ.SortByDistance=true;
  
@@ -314,9 +314,9 @@ namespace Mogre_Advanced_Framework
             {
                 if(itr.movable!=null)
                 {
-                    AdvancedMogreFramework.m_pLog.LogMessage("MovableName: " + itr.movable.Name);
+                    AdvancedMogreFramework.Singleton.m_pLog.LogMessage("MovableName: " + itr.movable.Name);
                     m_pCurrentObject = m_pSceneMgr.GetEntity(itr.movable.Name).ParentSceneNode;
-                    AdvancedMogreFramework.m_pLog.LogMessage("ObjName " + m_pCurrentObject.Name);
+                    AdvancedMogreFramework.Singleton.m_pLog.LogMessage("ObjName " + m_pCurrentObject.Name);
                     m_pCurrentObject.ShowBoundingBox=true;
                     m_pCurrentEntity = m_pSceneMgr.GetEntity(itr.movable.Name);
                     m_pCurrentEntity.GetSubEntity(1).SetMaterial(m_pOgreHeadMatHigh);
@@ -340,9 +340,9 @@ namespace Mogre_Advanced_Framework
         public override void update(double timeSinceLastFrame)
         {
             m_FrameEvent.timeSinceLastFrame = (float)timeSinceLastFrame;
-            if (AdvancedMogreFramework.m_pTrayMgr != null)
+            if (AdvancedMogreFramework.Singleton.m_pTrayMgr != null)
             {
-                AdvancedMogreFramework.m_pTrayMgr.frameRenderingQueued(m_FrameEvent);
+                AdvancedMogreFramework.Singleton.m_pTrayMgr.frameRenderingQueued(m_FrameEvent);
             }
  
             if(m_bQuit == true)
@@ -350,9 +350,9 @@ namespace Mogre_Advanced_Framework
                 popAppState();
                 return;
             }
-            if (AdvancedMogreFramework.m_pTrayMgr != null)
+            if (AdvancedMogreFramework.Singleton.m_pTrayMgr != null)
             {
-                if (!AdvancedMogreFramework.m_pTrayMgr.isDialogVisible())
+                if (!AdvancedMogreFramework.Singleton.m_pTrayMgr.isDialogVisible())
                 {
                     if (m_pDetailsPanel.isVisible())
                     {

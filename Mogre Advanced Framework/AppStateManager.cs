@@ -67,26 +67,26 @@ namespace Mogre_Advanced_Framework
  
 	        while(!m_bShutdown)
 	        {
-		        if(AdvancedMogreFramework.m_pRenderWnd.IsClosed)m_bShutdown = true;
+		        if(AdvancedMogreFramework.Singleton.m_pRenderWnd.IsClosed)m_bShutdown = true;
  
 		        WindowEventUtilities.MessagePump();
 
-            //    if (AdvancedMogreFramework.m_pRenderWnd.IsActive)
+            //    if (AdvancedMogreFramework.Singleton.m_pRenderWnd.IsActive)
 		    //    {
-                    startTime = (int)AdvancedMogreFramework.m_pTimer.MicrosecondsCPU;
+                    startTime = (int)AdvancedMogreFramework.Singleton.m_pTimer.MicrosecondsCPU;
 
                     //AdvancedMogreFramework.m_pKeyboard.Capture();
                     //AdvancedMogreFramework.m_pMouse.Capture();
  
 			        m_ActiveStateStack.Last().update(timeSinceLastFrame);
-                    AdvancedMogreFramework.m_pKeyboard.Capture();
-                    AdvancedMogreFramework.m_pMouse.Capture();
+                    AdvancedMogreFramework.Singleton.m_pKeyboard.Capture();
+                    AdvancedMogreFramework.Singleton.m_pMouse.Capture();
                     AdvancedMogreFramework.Singleton.updateOgre(timeSinceLastFrame);
-                    if (AdvancedMogreFramework.m_pRoot != null)
+                    if (AdvancedMogreFramework.Singleton.m_pRoot != null)
                     {
-                        AdvancedMogreFramework.m_pRoot.RenderOneFrame();
+                        AdvancedMogreFramework.Singleton.m_pRoot.RenderOneFrame();
                     }
-                    timeSinceLastFrame = (int)AdvancedMogreFramework.m_pTimer.MillisecondsCPU - startTime;
+                    timeSinceLastFrame = (int)AdvancedMogreFramework.Singleton.m_pTimer.MillisecondsCPU - startTime;
 		     //   }
 		     //   else
 		     //   {
@@ -94,7 +94,7 @@ namespace Mogre_Advanced_Framework
 		     //   }
 	        }
 
-            AdvancedMogreFramework.m_pLog.LogMessage("Main loop quit");
+            AdvancedMogreFramework.Singleton.m_pLog.LogMessage("Main loop quit");
          }
          public override void changeAppState(AppState state)
          {
@@ -168,8 +168,8 @@ namespace Mogre_Advanced_Framework
 
          protected void init(AppState state)
          {
-             AdvancedMogreFramework.m_pTrayMgr.setListener(state);
-             AdvancedMogreFramework.m_pRenderWnd.ResetStatistics();
+             AdvancedMogreFramework.Singleton.m_pTrayMgr.setListener(state);
+             AdvancedMogreFramework.Singleton.m_pRenderWnd.ResetStatistics();
          }
 
          protected List<AppState> m_ActiveStateStack=new List<AppState>();

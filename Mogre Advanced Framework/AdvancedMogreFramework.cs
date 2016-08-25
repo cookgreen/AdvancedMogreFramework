@@ -10,17 +10,17 @@ namespace Mogre_Advanced_Framework
 {
     class AdvancedMogreFramework 
     {
-        public static Root m_pRoot;
-        public static RenderWindow m_pRenderWnd;
-        public static Viewport m_pViewport;
-        public static Log m_pLog;
-        public static Timer m_pTimer;
+        public Root m_pRoot;
+        public RenderWindow m_pRenderWnd;
+        public Viewport m_pViewport;
+        public Log m_pLog;
+        public Timer m_pTimer;
 
-        public static InputManager m_pInputMgr;
-        public static Keyboard m_pKeyboard;
-        public static Mouse m_pMouse;
+        public InputManager m_pInputMgr;
+        public Keyboard m_pKeyboard;
+        public Mouse m_pMouse;
 
-        public static SdkTrayManager m_pTrayMgr;
+        public SdkTrayManager m_pTrayMgr;
         public AdvancedMogreFramework()
         {
             m_pRoot = null;

@@ -18,10 +18,10 @@ namespace Mogre_Advanced_Framework
 
         public override void enter()
         {
-            AdvancedMogreFramework.m_pLog.LogMessage("Entering PauseState...");
+            AdvancedMogreFramework.Singleton.m_pLog.LogMessage("Entering PauseState...");
             m_bQuit = false;
  
-            m_pSceneMgr = AdvancedMogreFramework.m_pRoot.CreateSceneManager(SceneType.ST_GENERIC, "PauseSceneMgr");
+            m_pSceneMgr = AdvancedMogreFramework.Singleton.m_pRoot.CreateSceneManager(SceneType.ST_GENERIC, "PauseSceneMgr");
             ColourValue cvAmbineLight=new ColourValue(0.7f,0.7f,0.7f);
             m_pSceneMgr.AmbientLight=cvAmbineLight;
  
@@ -32,23 +32,23 @@ namespace Mogre_Advanced_Framework
             m_pCamera.LookAt(vectCamLookAt);
             m_pCamera.NearClipDistance=1;
  
-            m_pCamera.AspectRatio=AdvancedMogreFramework.m_pViewport.ActualWidth /
-            AdvancedMogreFramework.m_pViewport.ActualHeight;
+            m_pCamera.AspectRatio=AdvancedMogreFramework.Singleton.m_pViewport.ActualWidth /
+            AdvancedMogreFramework.Singleton.m_pViewport.ActualHeight;
  
-            AdvancedMogreFramework.m_pViewport.Camera=m_pCamera;
+            AdvancedMogreFramework.Singleton.m_pViewport.Camera=m_pCamera;
 
-            AdvancedMogreFramework.m_pTrayMgr.destroyAllWidgets();
-            AdvancedMogreFramework.m_pTrayMgr.showCursor();
-            AdvancedMogreFramework.m_pTrayMgr.createButton(TrayLocation.TL_CENTER, "BackToGameBtn", "Return to GameState", 250);
-            AdvancedMogreFramework.m_pTrayMgr.createButton(TrayLocation.TL_CENTER, "BackToMenuBtn", "Return to Menu", 250);
-            AdvancedMogreFramework.m_pTrayMgr.createButton(TrayLocation.TL_CENTER, "ExitBtn", "Exit AdvancedOgreFramework", 250);
-            AdvancedMogreFramework.m_pTrayMgr.createLabel(TrayLocation.TL_TOP, "PauseLbl", "Pause mode", 250);
+            AdvancedMogreFramework.Singleton.m_pTrayMgr.destroyAllWidgets();
+            AdvancedMogreFramework.Singleton.m_pTrayMgr.showCursor();
+            AdvancedMogreFramework.Singleton.m_pTrayMgr.createButton(TrayLocation.TL_CENTER, "BackToGameBtn", "Return to GameState", 250);
+            AdvancedMogreFramework.Singleton.m_pTrayMgr.createButton(TrayLocation.TL_CENTER, "BackToMenuBtn", "Return to Menu", 250);
+            AdvancedMogreFramework.Singleton.m_pTrayMgr.createButton(TrayLocation.TL_CENTER, "ExitBtn", "Exit AdvancedOgreFramework", 250);
+            AdvancedMogreFramework.Singleton.m_pTrayMgr.createLabel(TrayLocation.TL_TOP, "PauseLbl", "Pause mode", 250);
 
-            AdvancedMogreFramework.m_pMouse.MouseMoved += new MouseListener.MouseMovedHandler(mouseMoved);
-            AdvancedMogreFramework.m_pMouse.MousePressed += new MouseListener.MousePressedHandler(mousePressed);
-            AdvancedMogreFramework.m_pMouse.MouseReleased += new MouseListener.MouseReleasedHandler(mouseReleased);
-            AdvancedMogreFramework.m_pKeyboard.KeyPressed += new KeyListener.KeyPressedHandler(keyPressed);
-            AdvancedMogreFramework.m_pKeyboard.KeyReleased += new KeyListener.KeyReleasedHandler(keyReleased);
+            AdvancedMogreFramework.Singleton.m_pMouse.MouseMoved += new MouseListener.MouseMovedHandler(mouseMoved);
+            AdvancedMogreFramework.Singleton.m_pMouse.MousePressed += new MouseListener.MousePressedHandler(mousePressed);
+            AdvancedMogreFramework.Singleton.m_pMouse.MouseReleased += new MouseListener.MouseReleasedHandler(mouseReleased);
+            AdvancedMogreFramework.Singleton.m_pKeyboard.KeyPressed += new KeyListener.KeyPressedHandler(keyPressed);
+            AdvancedMogreFramework.Singleton.m_pKeyboard.KeyReleased += new KeyListener.KeyReleasedHandler(keyReleased);
 
             m_bQuestionActive = true;
  
@@ -58,20 +58,20 @@ namespace Mogre_Advanced_Framework
         { }
         public override void exit()
         {
-            AdvancedMogreFramework.m_pLog.LogMessage("Leaving PauseState...");
+            AdvancedMogreFramework.Singleton.m_pLog.LogMessage("Leaving PauseState...");
  
             m_pSceneMgr.DestroyCamera(m_pCamera);
             if(m_pSceneMgr!=null)
-                AdvancedMogreFramework.m_pRoot.DestroySceneManager(m_pSceneMgr);
+                AdvancedMogreFramework.Singleton.m_pRoot.DestroySceneManager(m_pSceneMgr);
 
-            AdvancedMogreFramework.m_pTrayMgr.clearAllTrays();
-            AdvancedMogreFramework.m_pTrayMgr.destroyAllWidgets();
-            AdvancedMogreFramework.m_pTrayMgr.setListener(null);
+            AdvancedMogreFramework.Singleton.m_pTrayMgr.clearAllTrays();
+            AdvancedMogreFramework.Singleton.m_pTrayMgr.destroyAllWidgets();
+            AdvancedMogreFramework.Singleton.m_pTrayMgr.setListener(null);
         }
 
         public bool keyPressed(KeyEvent keyEventRef)
         {
-            if(AdvancedMogreFramework.m_pKeyboard.IsKeyDown(KeyCode.KC_ESCAPE) && !m_bQuestionActive)
+            if(AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_ESCAPE) && !m_bQuestionActive)
             {
                 m_bQuit = true;
                 return true;
@@ -90,17 +90,17 @@ namespace Mogre_Advanced_Framework
 
         public bool mouseMoved(MouseEvent evt)
         {
-            if (AdvancedMogreFramework.m_pTrayMgr.injectMouseMove(evt)) return true;
+            if (AdvancedMogreFramework.Singleton.m_pTrayMgr.injectMouseMove(evt)) return true;
             return true;
         }
         public bool mousePressed(MouseEvent evt, MouseButtonID id)
         {
-            if (AdvancedMogreFramework.m_pTrayMgr.injectMouseDown(evt, id)) return true;
+            if (AdvancedMogreFramework.Singleton.m_pTrayMgr.injectMouseDown(evt, id)) return true;
             return true;
         }
         public bool mouseReleased(MouseEvent evt, MouseButtonID id)
         {
-            if (AdvancedMogreFramework.m_pTrayMgr.injectMouseUp(evt, id)) return true;
+            if (AdvancedMogreFramework.Singleton.m_pTrayMgr.injectMouseUp(evt, id)) return true;
             return true;
         }
 
@@ -125,7 +125,7 @@ namespace Mogre_Advanced_Framework
             if(yesHit == true)
                 shutdown();
             else
-                AdvancedMogreFramework.m_pTrayMgr.closeDialog();
+                AdvancedMogreFramework.Singleton.m_pTrayMgr.closeDialog();
  
             m_bQuestionActive = false;
         }
@@ -133,7 +133,7 @@ namespace Mogre_Advanced_Framework
         public override void update(double timeSinceLastFrame)
         {
             m_FrameEvent.timeSinceLastFrame = (float)timeSinceLastFrame;
-            AdvancedMogreFramework.m_pTrayMgr.frameRenderingQueued(m_FrameEvent);
+            AdvancedMogreFramework.Singleton.m_pTrayMgr.frameRenderingQueued(m_FrameEvent);
  
             if(m_bQuit == true)
             {

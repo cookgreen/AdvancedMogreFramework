@@ -21,7 +21,7 @@ namespace Mogre_Advanced_Framework
             if (!AdvancedMogreFramework.Singleton.initOgre("AdvancedMogreFramework"))
 		        return;
 
-            AdvancedMogreFramework.m_pLog.LogMessage("Demo initialized!");
+            AdvancedMogreFramework.Singleton.m_pLog.LogMessage("Demo initialized!");
  
 	        m_pAppStateManager = new AppStateManager();
 
