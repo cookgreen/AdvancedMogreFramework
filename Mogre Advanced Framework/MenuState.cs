@@ -74,12 +74,12 @@ namespace Mogre_Advanced_Framework
                 return true;
             }
 
-            AdvancedMogreFramework.keyPressed(keyEventRef);
+            AdvancedMogreFramework.Singleton.keyPressed(keyEventRef);
             return true;
         }
         public bool keyReleased(KeyEvent keyEventRef)
         {
-            AdvancedMogreFramework.keyReleased(keyEventRef);
+            AdvancedMogreFramework.Singleton.keyReleased(keyEventRef);
             return true;
         }
 

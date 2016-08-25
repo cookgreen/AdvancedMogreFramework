@@ -42,7 +42,7 @@ namespace Mogre_Advanced_Framework
             //if (AdvancedMogreFramework.m_pRoot != null) m_pRoot = null;
         }
 
-        public static bool initOgre(String wndTitle)
+        public bool initOgre(String wndTitle)
         {
             LogManager logMgr = new LogManager();
  
@@ -113,11 +113,11 @@ namespace Mogre_Advanced_Framework
  
             return true;
         }
-        public static void updateOgre(double timeSinceLastFrame)
+        public void updateOgre(double timeSinceLastFrame)
         {
         }
 
-        public static bool keyPressed(KeyEvent keyEventRef)
+        public bool keyPressed(KeyEvent keyEventRef)
         {
              if(m_pKeyboard.IsKeyDown(MOIS.KeyCode.KC_V))
             {
@@ -141,22 +141,34 @@ namespace Mogre_Advanced_Framework
  
             return true;
         }
-        public static bool keyReleased(KeyEvent keyEventRef)
+        public bool keyReleased(KeyEvent keyEventRef)
         {
             return true;
         }
 
-        public static bool mouseMoved(MouseEvent evt)
+        public bool mouseMoved(MouseEvent evt)
         {
             return true;
         }
-        public static bool mousePressed(MouseEvent evt, MouseButtonID id)
+        public bool mousePressed(MouseEvent evt, MouseButtonID id)
         {
             return true;
         }
-        public static bool mouseReleased(MouseEvent evt, MouseButtonID id)
+        public bool mouseReleased(MouseEvent evt, MouseButtonID id)
         {
             return true;
+        }
+        public static AdvancedMogreFramework instance;
+        public static AdvancedMogreFramework Singleton
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new AdvancedMogreFramework();
+                }
+                return instance;
+            }
         }
         //AdvancedMogreFramework(const AdvancedMogreFramework);
         //AdvancedMogreFramework operator= (const AdvancedMogreFramework);

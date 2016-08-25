@@ -81,7 +81,7 @@ namespace Mogre_Advanced_Framework
 			        m_ActiveStateStack.Last().update(timeSinceLastFrame);
                     AdvancedMogreFramework.m_pKeyboard.Capture();
                     AdvancedMogreFramework.m_pMouse.Capture();
-                    AdvancedMogreFramework.updateOgre(timeSinceLastFrame);
+                    AdvancedMogreFramework.Singleton.updateOgre(timeSinceLastFrame);
                     if (AdvancedMogreFramework.m_pRoot != null)
                     {
                         AdvancedMogreFramework.m_pRoot.RenderOneFrame();

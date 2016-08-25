@@ -239,13 +239,13 @@ namespace Mogre_Advanced_Framework
             }
  
             if(!m_bSettingsMode || (m_bSettingsMode && !AdvancedMogreFramework.m_pKeyboard.IsKeyDown(KeyCode.KC_O)))
-                AdvancedMogreFramework.keyPressed(keyEventRef);
+                AdvancedMogreFramework.Singleton.keyPressed(keyEventRef);
  
                 return true;
         }
         public bool keyReleased(KeyEvent keyEventRef)
         {
-            AdvancedMogreFramework.keyPressed(keyEventRef);
+            AdvancedMogreFramework.Singleton.keyPressed(keyEventRef);
             return true;
         }
 

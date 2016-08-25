@@ -18,7 +18,7 @@ namespace Mogre_Advanced_Framework
         public void startDemo()
         {
             AdvancedMogreFramework amf=new AdvancedMogreFramework();
-            if (!AdvancedMogreFramework.initOgre("AdvancedMogreFramework"))
+            if (!AdvancedMogreFramework.Singleton.initOgre("AdvancedMogreFramework"))
 		        return;
 
             AdvancedMogreFramework.m_pLog.LogMessage("Demo initialized!");
