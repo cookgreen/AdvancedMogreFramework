@@ -1,11 +1,12 @@
  Advanced Mogre Framework
 =============
-An advanced Framework for mogre
+##Introduction
+Advanced Mogre Framework is an advanced framework for mogre base on Advanced Ogre Framework(See:[http://www.ogre3d.org/tikiwiki/tiki-index.php?page=Advanced+Ogre+Framework](http://www.ogre3d.org/tikiwiki/tiki-index.php?page=Advanced+Ogre+Framework))
 
-##How to use it?
-load this solution file with your visual studio(2010 later) and compile it
+##Usage:
+load the solution file with your visual studio(2010 2012 or 2013) and compile it
 
-##Requires##
+##Based on##
 * Mogre(include in the Mogre SDK)
 * MOIS(include in the Mogre SDK)
 * MogreBites(dll file in the project folder, you can use it directly)
