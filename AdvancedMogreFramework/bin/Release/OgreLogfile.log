@@ -1,0 +1,422 @@
+18:17:45: Creating resource group General
+18:17:45: Creating resource group Internal
+18:17:45: Creating resource group Autodetect
+18:17:45: SceneManagerFactory for type 'DefaultSceneManager' registered.
+18:17:45: Registering ResourceManager for type Material
+18:17:45: Registering ResourceManager for type Mesh
+18:17:45: Registering ResourceManager for type Skeleton
+18:17:45: MovableObjectFactory for type 'ParticleSystem' registered.
+18:17:45: OverlayElementFactory for type Panel registered.
+18:17:45: OverlayElementFactory for type BorderPanel registered.
+18:17:45: OverlayElementFactory for type TextArea registered.
+18:17:45: Registering ResourceManager for type Font
+18:17:45: ArchiveFactory for archive type FileSystem registered.
+18:17:45: ArchiveFactory for archive type Zip registered.
+18:17:45: DDS codec registering
+18:17:45: FreeImage version: 3.15.3
+18:17:45: This program uses FreeImage, a free, open source image library supporting all common bitmap formats. See http://freeimage.sourceforge.net for details
+18:17:45: Supported formats: bmp,ico,jpg,jif,jpeg,jpe,jng,koa,iff,lbm,mng,pbm,pbm,pcd,pcx,pgm,pgm,png,ppm,ppm,ras,tga,targa,tif,tiff,wap,wbmp,wbm,psd,cut,xbm,xpm,gif,hdr,g3,sgi,exr,j2k,j2c,jp2,pfm,pct,pict,pic,3fr,arw,bay,bmq,cap,cine,cr2,crw,cs1,dc2,dcr,drf,dsc,dng,erf,fff,ia,iiq,k25,kc2,kdc,mdc,mef,mos,mrw,nef,nrw,orf,pef,ptx,pxn,qtk,raf,raw,rdc,rw2,rwl,rwz,sr2,srf,srw,sti
+18:17:45: PVRTC codec registering
+18:17:45: Registering ResourceManager for type HighLevelGpuProgram
+18:17:45: Registering ResourceManager for type Compositor
+18:17:45: MovableObjectFactory for type 'Entity' registered.
+18:17:45: MovableObjectFactory for type 'Light' registered.
+18:17:45: MovableObjectFactory for type 'BillboardSet' registered.
+18:17:45: MovableObjectFactory for type 'ManualObject' registered.
+18:17:45: MovableObjectFactory for type 'BillboardChain' registered.
+18:17:45: MovableObjectFactory for type 'RibbonTrail' registered.
+18:17:45: Loading library .\RenderSystem_Direct3D9
+18:17:46: Installing plugin: D3D9 RenderSystem
+18:17:46: D3D9 : Direct3D9 Rendering Subsystem created.
+18:17:46: D3D9: Driver Detection Starts
+18:17:46: D3D9: Driver Detection Ends
+18:17:46: Plugin successfully installed
+18:17:46: Loading library .\RenderSystem_GL
+18:17:46: Installing plugin: GL RenderSystem
+18:17:46: OpenGL Rendering Subsystem created.
+18:17:46: Plugin successfully installed
+18:17:46: Loading library .\Plugin_ParticleFX
+18:17:46: Installing plugin: ParticleFX
+18:17:46: Particle Emitter Type 'Point' registered
+18:17:46: Particle Emitter Type 'Box' registered
+18:17:46: Particle Emitter Type 'Ellipsoid' registered
+18:17:46: Particle Emitter Type 'Cylinder' registered
+18:17:46: Particle Emitter Type 'Ring' registered
+18:17:46: Particle Emitter Type 'HollowEllipsoid' registered
+18:17:46: Particle Affector Type 'LinearForce' registered
+18:17:46: Particle Affector Type 'ColourFader' registered
+18:17:46: Particle Affector Type 'ColourFader2' registered
+18:17:46: Particle Affector Type 'ColourImage' registered
+18:17:46: Particle Affector Type 'ColourInterpolator' registered
+18:17:46: Particle Affector Type 'Scaler' registered
+18:17:46: Particle Affector Type 'Rotator' registered
+18:17:46: Particle Affector Type 'DirectionRandomiser' registered
+18:17:46: Particle Affector Type 'DeflectorPlane' registered
+18:17:46: Plugin successfully installed
+18:17:46: Loading library .\Plugin_BSPSceneManager
+18:17:46: Installing plugin: BSP Scene Manager
+18:17:46: Plugin successfully installed
+18:17:46: Loading library .\Plugin_OctreeSceneManager
+18:17:46: Installing plugin: Octree & Terrain Scene Manager
+18:17:46: Plugin successfully installed
+18:17:46: Loading library .\Plugin_CgProgramManager
+18:17:46: Installing plugin: Cg Program Manager
+18:17:46: Plugin successfully installed
+18:17:46: *-*-* OGRE Initialising
+18:17:46: *-*-* Version 1.7.4 (Cthugha)
+18:17:46: D3D9 : RenderSystem Option: Allow NVPerfHUD = No
+18:17:46: D3D9 : RenderSystem Option: FSAA = 0
+18:17:46: D3D9 : RenderSystem Option: Floating-point mode = Fastest
+18:17:46: D3D9 : RenderSystem Option: Full Screen = No
+18:17:46: D3D9 : RenderSystem Option: Rendering Device = Monitor-1-AMD Radeon HD 7400M Series
+18:17:46: D3D9 : RenderSystem Option: Resource Creation Policy = Create on all devices
+18:17:46: D3D9 : RenderSystem Option: VSync = No
+18:17:46: D3D9 : RenderSystem Option: VSync Interval = 1
+18:17:46: D3D9 : RenderSystem Option: Video Mode = 800 x 600 @ 32-bit colour
+18:17:46: D3D9 : RenderSystem Option: sRGB Gamma Conversion = No
+18:17:47: CPU Identifier & Features
+18:17:47: -------------------------
+18:17:47:  *   CPU ID: GenuineIntel: Intel(R) Core(TM) i3-2330M CPU @ 2.20GHz
+18:17:47:  *      SSE: yes
+18:17:47:  *     SSE2: yes
+18:17:47:  *     SSE3: yes
+18:17:47:  *      MMX: yes
+18:17:47:  *   MMXEXT: yes
+18:17:47:  *    3DNOW: no
+18:17:47:  * 3DNOWEXT: no
+18:17:47:  *     CMOV: yes
+18:17:47:  *      TSC: yes
+18:17:47:  *      FPU: yes
+18:17:47:  *      PRO: yes
+18:17:47:  *       HT: no
+18:17:47: -------------------------
+18:17:47: D3D9 : Subsystem Initialising
+18:17:47: Registering ResourceManager for type Texture
+18:17:47: Registering ResourceManager for type GpuProgram
+18:17:47: D3D9RenderSystem::_createRenderWindow "AdvancedMogreFramework", 800x600 windowed  miscParams: FSAA=0 FSAAHint= colourDepth=32 gamma=false monitorIndex=0 useNVPerfHUD=false vsync=false vsyncInterval=1 
+18:17:47: D3D9 : Created D3D9 Rendering Window 'AdvancedMogreFramework' : 800x600, 32bpp
+18:17:47: D3D9 : WARNING - disabling VSync in windowed mode can cause timing issues at lower frame rates, turn VSync on if you observe this problem.
+18:17:47: D3D9: Vertex texture format supported - PF_L8
+18:17:47: D3D9: Vertex texture format supported - PF_L16
+18:17:47: D3D9: Vertex texture format supported - PF_A8
+18:17:47: D3D9: Vertex texture format supported - PF_A4L4
+18:17:47: D3D9: Vertex texture format supported - PF_BYTE_LA
+18:17:47: D3D9: Vertex texture format supported - PF_R5G6B5
+18:17:47: D3D9: Vertex texture format supported - PF_B5G6R5
+18:17:47: D3D9: Vertex texture format supported - PF_A4R4G4B4
+18:17:47: D3D9: Vertex texture format supported - PF_A1R5G5B5
+18:17:47: D3D9: Vertex texture format supported - PF_A8R8G8B8
+18:17:47: D3D9: Vertex texture format supported - PF_B8G8R8A8
+18:17:47: D3D9: Vertex texture format supported - PF_A2R10G10B10
+18:17:47: D3D9: Vertex texture format supported - PF_A2B10G10R10
+18:17:47: D3D9: Vertex texture format supported - PF_DXT1
+18:17:47: D3D9: Vertex texture format supported - PF_DXT2
+18:17:47: D3D9: Vertex texture format supported - PF_DXT3
+18:17:47: D3D9: Vertex texture format supported - PF_DXT4
+18:17:47: D3D9: Vertex texture format supported - PF_DXT5
+18:17:47: D3D9: Vertex texture format supported - PF_FLOAT16_RGB
+18:17:47: D3D9: Vertex texture format supported - PF_FLOAT16_RGBA
+18:17:47: D3D9: Vertex texture format supported - PF_FLOAT32_RGB
+18:17:47: D3D9: Vertex texture format supported - PF_FLOAT32_RGBA
+18:17:47: D3D9: Vertex texture format supported - PF_X8R8G8B8
+18:17:47: D3D9: Vertex texture format supported - PF_X8B8G8R8
+18:17:47: D3D9: Vertex texture format supported - PF_R8G8B8A8
+18:17:47: D3D9: Vertex texture format supported - PF_DEPTH
+18:17:47: D3D9: Vertex texture format supported - PF_SHORT_RGBA
+18:17:47: D3D9: Vertex texture format supported - PF_FLOAT16_R
+18:17:47: D3D9: Vertex texture format supported - PF_FLOAT32_R
+18:17:47: D3D9: Vertex texture format supported - PF_SHORT_GR
+18:17:47: D3D9: Vertex texture format supported - PF_FLOAT16_GR
+18:17:47: D3D9: Vertex texture format supported - PF_FLOAT32_GR
+18:17:47: D3D9: Vertex texture format supported - PF_SHORT_RGB
+18:17:47: D3D9: Vertex texture format supported - PF_PVRTC_RGB2
+18:17:47: D3D9: Vertex texture format supported - PF_PVRTC_RGBA2
+18:17:47: D3D9: Vertex texture format supported - PF_PVRTC_RGB4
+18:17:47: D3D9: Vertex texture format supported - PF_PVRTC_RGBA4
+18:17:47: RenderSystem capabilities
+18:17:47: -------------------------
+18:17:47: RenderSystem Name: Direct3D9 Rendering Subsystem
+18:17:47: GPU Vendor: ati
+18:17:47: Device Name: Monitor-1-AMD Radeon HD 7400M Series
+18:17:47: Driver Version: 8.17.10.1280
+18:17:47:  * Fixed function pipeline: yes
+18:17:47:  * Hardware generation of mipmaps: yes
+18:17:47:  * Texture blending: yes
+18:17:47:  * Anisotropic texture filtering: yes
+18:17:47:  * Dot product texture operation: yes
+18:17:47:  * Cube mapping: yes
+18:17:47:  * Hardware stencil buffer: yes
+18:17:47:    - Stencil depth: 8
+18:17:47:    - Two sided stencil support: yes
+18:17:47:    - Wrap stencil values: yes
+18:17:47:  * Hardware vertex / index buffers: yes
+18:17:47:  * Vertex programs: yes
+18:17:47:  * Number of floating-point constants for vertex programs: 256
+18:17:47:  * Number of integer constants for vertex programs: 16
+18:17:47:  * Number of boolean constants for vertex programs: 16
+18:17:47:  * Fragment programs: yes
+18:17:47:  * Number of floating-point constants for fragment programs: 224
+18:17:47:  * Number of integer constants for fragment programs: 16
+18:17:47:  * Number of boolean constants for fragment programs: 16
+18:17:47:  * Geometry programs: no
+18:17:47:  * Number of floating-point constants for geometry programs: 0
+18:17:47:  * Number of integer constants for geometry programs: 0
+18:17:47:  * Number of boolean constants for geometry programs: 0
+18:17:47:  * Supported Shader Profiles: hlsl ps_1_1 ps_1_2 ps_1_3 ps_1_4 ps_2_0 ps_2_a ps_2_b ps_2_x ps_3_0 vs_1_1 vs_2_0 vs_2_a vs_2_x vs_3_0
+18:17:47:  * Texture Compression: yes
+18:17:47:    - DXT: yes
+18:17:47:    - VTC: no
+18:17:47:    - PVRTC: no
+18:17:47:  * Scissor Rectangle: yes
+18:17:47:  * Hardware Occlusion Query: yes
+18:17:47:  * User clip planes: yes
+18:17:47:  * VET_UBYTE4 vertex element type: yes
+18:17:47:  * Infinite far plane projection: yes
+18:17:47:  * Hardware render-to-texture: yes
+18:17:47:  * Floating point textures: yes
+18:17:47:  * Non-power-of-two textures: yes
+18:17:47:  * Volume textures: yes
+18:17:47:  * Multiple Render Targets: 4
+18:17:47:    - With different bit depths: yes
+18:17:47:  * Point Sprites: yes
+18:17:47:  * Extended point parameters: yes
+18:17:47:  * Max Point Size: 10
+18:17:47:  * Vertex texture fetch: yes
+18:17:47:  * Number of world matrices: 0
+18:17:47:  * Number of texture units: 8
+18:17:47:  * Stencil buffer depth: 8
+18:17:47:  * Number of vertex blend matrices: 0
+18:17:47:    - Max vertex textures: 4
+18:17:47:    - Vertex textures shared: no
+18:17:47:  * Render to Vertex Buffer : no
+18:17:47:  * DirectX per stage constants: yes
+18:17:47: ***************************************
+18:17:47: *** D3D9 : Subsystem Initialised OK ***
+18:17:47: ***************************************
+18:17:47: DefaultWorkQueue('Root') initialising on thread main.
+18:17:47: Particle Renderer Type 'billboard' registered
+18:17:47: SceneManagerFactory for type 'BspSceneManager' registered.
+18:17:47: Registering ResourceManager for type BspLevel
+18:17:47: SceneManagerFactory for type 'OctreeSceneManager' registered.
+18:17:47: SceneManagerFactory for type 'TerrainSceneManager' registered.
+18:17:47: Creating resource group Bootstrap
+18:17:47: Added resource location '../../media/packs/SdkTrays.zip' of type 'Zip' to resource group 'Bootstrap'
+18:17:47: Added resource location '../../media/MyGUI_Media' of type 'FileSystem' to resource group 'General'
+18:17:47: Added resource location '../../media/models' of type 'FileSystem' to resource group 'General'
+18:17:47: Added resource location '../../media/cube_scene' of type 'FileSystem' to resource group 'General'
+18:17:47: Added resource location '../../media/materials/scripts' of type 'FileSystem' to resource group 'General'
+18:17:47: Added resource location '../../media/materials/textures' of type 'FileSystem' to resource group 'General'
+18:17:47: Added resource location '../../media/packs/cubemapsJS.zip' of type 'Zip' to resource group 'General'
+18:17:47: Added resource location '../../media/packs/Sinbad.zip' of type 'Zip' to resource group 'General'
+18:17:47: Parsing scripts for resource group Autodetect
+18:17:47: Finished parsing scripts for resource group Autodetect
+18:17:47: Parsing scripts for resource group Bootstrap
+18:17:47: Parsing script SdkTrays.material
+18:17:47: Parsing script SdkTrays.fontdef
+18:17:47: Parsing script SdkTrays.overlay
+18:17:47: Bad element attribute line: '# you can offset the image to change the cursor "hotspot"' for element SdkTrays/Cursor in overlay 
+18:17:47: Texture: sdk_cursor.png: Loading 1 faces(PF_A8R8G8B8,32x32x1) with  hardware generated mipmaps from Image. Internal format is PF_A8R8G8B8,32x32x1.
+18:17:47: Texture: sdk_tray.png: Loading 1 faces(PF_A8R8G8B8,64x64x1) with  hardware generated mipmaps from Image. Internal format is PF_A8R8G8B8,64x64x1.
+18:17:47: Texture: sdk_button_up.png: Loading 1 faces(PF_A8R8G8B8,128x32x1) with  hardware generated mipmaps from Image. Internal format is PF_A8R8G8B8,128x32x1.
+18:17:47: Texture: sdk_text_box.png: Loading 1 faces(PF_A8R8G8B8,32x32x1) with  hardware generated mipmaps from Image. Internal format is PF_A8R8G8B8,32x32x1.
+18:17:47: Texture: sdk_mini_tray.png: Loading 1 faces(PF_A8R8G8B8,32x32x1) with  hardware generated mipmaps from Image. Internal format is PF_A8R8G8B8,32x32x1.
+18:17:47: Texture: sdk_track.png: Loading 1 faces(PF_A8R8G8B8,16x32x1) with  hardware generated mipmaps from Image. Internal format is PF_A8R8G8B8,16x32x1.
+18:17:47: Texture: sdk_handle.png: Loading 1 faces(PF_A8R8G8B8,16x16x1) with  hardware generated mipmaps from Image. Internal format is PF_A8R8G8B8,16x16x1.
+18:17:47: Texture: sdk_mini_text_box.png: Loading 1 faces(PF_A8R8G8B8,32x32x1) with  hardware generated mipmaps from Image. Internal format is PF_A8R8G8B8,32x32x1.
+18:17:47: Texture: sdk_label.png: Loading 1 faces(PF_A8R8G8B8,32x32x1) with  hardware generated mipmaps from Image. Internal format is PF_A8R8G8B8,32x32x1.
+18:17:47: Texture: sdk_separator.png: Loading 1 faces(PF_A8R8G8B8,64x16x1) with  hardware generated mipmaps from Image. Internal format is PF_A8R8G8B8,64x16x1.
+18:17:47: Texture: sdk_logo.png: Loading 1 faces(PF_A8R8G8B8,128x64x1) with  hardware generated mipmaps from Image. Internal format is PF_A8R8G8B8,128x64x1.
+18:17:47: Texture: sdk_shade.png: Loading 1 faces(PF_A8R8G8B8,64x48x1) with 5 generated mipmaps from Image. Internal format is PF_A8R8G8B8,64x48x1.
+18:17:47: Texture: sdk_frame.png: Loading 1 faces(PF_A8R8G8B8,32x32x1) with  hardware generated mipmaps from Image. Internal format is PF_A8R8G8B8,32x32x1.
+18:17:47: Texture: sdk_mini_text_box_over.png: Loading 1 faces(PF_A8R8G8B8,32x32x1) with  hardware generated mipmaps from Image. Internal format is PF_A8R8G8B8,32x32x1.
+18:17:47: Texture: sdk_pulse.png: Loading 1 faces(PF_R8G8B8,8x1x1) with  hardware generated mipmaps from Image. Internal format is PF_X8R8G8B8,8x1x1.
+18:17:47: Finished parsing scripts for resource group Bootstrap
+18:17:47: Parsing scripts for resource group General
+18:17:47: Parsing script Scene.material
+18:17:47: Parsing script Examples.material
+18:17:47: Compiler error: reference to a non existing object in Examples.material(253)
+18:17:47: OGRE EXCEPTION(6:FileNotFoundException): Cannot locate resource hdr.cg in resource group General or any other group. in ResourceGroupManager::openResource at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreResourceGroupManager.cpp (line 753)
+18:17:47: High-level program Examples/MorningSkyBoxHDRfp encountered an error during loading and is thus not supported.
+OGRE EXCEPTION(6:FileNotFoundException): Cannot locate resource hdr.cg in resource group General or any other group. in ResourceGroupManager::openResource at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreResourceGroupManager.cpp (line 753)
+18:17:47: OGRE EXCEPTION(6:FileNotFoundException): Cannot locate resource hdr.cg in resource group General or any other group. in ResourceGroupManager::openResource at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreResourceGroupManager.cpp (line 753)
+18:17:47: High-level program Examples/MorningCubeMapHDRfp encountered an error during loading and is thus not supported.
+OGRE EXCEPTION(6:FileNotFoundException): Cannot locate resource hdr.cg in resource group General or any other group. in ResourceGroupManager::openResource at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreResourceGroupManager.cpp (line 753)
+18:17:47: Compiler error: reference to a non existing object in Examples.material(772)
+18:17:47: Compiler error: reference to a non existing object in Examples.material(784)
+18:17:47: OGRE EXCEPTION(6:FileNotFoundException): Cannot locate resource Grass.cg in resource group General or any other group. in ResourceGroupManager::openResource at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreResourceGroupManager.cpp (line 753)
+18:17:47: High-level program Examples/GrassWaverVp encountered an error during loading and is thus not supported.
+OGRE EXCEPTION(6:FileNotFoundException): Cannot locate resource Grass.cg in resource group General or any other group. in ResourceGroupManager::openResource at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreResourceGroupManager.cpp (line 753)
+18:17:47: OGRE EXCEPTION(2:InvalidParametersException): Named constants have not been initialised, perhaps a compile error. in GpuProgramParameters::_findNamedConstantDefinition at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreGpuProgramParams.cpp (line 1425)
+18:17:47: Compiler error: invalid parameters in Examples.material(835): setting of constant failed
+18:17:47: OGRE EXCEPTION(2:InvalidParametersException): Named constants have not been initialised, perhaps a compile error. in GpuProgramParameters::_findNamedConstantDefinition at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreGpuProgramParams.cpp (line 1425)
+18:17:47: Compiler error: invalid parameters in Examples.material(837): setting of constant failed
+18:17:47: OGRE EXCEPTION(2:InvalidParametersException): Named constants have not been initialised, perhaps a compile error. in GpuProgramParameters::_findNamedConstantDefinition at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreGpuProgramParams.cpp (line 1425)
+18:17:47: Compiler error: invalid parameters in Examples.material(839): setting of constant failed
+18:17:47: OGRE EXCEPTION(2:InvalidParametersException): Named constants have not been initialised, perhaps a compile error. in GpuProgramParameters::_findNamedConstantDefinition at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreGpuProgramParams.cpp (line 1425)
+18:17:47: Compiler error: invalid parameters in Examples.material(840): setting of constant failed
+18:17:47: OGRE EXCEPTION(2:InvalidParametersException): Named constants have not been initialised, perhaps a compile error. in GpuProgramParameters::_findNamedConstantDefinition at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreGpuProgramParams.cpp (line 1425)
+18:17:47: Compiler error: invalid parameters in Examples.material(841): setting of constant failed
+18:17:47: OGRE EXCEPTION(2:InvalidParametersException): Named constants have not been initialised, perhaps a compile error. in GpuProgramParameters::_findNamedConstantDefinition at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreGpuProgramParams.cpp (line 1425)
+18:17:47: Compiler error: invalid parameters in Examples.material(843): setting of constant failed
+18:17:47: OGRE EXCEPTION(6:FileNotFoundException): Cannot locate resource Grass.cg in resource group General or any other group. in ResourceGroupManager::openResource at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreResourceGroupManager.cpp (line 753)
+18:17:47: High-level program Examples/GrassWaverTexVp encountered an error during loading and is thus not supported.
+OGRE EXCEPTION(6:FileNotFoundException): Cannot locate resource Grass.cg in resource group General or any other group. in ResourceGroupManager::openResource at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreResourceGroupManager.cpp (line 753)
+18:17:47: OGRE EXCEPTION(2:InvalidParametersException): Named constants have not been initialised, perhaps a compile error. in GpuProgramParameters::_findNamedConstantDefinition at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreGpuProgramParams.cpp (line 1425)
+18:17:47: Compiler error: invalid parameters in Examples.material(855): setting of constant failed
+18:17:47: OGRE EXCEPTION(2:InvalidParametersException): Named constants have not been initialised, perhaps a compile error. in GpuProgramParameters::_findNamedConstantDefinition at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreGpuProgramParams.cpp (line 1425)
+18:17:47: Compiler error: invalid parameters in Examples.material(856): setting of constant failed
+18:17:47: OGRE EXCEPTION(6:FileNotFoundException): Cannot locate resource Grass.cg in resource group General or any other group. in ResourceGroupManager::openResource at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreResourceGroupManager.cpp (line 753)
+18:17:47: High-level program Examples/GrassWaverAmbientVp encountered an error during loading and is thus not supported.
+OGRE EXCEPTION(6:FileNotFoundException): Cannot locate resource Grass.cg in resource group General or any other group. in ResourceGroupManager::openResource at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreResourceGroupManager.cpp (line 753)
+18:17:47: OGRE EXCEPTION(2:InvalidParametersException): Named constants have not been initialised, perhaps a compile error. in GpuProgramParameters::_findNamedConstantDefinition at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreGpuProgramParams.cpp (line 1425)
+18:17:47: Compiler error: invalid parameters in Examples.material(867): setting of constant failed
+18:17:47: OGRE EXCEPTION(2:InvalidParametersException): Named constants have not been initialised, perhaps a compile error. in GpuProgramParameters::_findNamedConstantDefinition at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreGpuProgramParams.cpp (line 1425)
+18:17:47: Compiler error: invalid parameters in Examples.material(868): setting of constant failed
+18:17:47: OGRE EXCEPTION(2:InvalidParametersException): Named constants have not been initialised, perhaps a compile error. in GpuProgramParameters::_findNamedConstantDefinition at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreGpuProgramParams.cpp (line 1425)
+18:17:47: Compiler error: invalid parameters in Examples.material(869): setting of constant failed
+18:17:47: OGRE EXCEPTION(6:FileNotFoundException): Cannot locate resource Grass.cg in resource group General or any other group. in ResourceGroupManager::openResource at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreResourceGroupManager.cpp (line 753)
+18:17:47: High-level program Examples/GrassWaverAmbientFp encountered an error during loading and is thus not supported.
+OGRE EXCEPTION(6:FileNotFoundException): Cannot locate resource Grass.cg in resource group General or any other group. in ResourceGroupManager::openResource at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreResourceGroupManager.cpp (line 753)
+18:17:47: OGRE EXCEPTION(6:FileNotFoundException): Cannot locate resource Grass.cg in resource group General or any other group. in ResourceGroupManager::openResource at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreResourceGroupManager.cpp (line 753)
+18:17:47: High-level program Examples/GrassWaverFp encountered an error during loading and is thus not supported.
+OGRE EXCEPTION(6:FileNotFoundException): Cannot locate resource Grass.cg in resource group General or any other group. in ResourceGroupManager::openResource at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreResourceGroupManager.cpp (line 753)
+18:17:47: OGRE EXCEPTION(6:FileNotFoundException): Cannot locate resource Grass.cg in resource group General or any other group. in ResourceGroupManager::openResource at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreResourceGroupManager.cpp (line 753)
+18:17:47: High-level program Examples/GrassWaverCasterVp encountered an error during loading and is thus not supported.
+OGRE EXCEPTION(6:FileNotFoundException): Cannot locate resource Grass.cg in resource group General or any other group. in ResourceGroupManager::openResource at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreResourceGroupManager.cpp (line 753)
+18:17:47: OGRE EXCEPTION(2:InvalidParametersException): Named constants have not been initialised, perhaps a compile error. in GpuProgramParameters::_findNamedConstantDefinition at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreGpuProgramParams.cpp (line 1425)
+18:17:47: Compiler error: invalid parameters in Examples.material(899): setting of constant failed
+18:17:47: OGRE EXCEPTION(2:InvalidParametersException): Named constants have not been initialised, perhaps a compile error. in GpuProgramParameters::_findNamedConstantDefinition at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreGpuProgramParams.cpp (line 1425)
+18:17:47: Compiler error: invalid parameters in Examples.material(900): setting of constant failed
+18:17:47: OGRE EXCEPTION(2:InvalidParametersException): Named constants have not been initialised, perhaps a compile error. in GpuProgramParameters::_findNamedConstantDefinition at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreGpuProgramParams.cpp (line 1425)
+18:17:47: Compiler error: invalid parameters in Examples.material(901): setting of constant failed
+18:17:47: OGRE EXCEPTION(6:FileNotFoundException): Cannot locate resource Grass.cg in resource group General or any other group. in ResourceGroupManager::openResource at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreResourceGroupManager.cpp (line 753)
+18:17:47: High-level program Examples/GrassWaverCasterFp encountered an error during loading and is thus not supported.
+OGRE EXCEPTION(6:FileNotFoundException): Cannot locate resource Grass.cg in resource group General or any other group. in ResourceGroupManager::openResource at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreResourceGroupManager.cpp (line 753)
+18:17:47: OGRE EXCEPTION(6:FileNotFoundException): Cannot locate resource Grass.cg in resource group General or any other group. in ResourceGroupManager::openResource at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreResourceGroupManager.cpp (line 753)
+18:17:47: High-level program Examples/GrassWaverReceiverVp encountered an error during loading and is thus not supported.
+OGRE EXCEPTION(6:FileNotFoundException): Cannot locate resource Grass.cg in resource group General or any other group. in ResourceGroupManager::openResource at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreResourceGroupManager.cpp (line 753)
+18:17:47: OGRE EXCEPTION(2:InvalidParametersException): Named constants have not been initialised, perhaps a compile error. in GpuProgramParameters::_findNamedConstantDefinition at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreGpuProgramParams.cpp (line 1425)
+18:17:47: Compiler error: invalid parameters in Examples.material(922): setting of constant failed
+18:17:47: OGRE EXCEPTION(2:InvalidParametersException): Named constants have not been initialised, perhaps a compile error. in GpuProgramParameters::_findNamedConstantDefinition at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreGpuProgramParams.cpp (line 1425)
+18:17:47: Compiler error: invalid parameters in Examples.material(923): setting of constant failed
+18:17:47: OGRE EXCEPTION(2:InvalidParametersException): Named constants have not been initialised, perhaps a compile error. in GpuProgramParameters::_findNamedConstantDefinition at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreGpuProgramParams.cpp (line 1425)
+18:17:47: Compiler error: invalid parameters in Examples.material(924): setting of constant failed
+18:17:47: OGRE EXCEPTION(2:InvalidParametersException): Named constants have not been initialised, perhaps a compile error. in GpuProgramParameters::_findNamedConstantDefinition at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreGpuProgramParams.cpp (line 1425)
+18:17:47: Compiler error: invalid parameters in Examples.material(926): setting of constant failed
+18:17:47: OGRE EXCEPTION(2:InvalidParametersException): Named constants have not been initialised, perhaps a compile error. in GpuProgramParameters::_findNamedConstantDefinition at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreGpuProgramParams.cpp (line 1425)
+18:17:47: Compiler error: invalid parameters in Examples.material(928): setting of constant failed
+18:17:47: OGRE EXCEPTION(2:InvalidParametersException): Named constants have not been initialised, perhaps a compile error. in GpuProgramParameters::_findNamedConstantDefinition at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreGpuProgramParams.cpp (line 1425)
+18:17:47: Compiler error: invalid parameters in Examples.material(929): setting of constant failed
+18:17:47: OGRE EXCEPTION(2:InvalidParametersException): Named constants have not been initialised, perhaps a compile error. in GpuProgramParameters::_findNamedConstantDefinition at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreGpuProgramParams.cpp (line 1425)
+18:17:47: Compiler error: invalid parameters in Examples.material(931): setting of constant failed
+18:17:47: OGRE EXCEPTION(6:FileNotFoundException): Cannot locate resource Grass.cg in resource group General or any other group. in ResourceGroupManager::openResource at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreResourceGroupManager.cpp (line 753)
+18:17:47: High-level program Examples/GrassWaverReceiverFp encountered an error during loading and is thus not supported.
+OGRE EXCEPTION(6:FileNotFoundException): Cannot locate resource Grass.cg in resource group General or any other group. in ResourceGroupManager::openResource at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreResourceGroupManager.cpp (line 753)
+18:17:47: OGRE EXCEPTION(2:InvalidParametersException): Named constants have not been initialised, perhaps a compile error. in GpuProgramParameters::_findNamedConstantDefinition at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreGpuProgramParams.cpp (line 1425)
+18:17:47: Compiler error: invalid parameters in Examples.material(945): setting of constant failed
+18:17:47: OGRE EXCEPTION(2:InvalidParametersException): Named constants have not been initialised, perhaps a compile error. in GpuProgramParameters::_findNamedConstantDefinition at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreGpuProgramParams.cpp (line 1425)
+18:17:47: Compiler error: invalid parameters in Examples.material(946): setting of constant failed
+18:17:47: OGRE EXCEPTION(2:InvalidParametersException): Named constants have not been initialised, perhaps a compile error. in GpuProgramParameters::_findNamedConstantDefinition at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreGpuProgramParams.cpp (line 1425)
+18:17:47: Compiler error: invalid parameters in Examples.material(947): setting of constant failed
+18:17:47: Compiler error: reference to a non existing object in Examples.material(1281)
+18:17:47: Compiler error: reference to a non existing object in Examples.material(1473)
+18:17:47: Compiler error: reference to a non existing object in Examples.material(1508)
+18:17:47: Compiler error: reference to a non existing object in Examples.material(1617)
+18:17:47: Compiler error: reference to a non existing object in Examples.material(1622)
+18:17:47: OGRE EXCEPTION(6:FileNotFoundException): Cannot locate resource Example_Basic.cg in resource group General or any other group. in ResourceGroupManager::openResource at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreResourceGroupManager.cpp (line 753)
+18:17:47: High-level program Examples/ShowTangents_v encountered an error during loading and is thus not supported.
+OGRE EXCEPTION(6:FileNotFoundException): Cannot locate resource Example_Basic.cg in resource group General or any other group. in ResourceGroupManager::openResource at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreResourceGroupManager.cpp (line 753)
+18:17:47: OGRE EXCEPTION(2:InvalidParametersException): Named constants have not been initialised, perhaps a compile error. in GpuProgramParameters::_findNamedConstantDefinition at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreGpuProgramParams.cpp (line 1425)
+18:17:47: Compiler error: invalid parameters in Examples.material(1696): setting of constant failed
+18:17:47: OGRE EXCEPTION(6:FileNotFoundException): Cannot locate resource Example_Basic.cg in resource group General or any other group. in ResourceGroupManager::openResource at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreResourceGroupManager.cpp (line 753)
+18:17:47: High-level program Examples/ShowNormals_v encountered an error during loading and is thus not supported.
+OGRE EXCEPTION(6:FileNotFoundException): Cannot locate resource Example_Basic.cg in resource group General or any other group. in ResourceGroupManager::openResource at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreResourceGroupManager.cpp (line 753)
+18:17:47: OGRE EXCEPTION(2:InvalidParametersException): Named constants have not been initialised, perhaps a compile error. in GpuProgramParameters::_findNamedConstantDefinition at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreGpuProgramParams.cpp (line 1425)
+18:17:47: Compiler error: invalid parameters in Examples.material(1706): setting of constant failed
+18:17:47: Compiler error: reference to a non existing object in Examples.material(1716)
+18:17:47: OGRE EXCEPTION(6:FileNotFoundException): Cannot locate resource Example_Basic.cg in resource group General or any other group. in ResourceGroupManager::openResource at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreResourceGroupManager.cpp (line 753)
+18:17:47: High-level program Examples/ShowUV_p encountered an error during loading and is thus not supported.
+OGRE EXCEPTION(6:FileNotFoundException): Cannot locate resource Example_Basic.cg in resource group General or any other group. in ResourceGroupManager::openResource at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreResourceGroupManager.cpp (line 753)
+18:17:47: OGRE EXCEPTION(6:FileNotFoundException): Cannot locate resource Example_Basic.cg in resource group General or any other group. in ResourceGroupManager::openResource at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreResourceGroupManager.cpp (line 753)
+18:17:47: High-level program Examples/ShowUVdir3D encountered an error during loading and is thus not supported.
+OGRE EXCEPTION(6:FileNotFoundException): Cannot locate resource Example_Basic.cg in resource group General or any other group. in ResourceGroupManager::openResource at D:\Mogre BUILD 2012-10\BuildOutput\Main\OgreSrc\ogre\OgreMain\src\OgreResourceGroupManager.cpp (line 753)
+18:17:47: Parsing script Ogre.material
+18:17:47: Parsing script Sinbad.material
+18:17:47: Finished parsing scripts for resource group General
+18:17:47: Parsing scripts for resource group Internal
+18:17:47: Finished parsing scripts for resource group Internal
+18:17:47: Demo initialized!
+18:17:47: Entering MenuState...
+18:17:47: Font SdkTrays/Captionusing texture size 512x256
+18:17:47: Info: Freetype returned null for character 160 in font SdkTrays/Caption
+18:17:47: Texture: SdkTrays/CaptionTexture: Loading 1 faces(PF_BYTE_LA,512x256x1) with 0 generated mipmaps from Image. Internal format is PF_BYTE_LA,512x256x1.
+18:17:47: Font SdkTrays/Valueusing texture size 512x256
+18:17:47: Info: Freetype returned null for character 127 in font SdkTrays/Value
+18:17:47: Info: Freetype returned null for character 128 in font SdkTrays/Value
+18:17:47: Info: Freetype returned null for character 129 in font SdkTrays/Value
+18:17:47: Info: Freetype returned null for character 130 in font SdkTrays/Value
+18:17:47: Info: Freetype returned null for character 131 in font SdkTrays/Value
+18:17:47: Info: Freetype returned null for character 132 in font SdkTrays/Value
+18:17:47: Info: Freetype returned null for character 133 in font SdkTrays/Value
+18:17:47: Info: Freetype returned null for character 134 in font SdkTrays/Value
+18:17:47: Info: Freetype returned null for character 135 in font SdkTrays/Value
+18:17:47: Info: Freetype returned null for character 136 in font SdkTrays/Value
+18:17:47: Info: Freetype returned null for character 137 in font SdkTrays/Value
+18:17:47: Info: Freetype returned null for character 138 in font SdkTrays/Value
+18:17:47: Info: Freetype returned null for character 139 in font SdkTrays/Value
+18:17:47: Info: Freetype returned null for character 140 in font SdkTrays/Value
+18:17:47: Info: Freetype returned null for character 141 in font SdkTrays/Value
+18:17:47: Info: Freetype returned null for character 142 in font SdkTrays/Value
+18:17:47: Info: Freetype returned null for character 143 in font SdkTrays/Value
+18:17:47: Info: Freetype returned null for character 144 in font SdkTrays/Value
+18:17:47: Info: Freetype returned null for character 145 in font SdkTrays/Value
+18:17:47: Info: Freetype returned null for character 146 in font SdkTrays/Value
+18:17:47: Info: Freetype returned null for character 147 in font SdkTrays/Value
+18:17:47: Info: Freetype returned null for character 148 in font SdkTrays/Value
+18:17:47: Info: Freetype returned null for character 149 in font SdkTrays/Value
+18:17:47: Info: Freetype returned null for character 150 in font SdkTrays/Value
+18:17:47: Info: Freetype returned null for character 151 in font SdkTrays/Value
+18:17:47: Info: Freetype returned null for character 152 in font SdkTrays/Value
+18:17:47: Info: Freetype returned null for character 153 in font SdkTrays/Value
+18:17:47: Info: Freetype returned null for character 154 in font SdkTrays/Value
+18:17:47: Info: Freetype returned null for character 155 in font SdkTrays/Value
+18:17:47: Info: Freetype returned null for character 156 in font SdkTrays/Value
+18:17:47: Info: Freetype returned null for character 157 in font SdkTrays/Value
+18:17:47: Info: Freetype returned null for character 158 in font SdkTrays/Value
+18:17:47: Info: Freetype returned null for character 159 in font SdkTrays/Value
+18:17:47: Info: Freetype returned null for character 160 in font SdkTrays/Value
+18:17:47: Texture: SdkTrays/ValueTexture: Loading 1 faces(PF_BYTE_LA,512x256x1) with 0 generated mipmaps from Image. Internal format is PF_BYTE_LA,512x256x1.
+18:17:48: Texture: sdk_button_over.png: Loading 1 faces(PF_A8R8G8B8,128x32x1) with  hardware generated mipmaps from Image. Internal format is PF_A8R8G8B8,128x32x1.
+18:17:48: Texture: sdk_button_down.png: Loading 1 faces(PF_A8R8G8B8,128x32x1) with  hardware generated mipmaps from Image. Internal format is PF_A8R8G8B8,128x32x1.
+18:17:48: Leaving MenuState...
+18:17:48: Entering GameState...
+18:17:48: [DotSceneLoader] Parsing dotScene file with version 1.0.0
+18:17:48: Mesh: Loading Cube01.mesh.
+18:17:48: Texture: dirt.jpg: Loading 1 faces(PF_R8G8B8,96x96x1) with 5 generated mipmaps from Image. Internal format is PF_X8R8G8B8,96x96x1.
+18:17:48: Mesh: Loading Cube03.mesh.
+18:17:48: Texture: steel.jpg: Loading 1 faces(PF_R8G8B8,256x256x1) with  hardware generated mipmaps from Image. Internal format is PF_X8R8G8B8,256x256x1.
+18:17:48: Mesh: Loading Cube02.mesh.
+18:17:48: Texture: chrome.jpg: Loading 1 faces(PF_L8,256x256x1) with  hardware generated mipmaps from Image. Internal format is PF_L8,256x256x1.
+18:17:49: Mesh: Loading ogrehead.mesh.
+18:17:49: Texture: GreenSkin.jpg: Loading 1 faces(PF_R8G8B8,256x256x1) with  hardware generated mipmaps from Image. Internal format is PF_X8R8G8B8,256x256x1.
+18:17:49: Texture: spheremap.png: Loading 1 faces(PF_R8G8B8,256x256x1) with  hardware generated mipmaps from Image. Internal format is PF_X8R8G8B8,256x256x1.
+18:17:49: Texture: tusk.jpg: Loading 1 faces(PF_R8G8B8,96x96x1) with 5 generated mipmaps from Image. Internal format is PF_X8R8G8B8,96x96x1.
+18:17:49: Pausing GameState...
+18:17:49: Entering PauseState...
+18:17:50: Leaving PauseState...
+18:17:50: Leaving GameState...
+18:17:50: Entering GameState...
+18:17:50: [DotSceneLoader] Parsing dotScene file with version 1.0.0
+18:17:51: Pausing GameState...
+18:17:51: Entering PauseState...
+18:17:51: Leaving PauseState...
+18:17:51: Leaving GameState...
+18:17:51: Entering MenuState...
+18:17:52: Leaving MenuState...
+18:17:52: Entering GameState...
+18:17:52: [DotSceneLoader] Parsing dotScene file with version 1.0.0
+18:17:52: Pausing GameState...
+18:17:52: Entering PauseState...
+18:17:53: Main loop quit
+18:17:53: Leaving PauseState...
+18:17:53: Leaving GameState...

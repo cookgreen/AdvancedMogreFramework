@@ -1,0 +1,14 @@
+C:\tmp\AdvancedMogreFramework\Mogre Advanced Framework\Mogre Advanced Framework\bin\Debug\AdvancedMogreFramework_2010.exe.config
+C:\Repository\AdvancedMogreFramework\AdvancedMogreFramework\bin\Debug\AdvancedMogreFramework.exe
+C:\Repository\AdvancedMogreFramework\AdvancedMogreFramework\bin\Debug\AdvancedMogreFramework.pdb
+C:\Repository\AdvancedMogreFramework\AdvancedMogreFramework\bin\Debug\Mogre.dll
+C:\Repository\AdvancedMogreFramework\AdvancedMogreFramework\bin\Debug\Mogre_Procedural.MogreBites.dll
+C:\Repository\AdvancedMogreFramework\AdvancedMogreFramework\bin\Debug\MOIS.dll
+C:\Repository\AdvancedMogreFramework\AdvancedMogreFramework\bin\Debug\MyGUI.Sharp.dll
+C:\Repository\AdvancedMogreFramework\AdvancedMogreFramework\bin\Debug\Mogre.pdb
+C:\Repository\AdvancedMogreFramework\AdvancedMogreFramework\bin\Debug\Mogre_Procedural.MogreBites.pdb
+C:\Repository\AdvancedMogreFramework\AdvancedMogreFramework\obj\x86\Debug\AdvancedMogreFramework-2010.csprojResolveAssemblyReference.cache
+C:\Repository\AdvancedMogreFramework\AdvancedMogreFramework\obj\x86\Debug\AdvancedMogreFramework.Properties.Resources.resources
+C:\Repository\AdvancedMogreFramework\AdvancedMogreFramework\obj\x86\Debug\AdvancedMogreFramework-2010.csproj.GenerateResource.Cache
+C:\Repository\AdvancedMogreFramework\AdvancedMogreFramework\obj\x86\Debug\AdvancedMogreFramework.exe
+C:\Repository\AdvancedMogreFramework\AdvancedMogreFramework\obj\x86\Debug\AdvancedMogreFramework.pdb
