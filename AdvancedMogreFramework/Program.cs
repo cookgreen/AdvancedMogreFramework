@@ -4,7 +4,7 @@ using System.Text;
 using Mogre;
 using MOIS;
 
-namespace Mogre_Advanced_Framework
+namespace Advanced_Mogre_Framework
 {
     class Program
     {

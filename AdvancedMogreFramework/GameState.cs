@@ -6,7 +6,7 @@ using RMOgre;
 using MOIS;
 using Mogre_Procedural.MogreBites;
 
-namespace Mogre_Advanced_Framework
+namespace Advanced_Mogre_Framework
 {
     enum QueryFlags
     {

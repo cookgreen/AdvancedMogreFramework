@@ -6,7 +6,7 @@ using MOIS;
 using Mogre_Procedural;
 using Mogre_Procedural.MogreBites;
 
-namespace Mogre_Advanced_Framework
+namespace Advanced_Mogre_Framework
 {
     class AdvancedMogreFramework 
     {
@@ -154,6 +154,10 @@ namespace Mogre_Advanced_Framework
         public bool mouseReleased(MouseEvent evt, MouseButtonID id)
         {
             return true;
+        }
+        public float Clamp(float val, float minval, float maxval)
+        {
+            return System.Math.Max(System.Math.Min(val, maxval), minval);
         }
         public static AdvancedMogreFramework instance;
         public static AdvancedMogreFramework Singleton

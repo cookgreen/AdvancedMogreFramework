@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Mogre_Advanced_Framework
+namespace Advanced_Mogre_Framework
 {
     class DemoApp
     {
@@ -28,6 +28,7 @@ namespace Mogre_Advanced_Framework
             MenuState.create<MenuState>(m_pAppStateManager, "MenuState");
             GameState.create<GameState>(m_pAppStateManager, "GameState");
             PauseState.create<PauseState>(m_pAppStateManager, "PauseState");
+            SinbadState.create<SinbadState>(m_pAppStateManager, "SinbadState");
  
 	        m_pAppStateManager.start(m_pAppStateManager.findByName("MenuState"));
         }

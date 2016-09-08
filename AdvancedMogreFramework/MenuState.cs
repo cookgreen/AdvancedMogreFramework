@@ -5,7 +5,7 @@ using Mogre;
 using MOIS;
 using Mogre_Procedural.MogreBites;
 
-namespace Mogre_Advanced_Framework
+namespace Advanced_Mogre_Framework
 {
     class MenuState : AppState
     {
@@ -38,6 +38,7 @@ namespace Mogre_Advanced_Framework
             AdvancedMogreFramework.Singleton.m_pTrayMgr.showLogo(TrayLocation.TL_BOTTOMRIGHT);
             AdvancedMogreFramework.Singleton.m_pTrayMgr.showCursor();
             AdvancedMogreFramework.Singleton.m_pTrayMgr.createButton(TrayLocation.TL_CENTER, "EnterBtn", "Enter GameState", 250);
+            AdvancedMogreFramework.Singleton.m_pTrayMgr.createButton(TrayLocation.TL_CENTER, "EnterSinbadBtn", "Enter SinbadState", 250);
             AdvancedMogreFramework.Singleton.m_pTrayMgr.createButton(TrayLocation.TL_CENTER, "ExitBtn", "Exit AdvancedOgreFramework", 250);
             AdvancedMogreFramework.Singleton.m_pTrayMgr.createLabel(TrayLocation.TL_TOP, "MenuLbl", "Menu mode", 250);
 
@@ -102,6 +103,8 @@ namespace Mogre_Advanced_Framework
                 m_bQuit = true;
             else if (button.getName() == "EnterBtn")
                 changeAppState(findByName("GameState"));
+            else if (button.getName() == "EnterSinbadBtn")
+                changeAppState(findByName("SinbadState"));
         }
 
         public override void update(double timeSinceLastFrame)

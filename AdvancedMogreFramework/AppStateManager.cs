@@ -6,7 +6,7 @@ using Mogre;
 using MOIS;
 using Mogre_Procedural.MogreBites;
 
-namespace Mogre_Advanced_Framework
+namespace Advanced_Mogre_Framework
 {
     class AppStateManager : AppStateListener
     {
