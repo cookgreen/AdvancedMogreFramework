@@ -10,6 +10,35 @@ class SinbadCharacterController
 {
 	// all the animations our character has, and a null ID
 	// some of these affect separate body parts and will be blended together
+    public const int NUM_ANIMS = 13;          // number of animations the character has
+    public const int CHAR_HEIGHT = 5;      // height of character's center of mass above ground
+    public const int CAM_HEIGHT = 2;          // height of camera above character's center of mass
+    public const int RUN_SPEED = 17;           // character running speed in units per second
+    public const float TURN_SPEED = 500.0f;      // character turning in degrees per second
+    public const float ANIM_FADE_SPEED = 7.5f;   // animation crossfade speed in % of full weight per second
+    public const float JUMP_ACCEL = 30.0f;       // character jump acceleration in upward units per squared second
+    public const float GRAVITY = 90.0f;          // gravity in downward units per squared second
+
+    Camera mCamera;
+    SceneNode mBodyNode;
+    SceneNode mCameraPivot;
+    SceneNode mCameraGoal;
+    SceneNode mCameraNode;
+    float mPivotPitch;
+    Entity mBodyEnt;
+    Entity mSword1;
+    Entity mSword2;
+    RibbonTrail mSwordTrail;
+    AnimationState[] mAnims = new AnimationState[NUM_ANIMS];    // master animation list
+    AnimID mBaseAnimID;                   // current base (full- or lower-body) animation
+    AnimID mTopAnimID;                    // current top (upper-body) animation
+    bool[] mFadingIn = new bool[NUM_ANIMS];            // which animations are fading in
+    bool[] mFadingOut = new bool[NUM_ANIMS];           // which animations are fading out
+    bool mSwordsDrawn;
+    Mogre.Vector3 mKeyDirection;      // player's local intended direction based on WASD keys
+    Mogre.Vector3 mGoalDirection;     // actual intended direction in world-space
+    float mVerticalVelocity;     // for jumping
+    float mTimer;                // general timer to see how long animations have been playing
 	enum AnimID
 	{
 		ANIM_IDLE_BASE,
@@ -161,9 +190,9 @@ class SinbadCharacterController
 
     private void setupAnimations()
     { 
-        mBodyEnt.Skeleton.BlendMode=SkeletonAnimationBlendMode. ANIMBLEND_CUMULATIVE;
+        mBodyEnt.Skeleton.BlendMode=SkeletonAnimationBlendMode.ANIMBLEND_CUMULATIVE;
 
-	    String[] animNames =
+	    var animNames =new String[]
 	    {"IdleBase", "IdleTop", "RunBase", "RunTop", "HandsClosed", "HandsRelaxed", "DrawSwords",
 	    "SliceVertical", "SliceHorizontal", "Dance", "JumpStart", "JumpLoop", "JumpEnd"};
 
@@ -200,8 +229,8 @@ class SinbadCharacterController
 	    mCameraNode.SetFixedYawAxis(true);
 
 	    // our model is quite small, so reduce the clipping planes
-	    cam.NearClipDistance=(0.1f);
-	    cam.FarClipDistance=(100);
+	    cam.NearClipDistance=0.1f;
+	    cam.FarClipDistance=100;
 	    mCameraNode.AttachObject(cam);
 
 	    mPivotPitch = 0;
@@ -388,7 +417,7 @@ class SinbadCharacterController
     private void updateCamera(float deltaTime)
     {
         // place the camera pivot roughly at the character's shoulder
-	    mCameraPivot.Position=(mBodyNode.Position + Mogre.Vector3.UNIT_Y * CAM_HEIGHT);
+	    mCameraPivot.Position=mBodyNode.Position + Mogre.Vector3.UNIT_Y * CAM_HEIGHT;
 	    // move the camera smoothly to the goal
 	    Mogre.Vector3 goalOffset = mCameraGoal._getDerivedPosition() - mCameraNode.Position;
 	    mCameraNode.Translate(goalOffset * deltaTime * 9.0f);
@@ -462,37 +491,5 @@ class SinbadCharacterController
             if (reset) mAnims[(int)id].TimePosition=0;
         }
     }
-
-
-
-    public static int NUM_ANIMS = 13;          // number of animations the character has
-    public int CHAR_HEIGHT = 5;      // height of character's center of mass above ground
-    public int CAM_HEIGHT = 2;          // height of camera above character's center of mass
-    public int RUN_SPEED = 17;           // character running speed in units per second
-    public float TURN_SPEED = 500.0f;      // character turning in degrees per second
-    public float ANIM_FADE_SPEED = 7.5f;   // animation crossfade speed in % of full weight per second
-    public float JUMP_ACCEL = 30.0f;       // character jump acceleration in upward units per squared second
-    public float GRAVITY = 90.0f;          // gravity in downward units per squared second
-
-	Camera mCamera;
-	SceneNode mBodyNode;
-	SceneNode mCameraPivot;
-	SceneNode mCameraGoal;
-	SceneNode mCameraNode;
-	float mPivotPitch;
-	Entity mBodyEnt;
-	Entity mSword1;
-	Entity mSword2;
-	RibbonTrail mSwordTrail;
-	AnimationState[] mAnims=new AnimationState[NUM_ANIMS];    // master animation list
-	AnimID mBaseAnimID;                   // current base (full- or lower-body) animation
-	AnimID mTopAnimID;                    // current top (upper-body) animation
-	bool[] mFadingIn=new bool[NUM_ANIMS];            // which animations are fading in
-	bool[] mFadingOut=new bool[NUM_ANIMS];           // which animations are fading out
-	bool mSwordsDrawn;
-	Mogre.Vector3 mKeyDirection;      // player's local intended direction based on WASD keys
-    Mogre.Vector3 mGoalDirection;     // actual intended direction in world-space
-	float mVerticalVelocity;     // for jumping
-	float mTimer;                // general timer to see how long animations have been playing
 }
 }

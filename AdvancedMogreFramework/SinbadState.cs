@@ -17,7 +17,7 @@ namespace Advanced_Mogre_Framework
 	    bool						m_pDragLook;              // click and drag to free-look
         public SdkCameraMan	m_pCameraMan;
 	    SinbadCharacterController	m_pChara;
-	    NameValuePairList		mInfo;    // custom sample info
+	    NameValuePairList		mInfo=new NameValuePairList();    // custom sample info
         public SinbadState()
         {
             m_bQuit = false;
@@ -31,7 +31,7 @@ namespace Advanced_Mogre_Framework
         {
             AdvancedMogreFramework.Singleton.m_pLog.LogMessage("Entering SinbadState...");
  
-            m_pSceneMgr = AdvancedMogreFramework.Singleton.m_pRoot.CreateSceneManager(SceneType.ST_GENERIC, "GameSceneMgr");
+            m_pSceneMgr = AdvancedMogreFramework.Singleton.m_pRoot.CreateSceneManager(SceneType.ST_GENERIC, "SinbadSceneMgr");
 
             m_pCamera = m_pSceneMgr.CreateCamera("MainCamera");
 	        AdvancedMogreFramework.Singleton.m_pViewport.Camera=m_pCamera;
@@ -45,6 +45,8 @@ namespace Advanced_Mogre_Framework
             AdvancedMogreFramework.Singleton.m_pMouse.MouseReleased += new MouseListener.MouseReleasedHandler(mouseReleased);
             AdvancedMogreFramework.Singleton.m_pKeyboard.KeyPressed += new KeyListener.KeyPressedHandler(keyPressed);
             AdvancedMogreFramework.Singleton.m_pKeyboard.KeyReleased += new KeyListener.KeyReleasedHandler(keyReleased);
+
+            AdvancedMogreFramework.Singleton.m_pRoot.FrameRenderingQueued += new FrameListener.FrameRenderingQueuedHandler(FrameRenderingQueued);
 
             buildGUI();
  
@@ -63,8 +65,7 @@ namespace Advanced_Mogre_Framework
 	        m_pSceneMgr.ShadowTextureCount=1;
 
 	        // disable default camera control so the character can do its own
-	        m_pCameraMan.setStyle(CameraStyle. CS_MANUAL);
-
+	        m_pCameraMan.setStyle(CameraStyle.CS_MANUAL);
 	        // use a small amount of ambient lighting
 	        m_pSceneMgr.AmbientLight=new ColourValue(0.3f, 0.3f, 0.3f);
 
@@ -124,7 +125,7 @@ namespace Advanced_Mogre_Framework
             AdvancedMogreFramework.Singleton.m_pTrayMgr.showFrameStats(TrayLocation.TL_BOTTOMLEFT);
 	        AdvancedMogreFramework.Singleton.m_pTrayMgr.showLogo(TrayLocation.TL_BOTTOMRIGHT);
 	        AdvancedMogreFramework.Singleton.m_pTrayMgr.createLabel(TrayLocation.TL_TOP, "GameLbl", "Game mode", 250);
-	        AdvancedMogreFramework.Singleton.m_pTrayMgr.hideCursor();
+	        AdvancedMogreFramework.Singleton.m_pTrayMgr.showCursor();
 
 
             // create a params panel for displaying sample details
@@ -315,7 +316,7 @@ namespace Advanced_Mogre_Framework
         {
             m_FrameEvent.timeSinceLastFrame = (int)timeSinceLastFrame;
 
-	        m_pChara.addTime((float)timeSinceLastFrame/1000);
+	        //m_pChara.addTime((float)timeSinceLastFrame);
 
             AdvancedMogreFramework.Singleton.m_pTrayMgr.frameRenderingQueued(m_FrameEvent);
 
@@ -340,6 +341,12 @@ namespace Advanced_Mogre_Framework
                     m_pDetailsPanel.setParamValue(7, StringConverter.ToString(m_pCamera.DerivedOrientation.z));
 		        }	
 	        }
+        }
+        public bool FrameRenderingQueued(FrameEvent evt)
+        {
+            // let character update animations and camera
+            m_pChara.addTime(evt.timeSinceLastFrame);
+            return true;
         }
 }
 }
