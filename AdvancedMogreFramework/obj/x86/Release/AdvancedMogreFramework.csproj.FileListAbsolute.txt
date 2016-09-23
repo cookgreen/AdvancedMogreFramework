@@ -25,3 +25,9 @@ C:\Repository\AdvancedMogreFramework\AdvancedMogreFramework\bin\Release\Mogre_Pr
 C:\Repository\AdvancedMogreFramework\AdvancedMogreFramework\obj\x86\Release\AdvancedMogreFramework.csprojResolveAssemblyReference.cache
 C:\Repository\AdvancedMogreFramework\AdvancedMogreFramework\obj\x86\Release\AdvancedMogreFramework.Properties.Resources.resources
 C:\Repository\AdvancedMogreFramework\AdvancedMogreFramework\obj\x86\Release\AdvancedMogreFramework.csproj.GenerateResource.Cache
+C:\Repository\AdvancedMogreFramework\AdvancedMogreFramework\bin\Release\NAudio.dll
+C:\Repository\AdvancedMogreFramework\AdvancedMogreFramework\bin\Release\NAudio.Vorbis.dll
+C:\Repository\AdvancedMogreFramework\AdvancedMogreFramework\bin\Release\NVorbis.dll
+C:\Repository\AdvancedMogreFramework\AdvancedMogreFramework\bin\Release\NAudio.xml
+C:\Repository\AdvancedMogreFramework\AdvancedMogreFramework\bin\Release\NAudio.Vorbis.xml
+C:\Repository\AdvancedMogreFramework\AdvancedMogreFramework\bin\Release\NVorbis.xml

@@ -21,6 +21,9 @@ namespace Advanced_Mogre_Framework
         public Mouse m_pMouse;
 
         public SdkTrayManager m_pTrayMgr;
+
+        public NAudio.Vorbis.VorbisWaveReader m_pVorbis;
+        public NAudio.Wave.WaveOut m_pWaveOut;
         public AdvancedMogreFramework()
         {
             m_pRoot = null;
@@ -171,7 +174,5 @@ namespace Advanced_Mogre_Framework
                 return instance;
             }
         }
-        //AdvancedMogreFramework(const AdvancedMogreFramework);
-        //AdvancedMogreFramework operator= (const AdvancedMogreFramework);
     }
 }
