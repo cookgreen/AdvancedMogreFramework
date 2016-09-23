@@ -13,9 +13,10 @@ You can use this framework develop your own game.
 * MogreBites(dll file in the project folder, you can use it directly)
 * SdkCameraMan(dll file in the project folder, you can use it directly)
 <p>(<b>Remember MogreBites and SdkCameraMan is a part of Mogre_Procedural created by <i>andyhebear1</i> on ogre3d forum, based on GPLv2</b>)
+* NVorbis and NAudio
 
 ##Notice##
 * You only can build this project in release mode, because mogre only support release mode(if you use Mogre SDK 1.7.1, Mogre 1.7.4 can build Release and Debug)
 
 ##License##
-GPLv2+LGPL
+GPLv2+LGPL+Ms-PL
