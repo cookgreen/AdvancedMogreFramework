@@ -71,12 +71,12 @@ namespace Advanced_Mogre_Framework
  
 		        WindowEventUtilities.MessagePump();
 
-            //    if (AdvancedMogreFramework.Singleton.m_pRenderWnd.IsActive)
-		    //    {
+                if (AdvancedMogreFramework.Singleton.m_pRenderWnd.IsActive)
+		        {
                     startTime = (int)AdvancedMogreFramework.Singleton.m_pTimer.MicrosecondsCPU;
 
-                    //AdvancedMogreFramework.m_pKeyboard.Capture();
-                    //AdvancedMogreFramework.m_pMouse.Capture();
+                    AdvancedMogreFramework.Singleton.m_pKeyboard.Capture();
+                    AdvancedMogreFramework.Singleton.m_pMouse.Capture();
  
 			        m_ActiveStateStack.Last().update(timeSinceLastFrame);
                     AdvancedMogreFramework.Singleton.m_pKeyboard.Capture();
@@ -87,11 +87,11 @@ namespace Advanced_Mogre_Framework
                         AdvancedMogreFramework.Singleton.m_pRoot.RenderOneFrame();
                     }
                     timeSinceLastFrame = (int)AdvancedMogreFramework.Singleton.m_pTimer.MillisecondsCPU - startTime;
-		     //   }
-		     //   else
-		     //   {
-             //       System.Threading.Thread.Sleep(1000);
-		     //   }
+		        }
+		        else
+		        {
+                    System.Threading.Thread.Sleep(1000);
+		        }
 	        }
 
             AdvancedMogreFramework.Singleton.m_pLog.LogMessage("Main loop quit");

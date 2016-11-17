@@ -1,1 +1,0 @@
-E:\Visual Studio 2013\Projects\Mogre Advanced Framework\Mogre Advanced Framework\bin\Release\Advanced_Moge_Framework.exe.config

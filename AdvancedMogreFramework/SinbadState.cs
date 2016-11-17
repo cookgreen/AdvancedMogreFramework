@@ -30,7 +30,7 @@ namespace Advanced_Mogre_Framework
         public override void enter()
         {
             AdvancedMogreFramework.Singleton.m_pLog.LogMessage("Entering SinbadState...");
- 
+            AdvancedMogreFramework.lastState = "SinbadState";
             m_pSceneMgr = AdvancedMogreFramework.Singleton.m_pRoot.CreateSceneManager(SceneType.ST_GENERIC, "SinbadSceneMgr");
 
             m_pCamera = m_pSceneMgr.CreateCamera("MainCamera");

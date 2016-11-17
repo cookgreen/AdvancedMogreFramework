@@ -24,6 +24,8 @@ namespace Advanced_Mogre_Framework
 
         public NAudio.Vorbis.VorbisWaveReader m_pVorbis;
         public NAudio.Wave.WaveOut m_pWaveOut;
+
+        public static string lastState;
         public AdvancedMogreFramework()
         {
             m_pRoot = null;

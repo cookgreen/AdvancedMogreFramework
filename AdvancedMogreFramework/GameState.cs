@@ -31,7 +31,7 @@ namespace Advanced_Mogre_Framework
         public override void enter()
         {
             AdvancedMogreFramework.Singleton.m_pLog.LogMessage("Entering GameState...");
-
+            AdvancedMogreFramework.lastState = "GameState";
             m_pSceneMgr=AdvancedMogreFramework.Singleton.m_pRoot.CreateSceneManager(SceneType.ST_GENERIC, "GameSceneMgr");
             ColourValue cvAmbineLight=new ColourValue(0.7f,0.7f,0.7f);
             m_pSceneMgr.AmbientLight=cvAmbineLight;//(Ogre::ColourValue(0.7f, 0.7f, 0.7f));
@@ -119,31 +119,30 @@ namespace Advanced_Mogre_Framework
         {
             if(m_bSettingsMode == false)
             {
-                Angle angleCameraRoll;
                 if(AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_A))
-                    m_TranslateVector.x = -m_MoveScale;
+                    m_TranslateVector.x = -10;
  
                 if(AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_D))
-                    m_TranslateVector.x = m_MoveScale;
+                    m_TranslateVector.x = 10;
  
                 if(AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_W))
-                    m_TranslateVector.z = -m_MoveScale;
+                    m_TranslateVector.z = -10;
  
                 if(AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_S))
-                    m_TranslateVector.z = m_MoveScale;
+                    m_TranslateVector.z = 10;
  
                 if(AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_Q))
-                    m_TranslateVector.y = -m_MoveScale;
+                    m_TranslateVector.y = -10;
  
                 if(AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_E))
-                    m_TranslateVector.y = m_MoveScale;
+                    m_TranslateVector.y = 10;
  
         //camera roll
                 if(AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_Z))
-                    m_pCamera.Roll(angleCameraRoll=new Angle(-m_MoveScale));
+                    m_pCamera.Roll(new Angle(-10));
  
                 if(AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_X))
-                    m_pCamera.Roll(angleCameraRoll=new Angle(m_MoveScale));
+                    m_pCamera.Roll(new Angle(10));
  
         //reset roll
                 if (AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_C))
