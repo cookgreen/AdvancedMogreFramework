@@ -1,5 +1,6 @@
  Advanced Mogre Framework
 =============
+<img src=https://www.gnu.org/graphics/gplv3-127x51.png />
 ##Introduction
 Advanced Mogre Framework is an advanced framework for mogre base on Advanced Ogre Framework(See:[http://www.ogre3d.org/tikiwiki/tiki-index.php?page=Advanced+Ogre+Framework](http://www.ogre3d.org/tikiwiki/tiki-index.php?page=Advanced+Ogre+Framework))
 
@@ -19,4 +20,4 @@ You can use this framework develop your own game.
 * You only can build this project in release mode, because mogre only support release mode(if you use Mogre SDK 1.7.1, Mogre 1.7.4 can build Release and Debug)
 
 ##License##
-GPLv2+LGPL+Ms-PL
+GPLv3
