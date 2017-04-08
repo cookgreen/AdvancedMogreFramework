@@ -14,7 +14,8 @@ You can use this framework develop your own game.
 * MOIS(include in the Mogre SDK)
 * MogreBites(dll file in the project folder, you can use it directly)
 * SdkCameraMan(dll file in the project folder, you can use it directly)
-<p>(<b>Remember MogreBites and SdkCameraMan is a part of Mogre_Procedural created by <i>andyhebear1</i> on ogre3d forum, based on GPLv2</b>)
+<p>(<b>Remember MogreBites and SdkCameraMan is a part of Mogre_Procedural created by <i>andyhebear1</i> on ogre3d forum, based on GPLv2</b>)  
+
 * NVorbis and NAudio 
 
 ## License
