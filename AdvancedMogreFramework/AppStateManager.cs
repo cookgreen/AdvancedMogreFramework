@@ -77,16 +77,16 @@ namespace Advanced_Mogre_Framework
 
                     AdvancedMogreFramework.Singleton.m_pKeyboard.Capture();
                     AdvancedMogreFramework.Singleton.m_pMouse.Capture();
- 
-			        m_ActiveStateStack.Last().update(timeSinceLastFrame);
+
+                    m_ActiveStateStack.Last().update(timeSinceLastFrame * 1.0 / 1000);
                     AdvancedMogreFramework.Singleton.m_pKeyboard.Capture();
                     AdvancedMogreFramework.Singleton.m_pMouse.Capture();
-                    AdvancedMogreFramework.Singleton.updateOgre(timeSinceLastFrame);
+                    AdvancedMogreFramework.Singleton.updateOgre(timeSinceLastFrame * 1.0 / 1000);
                     if (AdvancedMogreFramework.Singleton.m_pRoot != null)
                     {
                         AdvancedMogreFramework.Singleton.m_pRoot.RenderOneFrame();
                     }
-                    timeSinceLastFrame = (int)AdvancedMogreFramework.Singleton.m_pTimer.MillisecondsCPU - startTime;
+                    timeSinceLastFrame = (int)AdvancedMogreFramework.Singleton.m_pTimer.MicrosecondsCPU - startTime;
 		        }
 		        else
 		        {
