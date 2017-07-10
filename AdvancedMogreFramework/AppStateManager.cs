@@ -39,17 +39,15 @@ namespace Advanced_Mogre_Framework
 
           public override void manageAppState(String stateName, AppState state)
          {
-		        state_info new_state_info;
-		        new_state_info.name = stateName;
-		        new_state_info.state = state;
-		        m_States.Insert(m_States.Count(),new_state_info);
+		    state_info new_state_info;
+		    new_state_info.name = stateName;
+		    new_state_info.state = state;
+		    m_States.Add(new_state_info);
          }
 
          public override AppState findByName(String stateName)
          {
-            // IEnumerator<state_info> itr = m_States.GetEnumerator();
-
-             foreach (state_info itr in m_States)
+            foreach (state_info itr in m_States)
 	        {
 		        if(itr.name==stateName)
 			    return itr.state;
@@ -60,7 +58,7 @@ namespace Advanced_Mogre_Framework
 
          public void start(AppState state)
          {
-             changeAppState(state);
+            changeAppState(state);
  
 	        int timeSinceLastFrame = 1;
 	        int startTime = 0;
@@ -104,7 +102,7 @@ namespace Advanced_Mogre_Framework
                  m_ActiveStateStack.RemoveAt(m_ActiveStateStack.Count()-1);
              }
 
-             m_ActiveStateStack.Insert(m_ActiveStateStack.Count(),state);
+             m_ActiveStateStack.Add(state);
              init(state);
              m_ActiveStateStack.Last().enter();
          }
@@ -116,7 +114,7 @@ namespace Advanced_Mogre_Framework
                      return false;
              }
 
-             m_ActiveStateStack.Insert(m_ActiveStateStack.Count(),state);
+             m_ActiveStateStack.Add(state);
              init(state);
              m_ActiveStateStack.Last().enter();
 
