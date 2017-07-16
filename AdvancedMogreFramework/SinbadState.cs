@@ -2,7 +2,7 @@
 -----------------------------------------------------------------------------
 This source file is part of AdvancedMogreFramework
 For the latest info, see https://github.com/cookgreen/AdvancedMogreFramework
-Copyright (c) 2016-2020 Cook Green(randomcode)
+Copyright (c) 2016-2020 Cook Green
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
