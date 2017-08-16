@@ -20,7 +20,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>Dependencies\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -35,16 +35,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Mogre">
+    <Reference Include="Mogre, Version=1.7.4.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>Dependencies\Mogre.dll</HintPath>
     </Reference>
-    <Reference Include="Mogre_Procedural.MogreBites">
+    <Reference Include="Mogre_Procedural.MogreBites, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>Dependencies\Mogre_Procedural.MogreBites.dll</HintPath>
     </Reference>
-    <Reference Include="Mogre_Procedural.MogreBites.Addons">
+    <Reference Include="Mogre_Procedural.MogreBites.Addons, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>Dependencies\Mogre_Procedural.MogreBites.Addons.dll</HintPath>
     </Reference>
-    <Reference Include="MOIS">
+    <Reference Include="MOIS, Version=1.1.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>Dependencies\MOIS.dll</HintPath>
     </Reference>
     <Reference Include="NAudio, Version=1.7.3.0, Culture=neutral, processorArchitecture=MSIL">
