@@ -36,17 +36,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mogre">
-      <HintPath>bin\x86\Release\Mogre.dll</HintPath>
+      <HintPath>Dependencies\Mogre.dll</HintPath>
     </Reference>
     <Reference Include="Mogre_Procedural.MogreBites">
-      <HintPath>bin\x86\Release\Mogre_Procedural.MogreBites.dll</HintPath>
+      <HintPath>Dependencies\Mogre_Procedural.MogreBites.dll</HintPath>
     </Reference>
-    <Reference Include="Mogre_Procedural.MogreBites.Addons, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Release\Mogre_Procedural.MogreBites.Addons.dll</HintPath>
+    <Reference Include="Mogre_Procedural.MogreBites.Addons">
+      <HintPath>Dependencies\Mogre_Procedural.MogreBites.Addons.dll</HintPath>
     </Reference>
     <Reference Include="MOIS">
-      <HintPath>bin\x86\Release\MOIS.dll</HintPath>
+      <HintPath>Dependencies\MOIS.dll</HintPath>
     </Reference>
     <Reference Include="NAudio, Version=1.7.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NAudio.1.7.3\lib\net35\NAudio.dll</HintPath>
