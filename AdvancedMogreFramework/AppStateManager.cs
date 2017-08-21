@@ -33,8 +33,10 @@ using Mogre_Procedural.MogreBites;
 
 namespace Advanced_Mogre_Framework
 {
-    class AppStateManager : AppStateListener
+    class AppStateManager : AppStateListener,IDisposable
     {
+        bool disposed;
+
          public struct state_info
         {
             public String name;
@@ -43,23 +45,6 @@ namespace Advanced_Mogre_Framework
          public AppStateManager()
          {
              m_bShutdown = false;
-         }
-          ~AppStateManager()
-         {
-             state_info si;
-
-             while (m_ActiveStateStack.Count!=0)
-             {
-                 m_ActiveStateStack.Last().exit();
-                 m_ActiveStateStack.RemoveAt(m_ActiveStateStack.Count()-1);
-             }
-
-             while (m_States.Count!=0)
-             {
-                 si = m_States.Last();
-                 si.state.destroy();
-                 m_States.RemoveAt(m_States.Count()-1);
-             }
          }
 
           public override void manageAppState(String stateName, AppState state)
@@ -198,5 +183,38 @@ namespace Advanced_Mogre_Framework
          protected List<AppState> m_ActiveStateStack=new List<AppState>();
          protected List<state_info> m_States=new List<state_info>();
          protected bool m_bShutdown;
+
+         public void Dispose()
+         {
+             Dispose(true);
+             GC.SuppressFinalize(this);
+         }
+
+         protected virtual void Dispose(bool disposing)
+         {
+             if (disposed)
+             {
+                 return;
+             }
+             if (disposing)
+             {
+
+                 state_info si;
+
+                 while (m_ActiveStateStack.Count != 0)
+                 {
+                     m_ActiveStateStack.Last().exit();
+                     m_ActiveStateStack.RemoveAt(m_ActiveStateStack.Count() - 1);
+                 }
+
+                 while (m_States.Count != 0)
+                 {
+                     si = m_States.Last();
+                     si.state.destroy();
+                     m_States.RemoveAt(m_States.Count() - 1);
+                 }
+             }
+             disposed = true;
+         }
     }
 }
