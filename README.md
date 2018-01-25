@@ -1,6 +1,6 @@
  Advanced Mogre Framework
 =============
-![License](https://img.shields.io/badge/License-GPL-red.svg)
+![License](https://img.shields.io/badge/License-GPL-blue.svg)
 
 ## Introduction
 Advanced Mogre Framework is an advanced framework for mogre base on Advanced Ogre Framework(See:[http://www.ogre3d.org/tikiwiki/tiki-index.php?page=Advanced+Ogre+Framework](http://www.ogre3d.org/tikiwiki/tiki-index.php?page=Advanced+Ogre+Framework))
