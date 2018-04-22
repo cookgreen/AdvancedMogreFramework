@@ -32,7 +32,7 @@ using MOIS;
 using Mogre_Procedural.MogreBites;
 using Mogre_Procedural.MogreBites.Addons;
 
-namespace Advanced_Mogre_Framework
+namespace AdvancedMogreFramework.States
 {
     class SinbadState : AppState
     {

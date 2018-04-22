@@ -23,11 +23,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 -----------------------------------------------------------------------------
 */
+using AdvancedMogreFramework.States;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Advanced_Mogre_Framework
+namespace AdvancedMogreFramework.Core
 {
     class DemoApp
     {
@@ -50,12 +51,13 @@ namespace Advanced_Mogre_Framework
  
 	        m_pAppStateManager = new AppStateManager();
 
-            MenuState.create<MenuState>(m_pAppStateManager, "MenuState");
-            GameState.create<GameState>(m_pAppStateManager, "GameState");
-            SinbadState.create<SinbadState>(m_pAppStateManager, "SinbadState");
-            PauseState.create<PauseState>(m_pAppStateManager, "PauseState");
- 
-	        m_pAppStateManager.start(m_pAppStateManager.findByName("MenuState"));
+            AppState.create<MenuState>(m_pAppStateManager, "MenuState");
+            AppState.create<GameState>(m_pAppStateManager, "GameState");
+            AppState.create<SinbadState>(m_pAppStateManager, "SinbadState");
+            AppState.create<PauseState>(m_pAppStateManager, "PauseState");
+            AppState.create<CreditState>(m_pAppStateManager, "CreditState");
+
+            m_pAppStateManager.start(m_pAppStateManager.findByName("MenuState"));
         }
 
         private AppStateManager m_pAppStateManager;

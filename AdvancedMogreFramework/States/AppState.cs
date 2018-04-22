@@ -31,7 +31,7 @@ using Mogre;
 using Mogre_Procedural.MogreBites;
 using MOIS;
 
-namespace Advanced_Mogre_Framework
+namespace AdvancedMogreFramework.States
 {
     class AppStateListener
     {

@@ -25,19 +25,23 @@ THE SOFTWARE.
 */
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using Mogre_Procedural.MogreBites;
 using Mogre;
-using MOIS;
-using AdvancedMogreFramework.Core;
 
-namespace AdvancedMogreFramework
+namespace AdvancedMogreFramework.Widgets
 {
-    class Program
+    public class Panel : Widget
     {
-        static void Main(string[] args)
+        public WidgetCollection ChildWidgets;
+        public Panel(string name, float width, float height)
         {
-            DemoApp app = new DemoApp();
-            app.startDemo();
+            mElement = OverlayManager.Singleton.CreateOverlayElement("Panel", name);
+            mElement.SetDimensions(width, height);
+            mElement.MaterialName = "SdkTrays/Tray";
+
+            ChildWidgets = new WidgetCollection(this);
         }
     }
 }

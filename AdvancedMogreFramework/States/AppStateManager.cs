@@ -23,6 +23,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 -----------------------------------------------------------------------------
 */
+using AdvancedMogreFramework.Core;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -31,7 +32,7 @@ using Mogre;
 using MOIS;
 using Mogre_Procedural.MogreBites;
 
-namespace Advanced_Mogre_Framework
+namespace AdvancedMogreFramework.States
 {
     class AppStateManager : AppStateListener,IDisposable
     {

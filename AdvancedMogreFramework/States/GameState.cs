@@ -31,7 +31,7 @@ using RMOgre;
 using MOIS;
 using Mogre_Procedural.MogreBites;
 
-namespace Advanced_Mogre_Framework
+namespace AdvancedMogreFramework.States
 {
     enum QueryFlags
     {
@@ -136,9 +136,12 @@ namespace Advanced_Mogre_Framework
  
 	    public void moveCamera()
         {
+            if (m_pCamera != null)
+            {
                 if (AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_LSHIFT))
                     m_pCamera.MoveRelative(m_TranslateVector);
                 m_pCamera.MoveRelative(m_TranslateVector / 10);
+            }
         }
         public void getInput()
         {
@@ -378,7 +381,7 @@ namespace Advanced_Mogre_Framework
             {
                 if (!AdvancedMogreFramework.Singleton.m_pTrayMgr.isDialogVisible())
                 {
-                    if (m_pDetailsPanel.isVisible())
+                    if (m_pDetailsPanel!=null && m_pDetailsPanel.isVisible())
                     {
                         m_pDetailsPanel.setParamValue(0, m_pCamera.DerivedPosition.x.ToString());
                         m_pDetailsPanel.setParamValue(1, m_pCamera.DerivedPosition.y.ToString());

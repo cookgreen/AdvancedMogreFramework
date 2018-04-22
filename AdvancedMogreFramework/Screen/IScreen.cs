@@ -25,19 +25,17 @@ THE SOFTWARE.
 */
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
-using Mogre;
-using MOIS;
-using AdvancedMogreFramework.Core;
 
 namespace AdvancedMogreFramework
 {
-    class Program
+    public interface IScreen
     {
-        static void Main(string[] args)
-        {
-            DemoApp app = new DemoApp();
-            app.startDemo();
-        }
+        event Action OnScreenExit;
+        void Init();
+        void Run();
+        void Update(float timeSinceLastFrame);
+        void Exit();
     }
 }

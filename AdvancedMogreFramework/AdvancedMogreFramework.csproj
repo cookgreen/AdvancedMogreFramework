@@ -75,19 +75,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdvancedMogreFramework.cs" />
-    <Compile Include="AppState.cs" />
-    <Compile Include="AppStateManager.cs" />
-    <Compile Include="SinbadState.cs" />
-    <Compile Include="DemoApp.cs" />
-    <Compile Include="GameState.cs" />
-    <Compile Include="Helper.cs" />
-    <Compile Include="MenuState.cs" />
-    <Compile Include="PauseState.cs" />
+    <Compile Include="Core\AdvancedMogreFramework.cs" />
+    <Compile Include="Screen\CreditScreen.cs" />
+    <Compile Include="Screen\IScreen.cs" />
+    <Compile Include="Screen\ScreenManager.cs" />
+    <Compile Include="States\AppState.cs" />
+    <Compile Include="States\AppStateManager.cs" />
+    <Compile Include="States\CreditState.cs" />
+    <Compile Include="States\SinbadState.cs" />
+    <Compile Include="Core\DemoApp.cs" />
+    <Compile Include="States\GameState.cs" />
+    <Compile Include="States\MenuState.cs" />
+    <Compile Include="States\PauseState.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RMogre.cs" />
-    <Compile Include="SinbadCharacterController.cs" />
+    <Compile Include="Helper\DotSceneLoader.cs" />
+    <Compile Include="States\SinbadCharacterController.cs" />
+    <Compile Include="Widgets\FrameworkTrayManager.cs" />
+    <Compile Include="Widgets\Panel.cs" />
+    <Compile Include="Widgets\WidgetCollection.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -109,6 +115,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

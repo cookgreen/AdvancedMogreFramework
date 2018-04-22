@@ -31,7 +31,7 @@ using MOIS;
 using Mogre_Procedural;
 using Mogre_Procedural.MogreBites;
 
-namespace Advanced_Mogre_Framework
+namespace AdvancedMogreFramework
 {
     class AdvancedMogreFramework 
     {

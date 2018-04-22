@@ -29,7 +29,7 @@ using System.Linq;
 using System.Text;
 using Mogre;
 using MOIS;
-namespace Advanced_Mogre_Framework
+namespace AdvancedMogreFramework
 {
 class SinbadCharacterController
 {

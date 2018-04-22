@@ -30,68 +30,64 @@ using Mogre;
 using MOIS;
 using Mogre_Procedural.MogreBites;
 
-namespace Advanced_Mogre_Framework
+namespace AdvancedMogreFramework.States
 {
-    class PauseState : AppState
+    class MenuState : AppState
     {
-        public PauseState()
+        public MenuState()
         {
-            m_bQuit             = false;
-            m_bQuestionActive   = false;
-            m_FrameEvent        = new FrameEvent();
+            m_bQuit         = false;
+            m_FrameEvent    = new FrameEvent();
         }
-
         public override void enter()
         {
-            AdvancedMogreFramework.Singleton.m_pLog.LogMessage("Entering PauseState...");
+            AdvancedMogreFramework.Singleton.m_pLog.LogMessage("Entering MenuState...");
             m_bQuit = false;
+
+            if (AdvancedMogreFramework.Singleton.m_pVorbis == null)
+            {
+                AdvancedMogreFramework.Singleton.m_pVorbis = new NAudio.Vorbis.VorbisWaveReader(@".\vivaldi_winter_allegro.ogg");
+                AdvancedMogreFramework.Singleton.m_pWaveOut = new NAudio.Wave.WaveOut();
+                AdvancedMogreFramework.Singleton.m_pWaveOut.Init(AdvancedMogreFramework.Singleton.m_pVorbis);
+                AdvancedMogreFramework.Singleton.m_pWaveOut.Play();
+            }
  
-            m_pSceneMgr = AdvancedMogreFramework.Singleton.m_pRoot.CreateSceneManager(SceneType.ST_GENERIC, "PauseSceneMgr");
+            m_pSceneMgr = AdvancedMogreFramework.Singleton.m_pRoot.CreateSceneManager(Mogre.SceneType.ST_GENERIC, "MenuSceneMgr");
             ColourValue cvAmbineLight=new ColourValue(0.7f,0.7f,0.7f);
             m_pSceneMgr.AmbientLight=cvAmbineLight;
  
-            m_pCamera = m_pSceneMgr.CreateCamera("PauseCam");
-            Mogre.Vector3 vectCamPos=new Mogre.Vector3(0,25,-50);
-            m_pCamera.Position=vectCamPos;
-            Mogre.Vector3 vectCamLookAt=new Mogre.Vector3(0,0,0);
-            m_pCamera.LookAt(vectCamLookAt);
-            m_pCamera.NearClipDistance=1;
+            m_pCamera = m_pSceneMgr.CreateCamera("MenuCam");
+            m_pCamera.SetPosition(0,25,-50);
+            Mogre.Vector3 vectorCameraLookat=new Mogre.Vector3(0,0,0);
+            m_pCamera.LookAt(vectorCameraLookat);
+            m_pCamera.NearClipDistance=1;//setNearClipDistance(1);
  
-            m_pCamera.AspectRatio=AdvancedMogreFramework.Singleton.m_pViewport.ActualWidth /
-            AdvancedMogreFramework.Singleton.m_pViewport.ActualHeight;
+            m_pCamera.AspectRatio=AdvancedMogreFramework.Singleton.m_pViewport.ActualWidth / AdvancedMogreFramework.Singleton.m_pViewport.ActualHeight;
  
             AdvancedMogreFramework.Singleton.m_pViewport.Camera=m_pCamera;
 
             AdvancedMogreFramework.Singleton.m_pTrayMgr.destroyAllWidgets();
+            AdvancedMogreFramework.Singleton.m_pTrayMgr.showFrameStats(TrayLocation.TL_BOTTOMLEFT);
+            AdvancedMogreFramework.Singleton.m_pTrayMgr.showLogo(TrayLocation.TL_BOTTOMRIGHT);
             AdvancedMogreFramework.Singleton.m_pTrayMgr.showCursor();
-            switch(AdvancedMogreFramework.lastState)
-            {
-                case "GameState":
-                AdvancedMogreFramework.Singleton.m_pTrayMgr.createButton(TrayLocation.TL_CENTER, "BackToGameBtn", "Return to GameState", 250);
-                break;
-                case "SinbadState":
-                AdvancedMogreFramework.Singleton.m_pTrayMgr.createButton(TrayLocation.TL_CENTER, "BackToSinbadBtn", "Return to SinbadState", 250);
-                break;
-            }
-            AdvancedMogreFramework.Singleton.m_pTrayMgr.createButton(TrayLocation.TL_CENTER, "BackToMenuBtn", "Return to Menu", 250);
+            AdvancedMogreFramework.Singleton.m_pTrayMgr.createButton(TrayLocation.TL_CENTER, "EnterBtn", "Enter GameState", 250);
+            AdvancedMogreFramework.Singleton.m_pTrayMgr.createButton(TrayLocation.TL_CENTER, "EnterSinbadBtn", "Enter SinbadState", 250);
+            AdvancedMogreFramework.Singleton.m_pTrayMgr.createButton(TrayLocation.TL_CENTER, "EnterCreditBtn", "Credit", 250);
             AdvancedMogreFramework.Singleton.m_pTrayMgr.createButton(TrayLocation.TL_CENTER, "ExitBtn", "Exit AdvancedOgreFramework", 250);
-            AdvancedMogreFramework.Singleton.m_pTrayMgr.createLabel(TrayLocation.TL_TOP, "PauseLbl", "Pause mode", 250);
+            AdvancedMogreFramework.Singleton.m_pTrayMgr.createLabel(TrayLocation.TL_TOP, "MenuLbl", "Menu mode", 250);
 
             AdvancedMogreFramework.Singleton.m_pMouse.MouseMoved += new MouseListener.MouseMovedHandler(mouseMoved);
             AdvancedMogreFramework.Singleton.m_pMouse.MousePressed += new MouseListener.MousePressedHandler(mousePressed);
             AdvancedMogreFramework.Singleton.m_pMouse.MouseReleased += new MouseListener.MouseReleasedHandler(mouseReleased);
             AdvancedMogreFramework.Singleton.m_pKeyboard.KeyPressed += new KeyListener.KeyPressedHandler(keyPressed);
             AdvancedMogreFramework.Singleton.m_pKeyboard.KeyReleased += new KeyListener.KeyReleasedHandler(keyReleased);
-
-            m_bQuestionActive = true;
- 
             createScene();
         }
         public void createScene()
         { }
         public override void exit()
         {
-            AdvancedMogreFramework.Singleton.m_pLog.LogMessage("Leaving PauseState...");
+            AdvancedMogreFramework.Singleton.m_pLog.LogMessage("Leaving MenuState...");
  
             m_pSceneMgr.DestroyCamera(m_pCamera);
             if(m_pSceneMgr!=null)
@@ -104,20 +100,18 @@ namespace Advanced_Mogre_Framework
 
         public bool keyPressed(KeyEvent keyEventRef)
         {
-            if(AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_ESCAPE) && !m_bQuestionActive)
+            if(AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(MOIS.KeyCode.KC_ESCAPE))
             {
                 m_bQuit = true;
                 return true;
             }
 
             AdvancedMogreFramework.Singleton.keyPressed(keyEventRef);
- 
             return true;
         }
         public bool keyReleased(KeyEvent keyEventRef)
         {
             AdvancedMogreFramework.Singleton.keyReleased(keyEventRef);
- 
             return true;
         }
 
@@ -139,33 +133,14 @@ namespace Advanced_Mogre_Framework
 
         public override void buttonHit(Button button)
         {
-            if(button.getName() == "ExitBtn")
-            {
-                //AdvancedMogreFramework.m_pTrayMgr.showYesNoDialog("Sure?", "Really leave?");
-                //m_bQuestionActive = true;
-                shutdown();
-            }
-            else if(button.getName() == "BackToGameBtn")
-            {
-                popAllAndPushAppState<PauseState>(findByName("GameState"));
+            if (button.getName() == "ExitBtn")
                 m_bQuit = true;
-            }
-            else if (button.getName() == "BackToSinbadBtn")
-            {
-                popAllAndPushAppState<PauseState>(findByName("SinbadState"));
-                m_bQuit = true;
-            }
-            else if(button.getName() == "BackToMenuBtn")
-                popAllAndPushAppState<PauseState>(findByName("MenuState"));
-        }
-        public override void yesNoDialogClosed(string question, bool yesHit)
-        {
-            if(yesHit == true)
-                shutdown();
-            else
-                AdvancedMogreFramework.Singleton.m_pTrayMgr.closeDialog();
- 
-            m_bQuestionActive = false;
+            else if (button.getName() == "EnterBtn")
+                changeAppState(findByName("GameState"));
+            else if (button.getName() == "EnterSinbadBtn")
+                changeAppState(findByName("SinbadState"));
+            else if (button.getName() == "EnterCreditBtn")
+                changeAppState(findByName("CreditState"));
         }
 
         public override void update(double timeSinceLastFrame)
@@ -175,12 +150,11 @@ namespace Advanced_Mogre_Framework
  
             if(m_bQuit == true)
             {
-                popAppState();
+                shutdown();
                 return;
             }
         }
 
-        private bool m_bQuit;
-        private bool m_bQuestionActive;
+        protected bool m_bQuit;
     }
 }
