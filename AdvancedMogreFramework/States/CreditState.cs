@@ -90,6 +90,7 @@ namespace AdvancedMogreFramework.States
             m_pSceneMgr.DestroyCamera(m_pCamera);
             AdvancedMogreFramework.Singleton.m_pRoot.DestroySceneManager(m_pSceneMgr);
             ScreenManager.Instance.Dispose();
+            AdvancedMogreFramework.Singleton.m_pMouse.MousePressed -= MousePressed;
         }
     }
 }

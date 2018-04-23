@@ -65,13 +65,13 @@ namespace AdvancedMogreFramework.States
 
 	        m_pCameraMan = new SdkCameraMan(m_pCamera);
 
-            AdvancedMogreFramework.Singleton.m_pMouse.MouseMoved += new MouseListener.MouseMovedHandler(mouseMoved);
-            AdvancedMogreFramework.Singleton.m_pMouse.MousePressed += new MouseListener.MousePressedHandler(mousePressed);
-            AdvancedMogreFramework.Singleton.m_pMouse.MouseReleased += new MouseListener.MouseReleasedHandler(mouseReleased);
-            AdvancedMogreFramework.Singleton.m_pKeyboard.KeyPressed += new KeyListener.KeyPressedHandler(keyPressed);
-            AdvancedMogreFramework.Singleton.m_pKeyboard.KeyReleased += new KeyListener.KeyReleasedHandler(keyReleased);
+            AdvancedMogreFramework.Singleton.m_pMouse.MouseMoved += mouseMoved;
+            AdvancedMogreFramework.Singleton.m_pMouse.MousePressed += mousePressed;
+            AdvancedMogreFramework.Singleton.m_pMouse.MouseReleased += mouseReleased;
+            AdvancedMogreFramework.Singleton.m_pKeyboard.KeyPressed += keyPressed;
+            AdvancedMogreFramework.Singleton.m_pKeyboard.KeyReleased += keyReleased;
 
-            AdvancedMogreFramework.Singleton.m_pRoot.FrameRenderingQueued += new FrameListener.FrameRenderingQueuedHandler(FrameRenderingQueued);
+            AdvancedMogreFramework.Singleton.m_pRoot.FrameRenderingQueued += FrameRenderingQueued;
 
             buildGUI();
  
@@ -123,7 +123,14 @@ namespace AdvancedMogreFramework.States
         public override void exit()
         {
             AdvancedMogreFramework.Singleton.m_pLog.LogMessage("Leaving SinbadState...");
- 
+
+            AdvancedMogreFramework.Singleton.m_pMouse.MouseMoved -= mouseMoved;
+            AdvancedMogreFramework.Singleton.m_pMouse.MousePressed -= mousePressed;
+            AdvancedMogreFramework.Singleton.m_pMouse.MouseReleased -= mouseReleased;
+            AdvancedMogreFramework.Singleton.m_pKeyboard.KeyPressed -= keyPressed;
+            AdvancedMogreFramework.Singleton.m_pKeyboard.KeyReleased -= keyReleased;
+            AdvancedMogreFramework.Singleton.m_pRoot.FrameRenderingQueued -= FrameRenderingQueued;
+
             m_pSceneMgr.DestroyCamera(m_pCamera);
 	        if (m_pCameraMan!=null) m_pCameraMan=null;
 	

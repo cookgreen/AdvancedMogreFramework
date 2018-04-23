@@ -39,10 +39,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Dependencies\Mogre.dll</HintPath>
     </Reference>
-    <Reference Include="Mogre_Procedural.MogreBites, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Dependencies\Mogre_Procedural.MogreBites.dll</HintPath>
-    </Reference>
     <Reference Include="Mogre_Procedural.MogreBites.Addons, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Dependencies\Mogre_Procedural.MogreBites.Addons.dll</HintPath>
@@ -91,8 +87,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helper\DotSceneLoader.cs" />
     <Compile Include="States\SinbadCharacterController.cs" />
-    <Compile Include="Widgets\FrameworkTrayManager.cs" />
     <Compile Include="Widgets\Panel.cs" />
+    <Compile Include="Widgets\SdkTrayGUI.cs" />
+    <Compile Include="Widgets\StaticText.cs" />
     <Compile Include="Widgets\WidgetCollection.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -23,71 +23,56 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 -----------------------------------------------------------------------------
 */
+using Mogre;
+using Mogre_Procedural.MogreBites;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace AdvancedMogreFramework.Screen
+namespace AdvancedMogreFramework.Widgets
 {
-    public class ScreenManager
+    public class StaticText : Widget
     {
-        private IScreen currentScreen;
-        private Dictionary<string, IScreen> screens;
-        private static ScreenManager instance;
-        public event Action OnCurrentScreenExit;
-        public static ScreenManager Instance
+        protected TextAreaOverlayElement mTextArea;
+        protected bool mFitToTray;
+        public StaticText(string name, string caption, float width)
         {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new ScreenManager();
-                }
-                return instance;
-            }
+            OverlayManager overlayMgr = OverlayManager.Singleton;
+            mElement = overlayMgr.CreateOverlayElement("BorderPanel", name);
+            mElement.MetricsMode = GuiMetricsMode.GMM_PIXELS;
+            mElement.HorizontalAlignment = GuiHorizontalAlignment.GHA_CENTER;
+            mElement.Height = 32;
+            mTextArea = overlayMgr.CreateOverlayElement("TextArea", name + "/StaticTextCaption") as TextAreaOverlayElement;
+            mTextArea.MetricsMode = GuiMetricsMode.GMM_PIXELS;
+            mTextArea.HorizontalAlignment = GuiHorizontalAlignment.GHA_CENTER;
+            mTextArea.SetAlignment(TextAreaOverlayElement.Alignment.Center);
+            mTextArea.Top = 10;
+            mTextArea.FontName = "SdkTrays/Caption";
+            mTextArea.CharHeight = 18;
+            mTextArea.SpaceWidth = 9;
+            mTextArea.Colour = new ColourValue(0.9f, 1f, 0.7f);
+            ((OverlayContainer)mElement).AddChild(mTextArea);
+            setCaption(caption);
         }
 
-        public ScreenManager()
+        public string getCaption()
         {
-            currentScreen = null;
-            screens = new Dictionary<string, IScreen>();
-            screens.Add("Credit", new CreditScreen());
-        }
-        public void ChangeScreen(string screenName)
-        {
-            if (currentScreen != null)
-            {
-                currentScreen.Exit();
-            }
-            if(screens.ContainsKey(screenName))
-            {
-                currentScreen = screens[screenName];
-                currentScreen.OnScreenExit += CurrentScreen_OnScreenExit;
-                currentScreen.Init();
-                currentScreen.Run();
-            }
+            return mTextArea.Caption;
         }
 
-        private void CurrentScreen_OnScreenExit()
+        public void setCaption(string caption)
         {
-            OnCurrentScreenExit?.Invoke();
+            mTextArea.Caption = caption;
         }
 
-        public void Dispose()
+        public override void _cursorPressed(Mogre.Vector2 cursorPos)
         {
-            if (currentScreen != null)
-            {
-                currentScreen.Exit();
-            }
         }
 
-        public void UpdateCurrentScreen(float timeSinceLastFrame)
+        public bool _isFitToTray()
         {
-            if (currentScreen != null)
-            {
-                currentScreen.Update(timeSinceLastFrame);
-            }
+            return mFitToTray;
         }
     }
 }

@@ -113,7 +113,13 @@ namespace AdvancedMogreFramework.States
         {
             AdvancedMogreFramework.Singleton.m_pLog.LogMessage("Leaving GameState...");
 
-            if(m_pSceneMgr!=null)
+            AdvancedMogreFramework.Singleton.m_pMouse.MouseMoved -= mouseMoved;
+            AdvancedMogreFramework.Singleton.m_pMouse.MousePressed -= mousePressed;
+            AdvancedMogreFramework.Singleton.m_pMouse.MouseReleased -= mouseReleased;
+            AdvancedMogreFramework.Singleton.m_pKeyboard.KeyPressed -= keyPressed;
+            AdvancedMogreFramework.Singleton.m_pKeyboard.KeyReleased -= keyReleased;
+
+            if (m_pSceneMgr!=null)
                 m_pSceneMgr.DestroyCamera(m_pCamera);
                 m_pSceneMgr.DestroyQuery(m_pRSQ);
                 AdvancedMogreFramework.Singleton.m_pRoot.DestroySceneManager(m_pSceneMgr);
@@ -208,11 +214,11 @@ namespace AdvancedMogreFramework.States
             chatModes.Insert(chatModes.Count,"Point mode");
             AdvancedMogreFramework.Singleton.m_pTrayMgr.createLongSelectMenu(TrayLocation.TL_TOPRIGHT, "ChatModeSelMenu", "ChatMode", 200, 3, chatModes);
 
-            AdvancedMogreFramework.Singleton.m_pMouse.MouseMoved += new MouseListener.MouseMovedHandler(mouseMoved);
-            AdvancedMogreFramework.Singleton.m_pMouse.MousePressed += new MouseListener.MousePressedHandler(mousePressed);
-            AdvancedMogreFramework.Singleton.m_pMouse.MouseReleased += new MouseListener.MouseReleasedHandler(mouseReleased);
-            AdvancedMogreFramework.Singleton.m_pKeyboard.KeyPressed += new KeyListener.KeyPressedHandler(keyPressed);
-            AdvancedMogreFramework.Singleton.m_pKeyboard.KeyReleased += new KeyListener.KeyReleasedHandler(keyReleased);
+            AdvancedMogreFramework.Singleton.m_pMouse.MouseMoved += mouseMoved;
+            AdvancedMogreFramework.Singleton.m_pMouse.MousePressed += mousePressed;
+            AdvancedMogreFramework.Singleton.m_pMouse.MouseReleased += mouseReleased;
+            AdvancedMogreFramework.Singleton.m_pKeyboard.KeyPressed += keyPressed;
+            AdvancedMogreFramework.Singleton.m_pKeyboard.KeyReleased += keyReleased;
         }
 
         public bool keyPressed(KeyEvent keyEventRef)
