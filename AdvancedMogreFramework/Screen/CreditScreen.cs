@@ -189,7 +189,10 @@ namespace AdvancedMogreFramework
             }
             else
             {
-                OnScreenExit?.Invoke();
+                if (OnScreenExit != null)
+                {
+                    OnScreenExit();
+                }
             }
             time++;
         }

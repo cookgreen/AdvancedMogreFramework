@@ -31,6 +31,7 @@ using Mogre;
 using MOIS;
 using Mogre_Procedural.MogreBites;
 using Mogre_Procedural.MogreBites.Addons;
+using org.critterai.nav;
 
 namespace AdvancedMogreFramework.States
 {
@@ -43,6 +44,7 @@ namespace AdvancedMogreFramework.States
         public SdkCameraMan	m_pCameraMan;
 	    SinbadCharacterController	m_pChara;
 	    NameValuePairList		mInfo=new NameValuePairList();    // custom sample info
+        public List<SinbadCharacterController> agents;
         public SinbadState()
         {
             m_bQuit = false;
@@ -50,6 +52,7 @@ namespace AdvancedMogreFramework.States
             m_pCamera = null;
             m_pCameraMan = null;
             m_pChara = null;
+            agents = new List<SinbadCharacterController>();
         }
 
         public override void enter()
@@ -110,8 +113,46 @@ namespace AdvancedMogreFramework.States
 	        floor.CastShadows=(false);
             m_pSceneMgr.RootSceneNode.AttachObject(floor);
 
+            //Navmesh
+            Navmesh floorNavMesh = MeshToNavmesh.LoadNavmesh(floor); 
+            NavmeshQuery query;
+            float[] vagueStartPoint = { -8, 0.6f, -3 };
+            float[] vagueEndPoint = { 16.3f, 0.8f, 4.5f };
+            uint startPoly;
+            uint endPoly;
+            float[] extents = { 2, 2, 2 };
+
+            NavmeshPoint startPoint = new NavmeshPoint(0, new org.critterai.Vector3(0, 0, 0));
+            NavmeshPoint endPoint = new NavmeshPoint(1, new org.critterai.Vector3(100, 0, 100));
+
+            NavStatus status = NavmeshQuery.Create(floorNavMesh, 100, out query);
+            Console.WriteLine("Status returned when NavmeshQuery was built: " + status);
+
+            NavmeshQueryFilter filter = new NavmeshQueryFilter();
+            filter.IncludeFlags = 1;
+
+           //// status = query.GetNearestPoint( out startPoly, startPoint);
+           // Console.WriteLine("\nStatus of startPoint getNearestPoly: " + status);
+           // Console.WriteLine("Start polyref: " + startPoly + " startpoint: (" + startPoint[0] + ", " + startPoint[1] + ", " + startPoint[2] + ")");
+           //
+           //// query.GetNearestPoly(vagueEndPoint, extents, filter, out endPoly, endPoint);
+           // Console.WriteLine("\nStatus of endPoint getNearestPoly: " + status);
+           // Console.WriteLine("end polyref: " + endPoly + " endpoint: (" + endPoint[0] + ", " + endPoint[1] + ", " + endPoint[2] + ")");
+
+            uint[] path = new uint[100];
+            int pathCount;
+
+            status = query.FindPath(startPoint, endPoint, filter, path, out pathCount);
+
 	        // create our character controller
-	        m_pChara = new SinbadCharacterController(m_pCamera);
+	        m_pChara = new SinbadCharacterController(this, m_pCamera,new Mogre.Vector3(0,5,0), 0);
+            SinbadCharacterController bot1 = new SinbadCharacterController(this, m_pCamera, new Mogre.Vector3(-10, 5, 0), 1, false);
+            SinbadCharacterController bot2 = new SinbadCharacterController(this, m_pCamera, new Mogre.Vector3(0, 5, -10), 2, false);
+            SinbadCharacterController bot3 = new SinbadCharacterController(this, m_pCamera, new Mogre.Vector3(10, 5, 0), 3, false);
+            agents.Add(m_pChara);
+            agents.Add(bot1);
+            agents.Add(bot2);
+            agents.Add(bot3);
 
 	        AdvancedMogreFramework.Singleton.m_pTrayMgr.toggleAdvancedFrameStats();
 
@@ -281,13 +322,22 @@ namespace AdvancedMogreFramework.States
 			{
                 AdvancedMogreFramework.Singleton.m_pRenderWnd.WriteContentsToTimestampedFile("screenshot", ".png");
 			}
+            else if (evt.key == KeyCode.KC_X)
+            {
+                //spawn a new agent
+                SinbadCharacterController agent = new SinbadCharacterController(this, m_pCamera,m_pChara.Position,agents.Count, false);
+                agents.Add(agent);
+            }
 
 			m_pCameraMan.injectKeyDown(evt);
 			return true;
         }
         public bool keyReleased(KeyEvent keyEventRef)
         {
-            m_pChara.injectKeyUp(keyEventRef);
+            for (int i = 0; i < agents.Count; i++)
+            {
+                agents[i].injectKeyUp(keyEventRef);
+            }
 	        m_pCameraMan.injectKeyUp(keyEventRef);
             AdvancedMogreFramework.Singleton.keyPressed(keyEventRef);
             return true;
@@ -295,7 +345,11 @@ namespace AdvancedMogreFramework.States
 
         public bool mouseMoved(MouseEvent arg)
         {
-            if (!AdvancedMogreFramework.Singleton.m_pTrayMgr.isDialogVisible()) m_pChara.injectMouseMove(arg);
+            if (!AdvancedMogreFramework.Singleton.m_pTrayMgr.isDialogVisible())
+                for (int i = 0; i < agents.Count; i++)
+                {
+                    agents[i].injectMouseMove(arg);
+                }
             if (AdvancedMogreFramework.Singleton.m_pTrayMgr.injectMouseMove(arg)) return true;
 	        m_pCameraMan.injectMouseMove(arg);
   
@@ -348,8 +402,6 @@ namespace AdvancedMogreFramework.States
         {
             m_FrameEvent.timeSinceLastFrame = (int)timeSinceLastFrame;
 
-	        //m_pChara.addTime((float)timeSinceLastFrame);
-
             AdvancedMogreFramework.Singleton.m_pTrayMgr.frameRenderingQueued(m_FrameEvent);
 
             if(m_bQuit == true)
@@ -377,7 +429,10 @@ namespace AdvancedMogreFramework.States
         public bool FrameRenderingQueued(FrameEvent evt)
         {
             // let character update animations and camera
-            m_pChara.addTime(evt.timeSinceLastFrame);
+            foreach (var agent in agents)
+            {
+                agent.addTime(evt.timeSinceLastFrame);
+            }
             return true;
         }
 }

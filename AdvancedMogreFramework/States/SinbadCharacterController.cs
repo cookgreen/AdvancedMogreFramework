@@ -29,8 +29,15 @@ using System.Linq;
 using System.Text;
 using Mogre;
 using MOIS;
+using MMOC;
+using AdvancedMogreFramework.States;
 namespace AdvancedMogreFramework
 {
+    public enum QUERY_MASK
+    {
+        AGENT_QUERY_MASK = 1 << 0,
+        STATIC_OBJECT_MASK = 1 << 1
+    }
 class SinbadCharacterController
 {
 	// all the animations our character has, and a null ID
@@ -43,6 +50,8 @@ class SinbadCharacterController
     public const float ANIM_FADE_SPEED = 7.5f;   // animation crossfade speed in % of full weight per second
     public const float JUMP_ACCEL = 30.0f;       // character jump acceleration in upward units per squared second
     public const float GRAVITY = 90.0f;          // gravity in downward units per squared second
+
+    public Mogre.Vector3 Position { get; set; }
 
     Camera mCamera;
     SceneNode mBodyNode;
@@ -64,6 +73,11 @@ class SinbadCharacterController
     Mogre.Vector3 mGoalDirection;     // actual intended direction in world-space
     float mVerticalVelocity;     // for jumping
     float mTimer;                // general timer to see how long animations have been playing
+    bool mControlled;
+    int Id;
+    Mogre.Vector3 mSpawnPos;
+    AppState mWorld;
+    CollisionTools mCollision;
 	enum AnimID
 	{
 		ANIM_IDLE_BASE,
@@ -82,10 +96,19 @@ class SinbadCharacterController
 		ANIM_NONE
 	};
 
-    public SinbadCharacterController(Camera cam)
+    public SinbadCharacterController(AppState world, Camera cam, Mogre.Vector3 spawnPos, int agentId = -1, bool controlled = true)
     {
+        mWorld = world;
+        mControlled = controlled;
+        Id = agentId;
+        mSpawnPos = spawnPos;
+        mCamera = cam;
+        mCollision = new CollisionTools(cam.SceneManager);
         setupBody(cam.SceneManager);
-        setupCamera(cam);
+        if (mControlled)
+        {
+            setupCamera(cam);
+        }
         setupAnimations();
     }
 
@@ -94,99 +117,117 @@ class SinbadCharacterController
     {
         updateBody(deltaTime);
         updateAnimations(deltaTime);
-        updateCamera(deltaTime);
+        updateFilpTerrain();
+        if (mControlled)
+        {
+            updateCamera(deltaTime);
+        }
     }
 
     public void injectKeyDown(KeyEvent evt)
-    { 
-        if (evt.key ==  KeyCode.KC_Q && (mTopAnimID == AnimID. ANIM_IDLE_TOP || mTopAnimID == AnimID.ANIM_RUN_TOP))
-	    {
-		// take swords out (or put them back, since it's the same animation but reversed)
-		    setTopAnimation(AnimID.ANIM_DRAW_SWORDS, true);
-		    mTimer = 0;
-	    }
-	    else if (evt.key == KeyCode.KC_E && !mSwordsDrawn)
-	    {
-		    if (mTopAnimID == AnimID.ANIM_IDLE_TOP || mTopAnimID == AnimID.ANIM_RUN_TOP)
-		    {
-			    // start dancing
-			    setBaseAnimation(AnimID.ANIM_DANCE, true);
-			    setTopAnimation(AnimID.ANIM_NONE);
-			    // disable hand animation because the dance controls hands
-			    mAnims[(int)AnimID.ANIM_HANDS_RELAXED].Enabled=false;
-		    }
-		    else if (mBaseAnimID == AnimID.ANIM_DANCE)
-		    {
-			    // stop dancing
-			    setBaseAnimation(AnimID.ANIM_IDLE_BASE);
-			    setTopAnimation(AnimID.ANIM_IDLE_TOP);
-			    // re-enable hand animation
-			    mAnims[(int)AnimID.ANIM_HANDS_RELAXED].Enabled=true;
-		    }
-	    }
+    {
+        if (mControlled)
+        {
+            if (evt.key == KeyCode.KC_Q && (mTopAnimID == AnimID.ANIM_IDLE_TOP || mTopAnimID == AnimID.ANIM_RUN_TOP))
+            {
+                // take swords out (or put them back, since it's the same animation but reversed)
+                setTopAnimation(AnimID.ANIM_DRAW_SWORDS, true);
+                mTimer = 0;
+            }
+            else if (evt.key == KeyCode.KC_E && !mSwordsDrawn)
+            {
+                if (mTopAnimID == AnimID.ANIM_IDLE_TOP || mTopAnimID == AnimID.ANIM_RUN_TOP)
+                {
+                    // start dancing
+                    setBaseAnimation(AnimID.ANIM_DANCE, true);
+                    setTopAnimation(AnimID.ANIM_NONE);
+                    // disable hand animation because the dance controls hands
+                    mAnims[(int)AnimID.ANIM_HANDS_RELAXED].Enabled = false;
+                }
+                else if (mBaseAnimID == AnimID.ANIM_DANCE)
+                {
+                    // stop dancing
+                    setBaseAnimation(AnimID.ANIM_IDLE_BASE);
+                    setTopAnimation(AnimID.ANIM_IDLE_TOP);
+                    // re-enable hand animation
+                    mAnims[(int)AnimID.ANIM_HANDS_RELAXED].Enabled = true;
+                }
+            }
 
-	    // keep track of the player's intended direction
-	    else if (evt.key == KeyCode.KC_W) mKeyDirection.z = -1;
-	    else if (evt.key == KeyCode.KC_A) mKeyDirection.x = -1;
-	    else if (evt.key == KeyCode.KC_S) mKeyDirection.z = 1;
-	    else if (evt.key == KeyCode.KC_D) mKeyDirection.x = 1;
+            // keep track of the player's intended direction
+            else if (evt.key == KeyCode.KC_W && !checkCollision()) mKeyDirection.z = -1;
+            else if (evt.key == KeyCode.KC_A) mKeyDirection.x = -1;
+            else if (evt.key == KeyCode.KC_S) mKeyDirection.z = 1;
+            else if (evt.key == KeyCode.KC_D) mKeyDirection.x = 1;
 
-        else if (evt.key == KeyCode.KC_SPACE && (mTopAnimID == AnimID.ANIM_IDLE_TOP || mTopAnimID == AnimID.ANIM_RUN_TOP))
-	    {
-		    // jump if on ground
-            setBaseAnimation(AnimID.ANIM_JUMP_START, true);
-            setTopAnimation(AnimID.ANIM_NONE);
-		    mTimer = 0;
-	    }
+            else if (evt.key == KeyCode.KC_SPACE && (mTopAnimID == AnimID.ANIM_IDLE_TOP || mTopAnimID == AnimID.ANIM_RUN_TOP))
+            {
+                // jump if on ground
+                setBaseAnimation(AnimID.ANIM_JUMP_START, true);
+                setTopAnimation(AnimID.ANIM_NONE);
+                mTimer = 0;
+            }
 
-        if (!mKeyDirection.IsZeroLength && mBaseAnimID == AnimID.ANIM_IDLE_BASE)
-	    {
-		    // start running if not already moving and the player wants to move
-            setBaseAnimation(AnimID.ANIM_RUN_BASE, true);
-            if (mTopAnimID == AnimID.ANIM_IDLE_TOP) setTopAnimation(AnimID.ANIM_RUN_TOP, true);
-	     }
+            if (!mKeyDirection.IsZeroLength && mBaseAnimID == AnimID.ANIM_IDLE_BASE)
+            {
+                // start running if not already moving and the player wants to move
+                setBaseAnimation(AnimID.ANIM_RUN_BASE, true);
+                if (mTopAnimID == AnimID.ANIM_IDLE_TOP) setTopAnimation(AnimID.ANIM_RUN_TOP, true);
+            }
+        }
     }
 
     public void injectKeyUp(KeyEvent evt)
     {
-        if (evt.key == KeyCode.KC_W && mKeyDirection.z == -1) mKeyDirection.z = 0;
-	    else if (evt.key == KeyCode.KC_A && mKeyDirection.x == -1) mKeyDirection.x = 0;
-	    else if (evt.key == KeyCode.KC_S && mKeyDirection.z == 1) mKeyDirection.z = 0;
-        else if (evt.key == KeyCode.KC_D && mKeyDirection.x == 1) mKeyDirection.x = 0;
+        if (mControlled)
+        {
+            if (evt.key == KeyCode.KC_W && mKeyDirection.z == -1) mKeyDirection.z = 0;
+            else if (evt.key == KeyCode.KC_A && mKeyDirection.x == -1) mKeyDirection.x = 0;
+            else if (evt.key == KeyCode.KC_S && mKeyDirection.z == 1) mKeyDirection.z = 0;
+            else if (evt.key == KeyCode.KC_D && mKeyDirection.x == 1) mKeyDirection.x = 0;
 
-        if (mKeyDirection.IsZeroLength && mBaseAnimID == AnimID.ANIM_RUN_BASE)
-	    {
-		    // stop running if already moving and the player doesn't want to move
-            setBaseAnimation(AnimID.ANIM_IDLE_BASE);
-            if (mTopAnimID == AnimID.ANIM_RUN_TOP) setTopAnimation(AnimID.ANIM_IDLE_TOP);
-	    }
+            if (mKeyDirection.IsZeroLength && mBaseAnimID == AnimID.ANIM_RUN_BASE)
+            {
+                // stop running if already moving and the player doesn't want to move
+                setBaseAnimation(AnimID.ANIM_IDLE_BASE);
+                if (mTopAnimID == AnimID.ANIM_RUN_TOP) setTopAnimation(AnimID.ANIM_IDLE_TOP);
+            }
+        }
     }
 
     public void injectMouseMove(MouseEvent evt)
     {
-        updateCameraGoal(-0.05f * evt.state.X.rel, -0.05f * evt.state.Y.rel, -0.0005f * evt.state.Z.rel);
+        if (mControlled)
+        {
+            updateCameraGoal(-0.05f * evt.state.X.rel, -0.05f * evt.state.Y.rel, -0.0005f * evt.state.Z.rel);
+        }
     }
 
     public void injectMouseDown(MouseEvent evt, MouseButtonID id)
     {
-        if (mSwordsDrawn && (mTopAnimID == AnimID.ANIM_IDLE_TOP || mTopAnimID == AnimID.ANIM_RUN_TOP))
-	    {
-		    // if swords are out, and character's not doing something weird, then SLICE!
-		    if (id == MouseButtonID.MB_Left) setTopAnimation(AnimID.ANIM_SLICE_VERTICAL, true);
-            else if (id == MouseButtonID.MB_Right) setTopAnimation(AnimID.ANIM_SLICE_HORIZONTAL, true);
-		    mTimer = 0;
-	    }
+        if (mControlled)
+        {
+            if (mSwordsDrawn && (mTopAnimID == AnimID.ANIM_IDLE_TOP || mTopAnimID == AnimID.ANIM_RUN_TOP))
+            {
+                // if swords are out, and character's not doing something weird, then SLICE!
+                if (id == MouseButtonID.MB_Left) setTopAnimation(AnimID.ANIM_SLICE_VERTICAL, true);
+                else if (id == MouseButtonID.MB_Right) setTopAnimation(AnimID.ANIM_SLICE_HORIZONTAL, true);
+                mTimer = 0;
+            }
+        }
     }
 
     private void setupBody(SceneManager sceneMgr)
     {
         mBodyNode = sceneMgr.RootSceneNode.CreateChildSceneNode(Mogre.Vector3.UNIT_Y * CHAR_HEIGHT);
-	    mBodyEnt = sceneMgr.CreateEntity("SinbadBody", "Sinbad.mesh");
+	    mBodyEnt = sceneMgr.CreateEntity("SinbadBody" + Id, "Sinbad.mesh");
+        mBodyEnt.QueryFlags = (uint)QUERY_MASK.AGENT_QUERY_MASK;
 	    mBodyNode.AttachObject(mBodyEnt);
+        mBodyNode.Position = mSpawnPos;
 
 	    // create swords and attach to sheath
-	    mSword1 = sceneMgr.CreateEntity("SinbadSword1", "Sword.mesh");
-	    mSword2 = sceneMgr.CreateEntity("SinbadSword2", "Sword.mesh");
+	    mSword1 = sceneMgr.CreateEntity("SinbadSword1" +Id, "Sword.mesh");
+	    mSword2 = sceneMgr.CreateEntity("SinbadSword2" +Id, "Sword.mesh");
 	    mBodyEnt.AttachObjectToBone("Sheath.L", mSword1);
 	    mBodyEnt.AttachObjectToBone("Sheath.R", mSword2);
 
@@ -263,6 +304,7 @@ class SinbadCharacterController
 
     private void updateBody(float deltaTime)
     {
+        Position = mBodyNode.Position;
         mGoalDirection = Mogre.Vector3.ZERO;   // we will calculate this
 
 	    if (mKeyDirection != Mogre.Vector3.ZERO && mBaseAnimID != AnimID.ANIM_DANCE)
@@ -514,6 +556,41 @@ class SinbadCharacterController
             mFadingOut[(int)id] = false;
             mFadingIn[(int)id] = true;
             if (reset) mAnims[(int)id].TimePosition=0;
+        }
+    }
+
+    private bool checkCollision()
+    {
+        foreach (var agent in ((SinbadState)mWorld).agents)
+        {
+            if (agent.Id != Id)// not me 
+            {
+                Ray r = new Ray(Position, mBodyNode.Orientation * Mogre.Vector3.NEGATIVE_UNIT_Z);
+                MMOC.CollisionTools.RaycastResult result = mCollision.Raycast(r, mBodyEnt.QueryFlags);
+                if (result != null && result.Distance <= 10 && result.Target.Name!=("SinbadBody"+Id))
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public void updateFilpTerrain()
+    {
+        Ray ray = new Ray(Position, Mogre.Vector3.NEGATIVE_UNIT_Y);
+        RaySceneQuery rayQuery = mCamera.SceneManager.CreateRayQuery(ray);
+        RaySceneQueryResult rayQueryResult = rayQuery.Execute();
+        foreach (var result in rayQueryResult)
+        {
+            if (result.worldFragment != null)
+            {
+                mBodyNode.SetPosition(
+                    Position.x,
+                    result.worldFragment.singleIntersection.y + 10,
+                    Position.z);
+            }
         }
     }
 }

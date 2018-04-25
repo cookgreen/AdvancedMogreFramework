@@ -71,7 +71,10 @@ namespace AdvancedMogreFramework.Screen
 
         private void CurrentScreen_OnScreenExit()
         {
-            OnCurrentScreenExit?.Invoke();
+            if (OnCurrentScreenExit != null)
+            {
+                OnCurrentScreenExit();
+            }
         }
 
         public void Dispose()

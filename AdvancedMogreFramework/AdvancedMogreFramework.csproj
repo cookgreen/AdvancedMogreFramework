@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -35,6 +36,30 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="cai-nav, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Dependencies\cai-nav.dll</HintPath>
+    </Reference>
+    <Reference Include="cai-nav-rcn, Version=0.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Dependencies\cai-nav-rcn.dll</HintPath>
+    </Reference>
+    <Reference Include="cai-nmbuild, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Dependencies\cai-nmbuild.dll</HintPath>
+    </Reference>
+    <Reference Include="cai-nmgen, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Dependencies\cai-nmgen.dll</HintPath>
+    </Reference>
+    <Reference Include="cai-nmgen-rcn, Version=0.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Dependencies\cai-nmgen-rcn.dll</HintPath>
+    </Reference>
+    <Reference Include="cai-util, Version=0.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Dependencies\cai-util.dll</HintPath>
+    </Reference>
     <Reference Include="Mogre, Version=1.7.4.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Dependencies\Mogre.dll</HintPath>
@@ -72,6 +97,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\AdvancedMogreFramework.cs" />
+    <Compile Include="Helper\CollisionTools.cs" />
+    <Compile Include="Helper\MeshToNavmesh.cs" />
+    <Compile Include="Helper\ObjToMesh.cs" />
     <Compile Include="Screen\CreditScreen.cs" />
     <Compile Include="Screen\IScreen.cs" />
     <Compile Include="Screen\ScreenManager.cs" />
