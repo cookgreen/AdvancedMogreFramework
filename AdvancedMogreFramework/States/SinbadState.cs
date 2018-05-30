@@ -116,14 +116,11 @@ namespace AdvancedMogreFramework.States
             //Navmesh
             Navmesh floorNavMesh = MeshToNavmesh.LoadNavmesh(floor); 
             NavmeshQuery query;
-            float[] vagueStartPoint = { -8, 0.6f, -3 };
-            float[] vagueEndPoint = { 16.3f, 0.8f, 4.5f };
-            uint startPoly;
-            uint endPoly;
-            float[] extents = { 2, 2, 2 };
-
-            NavmeshPoint startPoint = new NavmeshPoint(0, new org.critterai.Vector3(0, 0, 0));
-            NavmeshPoint endPoint = new NavmeshPoint(1, new org.critterai.Vector3(100, 0, 100));
+            NavmeshPoint retStartPoint;
+            NavmeshPoint retEndPoint;
+            org.critterai.Vector3 pointStart = new org.critterai.Vector3(0, 0, 0);
+            org.critterai.Vector3 pointEnd = new org.critterai.Vector3(0, 0, 0);
+            org.critterai.Vector3 extents = new org.critterai.Vector3(2, 2, 2);
 
             NavStatus status = NavmeshQuery.Create(floorNavMesh, 100, out query);
             Console.WriteLine("Status returned when NavmeshQuery was built: " + status);
@@ -131,21 +128,19 @@ namespace AdvancedMogreFramework.States
             NavmeshQueryFilter filter = new NavmeshQueryFilter();
             filter.IncludeFlags = 1;
 
-           //// status = query.GetNearestPoint( out startPoly, startPoint);
-           // Console.WriteLine("\nStatus of startPoint getNearestPoly: " + status);
-           // Console.WriteLine("Start polyref: " + startPoly + " startpoint: (" + startPoint[0] + ", " + startPoint[1] + ", " + startPoint[2] + ")");
-           //
-           //// query.GetNearestPoly(vagueEndPoint, extents, filter, out endPoly, endPoint);
-           // Console.WriteLine("\nStatus of endPoint getNearestPoly: " + status);
-           // Console.WriteLine("end polyref: " + endPoly + " endpoint: (" + endPoint[0] + ", " + endPoint[1] + ", " + endPoint[2] + ")");
+            status = query.GetNearestPoint(pointStart, extents,filter, out retStartPoint);
+            Console.WriteLine("\nStatus of startPoint GetNearestPoint: " + status);
+            status = query.GetNearestPoint(pointEnd, extents, filter, out retEndPoint);
+            Console.WriteLine("\nStatus of endPoint GetNearestPoint: " + status);
 
             uint[] path = new uint[100];
             int pathCount;
 
-            status = query.FindPath(startPoint, endPoint, filter, path, out pathCount);
+            status = query.FindPath(retStartPoint, retEndPoint, filter, path, out pathCount);
+            Console.WriteLine("\nStatus of Find path: " + status);
 
-	        // create our character controller
-	        m_pChara = new SinbadCharacterController(this, m_pCamera,new Mogre.Vector3(0,5,0), 0);
+            // create our character controller
+            m_pChara = new SinbadCharacterController(this, m_pCamera,new Mogre.Vector3(0,5,0), 0);
             SinbadCharacterController bot1 = new SinbadCharacterController(this, m_pCamera, new Mogre.Vector3(-10, 5, 0), 1, false);
             SinbadCharacterController bot2 = new SinbadCharacterController(this, m_pCamera, new Mogre.Vector3(0, 5, -10), 2, false);
             SinbadCharacterController bot3 = new SinbadCharacterController(this, m_pCamera, new Mogre.Vector3(10, 5, 0), 3, false);
