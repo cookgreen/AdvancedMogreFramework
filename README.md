@@ -10,13 +10,13 @@ load the solution file with your visual studio(2010 2012 or 2013) and compile it
 You can use this framework develop your own game.
 
 ## Based on
-* Mogre(include in the Mogre SDK)
-* MOIS(include in the Mogre SDK)
-* MogreBites(dll file in the project folder, you can use it directly)
-* SdkCameraMan(dll file in the project folder, you can use it directly)
-<p>(<b>Remember MogreBites and SdkCameraMan is a part of Mogre_Procedural created by <i>andyhebear1</i> on ogre3d forum, based on GPLv2</b>)  
-
+* Mogre
+* MOIS
+* MogreBites
+* SdkCameraMan
+* Critter AI navmesh pathfinder  
 * NVorbis and NAudio 
+<p>(<b>Remember MogreBites and SdkCameraMan is a part of Mogre_Procedural created by <i>andyhebear1</i> on ogre3d forum, based on GPLv2</b>)  
 
 ## License
 GPLv3
