@@ -11,7 +11,12 @@ namespace AdvancedMogreFramework.Helper
 {
     public class ObjToMesh
     {
-        public MeshPtr ConvertToMesh(Stream fileStream) 
+        /// <summary>
+        /// Convert Obj Model File to Ogre Mesh format
+        /// </summary>
+        /// <param name="fileStream">Obj File Stream</param>
+        /// <returns>Ogre Mesh</returns>
+        public MeshPtr ConvertObjToMesh(Stream fileStream) 
         {
             List<Vector3> vertexObj = new List<Vector3>();
             List<Vector3> faceObj = new List<Vector3>();

@@ -231,7 +231,7 @@ public static class MeshToNavmesh
                             }
                         }
                     }
-                    //if (sharedVertices > 2) ReportError("error: more than 2 vertices shared between polys " + q + " and " + w);
+                    if (sharedVertices > 2) ReportError("error: more than 2 vertices shared between polys " + q + " and " + w);
 
                     //Check if these faces are sharing an edge
                     if (sharedVertices == 2)
@@ -413,12 +413,13 @@ public static class MeshToNavmesh
 
     public static Navmesh LoadNavmesh(Entity ent)
     {
+        bool addedSharedVertex = false;
         vertices.Clear();
         faces.Clear();
         MeshPtr mesh = ent.GetMesh();
         Mesh.SubMeshIterator subIterator = mesh.GetSubMeshIterator();
 
-        uint vertexNum = mesh.sharedVertexData.vertexCount;
+        uint vertexNum = 0;
         uint vertexOffset = mesh.sharedVertexData.vertexStart;
         MyVector3<float>[] verticeArray = new MyVector3<float>[vertexNum];
         VertexElement posElem = mesh.sharedVertexData.vertexDeclaration.FindElementBySemantic(VertexElementSemantic.VES_POSITION);
@@ -427,11 +428,30 @@ public static class MeshToNavmesh
         while (subIterator.MoveNext())
         {
             SubMesh subMesh = subIterator.Current;
+
+            VertexData vertexData = subMesh.useSharedVertices ? mesh.sharedVertexData : subMesh.vertexData;
+
             HardwareIndexBufferSharedPtr indexBuffer = subMesh.indexData.indexBuffer;
             HardwareIndexBuffer.IndexType indexType = indexBuffer.Type;
             uint indexCount = subMesh.indexData.indexCount;
-            uint[] indcies=new uint[indexCount];
+
+            uint trisNum = indexCount / 3;
+
+            uint[] indcies = new uint[indexCount];
             uint indexOffset = subMesh.indexData.indexStart;
+
+            if (subMesh.useSharedVertices)
+            {
+                if (!addedSharedVertex)
+                {
+                    vertexNum += mesh.sharedVertexData.vertexCount;
+                    addedSharedVertex = true;
+                }
+            }
+            else
+            {
+                vertexNum += subMesh.vertexData.vertexCount;
+            }
 
             unsafe
             {
@@ -447,14 +467,17 @@ public static class MeshToNavmesh
                     {
                         indcies[indexOffset] = pShort[i] + vertexNum;
                     }
+                    indexOffset++;
                 }
             }
-            for (int i = 0; i < indcies.Length; i++)
+
+            int indexLength = indcies.Length / 3;
+            for (int i = 0; i < indexLength; i++)
             {
                 faces.Add(new MyVector3<ushort>(
-                        (ushort)indcies[i / 3 + 0],
-                        (ushort)indcies[i / 3 + 1],
-                        (ushort)indcies[i / 3 + 2]
+                        (ushort)indcies[i * 3 + 0],
+                        (ushort)indcies[i * 3 + 1],
+                        (ushort)indcies[i * 3 + 2]
                     ));
             }
 
@@ -522,6 +545,11 @@ public static class MeshToNavmesh
         return GenerateNavmesh();
     }
 
+    /// <summary>
+    /// Generate navmesh by TerrainGroup
+    /// </summary>
+    /// <param name="group">Terrain</param>
+    /// <returns>Navmesh</returns>
     public static Navmesh LoadNavmesh(TerrainGroup group)
     {
         TerrainGroup.TerrainIterator terrainIterator = group.GetTerrainIterator();
