@@ -9,6 +9,3 @@
 
 packages/*
 AdvancedMogreFramework/obj/*
-AdvancedMogreFramework/bin/Debug/*
-AdvancedMogreFramework/bin/Release/*.pdb
-AdvancedMogreFramework/bin/Release/*.exe
