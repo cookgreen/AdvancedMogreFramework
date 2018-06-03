@@ -22,8 +22,8 @@ namespace AdvancedMogreFramework.Helper
         {
             if (!actor.IsSleeping)
             {
-                //this.sceneNode.Position = actor.GlobalPosition;
-                //this.sceneNode.Orientation = actor.GlobalOrientationQuaternion;
+                this.sceneNode.Position = actor.GlobalPosition;
+                this.sceneNode.Orientation = actor.GlobalOrientationQuaternion;
             }
         }
     }

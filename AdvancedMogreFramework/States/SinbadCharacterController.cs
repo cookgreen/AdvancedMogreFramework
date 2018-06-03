@@ -338,6 +338,8 @@ class SinbadCharacterController
 
         // finally, create the actor in the physics scene
         mActor = mPhysicsScene.CreateActor(actorDesc);
+        if(!mControlled)
+            ((SinbadState)mWorld).AddActorNode(new ActorNode(mBodyNode, mActor));
     }
 
     private void updateBody(float deltaTime)

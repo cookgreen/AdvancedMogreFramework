@@ -128,6 +128,13 @@ namespace AdvancedMogreFramework.States
             floor.SetMaterialName("Examples/Rockwall");
 	        floor.CastShadows=(false);
             m_pSceneMgr.RootSceneNode.AttachObject(floor);
+            ActorDesc actorDesc = new ActorDesc();
+            actorDesc.Density = 4;
+            actorDesc.Body = null;
+            actorDesc.Shapes.Add(physics.CreateTriangleMesh(new
+                StaticMeshData(floor.GetMesh())));
+            Actor floorActor = physicsScene.CreateActor(actorDesc);
+            actorNodeList.Add(new ActorNode(m_pSceneMgr.RootSceneNode, floorActor));
 
             //Navmesh
             Navmesh floorNavMesh = MeshToNavmesh.LoadNavmesh(floor); 
@@ -454,6 +461,10 @@ namespace AdvancedMogreFramework.States
                 agent.addTime(evt.timeSinceLastFrame);
             }
             return true;
+        }
+        public void AddActorNode(ActorNode actorNode)
+        {
+            actorNodeList.Add(actorNode);
         }
 }
 }
