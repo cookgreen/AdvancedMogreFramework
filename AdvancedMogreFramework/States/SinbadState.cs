@@ -28,10 +28,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Mogre;
+using Mogre.PhysX;
 using MOIS;
 using Mogre_Procedural.MogreBites;
 using Mogre_Procedural.MogreBites.Addons;
 using org.critterai.nav;
+using AdvancedMogreFramework.Helper;
 
 namespace AdvancedMogreFramework.States
 {
@@ -45,6 +47,9 @@ namespace AdvancedMogreFramework.States
 	    SinbadCharacterController	m_pChara;
 	    NameValuePairList		mInfo=new NameValuePairList();    // custom sample info
         public List<SinbadCharacterController> agents;
+        private Physics physics;
+        private Scene physicsScene;
+        private List<ActorNode> actorNodeList;
         public SinbadState()
         {
             m_bQuit = false;
@@ -53,6 +58,7 @@ namespace AdvancedMogreFramework.States
             m_pCameraMan = null;
             m_pChara = null;
             agents = new List<SinbadCharacterController>();
+            actorNodeList = new List<ActorNode>();
         }
 
         public override void enter()
@@ -77,7 +83,17 @@ namespace AdvancedMogreFramework.States
             AdvancedMogreFramework.Singleton.m_pRoot.FrameRenderingQueued += FrameRenderingQueued;
 
             buildGUI();
- 
+
+            physics = Physics.Create();
+            SceneDesc physicsSceneDesc = new SceneDesc();
+            physicsSceneDesc.Gravity = new Mogre.Vector3(0.0f, -9.8f, 0.0f);
+            physicsSceneDesc.UpAxis = 1;
+            physicsScene = physics.CreateScene(physicsSceneDesc);
+            physicsScene.Materials[0].Restitution = 0.5f;
+            physicsScene.Materials[0].StaticFriction = 0.5f;
+            physicsScene.Materials[0].DynamicFriction = 0.5f;
+            physicsScene.Simulate(0);
+
             createScene();
         }
         public void createScene()
@@ -140,10 +156,10 @@ namespace AdvancedMogreFramework.States
             Console.WriteLine("\nStatus of Find path: " + status);
 
             // create our character controller
-            m_pChara = new SinbadCharacterController(this, m_pCamera,new Mogre.Vector3(0,5,0), 0);
-            SinbadCharacterController bot1 = new SinbadCharacterController(this, m_pCamera, new Mogre.Vector3(-10, 5, 0), 1, false);
-            SinbadCharacterController bot2 = new SinbadCharacterController(this, m_pCamera, new Mogre.Vector3(0, 5, -10), 2, false);
-            SinbadCharacterController bot3 = new SinbadCharacterController(this, m_pCamera, new Mogre.Vector3(10, 5, 0), 3, false);
+            m_pChara = new SinbadCharacterController(this, physicsScene, m_pCamera,new Mogre.Vector3(0,5,0), 0);
+            SinbadCharacterController bot1 = new SinbadCharacterController(this, physicsScene, m_pCamera, new Mogre.Vector3(-10, 5, 0), 1, false);
+            SinbadCharacterController bot2 = new SinbadCharacterController(this, physicsScene, m_pCamera, new Mogre.Vector3(0, 5, -10), 2, false);
+            SinbadCharacterController bot3 = new SinbadCharacterController(this, physicsScene, m_pCamera, new Mogre.Vector3(10, 5, 0), 3, false);
             agents.Add(m_pChara);
             agents.Add(bot1);
             agents.Add(bot2);
@@ -320,7 +336,7 @@ namespace AdvancedMogreFramework.States
             else if (evt.key == KeyCode.KC_X)
             {
                 //spawn a new agent
-                SinbadCharacterController agent = new SinbadCharacterController(this, m_pCamera,m_pChara.Position,agents.Count, false);
+                SinbadCharacterController agent = new SinbadCharacterController(this,physicsScene, m_pCamera,m_pChara.Position,agents.Count, false);
                 agents.Add(agent);
             }
 
@@ -420,6 +436,15 @@ namespace AdvancedMogreFramework.States
                     m_pDetailsPanel.setParamValue(7, StringConverter.ToString(m_pCamera.DerivedOrientation.z));
 		        }	
 	        }
+
+            for (int i = 0; i < actorNodeList.Count; i++)
+            {
+                actorNodeList[i].Update((float)timeSinceLastFrame);
+            }
+
+            physicsScene.FlushStream();
+            physicsScene.FetchResults(SimulationStatuses.AllFinished, true);
+            physicsScene.Simulate(timeSinceLastFrame);
         }
         public bool FrameRenderingQueued(FrameEvent evt)
         {

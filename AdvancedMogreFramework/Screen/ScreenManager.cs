@@ -60,7 +60,7 @@ namespace AdvancedMogreFramework.Screen
             {
                 currentScreen.Exit();
             }
-            if(screens.ContainsKey(screenName))
+            if (screens.ContainsKey(screenName))
             {
                 currentScreen = screens[screenName];
                 currentScreen.OnScreenExit += CurrentScreen_OnScreenExit;

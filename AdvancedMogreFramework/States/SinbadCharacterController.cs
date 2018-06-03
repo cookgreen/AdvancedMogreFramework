@@ -31,6 +31,9 @@ using Mogre;
 using MOIS;
 using MMOC;
 using AdvancedMogreFramework.States;
+using Mogre.PhysX;
+using AdvancedMogreFramework.Helper;
+
 namespace AdvancedMogreFramework
 {
     public enum QUERY_MASK
@@ -78,6 +81,9 @@ class SinbadCharacterController
     Mogre.Vector3 mSpawnPos;
     AppState mWorld;
     CollisionTools mCollision;
+    Physics mPhysics;
+    Scene mPhysicsScene;
+    Actor mActor;
 	enum AnimID
 	{
 		ANIM_IDLE_BASE,
@@ -96,7 +102,13 @@ class SinbadCharacterController
 		ANIM_NONE
 	};
 
-    public SinbadCharacterController(AppState world, Camera cam, Mogre.Vector3 spawnPos, int agentId = -1, bool controlled = true)
+    public SinbadCharacterController(
+        AppState world, 
+        Scene physicsScene,
+        Camera cam, 
+        Mogre.Vector3 spawnPos, 
+        int agentId = -1, 
+        bool controlled = true)
     {
         mWorld = world;
         mControlled = controlled;
@@ -104,7 +116,10 @@ class SinbadCharacterController
         mSpawnPos = spawnPos;
         mCamera = cam;
         mCollision = new CollisionTools(cam.SceneManager);
+        mPhysicsScene = physicsScene;
+        mPhysics = physicsScene.Physics;
         setupBody(cam.SceneManager);
+        setupPhysics();
         if (mControlled)
         {
             setupCamera(cam);
@@ -122,6 +137,7 @@ class SinbadCharacterController
         {
             updateCamera(deltaTime);
         }
+        updatePhysics(deltaTime);
     }
 
     public void injectKeyDown(KeyEvent evt)
@@ -300,6 +316,28 @@ class SinbadCharacterController
 	    mCameraNode.AttachObject(cam);
 
 	    mPivotPitch = 0;
+    }
+
+    private void setupPhysics()
+    {
+        BodyDesc bodyDesc = new BodyDesc();
+        bodyDesc.LinearVelocity = new Mogre.Vector3(0, 2, 5);
+
+        // the actor properties control the mass, position and orientation
+        // if you leave the body set to null it will become a static actor and wont move
+        ActorDesc actorDesc = new ActorDesc();
+        actorDesc.Density = 4;
+        actorDesc.Body = bodyDesc;
+        actorDesc.GlobalPosition = mBodyNode.Position;
+        actorDesc.GlobalOrientation = mBodyNode.Orientation.ToRotationMatrix();
+
+        // a quick trick the get the size of the physics shape right is to use the bounding box of the entity
+        actorDesc.Shapes.Add(
+            mPhysics.CreateConvexHull(new
+            StaticMeshData(mBodyEnt.GetMesh())));
+
+        // finally, create the actor in the physics scene
+        mActor = mPhysicsScene.CreateActor(actorDesc);
     }
 
     private void updateBody(float deltaTime)
@@ -592,6 +630,13 @@ class SinbadCharacterController
                     Position.z);
             }
         }
+    }
+
+    private void updatePhysics(double deltaTime)
+    {
+        mPhysicsScene.FlushStream();
+        mPhysicsScene.FetchResults(SimulationStatuses.AllFinished, true);
+        mPhysicsScene.Simulate(deltaTime);
     }
 }
 }
