@@ -16,6 +16,7 @@ You can use this framework develop your own game.
 * SdkCameraMan
 * Critter AI navmesh pathfinder  
 * NVorbis and NAudio 
+* Physx Candy Wrapper(Be sure that you have Physx SDK installed in your computer)  
 <p>(<b>Remember MogreBites and SdkCameraMan is a part of Mogre_Procedural created by <i>andyhebear1</i> on ogre3d forum, based on GPLv2</b>)  
 
 ## License
