@@ -6,6 +6,8 @@
 *.Cache
 *.suo
 *.Resources
+*.config
+*/obj/*
 
 packages/*
 AdvancedMogreFramework/obj/*
