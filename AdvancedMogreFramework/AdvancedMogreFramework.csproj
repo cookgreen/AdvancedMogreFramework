@@ -20,7 +20,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>Dependencies\</OutputPath>
+    <OutputPath>..\bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -30,10 +30,15 @@
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\bin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="cai-nav, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -113,6 +118,7 @@
     <Compile Include="States\AppState.cs" />
     <Compile Include="States\AppStateManager.cs" />
     <Compile Include="States\CreditState.cs" />
+    <Compile Include="States\NetworkState.cs" />
     <Compile Include="States\SinbadState.cs" />
     <Compile Include="Core\DemoApp.cs" />
     <Compile Include="States\GameState.cs" />
