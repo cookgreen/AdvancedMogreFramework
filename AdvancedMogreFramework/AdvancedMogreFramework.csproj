@@ -112,6 +112,14 @@
     <Compile Include="Helper\ObjToMesh.cs" />
     <Compile Include="Helper\PhysxExpansion.cs" />
     <Compile Include="Helper\StaticMesh.cs" />
+    <Compile Include="Physx\CharacterControllerDescription.cs" />
+    <Compile Include="Physx\CharacterControllerInteractionFlag.cs" />
+    <Compile Include="Physx\GroupIdentifier.cs" />
+    <Compile Include="Physx\CharacterController.cs" />
+    <Compile Include="Physx\RigidBody.cs" />
+    <Compile Include="Physx\RigidBodyDescription.cs" />
+    <Compile Include="Physx\SimpleShape.cs" />
+    <Compile Include="Physx\World.cs" />
     <Compile Include="Screen\CreditScreen.cs" />
     <Compile Include="Screen\IScreen.cs" />
     <Compile Include="Screen\ScreenManager.cs" />
