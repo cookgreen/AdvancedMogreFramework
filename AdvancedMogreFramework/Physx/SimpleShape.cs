@@ -1,7 +1,7 @@
 ﻿using System;
 using Mogre;
 
-namespace AdvancedMogreFramework.PhysX
+namespace AdvancedMogreFramework.Physx
 {
     public class SimpleShape
     {

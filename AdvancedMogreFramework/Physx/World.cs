@@ -5,7 +5,7 @@ using System.Text;
 using Mogre;
 using Mogre.PhysX;
 
-namespace AdvancedMogreFramework.PhysX
+namespace AdvancedMogreFramework.Physx
 {
     public class World
     {
