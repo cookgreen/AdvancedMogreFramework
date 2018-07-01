@@ -85,7 +85,9 @@ namespace AdvancedMogreFramework
         Physics mPhysics;
         Scene mPhysicsScene;
         Actor mActor;
-	    enum AnimID
+        CharacterController physicsController;
+        RigidBody rigidBody;
+        enum AnimID
 	    {
 		    ANIM_IDLE_BASE,
 		    ANIM_IDLE_TOP,
@@ -321,26 +323,48 @@ namespace AdvancedMogreFramework
 
         private void setupPhysics()
         {
-            BodyDesc bodyDesc = new BodyDesc();
-            bodyDesc.LinearVelocity = new Mogre.Vector3(0, 2, 5);
+            //if (mControlled)
+            //{
+            //    SimpleShape shape = new SimpleShape(new Mogre.Vector3(50, CHAR_HEIGHT, 0));
+            //    CharacterControllerDescription description = new CharacterControllerDescription();
+            //    physicsController = new CharacterController();
+            //    physicsController.createCharacterController(mBodyNode.Position, shape, description, mPhysicsScene);
+            //}
+            //else
+            //{
+                rigidBody = new RigidBody();
+                RigidBodyDescription description = new RigidBodyDescription();
+                description.Density = 4;
+                description.LinearVelocity = new Mogre.Vector3(0, 2, 5);
+                ShapeDesc shape = mPhysics.CreateConvexHull(new
+                    StaticMeshData(mBodyEnt.GetMesh()));
+                rigidBody.CreateDynamic(
+                    mBodyNode.Position, 
+                    mBodyNode.Orientation.ToRotationMatrix(), 
+                    description, 
+                    mPhysicsScene, 
+                    shape);
+                //BodyDesc bodyDesc = new BodyDesc();
+                //bodyDesc.LinearVelocity = new Mogre.Vector3(0, 2, 5);
+                //
+                //// the actor properties control the mass, position and orientation
+                //// if you leave the body set to null it will become a static actor and wont move
+                //ActorDesc actorDesc = new ActorDesc();
+                //actorDesc.Density = 4;
+                //actorDesc.Body = bodyDesc;
+                //actorDesc.GlobalPosition = mBodyNode.Position;
+                //actorDesc.GlobalOrientation = mBodyNode.Orientation.ToRotationMatrix();
 
-            // the actor properties control the mass, position and orientation
-            // if you leave the body set to null it will become a static actor and wont move
-            ActorDesc actorDesc = new ActorDesc();
-            actorDesc.Density = 4;
-            actorDesc.Body = bodyDesc;
-            actorDesc.GlobalPosition = mBodyNode.Position;
-            actorDesc.GlobalOrientation = mBodyNode.Orientation.ToRotationMatrix();
-
-            // a quick trick the get the size of the physics shape right is to use the bounding box of the entity
-            actorDesc.Shapes.Add(
-                mPhysics.CreateConvexHull(new
-                StaticMeshData(mBodyEnt.GetMesh())));
-
-            // finally, create the actor in the physics scene
-            mActor = mPhysicsScene.CreateActor(actorDesc);
-            if(!mControlled)
-                ((SinbadState)mWorld).AddActorNode(new ActorNode(mBodyNode, mActor));
+                // a quick trick the get the size of the physics shape right is to use the bounding box of the entity
+                //actorDesc.Shapes.Add(
+                //    mPhysics.CreateConvexHull(new
+                //    StaticMeshData(mBodyEnt.GetMesh())));
+                //
+                //// finally, create the actor in the physics scene
+                //mActor = mPhysicsScene.CreateActor(actorDesc);
+                if (!mControlled)
+                    ((SinbadState)mWorld).AddActorNode(new ActorNode(mBodyNode, rigidBody.Actor));
+            //}
         }
 
         private void updateBody(float deltaTime)

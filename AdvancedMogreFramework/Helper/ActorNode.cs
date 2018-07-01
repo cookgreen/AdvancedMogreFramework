@@ -20,10 +20,13 @@ namespace AdvancedMogreFramework.Helper
 
         internal void Update(float deltaTime)
         {
-            if (!actor.IsSleeping)
+            if (actor != null)
             {
-                this.sceneNode.Position = actor.GlobalPosition;
-                this.sceneNode.Orientation = actor.GlobalOrientationQuaternion;
+                if (!actor.IsSleeping)
+                {
+                    this.sceneNode.Position = actor.GlobalPosition;
+                    this.sceneNode.Orientation = actor.GlobalOrientationQuaternion;
+                }
             }
         }
     }

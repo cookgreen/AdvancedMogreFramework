@@ -17,25 +17,31 @@ namespace AdvancedMogreFramework.Physx
         {
         }
         
-        private void createDynamic(Matrix4 pose, RigidBodyDescription description, Scene scene, ShapeDesc shape)
+        public void CreateDynamic(
+            Vector3 pose, 
+            Matrix3 oritentaion, 
+            RigidBodyDescription description, 
+            Scene scene, 
+            ShapeDesc shape)
         {
             BodyDesc bodyDesc = new BodyDesc();
             ActorDesc actorDesc = new ActorDesc();
-            actorDesc.GlobalPose = pose;
-            actorDesc.Body = bodyDesc;
             description.ToNxActor(ref actorDesc, ref bodyDesc);
+            actorDesc.Body = bodyDesc;
+            actorDesc.GlobalPosition = pose;
+            actorDesc.GlobalOrientation = oritentaion;
             actorDesc.Shapes.Add(shape);
-            Actor = Scene.CreateActor(actorDesc);
+            Actor = scene.CreateActor(actorDesc);
         }
 
-        private void createStatic(Matrix4 pose, RigidBodyDescription description, Scene scene, ShapeDesc shape)
+        public void CreateStatic(Vector3 pose, RigidBodyDescription description, Scene scene, ShapeDesc shape)
         {
             ActorDesc actorDesc = new ActorDesc();
-            actorDesc.GlobalPose = pose;
+            actorDesc.GlobalPosition = pose;
             actorDesc.Body = null;
             description.ToNxActor(ref actorDesc);
             actorDesc.Shapes.Add(shape);
-            Actor = Scene.CreateActor(actorDesc);
+            Actor = scene.CreateActor(actorDesc);
         }
 
         protected Controller _createCharacterController(Vector3 pose, Scene scene, SimpleShape shape, CharacterControllerDescription description)
@@ -46,7 +52,7 @@ namespace AdvancedMogreFramework.Physx
             Vector3 capsule_desc = shape.to_cc_shape();
             controller_desc.Height = capsule_desc.y;
             controller_desc.Radius = capsule_desc.x;
-            //controller_desc.Position = globalPos.as< NxExtendedVec3 > ();
+            controller_desc.Position = pose;
             controller_desc.SkinWidth = description.SkinWidth;
             controller_desc.SlopeLimit = description.SlopeLimit;
             controller_desc.StepOffset = description.StepOffset;

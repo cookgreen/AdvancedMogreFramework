@@ -5,9 +5,18 @@ namespace AdvancedMogreFramework.Physx
 {
     public class SimpleShape
     {
-        internal Vector3 to_cc_shape()
+        private Vector3 vector;
+        public SimpleShape()
         {
-            throw new NotImplementedException();
+
+        }
+        public SimpleShape(Vector3 vect)
+        {
+            vector = vect;
+        }
+        public Vector3 to_cc_shape()
+        {
+            return vector;
         }
     }
 }

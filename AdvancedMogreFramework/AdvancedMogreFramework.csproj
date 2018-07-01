@@ -127,6 +127,7 @@
     <Compile Include="States\AppStateManager.cs" />
     <Compile Include="States\CreditState.cs" />
     <Compile Include="States\NetworkState.cs" />
+    <Compile Include="States\SceneProp.cs" />
     <Compile Include="States\SinbadState.cs" />
     <Compile Include="Core\DemoApp.cs" />
     <Compile Include="States\GameState.cs" />

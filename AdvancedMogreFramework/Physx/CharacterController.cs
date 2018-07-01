@@ -169,17 +169,20 @@ namespace AdvancedMogreFramework.Physx
                 sharpness = value;
             }
         }
+        public CharacterController()
+        {
 
-        protected CharacterController(Scene scene)
+        }
+        public CharacterController(Scene scene)
         {
             Scene = scene;
         }
-        protected CharacterController(SimpleShape shape, Vector3 globalPosition, CharacterControllerDescription description, Scene scene)
+        public CharacterController(SimpleShape shape, Vector3 globalPosition, CharacterControllerDescription description, Scene scene)
         {
             createCharacterController(globalPosition, shape, description, scene);
         }
 
-        protected void createCharacterController(Vector3 globalPos, SimpleShape shape, CharacterControllerDescription description, Scene scene)
+        public void createCharacterController(Vector3 globalPos, SimpleShape shape, CharacterControllerDescription description, Scene scene)
         {
             stepOffset = description.StepOffset;
             skinWidth = description.SkinWidth;

@@ -123,21 +123,19 @@ namespace AdvancedMogreFramework.States
 	        MeshManager.Singleton.CreatePlane("floor", ResourceGroupManager.DEFAULT_RESOURCE_GROUP_NAME,
 		        new Plane(Mogre.Vector3.UNIT_Y, 0), 100, 100, 10, 10, true, 1, 10, 10, Mogre.Vector3.UNIT_Z);
 
-	        // create a floor entity, give it a material, and place it at the origin
-            Entity floor = m_pSceneMgr.CreateEntity("Floor", "floor");
-            floor.SetMaterialName("Examples/Rockwall");
-	        floor.CastShadows=(false);
-            m_pSceneMgr.RootSceneNode.AttachObject(floor);
-            ActorDesc actorDesc = new ActorDesc();
-            actorDesc.Density = 4;
-            actorDesc.Body = null;
-            actorDesc.Shapes.Add(physics.CreateTriangleMesh(new
-                StaticMeshData(floor.GetMesh())));
-            Actor floorActor = physicsScene.CreateActor(actorDesc);
-            actorNodeList.Add(new ActorNode(m_pSceneMgr.RootSceneNode, floorActor));
+            // create a floor entity, give it a material, and place it at the origin
+            SceneProp floorSceneProp = new SceneProp(
+                this,
+                m_pSceneMgr,
+                m_pSceneMgr.RootSceneNode,
+                physicsScene,
+                "Floor",
+                "floor"
+                );
+            floorSceneProp.SetMaterialName("Examples/Rockwall");
 
             //Navmesh
-            Navmesh floorNavMesh = MeshToNavmesh.LoadNavmesh(floor); 
+            Navmesh floorNavMesh = MeshToNavmesh.LoadNavmesh(floorSceneProp.Entity); 
             NavmeshQuery query;
             NavmeshPoint retStartPoint;
             NavmeshPoint retEndPoint;

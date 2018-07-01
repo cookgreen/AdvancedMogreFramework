@@ -292,7 +292,18 @@ namespace AdvancedMogreFramework.Physx
                 name = value;
             }
         }
-
+        public RigidBodyDescription()
+        {
+            angularDamping = 0.05f;
+            linearDamping = 0;
+            mass = 0;
+            maxAngularVelocity = -1;
+            sleepAngularVelocity = -1;
+            sleepDamping = 0;
+            ccdMotionThreshold = 0;
+            massLocalPose = Matrix4.IDENTITY;
+            solverIterationCount = 4;
+        }
         public void ToNxActor(ref ActorDesc actorDesc)
         {
             actorDesc.ContactReportFlags = contactReportFlags;
@@ -310,8 +321,6 @@ namespace AdvancedMogreFramework.Physx
             bodyDesc.AngularDamping = angularDamping;
             bodyDesc.AngularVelocity = angularVelocity;
             bodyDesc.CCDMotionThreshold = ccdMotionThreshold;
-            bodyDesc.ContactReportThreshold = contactReportThreshold;
-            //bodyDesc.Flags = mDynamicRigidbodyFlags.to_i();
             bodyDesc.LinearDamping = linearDamping;
             bodyDesc.LinearVelocity = linearVelocity;
             bodyDesc.Mass = mass;
