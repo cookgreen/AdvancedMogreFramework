@@ -38,7 +38,7 @@ namespace AdvancedMogreFramework.States
         OGRE_HEAD_MASK = 1 << 0,
         CUBE_MASK = 1 << 1
     };
-    class GameState : AppState
+    public class GameState : AppState
     {
         public GameState()
         {

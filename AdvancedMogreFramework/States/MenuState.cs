@@ -32,7 +32,7 @@ using Mogre_Procedural.MogreBites;
 
 namespace AdvancedMogreFramework.States
 {
-    class MenuState : AppState
+    public class MenuState : AppState
     {
         public MenuState()
         {

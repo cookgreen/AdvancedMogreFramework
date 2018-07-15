@@ -9,7 +9,10 @@ using AdvancedMogreFramework.Helper;
 
 namespace AdvancedMogreFramework.States
 {
-    class SceneProp
+    /// <summary>
+    /// Static Game Object
+    /// </summary>
+    public class SceneProp
     {
         private AppState state;
         private SceneManager scm;

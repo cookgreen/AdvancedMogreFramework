@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AdvancedMogreFramework.States
 {
-    class NetworkState : AppState
+    public class NetworkState : AppState
     {
         public override void enter()
         {

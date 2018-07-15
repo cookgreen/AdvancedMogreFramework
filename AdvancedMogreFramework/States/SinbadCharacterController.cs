@@ -57,37 +57,37 @@ namespace AdvancedMogreFramework
 
         public Mogre.Vector3 Position { get; set; }
 
-        Camera mCamera;
-        SceneNode mBodyNode;
-        SceneNode mCameraPivot;
-        SceneNode mCameraGoal;
-        SceneNode mCameraNode;
-        float mPivotPitch;
-        Entity mBodyEnt;
-        Entity mSword1;
-        Entity mSword2;
-        RibbonTrail mSwordTrail;
-        AnimationState[] mAnims = new AnimationState[NUM_ANIMS];    // master animation list
-        AnimID mBaseAnimID;                   // current base (full- or lower-body) animation
-        AnimID mTopAnimID;                    // current top (upper-body) animation
-        bool[] mFadingIn = new bool[NUM_ANIMS];            // which animations are fading in
-        bool[] mFadingOut = new bool[NUM_ANIMS];           // which animations are fading out
-        bool mSwordsDrawn;
-        Mogre.Vector3 mKeyDirection;      // player's local intended direction based on WASD keys
-        Mogre.Vector3 mGoalDirection;     // actual intended direction in world-space
-        float mVerticalVelocity;     // for jumping
-        float mTimer;                // general timer to see how long animations have been playing
-        bool mControlled;
-        int Id;
-        Mogre.Vector3 mSpawnPos;
-        AppState mWorld;
-        CollisionTools mCollision;
-        Physics mPhysics;
-        Scene mPhysicsScene;
-        Actor mActor;
-        CharacterController physicsController;
-        RigidBody rigidBody;
-        enum AnimID
+        private Camera mCamera;
+        private SceneNode mBodyNode;
+        private SceneNode mCameraPivot;
+        private SceneNode mCameraGoal;
+        private SceneNode mCameraNode;
+        private float mPivotPitch;
+        private Entity mBodyEnt;
+        private Entity mSword1;
+        private Entity mSword2;
+        private RibbonTrail mSwordTrail;
+        private AnimationState[] mAnims = new AnimationState[NUM_ANIMS];    // master animation list
+        private AnimID mBaseAnimID;                   // current base (full- or lower-body) animation
+        private AnimID mTopAnimID;                    // current top (upper-body) animation
+        private bool[] mFadingIn = new bool[NUM_ANIMS];            // which animations are fading in
+        private bool[] mFadingOut = new bool[NUM_ANIMS];           // which animations are fading out
+        private bool mSwordsDrawn;
+        private Mogre.Vector3 mKeyDirection;      // player's local intended direction based on WASD keys
+        private Mogre.Vector3 mGoalDirection;     // actual intended direction in world-space
+        private float mVerticalVelocity;     // for jumping
+        private float mTimer;                // general timer to see how long animations have been playing
+        private bool mControlled;
+        private int Id;
+        private Mogre.Vector3 mSpawnPos;
+        private AppState mWorld;
+        private CollisionTools mCollision;
+        private Physics mPhysics;
+        private Scene mPhysicsScene;
+        private Actor mActor;
+        private CharacterController physicsController;
+        private RigidBody rigidBody;
+        private enum AnimID
 	    {
 		    ANIM_IDLE_BASE,
 		    ANIM_IDLE_TOP,
@@ -174,7 +174,7 @@ namespace AdvancedMogreFramework
                 }
 
                 // keep track of the player's intended direction
-                else if (evt.key == KeyCode.KC_W && !checkCollision()) mKeyDirection.z = -1;
+                else if (evt.key == KeyCode.KC_W) mKeyDirection.z = -1;
                 else if (evt.key == KeyCode.KC_A) mKeyDirection.x = -1;
                 else if (evt.key == KeyCode.KC_S) mKeyDirection.z = 1;
                 else if (evt.key == KeyCode.KC_D) mKeyDirection.x = 1;
@@ -622,24 +622,6 @@ namespace AdvancedMogreFramework
                 mFadingIn[(int)id] = true;
                 if (reset) mAnims[(int)id].TimePosition=0;
             }
-        }
-
-        private bool checkCollision()
-        {
-            foreach (var agent in ((SinbadState)mWorld).agents)
-            {
-                if (agent.Id != Id)// not me 
-                {
-                    Ray r = new Ray(Position, mBodyNode.Orientation * Mogre.Vector3.NEGATIVE_UNIT_Z);
-                    MMOC.CollisionTools.RaycastResult result = mCollision.Raycast(r, mBodyEnt.QueryFlags);
-                    if (result != null && result.Distance <= 10 && result.Target.Name!=("SinbadBody"+Id))
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
         }
 
         public void updateFilpTerrain()

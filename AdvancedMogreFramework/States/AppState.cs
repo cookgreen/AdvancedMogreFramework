@@ -33,7 +33,7 @@ using MOIS;
 
 namespace AdvancedMogreFramework.States
 {
-    class AppStateListener
+    public class AppStateListener
     {
 	    public AppStateListener(){}
 	    ~AppStateListener(){}
@@ -48,7 +48,7 @@ namespace AdvancedMogreFramework.States
         public virtual void shutdown() { }
         public virtual void popAllAndPushAppState<T>(AppState state) where T:AppState { }
 };
-    class AppState :SdkTrayListener
+    public class AppState :SdkTrayListener
     {
         public static void create<T>(AppStateListener parent, String name) where T : AppState, new()
         {

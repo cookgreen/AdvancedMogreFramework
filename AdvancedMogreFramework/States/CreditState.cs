@@ -32,7 +32,7 @@ using System.Text;
 
 namespace AdvancedMogreFramework.States
 {
-    class CreditState : AppState
+    public class CreditState : AppState
     {
         public override void enter()
         {
