@@ -67,7 +67,7 @@
     </Reference>
     <Reference Include="eyecm.PhysX, Version=0.1.3788.29655, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Dependencies\eyecm.PhysX.dll</HintPath>
+      <HintPath>..\bin\eyecm.PhysX.dll</HintPath>
     </Reference>
     <Reference Include="Mogre, Version=1.7.4.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
@@ -107,7 +107,6 @@
   <ItemGroup>
     <Compile Include="Core\AdvancedMogreFramework.cs" />
     <Compile Include="Helper\ActorNode.cs" />
-    <Compile Include="Helper\CollisionTools.cs" />
     <Compile Include="Helper\MeshToNavmesh.cs" />
     <Compile Include="Helper\ObjToMesh.cs" />
     <Compile Include="Helper\PhysxExpansion.cs" />
@@ -127,6 +126,10 @@
     <Compile Include="States\AppStateManager.cs" />
     <Compile Include="States\CreditState.cs" />
     <Compile Include="States\NetworkState.cs" />
+    <Compile Include="States\PhysxBasicCubeState.cs" />
+    <Compile Include="States\PhysxCharacterControllerState.cs" />
+    <Compile Include="States\PhysxClothState.cs" />
+    <Compile Include="States\PhysxNewtonCradleState.cs" />
     <Compile Include="States\SceneProp.cs" />
     <Compile Include="States\SinbadState.cs" />
     <Compile Include="Core\DemoApp.cs" />

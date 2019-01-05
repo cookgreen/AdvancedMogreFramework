@@ -30,6 +30,7 @@ using Mogre;
 using RMOgre;
 using MOIS;
 using Mogre_Procedural.MogreBites;
+using Mogre.PhysX;
 
 namespace AdvancedMogreFramework.States
 {
@@ -40,6 +41,29 @@ namespace AdvancedMogreFramework.States
     };
     public class GameState : AppState
     {
+        SceneNode m_pOgreHeadNode;
+        Entity m_pOgreHeadEntity;
+        MaterialPtr m_pOgreHeadMat;
+        MaterialPtr m_pOgreHeadMatHigh;
+
+        ParamsPanel m_pDetailsPanel;
+        bool m_bQuit;
+
+        Mogre.Vector3 m_TranslateVector;
+        float m_MoveSpeed;
+        Degree m_RotateSpeed;
+        float m_MoveScale;
+        Degree m_RotScale;
+
+        RaySceneQuery m_pRSQ;
+        SceneNode m_pCurrentObject;
+        Entity m_pCurrentEntity;
+        bool m_bRMouseDown, m_bLMouseDown;
+        bool m_bSettingsMode;
+
+        private Scene physxScene;
+        private Physics physx;
+        private bool paused;
         public GameState()
         {
             m_MoveSpeed = 0.1f;
@@ -51,6 +75,13 @@ namespace AdvancedMogreFramework.States
             m_bSettingsMode = false;
 
             m_pDetailsPanel = null;
+
+            physx = Physics.Create();
+            SceneDesc desc = new SceneDesc();
+            desc.Gravity = new Mogre.Vector3(0, -9.8f, 0);
+            physxScene = physx.CreateScene(desc);
+
+            paused = false;
         }
 
         public override void enter()
@@ -108,6 +139,8 @@ namespace AdvancedMogreFramework.States
             m_pOgreHeadMatHigh.GetTechnique(0).GetPass(0).Ambient = cvAmbinet;
             ColourValue cvDiffuse = new Mogre.ColourValue(1, 0, 0,0);
             m_pOgreHeadMatHigh.GetTechnique(0).GetPass(0).Diffuse = cvDiffuse;
+
+            physxScene.Simulate(0);
         }
         public override void exit()
         {
@@ -127,13 +160,13 @@ namespace AdvancedMogreFramework.States
         public override bool pause()
         {
             AdvancedMogreFramework.Singleton.m_pLog.LogMessage("Pausing GameState...");
- 
+            paused = true;
             return true;
         }
         public override void resume()
         {
             AdvancedMogreFramework.Singleton.m_pLog.LogMessage("Resuming GameState...");
- 
+            paused = false;
             buildGUI();
 
             AdvancedMogreFramework.Singleton.m_pViewport.Camera=m_pCamera;
@@ -151,6 +184,8 @@ namespace AdvancedMogreFramework.States
         }
         public void getInput()
         {
+            m_TranslateVector = Mogre.Vector3.ZERO;
+
             if(m_bSettingsMode == false)
             {
                 if(AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_A))
@@ -221,7 +256,7 @@ namespace AdvancedMogreFramework.States
             AdvancedMogreFramework.Singleton.m_pKeyboard.KeyReleased += keyReleased;
         }
 
-        public bool keyPressed(KeyEvent keyEventRef)
+        public virtual bool keyPressed(KeyEvent keyEventRef)
         {
             if(m_bSettingsMode == true)
             {
@@ -338,6 +373,10 @@ namespace AdvancedMogreFramework.States
  
             Ray mouseRay = m_pCamera.GetCameraToViewportRay(AdvancedMogreFramework.Singleton.m_pMouse.MouseState.X.abs / (float)evt.state.width,
             AdvancedMogreFramework.Singleton.m_pMouse.MouseState.Y.abs / (float)evt.state.height);
+            if (m_pRSQ == null)
+            {
+                return;
+            }
             m_pRSQ.Ray=mouseRay;
             //m_pRSQ.SortByDistance=true;
  
@@ -372,6 +411,13 @@ namespace AdvancedMogreFramework.States
 
         public override void update(double timeSinceLastFrame)
         {
+            if (physxScene != null && !paused)
+            {
+                physxScene.FlushStream();
+                physxScene.FetchResults(SimulationStatuses.AllFinished, false);
+                physxScene.Simulate(timeSinceLastFrame);
+            }
+
             m_FrameEvent.timeSinceLastFrame = (float)timeSinceLastFrame;
             if (AdvancedMogreFramework.Singleton.m_pTrayMgr != null)
             {
@@ -412,24 +458,5 @@ namespace AdvancedMogreFramework.States
             getInput();
             moveCamera();
         }
-        SceneNode m_pOgreHeadNode;
-        Entity m_pOgreHeadEntity;
-        MaterialPtr m_pOgreHeadMat;
-        MaterialPtr m_pOgreHeadMatHigh;
-
-        ParamsPanel m_pDetailsPanel;
-        bool m_bQuit;
-
-        Mogre.Vector3 m_TranslateVector;
-        float m_MoveSpeed;
-        Degree m_RotateSpeed;
-        float m_MoveScale;
-        Degree m_RotScale;
-
-        RaySceneQuery m_pRSQ;
-        SceneNode m_pCurrentObject;
-        Entity m_pCurrentEntity;
-        bool m_bRMouseDown,m_bLMouseDown;
-        bool m_bSettingsMode;
     }
 }

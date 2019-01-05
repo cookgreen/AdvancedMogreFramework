@@ -30,7 +30,6 @@ using System.Text;
 using Mogre;
 using Mogre.PhysX;
 using MOIS;
-using MMOC;
 using AdvancedMogreFramework.States;
 using AdvancedMogreFramework.Helper;
 using AdvancedMogreFramework.Physx;
@@ -81,7 +80,6 @@ namespace AdvancedMogreFramework
         private int Id;
         private Mogre.Vector3 mSpawnPos;
         private AppState mWorld;
-        private CollisionTools mCollision;
         private Physics mPhysics;
         private Scene mPhysicsScene;
         private Actor mActor;
@@ -118,7 +116,6 @@ namespace AdvancedMogreFramework
             Id = agentId;
             mSpawnPos = spawnPos;
             mCamera = cam;
-            mCollision = new CollisionTools(cam.SceneManager);
             mPhysicsScene = physicsScene;
             mPhysics = physicsScene.Physics;
             setupBody(cam.SceneManager);

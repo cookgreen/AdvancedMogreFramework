@@ -56,6 +56,10 @@ namespace AdvancedMogreFramework.Core
             AppState.create<SinbadState>(m_pAppStateManager, "SinbadState");
             AppState.create<PauseState>(m_pAppStateManager, "PauseState");
             AppState.create<CreditState>(m_pAppStateManager, "CreditState");
+            AppState.create<PhysxBasicCubeState>(m_pAppStateManager, "BasicCubeState");
+            AppState.create<PhysxCharacterControllerState>(m_pAppStateManager, "CharacterControllerState");
+            AppState.create<PhysxClothState>(m_pAppStateManager, "ClothState");
+            AppState.create<PhysxNewtonCradleState>(m_pAppStateManager, "NewtonCradleState");
 
             m_pAppStateManager.start(m_pAppStateManager.findByName("MenuState"));
         }
