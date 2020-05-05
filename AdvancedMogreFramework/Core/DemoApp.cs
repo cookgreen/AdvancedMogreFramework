@@ -60,6 +60,8 @@ namespace AdvancedMogreFramework.Core
             AppState.create<PhysxCharacterControllerState>(m_pAppStateManager, "CharacterControllerState");
             AppState.create<PhysxClothState>(m_pAppStateManager, "ClothState");
             AppState.create<PhysxNewtonCradleState>(m_pAppStateManager, "NewtonCradleState");
+            AppState.create<DrivingCarState>(m_pAppStateManager, "DrivingCarState");
+            AppState.create<InventoryDemoState>(m_pAppStateManager, "InventoryDemoState");
 
             m_pAppStateManager.start(m_pAppStateManager.findByName("MenuState"));
         }

@@ -125,6 +125,8 @@
     <Compile Include="States\AppState.cs" />
     <Compile Include="States\AppStateManager.cs" />
     <Compile Include="States\CreditState.cs" />
+    <Compile Include="States\DrivingCarState.cs" />
+    <Compile Include="States\InventoryDemoState.cs" />
     <Compile Include="States\NetworkState.cs" />
     <Compile Include="States\PhysxBasicCubeState.cs" />
     <Compile Include="States\PhysxCharacterControllerState.cs" />

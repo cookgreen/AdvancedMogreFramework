@@ -64,6 +64,10 @@ namespace AdvancedMogreFramework.States
         private Scene physxScene;
         private Physics physx;
         private bool paused;
+        private TerrainGlobalOptions mTerrainGlobals;
+        private TerrainGroup mTerrainGroup;
+        private bool mTerrainImported;
+
         public GameState()
         {
             m_MoveSpeed = 0.1f;
@@ -141,6 +145,152 @@ namespace AdvancedMogreFramework.States
             m_pOgreHeadMatHigh.GetTechnique(0).GetPass(0).Diffuse = cvDiffuse;
 
             physxScene.Simulate(0);
+
+            Mogre.Vector3 lightDir = new Mogre.Vector3(0.55f, -0.3f, 0.75f);
+            lightDir.Normalise();
+
+            Light light = m_pSceneMgr.CreateLight("tstLight");
+            light.Type = Light.LightTypes.LT_DIRECTIONAL;
+            light.Direction = lightDir;
+            light.DiffuseColour = ColourValue.White;
+            light.SpecularColour = new ColourValue(0.4f, 0.4f, 0.4f);
+
+            m_pSceneMgr.AmbientLight = new ColourValue(0.2f, 0.2f, 0.2f);
+
+            GenerateTerrain(light);
+        }
+
+        private void GenerateTerrain(Light light)
+        {
+            mTerrainGlobals = new TerrainGlobalOptions();
+            mTerrainGroup = new TerrainGroup(m_pSceneMgr, Terrain.Alignment.ALIGN_X_Z, 513, 12000.0f);
+            mTerrainGroup.SetFilenameConvention("BasicTutorialTerrain3", "dat");
+            mTerrainGroup.Origin = Mogre.Vector3.ZERO;
+
+            ConfigureTerrainDefaults(light);
+
+            for (int x = 0; x <= 0; ++x)
+            {
+                for (int y = 0; y <= 0; ++y)
+                {
+                    DefineTerrain(x, y);
+                }
+            }
+
+            mTerrainGroup.LoadAllTerrains(true);
+            if (mTerrainImported)
+            {
+                foreach (TerrainGroup.TerrainSlot t in mTerrainGroup.GetTerrainIterator())
+                {
+                    InitBlendMaps(t.instance);
+                }
+            }
+            mTerrainGroup.FreeTemporaryResources();
+            mTerrainGroup.SaveAllTerrains(true);
+        }
+
+        protected void ConfigureTerrainDefaults(Light light)
+        {
+            // Configure global
+            mTerrainGlobals.MaxPixelError = 8;
+            // testing composite map
+            mTerrainGlobals.CompositeMapDistance = 3000;
+
+            // Important to set these so that the terrain knows what to use for derived (non-realtime) data
+            mTerrainGlobals.LightMapDirection = light.Direction;
+            mTerrainGlobals.CompositeMapAmbient = m_pSceneMgr.AmbientLight;
+            mTerrainGlobals.CompositeMapDiffuse = light.DiffuseColour;
+
+            // Configure default import settings for if we use imported image
+            Terrain.ImportData defaultimp = mTerrainGroup.DefaultImportSettings;
+
+            defaultimp.terrainSize = 513;
+            defaultimp.worldSize = 12000.0f; // due terrain.png is 8 bpp
+            defaultimp.inputScale = 600;
+            defaultimp.minBatchSize = 33;
+            defaultimp.maxBatchSize = 65;
+
+            // textures
+            defaultimp.layerList.Add(new Terrain.LayerInstance());
+            defaultimp.layerList.Add(new Terrain.LayerInstance());
+            defaultimp.layerList.Add(new Terrain.LayerInstance());
+
+            defaultimp.layerList[0].worldSize = 100;
+            defaultimp.layerList[0].textureNames.Add("dirt_grayrocky_diffusespecular.dds");
+            defaultimp.layerList[0].textureNames.Add("dirt_grayrocky_normalheight.dds");
+
+            defaultimp.layerList[1].worldSize = 30;
+            defaultimp.layerList[1].textureNames.Add("grass_green-01_diffusespecular.dds");
+            defaultimp.layerList[1].textureNames.Add("grass_green-01_normalheight.dds");
+
+            defaultimp.layerList[2].worldSize = 200;
+            defaultimp.layerList[2].textureNames.Add("growth_weirdfungus-03_diffusespecular.dds");
+            defaultimp.layerList[2].textureNames.Add("growth_weirdfungus-03_normalheight.dds");
+        }
+
+        protected void DefineTerrain(int x, int y)
+        {
+            string filename = mTerrainGroup.GenerateFilename(x, y);
+
+            if (ResourceGroupManager.Singleton.ResourceExists(mTerrainGroup.ResourceGroup, filename))
+                mTerrainGroup.DefineTerrain(x, y);
+            else
+            {
+                Image img = new Image();
+                GetTerrainImage(x % 2 != 0, y % 2 != 0, img);
+                mTerrainGroup.DefineTerrain(x, y, img);
+                mTerrainImported = true;
+            }
+        }
+        protected void GetTerrainImage(bool flipX, bool flipY, Image img)
+        {
+            img.Load("terrain.png", ResourceGroupManager.DEFAULT_RESOURCE_GROUP_NAME);
+
+            if (flipX)
+                img.FlipAroundX();
+
+            if (flipY)
+                img.FlipAroundY();
+        }
+        protected unsafe void InitBlendMaps(Terrain terrain)
+        {
+            TerrainLayerBlendMap blendMap0 = terrain.GetLayerBlendMap(1);
+            TerrainLayerBlendMap blendMap1 = terrain.GetLayerBlendMap(2);
+
+            float minHeight0 = 70, minHeight1 = 70;
+            float fadeDist0 = 40, fadeDist1 = 15;
+
+            float* pBlend1 = blendMap1.BlendPointer;
+
+            for (int y = 0; y < terrain.LayerBlendMapSize; ++y)
+                for (int x = 0; x < terrain.LayerBlendMapSize; ++x)
+                {
+                    float tx, ty;
+
+                    blendMap0.ConvertImageToTerrainSpace((uint)x, (uint)y, out tx, out ty);
+
+                    float height = terrain.GetHeightAtTerrainPosition(tx, ty);
+                    float val = (height - minHeight0) / fadeDist0;
+                    val = Clamp(val, 0, 1);
+
+                    val = (height - minHeight1) / fadeDist1;
+                    val = Clamp(val, 0, 1);
+                    *pBlend1++ = val;
+                }
+
+            blendMap0.Dirty();
+            blendMap0.Update();
+            blendMap1.Dirty();
+            blendMap1.Update();
+        }
+        protected float Clamp(float value, float min, float max)
+        {
+            if (value <= min)
+                return min;
+            else if (value >= max)
+                return max;
+
+            return value;
         }
         public override void exit()
         {

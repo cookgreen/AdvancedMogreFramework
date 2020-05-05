@@ -87,8 +87,9 @@ namespace AdvancedMogreFramework.States
             AdvancedMogreFramework.Singleton.m_pTrayMgr.createButton(TrayLocation.TL_CENTER, "EnterBtn", "Enter GameState", 250);
             AdvancedMogreFramework.Singleton.m_pTrayMgr.createButton(TrayLocation.TL_CENTER, "EnterSinbadBtn", "Enter SinbadState", 250);
             AdvancedMogreFramework.Singleton.m_pTrayMgr.createButton(TrayLocation.TL_CENTER, "EnterPhysxBtn", "View Physx Demos", 250);
+            AdvancedMogreFramework.Singleton.m_pTrayMgr.createButton(TrayLocation.TL_CENTER, "EnterGameBtn", "View Game Demos", 250);
             AdvancedMogreFramework.Singleton.m_pTrayMgr.createButton(TrayLocation.TL_CENTER, "EnterCreditBtn", "Credit", 250);
-            AdvancedMogreFramework.Singleton.m_pTrayMgr.createButton(TrayLocation.TL_CENTER, "ExitBtn", "Exit AdvancedMogreFramework", 250);
+            AdvancedMogreFramework.Singleton.m_pTrayMgr.createButton(TrayLocation.TL_CENTER, "ExitBtn", "Exit", 250);
             AdvancedMogreFramework.Singleton.m_pTrayMgr.createLabel(TrayLocation.TL_TOP, "MenuLbl", "AdvancedMogreFramework", 250);
         }
 
@@ -101,6 +102,15 @@ namespace AdvancedMogreFramework.States
             AdvancedMogreFramework.Singleton.m_pTrayMgr.createButton(TrayLocation.TL_CENTER, "EnterCharacterControllerBtn", "Character Controller", 250);
             AdvancedMogreFramework.Singleton.m_pTrayMgr.createButton(TrayLocation.TL_CENTER, "BackBtn", "Back", 250);
             AdvancedMogreFramework.Singleton.m_pTrayMgr.createLabel(TrayLocation.TL_TOP, "PhysxLbl", "View Physx Demos", 250);
+        }
+
+        private void BuildGameGUI()
+        {
+            AdvancedMogreFramework.Singleton.m_pTrayMgr.destroyAllWidgets();
+            AdvancedMogreFramework.Singleton.m_pTrayMgr.createButton(TrayLocation.TL_CENTER, "EnterDrivingCarBtn", "Driving Car", 250);
+            AdvancedMogreFramework.Singleton.m_pTrayMgr.createButton(TrayLocation.TL_CENTER, "EnterInventoryBtn", "Inventory Demo", 250);
+            AdvancedMogreFramework.Singleton.m_pTrayMgr.createButton(TrayLocation.TL_CENTER, "BackBtn", "Back", 250);
+            AdvancedMogreFramework.Singleton.m_pTrayMgr.createLabel(TrayLocation.TL_TOP, "GameLbl", "View Game Demos", 250);
         }
 
         public void createScene()
@@ -169,6 +179,8 @@ namespace AdvancedMogreFramework.States
                 changeAppState(findByName("CreditState"));
             else if (button.getName() == "EnterPhysxBtn")
                 BuildPhysxGUI();
+            else if (button.getName() == "EnterGameBtn")
+                BuildGameGUI();
             else if (button.getName() == "EnterBasicCubeBtn")
                 changeAppState(findByName("BasicCubeState"));
             else if (button.getName() == "EnterNewtonCradleBtn")
@@ -177,6 +189,10 @@ namespace AdvancedMogreFramework.States
                 changeAppState(findByName("CreditState"));
             else if (button.getName() == "EnterCharacterControllerBtn")
                 changeAppState(findByName("CreditState"));
+            else if (button.getName() == "EnterDrivingCarBtn")
+                changeAppState(findByName("CreditState"));
+            else if (button.getName() == "EnterInventoryBtn")
+                changeAppState(findByName("InventoryDemoState"));
             else if (button.getName() == "BackBtn")
                 BuildMainMenu();
         }
