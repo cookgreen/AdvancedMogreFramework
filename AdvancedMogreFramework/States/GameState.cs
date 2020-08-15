@@ -120,7 +120,8 @@ namespace AdvancedMogreFramework.States
         public void createScene()
         {
             Mogre.Vector3 vectLightPos=new Mogre.Vector3(75,75,75);
-            m_pSceneMgr.CreateLight("Light").Position = vectLightPos;//(75, 75, 75);
+            var l = m_pSceneMgr.CreateLight("Light");//(75, 75, 75);
+            l.Position = vectLightPos;
 
             DotSceneLoader pDotSceneLoader = new DotSceneLoader();
             pDotSceneLoader.ParseDotScene("CubeScene.xml", "General", m_pSceneMgr, m_pSceneMgr.RootSceneNode);
@@ -149,15 +150,16 @@ namespace AdvancedMogreFramework.States
             Mogre.Vector3 lightDir = new Mogre.Vector3(0.55f, -0.3f, 0.75f);
             lightDir.Normalise();
 
-            Light light = m_pSceneMgr.CreateLight("tstLight");
-            light.Type = Light.LightTypes.LT_DIRECTIONAL;
-            light.Direction = lightDir;
-            light.DiffuseColour = ColourValue.White;
-            light.SpecularColour = new ColourValue(0.4f, 0.4f, 0.4f);
+            //Light light = m_pSceneMgr.CreateLight("tstLight");
+            //light.Type = Light.LightTypes.LT_SPOTLIGHT;
+            //light.Direction = lightDir;
+            //light.DiffuseColour = ColourValue.White;
+            //light.SpecularColour = new ColourValue(0.4f, 0.4f, 0.4f);
+            //light.Position = new Mogre.Vector3(0, 10, 10);
 
             m_pSceneMgr.AmbientLight = new ColourValue(0.2f, 0.2f, 0.2f);
 
-            GenerateTerrain(light);
+            GenerateTerrain(l);
         }
 
         private void GenerateTerrain(Light light)
@@ -168,6 +170,13 @@ namespace AdvancedMogreFramework.States
             mTerrainGroup.Origin = Mogre.Vector3.ZERO;
 
             ConfigureTerrainDefaults(light);
+
+            TerrainMaterialGeneratorA.SM2Profile profile = (TerrainMaterialGeneratorA.SM2Profile)mTerrainGlobals.GetDefaultMaterialGenerator().ActiveProfile;
+            profile.SetLayerParallaxMappingEnabled(true);
+            profile.SetLayerSpecularMappingEnabled(false);
+            profile.SetLightmapEnabled(true);
+            profile.SetLayerNormalMappingEnabled(true);
+            mTerrainGroup.FreeTemporaryResources();
 
             for (int x = 0; x <= 0; ++x)
             {
@@ -185,8 +194,7 @@ namespace AdvancedMogreFramework.States
                     InitBlendMaps(t.instance);
                 }
             }
-            mTerrainGroup.FreeTemporaryResources();
-            mTerrainGroup.SaveAllTerrains(true);
+            //mTerrainGroup.SaveAllTerrains(true);
         }
 
         protected void ConfigureTerrainDefaults(Light light)
@@ -201,6 +209,8 @@ namespace AdvancedMogreFramework.States
             mTerrainGlobals.CompositeMapAmbient = m_pSceneMgr.AmbientLight;
             mTerrainGlobals.CompositeMapDiffuse = light.DiffuseColour;
 
+            mTerrainGlobals.LightMapSize = 1024;
+
             // Configure default import settings for if we use imported image
             Terrain.ImportData defaultimp = mTerrainGroup.DefaultImportSettings;
 
@@ -214,15 +224,15 @@ namespace AdvancedMogreFramework.States
             defaultimp.layerList.Add(new Terrain.LayerInstance());
             defaultimp.layerList.Add(new Terrain.LayerInstance());
             defaultimp.layerList.Add(new Terrain.LayerInstance());
-
+            
             defaultimp.layerList[0].worldSize = 100;
             defaultimp.layerList[0].textureNames.Add("dirt_grayrocky_diffusespecular.dds");
             defaultimp.layerList[0].textureNames.Add("dirt_grayrocky_normalheight.dds");
-
+            
             defaultimp.layerList[1].worldSize = 30;
             defaultimp.layerList[1].textureNames.Add("grass_green-01_diffusespecular.dds");
             defaultimp.layerList[1].textureNames.Add("grass_green-01_normalheight.dds");
-
+            
             defaultimp.layerList[2].worldSize = 200;
             defaultimp.layerList[2].textureNames.Add("growth_weirdfungus-03_diffusespecular.dds");
             defaultimp.layerList[2].textureNames.Add("growth_weirdfungus-03_normalheight.dds");
@@ -536,8 +546,13 @@ namespace AdvancedMogreFramework.States
             {
                 if(itr.movable!=null)
                 {
+                    if (string.IsNullOrEmpty(itr.movable.Name))
+                    {
+                        continue;
+                    }
+                    var ent = m_pSceneMgr.GetEntity(itr.movable.Name);
                     AdvancedMogreFramework.Singleton.m_pLog.LogMessage("MovableName: " + itr.movable.Name);
-                    m_pCurrentObject = m_pSceneMgr.GetEntity(itr.movable.Name).ParentSceneNode;
+                    m_pCurrentObject = ent.ParentSceneNode;
                     AdvancedMogreFramework.Singleton.m_pLog.LogMessage("ObjName " + m_pCurrentObject.Name);
                     m_pCurrentObject.ShowBoundingBox=true;
                     m_pCurrentEntity = m_pSceneMgr.GetEntity(itr.movable.Name);
