@@ -1,6 +1,6 @@
  Advanced Mogre Framework
 =============
-![License](https://img.shields.io/badge/License-GPL-blue.svg)
+[![Build status](https://ci.appveyor.com/api/projects/status/4a2f8647qb9df4jn?svg=true)](https://ci.appveyor.com/project/cookgreen/advancedmogreframework)
 
 ## Introduction
 Advanced Mogre Framework is an advanced framework for mogre  
