@@ -6,8 +6,7 @@
 Advanced Mogre Framework is an advanced framework for mogre  
 
 ## Usage:
-load the solution file with your visual studio(2010 2012 or 2013) and compile it
-You can use this framework develop your own game.
+Use Visual Studio 2019 to load the sln file to build or use `build.bat`  
 
 ## Based on
 * Mogre

@@ -1,0 +1,1 @@
+msbuild AdvancedMogreFramework.sln /verbosity:minimal
