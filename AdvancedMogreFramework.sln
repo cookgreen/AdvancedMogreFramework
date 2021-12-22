@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31727.386
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedMogreFramework", "AdvancedMogreFramework\AdvancedMogreFramework.csproj", "{70878EFC-AF3F-4792-AB2F-CE47EBCA487D}"
 EndProject
@@ -16,6 +16,7 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{70878EFC-AF3F-4792-AB2F-CE47EBCA487D}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{70878EFC-AF3F-4792-AB2F-CE47EBCA487D}.Debug|Any CPU.Build.0 = Debug|x86
 		{70878EFC-AF3F-4792-AB2F-CE47EBCA487D}.Debug|x86.ActiveCfg = Debug|x86
 		{70878EFC-AF3F-4792-AB2F-CE47EBCA487D}.Debug|x86.Build.0 = Debug|x86
 		{70878EFC-AF3F-4792-AB2F-CE47EBCA487D}.Release|Any CPU.ActiveCfg = Release|x86
@@ -32,5 +33,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FD59A192-A811-4CBE-84A7-80B95178600D}
 	EndGlobalSection
 EndGlobal

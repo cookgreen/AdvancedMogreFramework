@@ -1,3 +1,9 @@
+.vs/*
+*/bin/*
+*/obj/*
+packages/*
+AdvancedMogreFramework/obj/*
+AdvancedMogreFramework.VC.db
 *.exe
 *.pdb
 *.log
@@ -7,8 +13,3 @@
 *.suo
 *.Resources
 *.config
-*/obj/*
-.vs/*
-packages/*
-AdvancedMogreFramework/obj/*
-AdvancedMogreFramework.VC.db
