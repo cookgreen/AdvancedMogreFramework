@@ -15,7 +15,7 @@ Use Visual Studio 2019 to load the sln file to build or use `build.bat`
 * SdkCameraMan
 * Critter AI navmesh pathfinder  
 * NVorbis and NAudio 
-* Physx Candy Wrapper(Be sure that you have Physx SDK installed in your computer)  
+* Physx Candy Wrapper  
 
 ## Credit  
 * Advanced Ogre Framework - andyhebear  
