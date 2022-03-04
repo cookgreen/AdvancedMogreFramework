@@ -52,19 +52,19 @@ namespace AdvancedMogreFramework.States
             //    AdvancedMogreFramework.Singleton.m_pWaveOut.Play();
             //}
  
-            m_pSceneMgr = AdvancedMogreFramework.Singleton.m_pRoot.CreateSceneManager(Mogre.SceneType.ST_GENERIC, "MenuSceneMgr");
+            mSceneMgr = AdvancedMogreFramework.Singleton.m_pRoot.CreateSceneManager(Mogre.SceneType.ST_GENERIC, "MenuSceneMgr");
             ColourValue cvAmbineLight=new ColourValue(0.7f,0.7f,0.7f);
-            m_pSceneMgr.AmbientLight=cvAmbineLight;
+            mSceneMgr.AmbientLight=cvAmbineLight;
  
-            m_pCamera = m_pSceneMgr.CreateCamera("MenuCam");
-            m_pCamera.SetPosition(0,25,-50);
+            mCamera = mSceneMgr.CreateCamera("MenuCam");
+            mCamera.SetPosition(0,25,-50);
             Mogre.Vector3 vectorCameraLookat=new Mogre.Vector3(0,0,0);
-            m_pCamera.LookAt(vectorCameraLookat);
-            m_pCamera.NearClipDistance=1;//setNearClipDistance(1);
+            mCamera.LookAt(vectorCameraLookat);
+            mCamera.NearClipDistance=1;//setNearClipDistance(1);
  
-            m_pCamera.AspectRatio=AdvancedMogreFramework.Singleton.m_pViewport.ActualWidth / AdvancedMogreFramework.Singleton.m_pViewport.ActualHeight;
+            mCamera.AspectRatio=AdvancedMogreFramework.Singleton.m_pViewport.ActualWidth / AdvancedMogreFramework.Singleton.m_pViewport.ActualHeight;
  
-            AdvancedMogreFramework.Singleton.m_pViewport.Camera=m_pCamera;
+            AdvancedMogreFramework.Singleton.m_pViewport.Camera=mCamera;
 
             AdvancedMogreFramework.Singleton.m_pTrayMgr.showFrameStats(TrayLocation.TL_BOTTOMLEFT);
             AdvancedMogreFramework.Singleton.m_pTrayMgr.showLogo(TrayLocation.TL_BOTTOMRIGHT);
@@ -125,9 +125,9 @@ namespace AdvancedMogreFramework.States
             AdvancedMogreFramework.Singleton.m_pKeyboard.KeyPressed -= keyPressed;
             AdvancedMogreFramework.Singleton.m_pKeyboard.KeyReleased -= keyReleased;
 
-            m_pSceneMgr.DestroyCamera(m_pCamera);
-            if(m_pSceneMgr!=null)
-                AdvancedMogreFramework.Singleton.m_pRoot.DestroySceneManager(m_pSceneMgr);
+            mSceneMgr.DestroyCamera(mCamera);
+            if(mSceneMgr!=null)
+                AdvancedMogreFramework.Singleton.m_pRoot.DestroySceneManager(mSceneMgr);
 
             AdvancedMogreFramework.Singleton.m_pTrayMgr.clearAllTrays();
             AdvancedMogreFramework.Singleton.m_pTrayMgr.destroyAllWidgets();

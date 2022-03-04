@@ -92,24 +92,24 @@ namespace AdvancedMogreFramework.States
         {
             AdvancedMogreFramework.Singleton.m_pLog.LogMessage("Entering GameState...");
             AdvancedMogreFramework.lastState = "GameState";
-            m_pSceneMgr=AdvancedMogreFramework.Singleton.m_pRoot.CreateSceneManager(SceneType.ST_GENERIC, "GameSceneMgr");
+            mSceneMgr=AdvancedMogreFramework.Singleton.m_pRoot.CreateSceneManager(SceneType.ST_GENERIC, "GameSceneMgr");
             ColourValue cvAmbineLight=new ColourValue(0.7f,0.7f,0.7f);
-            m_pSceneMgr.AmbientLight=cvAmbineLight;//(Ogre::ColourValue(0.7f, 0.7f, 0.7f));
+            mSceneMgr.AmbientLight=cvAmbineLight;//(Ogre::ColourValue(0.7f, 0.7f, 0.7f));
  
             Ray r=new Ray();
-            m_pRSQ = m_pSceneMgr.CreateRayQuery(r);
+            m_pRSQ = mSceneMgr.CreateRayQuery(r);
             m_pRSQ.QueryMask=1<<0;
  
-            m_pCamera = m_pSceneMgr.CreateCamera("GameCamera");
+            mCamera = mSceneMgr.CreateCamera("GameCamera");
             Mogre.Vector3 vectCameraPostion=new Mogre.Vector3(5,60,60);
-            m_pCamera.Position=vectCameraPostion;
+            mCamera.Position=vectCameraPostion;
             Mogre.Vector3 vectorCameraLookAt=new Mogre.Vector3(5,20,0);
-            m_pCamera.LookAt(vectorCameraLookAt);
-            m_pCamera.NearClipDistance=5;
+            mCamera.LookAt(vectorCameraLookAt);
+            mCamera.NearClipDistance=5;
  
-            m_pCamera.AspectRatio=AdvancedMogreFramework.Singleton.m_pViewport.ActualWidth / AdvancedMogreFramework.Singleton.m_pViewport.ActualHeight;
+            mCamera.AspectRatio=AdvancedMogreFramework.Singleton.m_pViewport.ActualWidth / AdvancedMogreFramework.Singleton.m_pViewport.ActualHeight;
 
-            AdvancedMogreFramework.Singleton.m_pViewport.Camera=m_pCamera;
+            AdvancedMogreFramework.Singleton.m_pViewport.Camera=mCamera;
             m_pCurrentObject = null;
 
  
@@ -120,20 +120,20 @@ namespace AdvancedMogreFramework.States
         public void createScene()
         {
             Mogre.Vector3 vectLightPos=new Mogre.Vector3(75,75,75);
-            var l = m_pSceneMgr.CreateLight("Light");//(75, 75, 75);
+            var l = mSceneMgr.CreateLight("Light");//(75, 75, 75);
             l.Position = vectLightPos;
 
             DotSceneLoader pDotSceneLoader = new DotSceneLoader();
-            pDotSceneLoader.ParseDotScene("CubeScene.xml", "General", m_pSceneMgr, m_pSceneMgr.RootSceneNode);
+            pDotSceneLoader.ParseDotScene("CubeScene.xml", "General", mSceneMgr, mSceneMgr.RootSceneNode);
             pDotSceneLoader=null;
 
-            m_pSceneMgr.GetEntity("Cube01").QueryFlags = 1 << 1;
-            m_pSceneMgr.GetEntity("Cube02").QueryFlags=1<<1;//(CUBE_MASK);
-            m_pSceneMgr.GetEntity("Cube03").QueryFlags=1<<1;//(CUBE_MASK);
+            mSceneMgr.GetEntity("Cube01").QueryFlags = 1 << 1;
+            mSceneMgr.GetEntity("Cube02").QueryFlags=1<<1;//(CUBE_MASK);
+            mSceneMgr.GetEntity("Cube03").QueryFlags=1<<1;//(CUBE_MASK);
 
-            m_pOgreHeadEntity = m_pSceneMgr.CreateEntity("Cube", "ogrehead.mesh");
+            m_pOgreHeadEntity = mSceneMgr.CreateEntity("Cube", "ogrehead.mesh");
             m_pOgreHeadEntity.QueryFlags=1<<0;
-            m_pOgreHeadNode = m_pSceneMgr.RootSceneNode.CreateChildSceneNode("CubeNode");
+            m_pOgreHeadNode = mSceneMgr.RootSceneNode.CreateChildSceneNode("CubeNode");
             m_pOgreHeadNode.AttachObject(m_pOgreHeadEntity);
             Mogre.Vector3 vectOgreHeadNodePos = new Mogre.Vector3(0,0,-25);
             m_pOgreHeadNode.Position = vectOgreHeadNodePos;// (Vector3(0, 0, -25));
@@ -157,7 +157,7 @@ namespace AdvancedMogreFramework.States
             //light.SpecularColour = new ColourValue(0.4f, 0.4f, 0.4f);
             //light.Position = new Mogre.Vector3(0, 10, 10);
 
-            m_pSceneMgr.AmbientLight = new ColourValue(0.2f, 0.2f, 0.2f);
+            mSceneMgr.AmbientLight = new ColourValue(0.2f, 0.2f, 0.2f);
 
             GenerateTerrain(l);
         }
@@ -165,7 +165,7 @@ namespace AdvancedMogreFramework.States
         private void GenerateTerrain(Light light)
         {
             mTerrainGlobals = new TerrainGlobalOptions();
-            mTerrainGroup = new TerrainGroup(m_pSceneMgr, Terrain.Alignment.ALIGN_X_Z, 513, 12000.0f);
+            mTerrainGroup = new TerrainGroup(mSceneMgr, Terrain.Alignment.ALIGN_X_Z, 513, 12000.0f);
             mTerrainGroup.SetFilenameConvention("BasicTutorialTerrain3", "dat");
             mTerrainGroup.Origin = Mogre.Vector3.ZERO;
 
@@ -206,7 +206,7 @@ namespace AdvancedMogreFramework.States
 
             // Important to set these so that the terrain knows what to use for derived (non-realtime) data
             mTerrainGlobals.LightMapDirection = light.Direction;
-            mTerrainGlobals.CompositeMapAmbient = m_pSceneMgr.AmbientLight;
+            mTerrainGlobals.CompositeMapAmbient = mSceneMgr.AmbientLight;
             mTerrainGlobals.CompositeMapDiffuse = light.DiffuseColour;
 
             mTerrainGlobals.LightMapSize = 1024;
@@ -312,10 +312,10 @@ namespace AdvancedMogreFramework.States
             AdvancedMogreFramework.Singleton.m_pKeyboard.KeyPressed -= keyPressed;
             AdvancedMogreFramework.Singleton.m_pKeyboard.KeyReleased -= keyReleased;
 
-            if (m_pSceneMgr!=null)
-                m_pSceneMgr.DestroyCamera(m_pCamera);
-                m_pSceneMgr.DestroyQuery(m_pRSQ);
-                AdvancedMogreFramework.Singleton.m_pRoot.DestroySceneManager(m_pSceneMgr);
+            if (mSceneMgr!=null)
+                mSceneMgr.DestroyCamera(mCamera);
+                mSceneMgr.DestroyQuery(m_pRSQ);
+                AdvancedMogreFramework.Singleton.m_pRoot.DestroySceneManager(mSceneMgr);
         }
         public override bool pause()
         {
@@ -329,17 +329,17 @@ namespace AdvancedMogreFramework.States
             paused = false;
             buildGUI();
 
-            AdvancedMogreFramework.Singleton.m_pViewport.Camera=m_pCamera;
+            AdvancedMogreFramework.Singleton.m_pViewport.Camera=mCamera;
             m_bQuit = false;
         }
  
 	    public void moveCamera()
         {
-            if (m_pCamera != null)
+            if (mCamera != null)
             {
                 if (AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_LSHIFT))
-                    m_pCamera.MoveRelative(m_TranslateVector);
-                m_pCamera.MoveRelative(m_TranslateVector / 10);
+                    mCamera.MoveRelative(m_TranslateVector);
+                mCamera.MoveRelative(m_TranslateVector / 10);
             }
         }
         public void getInput()
@@ -349,33 +349,33 @@ namespace AdvancedMogreFramework.States
             if(m_bSettingsMode == false)
             {
                 if(AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_A))
-                    m_TranslateVector.x = -10;
+                    m_TranslateVector.x = -2;
  
                 if(AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_D))
-                    m_TranslateVector.x = 10;
+                    m_TranslateVector.x = 2;
  
                 if(AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_W))
-                    m_TranslateVector.z = -10;
+                    m_TranslateVector.z = -2;
  
                 if(AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_S))
-                    m_TranslateVector.z = 10;
+                    m_TranslateVector.z = 2;
  
                 if(AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_Q))
-                    m_TranslateVector.y = -10;
+                    m_TranslateVector.y = -2;
  
                 if(AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_E))
-                    m_TranslateVector.y = 10;
+                    m_TranslateVector.y = 2;
  
         //camera roll
                 if(AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_Z))
-                    m_pCamera.Roll(new Angle(-10));
+                    mCamera.Roll(new Angle(-10));
  
                 if(AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_X))
-                    m_pCamera.Roll(new Angle(10));
+                    mCamera.Roll(new Angle(10));
  
         //reset roll
                 if (AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_C))
-                    m_pCamera.Roll(-(m_pCamera.RealOrientation.Roll));
+                    mCamera.Roll(-(mCamera.RealOrientation.Roll));
             }
         }
         public void buildGUI()
@@ -484,9 +484,9 @@ namespace AdvancedMogreFramework.States
             if(m_bRMouseDown)
             {
                 Degree deCameraYaw = new Degree(evt.state.X.rel * -0.1f);
-                m_pCamera.Yaw(deCameraYaw);
+                mCamera.Yaw(deCameraYaw);
                 Degree deCameraPitch = new Degree(evt.state.Y.rel * -0.1f);
-                m_pCamera.Pitch(deCameraPitch);
+                mCamera.Pitch(deCameraPitch);
             }
  
             return true;
@@ -531,7 +531,7 @@ namespace AdvancedMogreFramework.States
                 m_pCurrentEntity.GetSubEntity(1).SetMaterial(m_pOgreHeadMat);
             }
  
-            Ray mouseRay = m_pCamera.GetCameraToViewportRay(AdvancedMogreFramework.Singleton.m_pMouse.MouseState.X.abs / (float)evt.state.width,
+            Ray mouseRay = mCamera.GetCameraToViewportRay(AdvancedMogreFramework.Singleton.m_pMouse.MouseState.X.abs / (float)evt.state.width,
             AdvancedMogreFramework.Singleton.m_pMouse.MouseState.Y.abs / (float)evt.state.height);
             if (m_pRSQ == null)
             {
@@ -550,12 +550,12 @@ namespace AdvancedMogreFramework.States
                     {
                         continue;
                     }
-                    var ent = m_pSceneMgr.GetEntity(itr.movable.Name);
+                    var ent = mSceneMgr.GetEntity(itr.movable.Name);
                     AdvancedMogreFramework.Singleton.m_pLog.LogMessage("MovableName: " + itr.movable.Name);
                     m_pCurrentObject = ent.ParentSceneNode;
                     AdvancedMogreFramework.Singleton.m_pLog.LogMessage("ObjName " + m_pCurrentObject.Name);
                     m_pCurrentObject.ShowBoundingBox=true;
-                    m_pCurrentEntity = m_pSceneMgr.GetEntity(itr.movable.Name);
+                    m_pCurrentEntity = mSceneMgr.GetEntity(itr.movable.Name);
                     m_pCurrentEntity.GetSubEntity(1).SetMaterial(m_pOgreHeadMatHigh);
                     break;
                 }
@@ -566,11 +566,11 @@ namespace AdvancedMogreFramework.States
             switch(menu.getSelectionIndex())
             {
             case 0:
-                m_pCamera.PolygonMode=(PolygonMode.PM_SOLID);break;
+                mCamera.PolygonMode=(PolygonMode.PM_SOLID);break;
             case 1:
-                m_pCamera.PolygonMode=(PolygonMode.PM_WIREFRAME);break;
+                mCamera.PolygonMode=(PolygonMode.PM_WIREFRAME);break;
             case 2:
-                m_pCamera.PolygonMode=(PolygonMode.PM_POINTS);break;
+                mCamera.PolygonMode=(PolygonMode.PM_POINTS);break;
     }
         }
 
@@ -600,13 +600,13 @@ namespace AdvancedMogreFramework.States
                 {
                     if (m_pDetailsPanel!=null && m_pDetailsPanel.isVisible())
                     {
-                        m_pDetailsPanel.setParamValue(0, m_pCamera.DerivedPosition.x.ToString());
-                        m_pDetailsPanel.setParamValue(1, m_pCamera.DerivedPosition.y.ToString());
-                        m_pDetailsPanel.setParamValue(2, m_pCamera.DerivedPosition.z.ToString());
-                        m_pDetailsPanel.setParamValue(3, m_pCamera.DerivedOrientation.w.ToString());
-                        m_pDetailsPanel.setParamValue(4, m_pCamera.DerivedOrientation.x.ToString());
-                        m_pDetailsPanel.setParamValue(5, m_pCamera.DerivedOrientation.y.ToString());
-                        m_pDetailsPanel.setParamValue(6, m_pCamera.DerivedOrientation.z.ToString());
+                        m_pDetailsPanel.setParamValue(0, mCamera.DerivedPosition.x.ToString());
+                        m_pDetailsPanel.setParamValue(1, mCamera.DerivedPosition.y.ToString());
+                        m_pDetailsPanel.setParamValue(2, mCamera.DerivedPosition.z.ToString());
+                        m_pDetailsPanel.setParamValue(3, mCamera.DerivedOrientation.w.ToString());
+                        m_pDetailsPanel.setParamValue(4, mCamera.DerivedOrientation.x.ToString());
+                        m_pDetailsPanel.setParamValue(5, mCamera.DerivedOrientation.y.ToString());
+                        m_pDetailsPanel.setParamValue(6, mCamera.DerivedOrientation.z.ToString());
                         if (m_bSettingsMode)
                             m_pDetailsPanel.setParamValue(7, "Buffered Input");
                         else

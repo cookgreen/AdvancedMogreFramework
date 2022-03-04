@@ -33,20 +33,20 @@ namespace AdvancedMogreFramework.States
         {
             AdvancedMogreFramework.Singleton.m_pLog.LogMessage("Entering GameState...");
             AdvancedMogreFramework.lastState = "GameState";
-            m_pSceneMgr = AdvancedMogreFramework.Singleton.m_pRoot.CreateSceneManager(SceneType.ST_GENERIC, "GameSceneMgr");
+            mSceneMgr = AdvancedMogreFramework.Singleton.m_pRoot.CreateSceneManager(SceneType.ST_GENERIC, "GameSceneMgr");
             ColourValue cvAmbineLight = new ColourValue(0.7f, 0.7f, 0.7f);
-            m_pSceneMgr.AmbientLight = cvAmbineLight;//(Ogre::ColourValue(0.7f, 0.7f, 0.7f));
+            mSceneMgr.AmbientLight = cvAmbineLight;//(Ogre::ColourValue(0.7f, 0.7f, 0.7f));
 
-            m_pCamera = m_pSceneMgr.CreateCamera("GameCamera");
+            mCamera = mSceneMgr.CreateCamera("GameCamera");
             Mogre.Vector3 vectCameraPostion = new Mogre.Vector3(5, 60, 60);
-            m_pCamera.Position = vectCameraPostion;
+            mCamera.Position = vectCameraPostion;
             Mogre.Vector3 vectorCameraLookAt = new Mogre.Vector3(5, 20, 0);
-            m_pCamera.LookAt(vectorCameraLookAt);
-            m_pCamera.NearClipDistance = 5;
+            mCamera.LookAt(vectorCameraLookAt);
+            mCamera.NearClipDistance = 5;
 
-            m_pCamera.AspectRatio = AdvancedMogreFramework.Singleton.m_pViewport.ActualWidth / AdvancedMogreFramework.Singleton.m_pViewport.ActualHeight;
+            mCamera.AspectRatio = AdvancedMogreFramework.Singleton.m_pViewport.ActualWidth / AdvancedMogreFramework.Singleton.m_pViewport.ActualHeight;
 
-            AdvancedMogreFramework.Singleton.m_pViewport.Camera = m_pCamera;
+            AdvancedMogreFramework.Singleton.m_pViewport.Camera = mCamera;
 
             AdvancedMogreFramework.Singleton.m_pTrayMgr.showFrameStats(TrayLocation.TL_BOTTOMLEFT);
             AdvancedMogreFramework.Singleton.m_pTrayMgr.showLogo(TrayLocation.TL_BOTTOMRIGHT);
@@ -71,14 +71,14 @@ namespace AdvancedMogreFramework.States
             AdvancedMogreFramework.Singleton.m_pKeyboard.KeyPressed -= keyPressed;
             AdvancedMogreFramework.Singleton.m_pKeyboard.KeyReleased -= keyReleased;
 
-            if (m_pSceneMgr != null)
-                m_pSceneMgr.DestroyCamera(m_pCamera);
-            AdvancedMogreFramework.Singleton.m_pRoot.DestroySceneManager(m_pSceneMgr);
+            if (mSceneMgr != null)
+                mSceneMgr.DestroyCamera(mCamera);
+            AdvancedMogreFramework.Singleton.m_pRoot.DestroySceneManager(mSceneMgr);
         }
         public void createScene()
         {
             Mogre.Vector3 vectLightPos = new Mogre.Vector3(75, 75, 75);
-            m_pSceneMgr.CreateLight("Light").Position = vectLightPos;//(75, 75, 75);
+            mSceneMgr.CreateLight("Light").Position = vectLightPos;//(75, 75, 75);
             
             //DotSceneLoader pDotSceneLoader = new DotSceneLoader();
             //pDotSceneLoader.ParseDotScene("CubeScene.xml", "General", m_pSceneMgr, m_pSceneMgr.RootSceneNode);
@@ -88,9 +88,9 @@ namespace AdvancedMogreFramework.States
             //m_pSceneMgr.GetEntity("Cube02").QueryFlags = 1 << 1;//(CUBE_MASK);
             //m_pSceneMgr.GetEntity("Cube03").QueryFlags = 1 << 1;//(CUBE_MASK);
             
-            m_pOgreHeadEntity = m_pSceneMgr.CreateEntity("Cube", "ogrehead.mesh");
+            m_pOgreHeadEntity = mSceneMgr.CreateEntity("Cube", "ogrehead.mesh");
             m_pOgreHeadEntity.QueryFlags = 1 << 0;
-            m_pOgreHeadNode = m_pSceneMgr.RootSceneNode.CreateChildSceneNode("CubeNode");
+            m_pOgreHeadNode = mSceneMgr.RootSceneNode.CreateChildSceneNode("CubeNode");
             m_pOgreHeadNode.AttachObject(m_pOgreHeadEntity);
             Mogre.Vector3 vectOgreHeadNodePos = new Mogre.Vector3(0, 0, -25);
             m_pOgreHeadNode.Position = vectOgreHeadNodePos;// (Vector3(0, 0, -25));
@@ -105,13 +105,13 @@ namespace AdvancedMogreFramework.States
             Vector3 lightDir = new Vector3(0.55f, -0.3f, 0.75f);
             lightDir.Normalise();
 
-            Light light = m_pSceneMgr.CreateLight("tstLight");
+            Light light = mSceneMgr.CreateLight("tstLight");
             light.Type = Light.LightTypes.LT_DIRECTIONAL;
             light.Direction = lightDir;
             light.DiffuseColour = ColourValue.White;
             light.SpecularColour = new ColourValue(0.4f, 0.4f, 0.4f);
 
-            m_pSceneMgr.AmbientLight = new ColourValue(0.2f, 0.2f, 0.2f);
+            mSceneMgr.AmbientLight = new ColourValue(0.2f, 0.2f, 0.2f);
 
             GenerateTerrain(light);
         }
@@ -119,7 +119,7 @@ namespace AdvancedMogreFramework.States
         private void GenerateTerrain(Light light)
         {
             mTerrainGlobals = new TerrainGlobalOptions();
-            mTerrainGroup = new TerrainGroup(m_pSceneMgr, Terrain.Alignment.ALIGN_X_Z, 513, 12000.0f);
+            mTerrainGroup = new TerrainGroup(mSceneMgr, Terrain.Alignment.ALIGN_X_Z, 513, 12000.0f);
             mTerrainGroup.SetFilenameConvention("BasicTutorialTerrain3", "dat");
             mTerrainGroup.Origin = Vector3.ZERO;
 
@@ -154,7 +154,7 @@ namespace AdvancedMogreFramework.States
 
             // Important to set these so that the terrain knows what to use for derived (non-realtime) data
             mTerrainGlobals.LightMapDirection = light.Direction;
-            mTerrainGlobals.CompositeMapAmbient = m_pSceneMgr.AmbientLight;
+            mTerrainGlobals.CompositeMapAmbient = mSceneMgr.AmbientLight;
             mTerrainGlobals.CompositeMapDiffuse = light.DiffuseColour;
 
             // Configure default import settings for if we use imported image
@@ -274,7 +274,7 @@ namespace AdvancedMogreFramework.States
         void createCameraLook(string CameraName, string TextureName, string materialName, SceneNode m_pSceneNode)           
         {
             //create a camera look this scenenode(attached entitys)
-            Camera pCameraLookMe = m_pSceneMgr.CreateCamera(CameraName);
+            Camera pCameraLookMe = mSceneMgr.CreateCamera(CameraName);
             pCameraLookMe.Position = (CameraPos);
             pCameraLookMe.LookAt(lookPos);
             pCameraLookMe.SetAutoTracking(true, m_pSceneNode, lookPos);

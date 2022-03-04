@@ -36,19 +36,19 @@ namespace AdvancedMogreFramework.States
     {
         public override void enter()
         {
-            m_pSceneMgr = AdvancedMogreFramework.Singleton.m_pRoot.CreateSceneManager(Mogre.SceneType.ST_GENERIC, "CreditSceneMgr");
+            mSceneMgr = AdvancedMogreFramework.Singleton.m_pRoot.CreateSceneManager(Mogre.SceneType.ST_GENERIC, "CreditSceneMgr");
             ColourValue cvAmbineLight = new ColourValue(0.7f, 0.7f, 0.7f);
-            m_pSceneMgr.AmbientLight = cvAmbineLight;
+            mSceneMgr.AmbientLight = cvAmbineLight;
 
-            m_pCamera = m_pSceneMgr.CreateCamera("GameCamera");
+            mCamera = mSceneMgr.CreateCamera("GameCamera");
             Mogre.Vector3 vectCameraPostion = new Mogre.Vector3(5, 60, 60);
-            m_pCamera.Position = vectCameraPostion;
+            mCamera.Position = vectCameraPostion;
             Mogre.Vector3 vectorCameraLookAt = new Mogre.Vector3(5, 20, 0);
-            m_pCamera.LookAt(vectorCameraLookAt);
-            m_pCamera.NearClipDistance = 5;
-            m_pCamera.AspectRatio = AdvancedMogreFramework.Singleton.m_pViewport.ActualWidth / AdvancedMogreFramework.Singleton.m_pViewport.ActualHeight;
+            mCamera.LookAt(vectorCameraLookAt);
+            mCamera.NearClipDistance = 5;
+            mCamera.AspectRatio = AdvancedMogreFramework.Singleton.m_pViewport.ActualWidth / AdvancedMogreFramework.Singleton.m_pViewport.ActualHeight;
 
-            AdvancedMogreFramework.Singleton.m_pViewport.Camera = m_pCamera;
+            AdvancedMogreFramework.Singleton.m_pViewport.Camera = mCamera;
 
             ScreenManager.Instance.ChangeScreen("Credit");
             ScreenManager.Instance.OnCurrentScreenExit += OnCurrentScreenExit;
@@ -87,8 +87,8 @@ namespace AdvancedMogreFramework.States
 
         public override void exit()
         {
-            m_pSceneMgr.DestroyCamera(m_pCamera);
-            AdvancedMogreFramework.Singleton.m_pRoot.DestroySceneManager(m_pSceneMgr);
+            mSceneMgr.DestroyCamera(mCamera);
+            AdvancedMogreFramework.Singleton.m_pRoot.DestroySceneManager(mSceneMgr);
             ScreenManager.Instance.Dispose();
             AdvancedMogreFramework.Singleton.m_pMouse.MousePressed -= MousePressed;
         }

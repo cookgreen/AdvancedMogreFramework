@@ -17,8 +17,7 @@ namespace AdvancedMogreFramework.States
         private Physics physx;
         private SdkTrayManager trayMgr;
         private Random rnd;
-        private List<Entity> cubes;
-        private List<Actor> cubeActors;
+        private List<ActorNode> cubeActorNodes;
 
         public PhysxBasicCubeState()
         {
@@ -34,51 +33,40 @@ namespace AdvancedMogreFramework.States
             defm.DynamicFriction = defm.StaticFriction = 0.6f;
 
             trayMgr = AdvancedMogreFramework.instance.m_pTrayMgr;
-            cubes = new List<Entity>();
-            cubeActors = new List<Actor>();
+            cubeActorNodes = new List<ActorNode>();
         }
 
         public override void enter()
         {
-            m_pSceneMgr = AdvancedMogreFramework.Singleton.m_pRoot.CreateSceneManager(SceneType.ST_GENERIC, "PhysxBasicCubeMgr");
-            ColourValue cvAmbineLight = new ColourValue(0.7f, 0.7f, 0.7f);
-            m_pSceneMgr.AmbientLight = cvAmbineLight;//(Ogre::ColourValue(0.7f, 0.7f, 0.7f));
-
-            m_pCamera = m_pSceneMgr.CreateCamera("PhysxBasicCubeCamera");
-            Mogre.Vector3 vectCameraPostion = new Mogre.Vector3(-10, 40,10);
-            m_pCamera.Position = vectCameraPostion;
-            Mogre.Vector3 vectorCameraLookAt = new Mogre.Vector3(5, 20, 0);
-            m_pCamera.LookAt(vectorCameraLookAt);
-            m_pCamera.NearClipDistance = 5;
-
-            m_pCamera.AspectRatio = AdvancedMogreFramework.Singleton.m_pViewport.ActualWidth / AdvancedMogreFramework.Singleton.m_pViewport.ActualHeight;
-
-            AdvancedMogreFramework.Singleton.m_pViewport.Camera = m_pCamera;
-
-            createPanel(m_pSceneMgr);
-
             trayMgr.destroyAllWidgets();
 
-            for (int i = 0; i < 10; i++)
-            {
-                double d = 0.1 + 0.2 * rnd.NextDouble() * 10;
-                var ad = new ActorDesc(new BodyDesc(), 10, new BoxShapeDesc(new Mogre.Vector3((float)d, (float)d, (float)d)));
-                Mogre.Vector3 gpose = new Mogre.Vector3((float)(10 * (rnd.NextDouble() - rnd.NextDouble())), (float)(10 * rnd.NextDouble()), (float)(5 * rnd.NextDouble()));
-                ad.GlobalPosition = gpose;
+            mSceneMgr = AdvancedMogreFramework.Singleton.m_pRoot.CreateSceneManager(SceneType.ST_GENERIC, "PhysxBasicCubeMgr");
+            ColourValue cvAmbineLight = new ColourValue(0.7f, 0.7f, 0.7f);
+            mSceneMgr.AmbientLight = cvAmbineLight;//(Ogre::ColourValue(0.7f, 0.7f, 0.7f));
 
-                var a = scene.CreateActor(ad);
-                cubeActors.Add(a);
-                a.AddTorque(new Mogre.Vector3(0, 0, (float)(15 * d * (rnd.NextDouble() - rnd.NextDouble()))), ForceModes.Impulse);
+            mCamera = mSceneMgr.CreateCamera("PhysxBasicCubeCamera");
+            mCamera.NearClipDistance = 5;
+            mCamera.FarClipDistance = 999;
+            mCamera.AspectRatio = AdvancedMogreFramework.Singleton.m_pViewport.ActualWidth / AdvancedMogreFramework.Singleton.m_pViewport.ActualHeight;
 
-                string id = "MaunalObject_" + Guid.NewGuid().ToString();
-                string cubeName = "CUSTOME_CUBE_" + Guid.NewGuid().ToString();
-                createCube(cubeName, gpose, d);
-                Entity mo = m_pSceneMgr.CreateEntity(id, cubeName);
-                SceneNode moSceneNode = m_pSceneMgr.RootSceneNode.CreateChildSceneNode();
-                moSceneNode.AttachObject(mo);
+            AdvancedMogreFramework.Singleton.m_pViewport.Camera = mCamera;
 
-                cubes.Add(mo);
-            }
+            Entity tableEnt = mSceneMgr.CreateEntity("PhysxBasicCube_Table_" + Guid.NewGuid(), "PhysxBasicCube_Table.mesh");
+            tableEnt.CastShadows = false;
+            mSceneMgr.RootSceneNode.AttachObject(tableEnt);
+            ActorDesc actorDesc = new ActorDesc();
+            actorDesc.Density = 4;
+            actorDesc.Body = null;
+            actorDesc.Shapes.Add(physx.CreateConvexHull(new StaticMeshData(tableEnt.GetMesh())));
+            scene.CreateActor(actorDesc);
+
+            //Look At the table
+            mCamera.Position = new Mogre.Vector3(
+                mSceneMgr.RootSceneNode.Position.x,
+                mSceneMgr.RootSceneNode.Position.y + 5,
+                mSceneMgr.RootSceneNode.Position.z + 5
+                );
+            mCamera.Pitch(new Radian(new Degree(-40)));
 
             scene.Simulate(0);
 
@@ -92,50 +80,30 @@ namespace AdvancedMogreFramework.States
         private void AddCube()
         {
             double d = 0.1 + 0.2 * rnd.NextDouble();
-            Mogre.Vector3 pos = new Mogre.Vector3((float)(-10 * d), (float)d, 0); ;
+            Mogre.Vector3 pos = new Mogre.Vector3((float)(-1 * d), (float)20, 0);
 
-            for (int j = 0; j < 10; j++)
-            {
+            string cubeName = "CUSTOME_CUBE_" + Guid.NewGuid().ToString();
+            Entity cubeEnt = mSceneMgr.CreateEntity(cubeName, "Cube.mesh");
+            cubeEnt.SetMaterialName("Examples/10PointBlock");
+            SceneNode cubeSceneNode = mSceneMgr.RootSceneNode.CreateChildSceneNode();
+            cubeSceneNode.AttachObject(cubeEnt);
 
-                float tempy = pos.y;
+            var staticMeshData = new StaticMeshData(cubeEnt.GetMesh());
+            ActorDesc actorDesc = new ActorDesc();
+            actorDesc.Density = 4;
+            actorDesc.Body = new BodyDesc();
+            actorDesc.Shapes.Add(physx.CreateConvexHull(staticMeshData));
+            actorDesc.GlobalPosition = pos;
+            var cubeActor = scene.CreateActor(actorDesc);
 
-                pos.x += 2 * (float)(d - physx.Parameters.SkinWidth);
-                pos.z += 1f * (float)(d + physx.Parameters.SkinWidth);
-
-                for (int i = 0; i < 1 + j; i++)
-                {
-                    var ad = new ActorDesc(new BodyDesc(), 10, new BoxShapeDesc(new Mogre.Vector3((float)d, (float)d, (float)d)));
-                    ad.GlobalPosition = new Mogre.Vector3(pos.x, pos.y, pos.z);
-                    pos.y += 2 * (float)(d - physx.Parameters.SkinWidth);
-                    var a = scene.CreateActor(ad);
-                    cubeActors.Add(a);
-
-                    string id = "MaunalObject_" + Guid.NewGuid().ToString();
-                    string cubeName = "CUSTOME_CUBE_" + Guid.NewGuid().ToString();
-                    createCube(cubeName, ad.GlobalPosition, d);
-                    Entity mo = m_pSceneMgr.CreateEntity(id, cubeName);
-                    SceneNode moSceneNode = m_pSceneMgr.RootSceneNode.CreateChildSceneNode();
-                    moSceneNode.AttachObject(mo);
-
-                    cubes.Add(mo);
-                }
-                pos.y = tempy;
-            }
-            return;
+            cubeActorNodes.Add(new ActorNode(cubeSceneNode, cubeActor));
         }
 
-        private void UpdateCubes()
+        private void UpdateCubes(float deltaTime)
         {
-            int index = 0;
-            foreach (var actor in cubeActors)
+            foreach (var actorNode in cubeActorNodes)
             {
-                if (actor == null)
-                {
-                    continue;
-                }
-                Mogre.Vector3 gpose = actor.GlobalPosition;
-                cubes[index].ParentSceneNode.SetPosition(gpose.x, gpose.y, gpose.z);
-                index++;
+                actorNode.Update(deltaTime);
             }
         }
 
@@ -149,22 +117,6 @@ namespace AdvancedMogreFramework.States
             }
 
             return true;
-        }
-
-        private void createPanel(SceneManager scm)
-        {
-            MeshManager.Singleton.CreatePlane("floor", ResourceGroupManager.DEFAULT_RESOURCE_GROUP_NAME,
-                new Plane(Mogre.Vector3.UNIT_Y, 0), 100, 100, 10, 10, true, 1, 10, 10, Mogre.Vector3.UNIT_Z);
-            Entity floor = scm.CreateEntity("Floor", "floor");
-            floor.SetMaterialName("Examples/Rockwall");
-            floor.CastShadows = (false);
-            scm.RootSceneNode.AttachObject(floor);
-            ActorDesc actorDesc = new ActorDesc();
-            actorDesc.Density = 4;
-            actorDesc.Body = null;
-            actorDesc.Shapes.Add(physx.CreateTriangleMesh(new
-                StaticMeshData(floor.GetMesh())));
-            Actor floorActor = scene.CreateActor(actorDesc);
         }
 
         private void createSphere(string strName, float r, SceneManager sceneMgr, int nRings = 16, int nSegments = 16)
@@ -317,10 +269,11 @@ namespace AdvancedMogreFramework.States
             getInput();
             moveCamera();
 
+            UpdateCubes((float)timeSinceLastFrame);
+
             scene.FlushStream();
-            scene.FetchResults(SimulationStatuses.AllFinished, false);
+            scene.FetchResults(SimulationStatuses.AllFinished, true);
             scene.Simulate(timeSinceLastFrame);
-            UpdateCubes();
         }
     }
 }

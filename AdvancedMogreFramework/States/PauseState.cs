@@ -46,21 +46,21 @@ namespace AdvancedMogreFramework.States
             AdvancedMogreFramework.Singleton.m_pLog.LogMessage("Entering PauseState...");
             m_bQuit = false;
  
-            m_pSceneMgr = AdvancedMogreFramework.Singleton.m_pRoot.CreateSceneManager(SceneType.ST_GENERIC, "PauseSceneMgr");
+            mSceneMgr = AdvancedMogreFramework.Singleton.m_pRoot.CreateSceneManager(SceneType.ST_GENERIC, "PauseSceneMgr");
             ColourValue cvAmbineLight=new ColourValue(0.7f,0.7f,0.7f);
-            m_pSceneMgr.AmbientLight=cvAmbineLight;
+            mSceneMgr.AmbientLight=cvAmbineLight;
  
-            m_pCamera = m_pSceneMgr.CreateCamera("PauseCam");
+            mCamera = mSceneMgr.CreateCamera("PauseCam");
             Mogre.Vector3 vectCamPos=new Mogre.Vector3(0,25,-50);
-            m_pCamera.Position=vectCamPos;
+            mCamera.Position=vectCamPos;
             Mogre.Vector3 vectCamLookAt=new Mogre.Vector3(0,0,0);
-            m_pCamera.LookAt(vectCamLookAt);
-            m_pCamera.NearClipDistance=1;
+            mCamera.LookAt(vectCamLookAt);
+            mCamera.NearClipDistance=1;
  
-            m_pCamera.AspectRatio=AdvancedMogreFramework.Singleton.m_pViewport.ActualWidth /
+            mCamera.AspectRatio=AdvancedMogreFramework.Singleton.m_pViewport.ActualWidth /
             AdvancedMogreFramework.Singleton.m_pViewport.ActualHeight;
  
-            AdvancedMogreFramework.Singleton.m_pViewport.Camera=m_pCamera;
+            AdvancedMogreFramework.Singleton.m_pViewport.Camera=mCamera;
 
             AdvancedMogreFramework.Singleton.m_pTrayMgr.destroyAllWidgets();
             AdvancedMogreFramework.Singleton.m_pTrayMgr.showCursor();
@@ -99,9 +99,9 @@ namespace AdvancedMogreFramework.States
             AdvancedMogreFramework.Singleton.m_pKeyboard.KeyPressed -= keyPressed;
             AdvancedMogreFramework.Singleton.m_pKeyboard.KeyReleased -= keyReleased;
 
-            m_pSceneMgr.DestroyCamera(m_pCamera);
-            if(m_pSceneMgr!=null)
-                AdvancedMogreFramework.Singleton.m_pRoot.DestroySceneManager(m_pSceneMgr);
+            mSceneMgr.DestroyCamera(mCamera);
+            if(mSceneMgr!=null)
+                AdvancedMogreFramework.Singleton.m_pRoot.DestroySceneManager(mSceneMgr);
 
             AdvancedMogreFramework.Singleton.m_pTrayMgr.clearAllTrays();
             AdvancedMogreFramework.Singleton.m_pTrayMgr.destroyAllWidgets();

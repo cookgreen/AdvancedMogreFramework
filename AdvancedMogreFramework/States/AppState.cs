@@ -77,8 +77,8 @@ namespace AdvancedMogreFramework.States
 
         protected AppStateListener m_pParent;
 
-        protected Camera m_pCamera;
-        protected SceneManager m_pSceneMgr;
+        protected Camera mCamera;
+        protected SceneManager mSceneMgr;
         protected FrameEvent m_FrameEvent;
     }
 }

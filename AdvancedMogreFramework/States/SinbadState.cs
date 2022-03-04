@@ -54,7 +54,7 @@ namespace AdvancedMogreFramework.States
         {
             m_bQuit = false;
             m_pDetailsPanel = null;
-            m_pCamera = null;
+            mCamera = null;
             m_pCameraMan = null;
             m_pChara = null;
             agents = new List<SinbadCharacterController>();
@@ -65,14 +65,14 @@ namespace AdvancedMogreFramework.States
         {
             AdvancedMogreFramework.Singleton.m_pLog.LogMessage("Entering SinbadState...");
             AdvancedMogreFramework.lastState = "SinbadState";
-            m_pSceneMgr = AdvancedMogreFramework.Singleton.m_pRoot.CreateSceneManager(SceneType.ST_GENERIC, "SinbadSceneMgr");
+            mSceneMgr = AdvancedMogreFramework.Singleton.m_pRoot.CreateSceneManager(SceneType.ST_GENERIC, "SinbadSceneMgr");
 
-            m_pCamera = m_pSceneMgr.CreateCamera("MainCamera");
-	        AdvancedMogreFramework.Singleton.m_pViewport.Camera=m_pCamera;
-            m_pCamera.AspectRatio = (float)AdvancedMogreFramework.Singleton.m_pViewport.ActualWidth / (float)AdvancedMogreFramework.Singleton.m_pViewport.ActualHeight;
-	        m_pCamera.NearClipDistance=5;
+            mCamera = mSceneMgr.CreateCamera("MainCamera");
+	        AdvancedMogreFramework.Singleton.m_pViewport.Camera=mCamera;
+            mCamera.AspectRatio = (float)AdvancedMogreFramework.Singleton.m_pViewport.ActualWidth / (float)AdvancedMogreFramework.Singleton.m_pViewport.ActualHeight;
+	        mCamera.NearClipDistance=5;
 
-	        m_pCameraMan = new SdkCameraMan(m_pCamera);
+	        m_pCameraMan = new SdkCameraMan(mCamera);
 
             AdvancedMogreFramework.Singleton.m_pMouse.MouseMoved += mouseMoved;
             AdvancedMogreFramework.Singleton.m_pMouse.MousePressed += mousePressed;
@@ -100,21 +100,21 @@ namespace AdvancedMogreFramework.States
         {
             // set background and some fog
 	        AdvancedMogreFramework.Singleton.m_pViewport.BackgroundColour=new ColourValue(1.0f, 1.0f, 0.8f);
-	        m_pSceneMgr.SetFog(FogMode.FOG_LINEAR, new ColourValue(1.0f, 1.0f, 0.8f), 0, 15, 100);
+	        mSceneMgr.SetFog(FogMode.FOG_LINEAR, new ColourValue(1.0f, 1.0f, 0.8f), 0, 15, 100);
 
 	        // set shadow properties
-	        m_pSceneMgr.ShadowTechnique=ShadowTechnique.SHADOWTYPE_TEXTURE_MODULATIVE;
-	        m_pSceneMgr.ShadowColour=new ColourValue(0.5f, 0.5f, 0.5f);
-	        m_pSceneMgr.SetShadowTextureSize(1024);
-	        m_pSceneMgr.ShadowTextureCount=1;
+	        mSceneMgr.ShadowTechnique=ShadowTechnique.SHADOWTYPE_TEXTURE_MODULATIVE;
+	        mSceneMgr.ShadowColour=new ColourValue(0.5f, 0.5f, 0.5f);
+	        mSceneMgr.SetShadowTextureSize(1024);
+	        mSceneMgr.ShadowTextureCount=1;
 
 	        // disable default camera control so the character can do its own
 	        m_pCameraMan.setStyle(CameraStyle.CS_MANUAL);
 	        // use a small amount of ambient lighting
-	        m_pSceneMgr.AmbientLight=new ColourValue(0.3f, 0.3f, 0.3f);
+	        mSceneMgr.AmbientLight=new ColourValue(0.3f, 0.3f, 0.3f);
 
 	        // add a bright light above the scene
-	        Light light = m_pSceneMgr.CreateLight();
+	        Light light = mSceneMgr.CreateLight();
 	        light.Type=(Light.LightTypes. LT_POINT);
 	        light.Position=new Mogre.Vector3(-10, 40, 20);
 	        light.SpecularColour=ColourValue.White;
@@ -126,8 +126,8 @@ namespace AdvancedMogreFramework.States
             // create a floor entity, give it a material, and place it at the origin
             SceneProp floorSceneProp = new SceneProp(
                 this,
-                m_pSceneMgr,
-                m_pSceneMgr.RootSceneNode,
+                mSceneMgr,
+                mSceneMgr.RootSceneNode,
                 physicsScene,
                 "Floor",
                 "floor"
@@ -161,10 +161,10 @@ namespace AdvancedMogreFramework.States
             Console.WriteLine("\nStatus of Find path: " + status);
 
             // create our character controller
-            m_pChara = new SinbadCharacterController(this, physicsScene, m_pCamera,new Mogre.Vector3(0,5,0), 0);
-            SinbadCharacterController bot1 = new SinbadCharacterController(this, physicsScene, m_pCamera, new Mogre.Vector3(-10, 5, 0), 1, false);
-            SinbadCharacterController bot2 = new SinbadCharacterController(this, physicsScene, m_pCamera, new Mogre.Vector3(0, 5, -10), 2, false);
-            SinbadCharacterController bot3 = new SinbadCharacterController(this, physicsScene, m_pCamera, new Mogre.Vector3(10, 5, 0), 3, false);
+            m_pChara = new SinbadCharacterController(this, physicsScene, mCamera,new Mogre.Vector3(0,5,0), 0);
+            SinbadCharacterController bot1 = new SinbadCharacterController(this, physicsScene, mCamera, new Mogre.Vector3(-10, 5, 0), 1, false);
+            SinbadCharacterController bot2 = new SinbadCharacterController(this, physicsScene, mCamera, new Mogre.Vector3(0, 5, -10), 2, false);
+            SinbadCharacterController bot3 = new SinbadCharacterController(this, physicsScene, mCamera, new Mogre.Vector3(10, 5, 0), 3, false);
             agents.Add(m_pChara);
             agents.Add(bot1);
             agents.Add(bot2);
@@ -188,11 +188,11 @@ namespace AdvancedMogreFramework.States
             AdvancedMogreFramework.Singleton.m_pKeyboard.KeyReleased -= keyReleased;
             AdvancedMogreFramework.Singleton.m_pRoot.FrameRenderingQueued -= FrameRenderingQueued;
 
-            m_pSceneMgr.DestroyCamera(m_pCamera);
+            mSceneMgr.DestroyCamera(mCamera);
 	        if (m_pCameraMan!=null) m_pCameraMan=null;
 	
-            if(m_pSceneMgr!=null)
-                AdvancedMogreFramework.Singleton.m_pRoot.DestroySceneManager(m_pSceneMgr);
+            if(mSceneMgr!=null)
+                AdvancedMogreFramework.Singleton.m_pRoot.DestroySceneManager(mSceneMgr);
         }
         public override bool pause()
         {
@@ -205,7 +205,7 @@ namespace AdvancedMogreFramework.States
  
             buildGUI();
 
-            AdvancedMogreFramework.Singleton.m_pViewport.Camera=m_pCamera;
+            AdvancedMogreFramework.Singleton.m_pViewport.Camera=mCamera;
             m_bQuit = false;
         }
 
@@ -311,7 +311,7 @@ namespace AdvancedMogreFramework.States
 				String newVal;
 				PolygonMode pm;
 
-				switch (m_pCamera.PolygonMode)
+				switch (mCamera.PolygonMode)
 				{
 				case PolygonMode.PM_SOLID:
 					newVal = "Wireframe";
@@ -327,7 +327,7 @@ namespace AdvancedMogreFramework.States
                     break;
 				}
 
-				m_pCamera.PolygonMode=pm;
+				mCamera.PolygonMode=pm;
 				m_pDetailsPanel.setParamValue(10, newVal);
 			}
 			else if(evt.key == KeyCode.KC_F5)   // refresh all textures
@@ -341,7 +341,7 @@ namespace AdvancedMogreFramework.States
             else if (evt.key == KeyCode.KC_X)
             {
                 //spawn a new agent
-                SinbadCharacterController agent = new SinbadCharacterController(this,physicsScene, m_pCamera,m_pChara.Position,agents.Count, false);
+                SinbadCharacterController agent = new SinbadCharacterController(this,physicsScene, mCamera,m_pChara.Position,agents.Count, false);
                 agents.Add(agent);
             }
 
@@ -406,11 +406,11 @@ namespace AdvancedMogreFramework.States
             switch(menu.getSelectionIndex())
             {
             case 0:
-                m_pCamera.PolygonMode=(PolygonMode.PM_SOLID);break;
+                mCamera.PolygonMode=(PolygonMode.PM_SOLID);break;
             case 1:
-                m_pCamera.PolygonMode=(PolygonMode.PM_WIREFRAME);break;
+                mCamera.PolygonMode=(PolygonMode.PM_WIREFRAME);break;
             case 2:
-                m_pCamera.PolygonMode=(PolygonMode.PM_POINTS);break;
+                mCamera.PolygonMode=(PolygonMode.PM_POINTS);break;
     }
         }
 
@@ -432,13 +432,13 @@ namespace AdvancedMogreFramework.States
 
 		        if (m_pDetailsPanel.isVisible())   // if details panel is visible, then update its contents
 		        {
-			        m_pDetailsPanel.setParamValue(0, StringConverter.ToString(m_pCamera.DerivedPosition.x));
-                    m_pDetailsPanel.setParamValue(1, StringConverter.ToString(m_pCamera.DerivedPosition.y));
-                    m_pDetailsPanel.setParamValue(2, StringConverter.ToString(m_pCamera.DerivedPosition.z));
-                    m_pDetailsPanel.setParamValue(4, StringConverter.ToString(m_pCamera.DerivedOrientation.w));
-                    m_pDetailsPanel.setParamValue(5, StringConverter.ToString(m_pCamera.DerivedOrientation.x));
-                    m_pDetailsPanel.setParamValue(6, StringConverter.ToString(m_pCamera.DerivedOrientation.y));
-                    m_pDetailsPanel.setParamValue(7, StringConverter.ToString(m_pCamera.DerivedOrientation.z));
+			        m_pDetailsPanel.setParamValue(0, StringConverter.ToString(mCamera.DerivedPosition.x));
+                    m_pDetailsPanel.setParamValue(1, StringConverter.ToString(mCamera.DerivedPosition.y));
+                    m_pDetailsPanel.setParamValue(2, StringConverter.ToString(mCamera.DerivedPosition.z));
+                    m_pDetailsPanel.setParamValue(4, StringConverter.ToString(mCamera.DerivedOrientation.w));
+                    m_pDetailsPanel.setParamValue(5, StringConverter.ToString(mCamera.DerivedOrientation.x));
+                    m_pDetailsPanel.setParamValue(6, StringConverter.ToString(mCamera.DerivedOrientation.y));
+                    m_pDetailsPanel.setParamValue(7, StringConverter.ToString(mCamera.DerivedOrientation.z));
 		        }	
 	        }
 

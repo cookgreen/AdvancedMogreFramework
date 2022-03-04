@@ -13,20 +13,20 @@ namespace AdvancedMogreFramework.States
         {
             AdvancedMogreFramework.Singleton.m_pLog.LogMessage("Entering GameState...");
             AdvancedMogreFramework.lastState = "GameState";
-            m_pSceneMgr = AdvancedMogreFramework.Singleton.m_pRoot.CreateSceneManager(SceneType.ST_GENERIC, "GameSceneMgr");
+            mSceneMgr = AdvancedMogreFramework.Singleton.m_pRoot.CreateSceneManager(SceneType.ST_GENERIC, "GameSceneMgr");
             ColourValue cvAmbineLight = new ColourValue(0.7f, 0.7f, 0.7f);
-            m_pSceneMgr.AmbientLight = cvAmbineLight;//(Ogre::ColourValue(0.7f, 0.7f, 0.7f));
+            mSceneMgr.AmbientLight = cvAmbineLight;//(Ogre::ColourValue(0.7f, 0.7f, 0.7f));
 
-            m_pCamera = m_pSceneMgr.CreateCamera("GameCamera");
+            mCamera = mSceneMgr.CreateCamera("GameCamera");
             Mogre.Vector3 vectCameraPostion = new Mogre.Vector3(5, 60, 60);
-            m_pCamera.Position = vectCameraPostion;
+            mCamera.Position = vectCameraPostion;
             Mogre.Vector3 vectorCameraLookAt = new Mogre.Vector3(5, 20, 0);
-            m_pCamera.LookAt(vectorCameraLookAt);
-            m_pCamera.NearClipDistance = 5;
+            mCamera.LookAt(vectorCameraLookAt);
+            mCamera.NearClipDistance = 5;
 
-            m_pCamera.AspectRatio = AdvancedMogreFramework.Singleton.m_pViewport.ActualWidth / AdvancedMogreFramework.Singleton.m_pViewport.ActualHeight;
+            mCamera.AspectRatio = AdvancedMogreFramework.Singleton.m_pViewport.ActualWidth / AdvancedMogreFramework.Singleton.m_pViewport.ActualHeight;
 
-            AdvancedMogreFramework.Singleton.m_pViewport.Camera = m_pCamera;
+            AdvancedMogreFramework.Singleton.m_pViewport.Camera = mCamera;
         }
 
         public override void exit()
@@ -39,9 +39,9 @@ namespace AdvancedMogreFramework.States
             AdvancedMogreFramework.Singleton.m_pKeyboard.KeyPressed -= keyPressed;
             AdvancedMogreFramework.Singleton.m_pKeyboard.KeyReleased -= keyReleased;
 
-            if (m_pSceneMgr != null)
-                m_pSceneMgr.DestroyCamera(m_pCamera);
-            AdvancedMogreFramework.Singleton.m_pRoot.DestroySceneManager(m_pSceneMgr);
+            if (mSceneMgr != null)
+                mSceneMgr.DestroyCamera(mCamera);
+            AdvancedMogreFramework.Singleton.m_pRoot.DestroySceneManager(mSceneMgr);
         }
 
         public virtual bool keyPressed(KeyEvent keyEventRef)
