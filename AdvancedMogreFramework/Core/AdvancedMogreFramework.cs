@@ -35,34 +35,34 @@ namespace AdvancedMogreFramework
 {
     class AdvancedMogreFramework 
     {
-        public Root m_pRoot;
-        public RenderWindow m_pRenderWnd;
-        public Viewport m_pViewport;
-        public Log m_pLog;
-        public Timer m_pTimer;
+        public Root mRoot;
+        public RenderWindow mRenderWnd;
+        public Viewport mViewport;
+        public Log mLog;
+        public Timer mTimer;
 
-        public MOIS.InputManager m_pInputMgr;
-        public Keyboard m_pKeyboard;
-        public Mouse m_pMouse;
+        public MOIS.InputManager mInputMgr;
+        public Keyboard mKeyboard;
+        public Mouse mMouse;
 
-        public SdkTrayManager m_pTrayMgr;
+        public SdkTrayManager mTrayMgr;
 
-        public NAudio.Vorbis.VorbisWaveReader m_pVorbis;
-        public NAudio.Wave.WaveOut m_pWaveOut;
+        public NAudio.Vorbis.VorbisWaveReader mVorbis;
+        public NAudio.Wave.WaveOut mWaveOut;
 
         public static string lastState;
         public AdvancedMogreFramework()
         {
-            m_pRoot = null;
-            m_pRenderWnd = null;
-            m_pViewport = null;
-            m_pLog = null;
-            m_pTimer = null;
+            mRoot = null;
+            mRenderWnd = null;
+            mViewport = null;
+            mLog = null;
+            mTimer = null;
 
-            m_pInputMgr = null;
-            m_pKeyboard = null;
-            m_pMouse = null;
-            m_pTrayMgr = null;
+            mInputMgr = null;
+            mKeyboard = null;
+            mMouse = null;
+            mTrayMgr = null;
          }
         ~AdvancedMogreFramework()
         {
@@ -72,43 +72,43 @@ namespace AdvancedMogreFramework
             //if (AdvancedMogreFramework.m_pRoot != null) m_pRoot = null;
         }
 
-        public bool initOgre(String wndTitle)
+        public bool InitOgre(string wndTitle)
         {
             LogManager logMgr = new LogManager();
  
-            m_pLog = LogManager.Singleton.CreateLog("OgreLogfile.log", true, true, false);
-            m_pLog.SetDebugOutputEnabled(true);
+            mLog = LogManager.Singleton.CreateLog("OgreLogfile.log", true, true, false);
+            mLog.SetDebugOutputEnabled(true);
  
-            m_pRoot = new Root();
+            mRoot = new Root();
  
-            if(!m_pRoot.ShowConfigDialog())
+            if(!mRoot.ShowConfigDialog())
                 return false;
-               m_pRenderWnd = m_pRoot.Initialise(true, wndTitle);
+               mRenderWnd = mRoot.Initialise(true, wndTitle);
  
-            m_pViewport = m_pRenderWnd.AddViewport(null);
+            mViewport = mRenderWnd.AddViewport(null);
             ColourValue cv=new ColourValue(0.5f,0.5f,0.5f);
-            m_pViewport.BackgroundColour=cv;
+            mViewport.BackgroundColour=cv;
  
-            m_pViewport.Camera=null;
+            mViewport.Camera=null;
  
             int hWnd = 0;
             //ParamList paramList;
-            m_pRenderWnd.GetCustomAttribute("WINDOW", out hWnd);
+            mRenderWnd.GetCustomAttribute("WINDOW", out hWnd);
  
-            m_pInputMgr = InputManager.CreateInputSystem((uint)hWnd);
-            m_pKeyboard = (MOIS.Keyboard)m_pInputMgr.CreateInputObject(MOIS.Type.OISKeyboard, true);
-            m_pMouse =  (MOIS.Mouse)m_pInputMgr.CreateInputObject(MOIS.Type.OISMouse, true);
+            mInputMgr = InputManager.CreateInputSystem((uint)hWnd);
+            mKeyboard = (MOIS.Keyboard)mInputMgr.CreateInputObject(MOIS.Type.OISKeyboard, true);
+            mMouse =  (MOIS.Mouse)mInputMgr.CreateInputObject(MOIS.Type.OISMouse, true);
 
-            m_pMouse.MouseMoved+=new MouseListener.MouseMovedHandler(mouseMoved);
-            m_pMouse.MousePressed += new MouseListener.MousePressedHandler(mousePressed);
-            m_pMouse.MouseReleased += new MouseListener.MouseReleasedHandler(mouseReleased);
+            mMouse.MouseMoved+=new MouseListener.MouseMovedHandler(MouseMoved);
+            mMouse.MousePressed += new MouseListener.MousePressedHandler(MousePressed);
+            mMouse.MouseReleased += new MouseListener.MouseReleasedHandler(MouseReleased);
 
-            m_pKeyboard.KeyPressed += new KeyListener.KeyPressedHandler(keyPressed);
-            m_pKeyboard.KeyReleased += new KeyListener.KeyReleasedHandler(keyReleased);
+            mKeyboard.KeyPressed += new KeyListener.KeyPressedHandler(KeyPressed);
+            mKeyboard.KeyReleased += new KeyListener.KeyReleasedHandler(KeyReleased);
 
-            MOIS.MouseState_NativePtr mouseState = m_pMouse.MouseState;
-                mouseState.width = m_pViewport.ActualWidth;
-                mouseState.height = m_pViewport.ActualHeight;
+            MOIS.MouseState_NativePtr mouseState = mMouse.MouseState;
+                mouseState.width = mViewport.ActualWidth;
+                mouseState.height = mViewport.ActualHeight;
             //m_pMouse.MouseState = tempMouseState;
 
  
@@ -131,57 +131,57 @@ namespace AdvancedMogreFramework
             TextureManager.Singleton.DefaultNumMipmaps=5;
             ResourceGroupManager.Singleton.InitialiseAllResourceGroups(); 
  
-            m_pTrayMgr = new SdkTrayManager("AOFTrayMgr", m_pRenderWnd, m_pMouse, null);
+            mTrayMgr = new SdkTrayManager("AOFTrayMgr", mRenderWnd, mMouse, null);
  
-            m_pTimer = new Timer();
-            m_pTimer.Reset();
+            mTimer = new Timer();
+            mTimer.Reset();
  
-            m_pRenderWnd.IsActive=true;
+            mRenderWnd.IsActive=true;
  
             return true;
         }
-        public void updateOgre(double timeSinceLastFrame)
+        public void UpdateOgre(double timeSinceLastFrame)
         {
         }
 
-        public bool keyPressed(KeyEvent keyEventRef)
+        public bool KeyPressed(KeyEvent keyEventRef)
         {
-             if(m_pKeyboard.IsKeyDown(MOIS.KeyCode.KC_V))
+             if(mKeyboard.IsKeyDown(MOIS.KeyCode.KC_V))
             {
-                m_pRenderWnd.WriteContentsToTimestampedFile("AMOF_Screenshot_", ".jpg");
+                mRenderWnd.WriteContentsToTimestampedFile("AMOF_Screenshot_", ".jpg");
                 return true;
             }
  
-            if(m_pKeyboard.IsKeyDown(MOIS.KeyCode.KC_O))
+            if(mKeyboard.IsKeyDown(MOIS.KeyCode.KC_O))
             {
-                if(m_pTrayMgr.isLogoVisible())
+                if(mTrayMgr.isLogoVisible())
                 {
-                    m_pTrayMgr.hideFrameStats();
-                    m_pTrayMgr.hideLogo();
+                    mTrayMgr.hideFrameStats();
+                    mTrayMgr.hideLogo();
                 }
                 else
                 {
-                    m_pTrayMgr.showFrameStats(TrayLocation.TL_BOTTOMLEFT);
-                    m_pTrayMgr.showLogo(TrayLocation.TL_BOTTOMRIGHT);
+                    mTrayMgr.showFrameStats(TrayLocation.TL_BOTTOMLEFT);
+                    mTrayMgr.showLogo(TrayLocation.TL_BOTTOMRIGHT);
                 }
             }
  
             return true;
         }
-        public bool keyReleased(KeyEvent keyEventRef)
+        public bool KeyReleased(KeyEvent keyEventRef)
         {
             return true;
         }
 
-        public bool mouseMoved(MouseEvent evt)
+        public bool MouseMoved(MouseEvent evt)
         {
             return true;
         }
-        public bool mousePressed(MouseEvent evt, MouseButtonID id)
+        public bool MousePressed(MouseEvent evt, MouseButtonID id)
         {
             return true;
         }
-        public bool mouseReleased(MouseEvent evt, MouseButtonID id)
+        public bool MouseReleased(MouseEvent evt, MouseButtonID id)
         {
             return true;
         }
@@ -190,7 +190,7 @@ namespace AdvancedMogreFramework
             return System.Math.Max(System.Math.Min(val, maxval), minval);
         }
         public static AdvancedMogreFramework instance;
-        public static AdvancedMogreFramework Singleton
+        public static AdvancedMogreFramework Instance
         {
             get
             {

@@ -30,42 +30,42 @@ using System.Text;
 
 namespace AdvancedMogreFramework.Core
 {
-    class DemoApp
+    class FrameworkApp : IDisposable
     {
-        public DemoApp()
+        public FrameworkApp()
         {
-            m_pAppStateManager = null;
-        }
-        ~DemoApp()
-        {
-            m_pAppStateManager = null;
+            mAppStateManager = null;
         }
 
-        public void startDemo()
+        public void Start()
         {
-            AdvancedMogreFramework amf=new AdvancedMogreFramework();
-            if (!AdvancedMogreFramework.Singleton.initOgre("AdvancedMogreFramework"))
+            if (!AdvancedMogreFramework.Instance.InitOgre("AdvancedMogreFramework"))
 		        return;
 
-            AdvancedMogreFramework.Singleton.m_pLog.LogMessage("Demo initialized!");
+            AdvancedMogreFramework.Instance.mLog.LogMessage("Demo initialized!");
  
-	        m_pAppStateManager = new AppStateManager();
+	        mAppStateManager = new AppStateManager();
 
-            AppState.create<MenuState>(m_pAppStateManager, "MenuState");
-            AppState.create<GameState>(m_pAppStateManager, "GameState");
-            AppState.create<SinbadState>(m_pAppStateManager, "SinbadState");
-            AppState.create<PauseState>(m_pAppStateManager, "PauseState");
-            AppState.create<CreditState>(m_pAppStateManager, "CreditState");
-            AppState.create<PhysxBasicCubeState>(m_pAppStateManager, "BasicCubeState");
-            AppState.create<PhysxCharacterControllerState>(m_pAppStateManager, "CharacterControllerState");
-            AppState.create<PhysxClothState>(m_pAppStateManager, "ClothState");
-            AppState.create<PhysxNewtonCradleState>(m_pAppStateManager, "NewtonCradleState");
-            AppState.create<DrivingCarState>(m_pAppStateManager, "DrivingCarState");
-            AppState.create<InventoryDemoState>(m_pAppStateManager, "InventoryDemoState");
+            AppState.Create<MenuState>(mAppStateManager, "MenuState");
+            AppState.Create<GameState>(mAppStateManager, "GameState");
+            AppState.Create<SinbadState>(mAppStateManager, "SinbadState");
+            AppState.Create<PauseState>(mAppStateManager, "PauseState");
+            AppState.Create<CreditState>(mAppStateManager, "CreditState");
+            AppState.Create<PhysxBasicCubeState>(mAppStateManager, "BasicCubeState");
+            AppState.Create<PhysxCharacterControllerState>(mAppStateManager, "CharacterControllerState");
+            AppState.Create<PhysxClothState>(mAppStateManager, "ClothState");
+            AppState.Create<PhysxNewtonCradleState>(mAppStateManager, "NewtonCradleState");
+            AppState.Create<DrivingCarState>(mAppStateManager, "DrivingCarState");
+            AppState.Create<InventoryDemoState>(mAppStateManager, "InventoryDemoState");
 
-            m_pAppStateManager.start(m_pAppStateManager.findByName("MenuState"));
+            mAppStateManager.Start(mAppStateManager.FindByName("MenuState"));
         }
 
-        private AppStateManager m_pAppStateManager;
+        public void Dispose()
+        {
+            mAppStateManager = null;
+        }
+
+        private AppStateManager mAppStateManager;
     }
 }

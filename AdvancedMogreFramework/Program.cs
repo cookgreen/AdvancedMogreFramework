@@ -36,8 +36,8 @@ namespace AdvancedMogreFramework
     {
         static void Main(string[] args)
         {
-            DemoApp app = new DemoApp();
-            app.startDemo();
+            FrameworkApp app = new FrameworkApp();
+            app.Start();
         }
     }
 }

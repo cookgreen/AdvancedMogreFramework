@@ -38,27 +38,27 @@ namespace AdvancedMogreFramework.States
     {
         bool disposed;
 
-         public struct state_info
-        {
+        public struct StateInfo
+        { 
             public String name;
             public AppState state;
         };
-         public AppStateManager()
-         {
-             m_bShutdown = false;
-         }
+        public AppStateManager()
+        {
+             mShutdown = false;
+        }
 
-          public override void manageAppState(String stateName, AppState state)
+         public override void ManageAppState(String stateName, AppState state)
          {
-		    state_info new_state_info;
+		    StateInfo new_state_info;
 		    new_state_info.name = stateName;
 		    new_state_info.state = state;
-		    m_States.Add(new_state_info);
+		    mStates.Add(new_state_info);
          }
 
-         public override AppState findByName(String stateName)
+         public override AppState FindByName(String stateName)
          {
-            foreach (state_info itr in m_States)
+            foreach (StateInfo itr in mStates)
 	        {
 		        if(itr.name==stateName)
 			    return itr.state;
@@ -67,35 +67,35 @@ namespace AdvancedMogreFramework.States
 	        return null;
          }
 
-         public void start(AppState state)
+         public void Start(AppState state)
          {
-            changeAppState(state);
+            ChangeAppState(state);
  
 	        int timeSinceLastFrame = 1;
 	        int startTime = 0;
  
-	        while(!m_bShutdown)
+	        while(!mShutdown)
 	        {
-		        if(AdvancedMogreFramework.Singleton.m_pRenderWnd.IsClosed)m_bShutdown = true;
+		        if(AdvancedMogreFramework.Instance.mRenderWnd.IsClosed)mShutdown = true;
  
 		        WindowEventUtilities.MessagePump();
 
-                if (AdvancedMogreFramework.Singleton.m_pRenderWnd.IsActive)
+                if (AdvancedMogreFramework.Instance.mRenderWnd.IsActive)
 		        {
-                    startTime = (int)AdvancedMogreFramework.Singleton.m_pTimer.MicrosecondsCPU;
+                    startTime = (int)AdvancedMogreFramework.Instance.mTimer.MicrosecondsCPU;
 
-                    AdvancedMogreFramework.Singleton.m_pKeyboard.Capture();
-                    AdvancedMogreFramework.Singleton.m_pMouse.Capture();
+                    AdvancedMogreFramework.Instance.mKeyboard.Capture();
+                    AdvancedMogreFramework.Instance.mMouse.Capture();
 
-                    m_ActiveStateStack.Last().update(timeSinceLastFrame * 1.0 / 1000);
-                    AdvancedMogreFramework.Singleton.m_pKeyboard.Capture();
-                    AdvancedMogreFramework.Singleton.m_pMouse.Capture();
-                    AdvancedMogreFramework.Singleton.updateOgre(timeSinceLastFrame * 1.0 / 1000);
-                    if (AdvancedMogreFramework.Singleton.m_pRoot != null)
+                    mActiveStateStack.Last().Update(timeSinceLastFrame * 1.0 / 1000);
+                    AdvancedMogreFramework.Instance.mKeyboard.Capture();
+                    AdvancedMogreFramework.Instance.mMouse.Capture();
+                    AdvancedMogreFramework.Instance.UpdateOgre(timeSinceLastFrame * 1.0 / 1000);
+                    if (AdvancedMogreFramework.Instance.mRoot != null)
                     {
-                        AdvancedMogreFramework.Singleton.m_pRoot.RenderOneFrame();
+                        AdvancedMogreFramework.Instance.mRoot.RenderOneFrame();
                     }
-                    timeSinceLastFrame = (int)AdvancedMogreFramework.Singleton.m_pTimer.MicrosecondsCPU - startTime;
+                    timeSinceLastFrame = (int)AdvancedMogreFramework.Instance.mTimer.MicrosecondsCPU - startTime;
 		        }
 		        else
 		        {
@@ -103,87 +103,87 @@ namespace AdvancedMogreFramework.States
 		        }
 	        }
 
-            AdvancedMogreFramework.Singleton.m_pLog.LogMessage("Main loop quit");
+            AdvancedMogreFramework.Instance.mLog.LogMessage("Main loop quit");
          }
-         public override void changeAppState(AppState state)
+         public override void ChangeAppState(AppState state)
          {
-             if (m_ActiveStateStack.Count!=0)
+             if (mActiveStateStack.Count!=0)
              {
-                 m_ActiveStateStack.Last().exit();
-                 m_ActiveStateStack.RemoveAt(m_ActiveStateStack.Count()-1);
+                 mActiveStateStack.Last().Exit();
+                 mActiveStateStack.RemoveAt(mActiveStateStack.Count()-1);
              }
 
-             m_ActiveStateStack.Add(state);
+             mActiveStateStack.Add(state);
              init(state);
-             m_ActiveStateStack.Last().enter();
+             mActiveStateStack.Last().Enter();
          }
-         public override bool pushAppState(AppState state)
+         public override bool PushAppState(AppState state)
          {
-             if (m_ActiveStateStack.Count!=0)
+             if (mActiveStateStack.Count!=0)
              {
-                 if (!m_ActiveStateStack.Last().pause())
+                 if (!mActiveStateStack.Last().Pause())
                      return false;
              }
 
-             m_ActiveStateStack.Add(state);
+             mActiveStateStack.Add(state);
              init(state);
-             m_ActiveStateStack.Last().enter();
+             mActiveStateStack.Last().Enter();
 
              return true;
          }
-         public override void popAppState()
+         public override void PopAppState()
          {
-             if (m_ActiveStateStack.Count != 0)
+             if (mActiveStateStack.Count != 0)
              {
-                 m_ActiveStateStack.Last().exit();
-                 m_ActiveStateStack.RemoveAt(m_ActiveStateStack.Count()-1);
+                 mActiveStateStack.Last().Exit();
+                 mActiveStateStack.RemoveAt(mActiveStateStack.Count()-1);
              }
 
-             if (m_ActiveStateStack.Count != 0)
+             if (mActiveStateStack.Count != 0)
              {
-                 init(m_ActiveStateStack.Last());
-                 m_ActiveStateStack.Last().resume();
+                 init(mActiveStateStack.Last());
+                 mActiveStateStack.Last().Resume();
              }
              else
-                 shutdown();
+                 Shutdown();
          }
-         public override void popAllAndPushAppState<T>(AppState state)
+         public override void PopAllAndPushAppState<T>(AppState state)
         {
-            while (m_ActiveStateStack.Count != 0)
+            while (mActiveStateStack.Count != 0)
             {
-                m_ActiveStateStack.Last().exit();
-                m_ActiveStateStack.RemoveAt(m_ActiveStateStack.Count()-1);
+                mActiveStateStack.Last().Exit();
+                mActiveStateStack.RemoveAt(mActiveStateStack.Count()-1);
             }
 
-            pushAppState(state);
+            PushAppState(state);
         }
-         public override void pauseAppState()
+         public override void PauseAppState()
          {
-             if (m_ActiveStateStack.Count != 0)
+             if (mActiveStateStack.Count != 0)
              {
-                 m_ActiveStateStack.Last().pause();
+                 mActiveStateStack.Last().Pause();
              }
 
-             if (m_ActiveStateStack.Count() > 2)
+             if (mActiveStateStack.Count() > 2)
              {
-                 init(m_ActiveStateStack.ElementAt(m_ActiveStateStack.Count() - 2));
-                 m_ActiveStateStack.ElementAt(m_ActiveStateStack.Count() - 2).resume();
+                 init(mActiveStateStack.ElementAt(mActiveStateStack.Count() - 2));
+                 mActiveStateStack.ElementAt(mActiveStateStack.Count() - 2).Resume();
              }
          }
-         public override void shutdown()
+         public override void Shutdown()
          {
-             m_bShutdown = true;
+             mShutdown = true;
          }
 
          protected void init(AppState state)
          {
-             AdvancedMogreFramework.Singleton.m_pTrayMgr.setListener(state);
-             AdvancedMogreFramework.Singleton.m_pRenderWnd.ResetStatistics();
+             AdvancedMogreFramework.Instance.mTrayMgr.setListener(state);
+             AdvancedMogreFramework.Instance.mRenderWnd.ResetStatistics();
          }
 
-         protected List<AppState> m_ActiveStateStack=new List<AppState>();
-         protected List<state_info> m_States=new List<state_info>();
-         protected bool m_bShutdown;
+         protected List<AppState> mActiveStateStack=new List<AppState>();
+         protected List<StateInfo> mStates=new List<StateInfo>();
+         protected bool mShutdown;
 
          public void Dispose()
          {
@@ -200,19 +200,19 @@ namespace AdvancedMogreFramework.States
              if (disposing)
              {
 
-                 state_info si;
+                 StateInfo si;
 
-                 while (m_ActiveStateStack.Count != 0)
+                 while (mActiveStateStack.Count != 0)
                  {
-                     m_ActiveStateStack.Last().exit();
-                     m_ActiveStateStack.RemoveAt(m_ActiveStateStack.Count() - 1);
+                     mActiveStateStack.Last().Exit();
+                     mActiveStateStack.RemoveAt(mActiveStateStack.Count() - 1);
                  }
 
-                 while (m_States.Count != 0)
+                 while (mStates.Count != 0)
                  {
-                     si = m_States.Last();
-                     si.state.destroy();
-                     m_States.RemoveAt(m_States.Count() - 1);
+                     si = mStates.Last();
+                     si.state.Destroy();
+                     mStates.RemoveAt(mStates.Count() - 1);
                  }
              }
              disposed = true;

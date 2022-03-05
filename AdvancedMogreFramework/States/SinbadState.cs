@@ -61,26 +61,26 @@ namespace AdvancedMogreFramework.States
             actorNodeList = new List<ActorNode>();
         }
 
-        public override void enter()
+        public override void Enter()
         {
-            AdvancedMogreFramework.Singleton.m_pLog.LogMessage("Entering SinbadState...");
+            AdvancedMogreFramework.Instance.mLog.LogMessage("Entering SinbadState...");
             AdvancedMogreFramework.lastState = "SinbadState";
-            mSceneMgr = AdvancedMogreFramework.Singleton.m_pRoot.CreateSceneManager(SceneType.ST_GENERIC, "SinbadSceneMgr");
+            mSceneMgr = AdvancedMogreFramework.Instance.mRoot.CreateSceneManager(SceneType.ST_GENERIC, "SinbadSceneMgr");
 
             mCamera = mSceneMgr.CreateCamera("MainCamera");
-	        AdvancedMogreFramework.Singleton.m_pViewport.Camera=mCamera;
-            mCamera.AspectRatio = (float)AdvancedMogreFramework.Singleton.m_pViewport.ActualWidth / (float)AdvancedMogreFramework.Singleton.m_pViewport.ActualHeight;
+	        AdvancedMogreFramework.Instance.mViewport.Camera=mCamera;
+            mCamera.AspectRatio = (float)AdvancedMogreFramework.Instance.mViewport.ActualWidth / (float)AdvancedMogreFramework.Instance.mViewport.ActualHeight;
 	        mCamera.NearClipDistance=5;
 
 	        m_pCameraMan = new SdkCameraMan(mCamera);
 
-            AdvancedMogreFramework.Singleton.m_pMouse.MouseMoved += mouseMoved;
-            AdvancedMogreFramework.Singleton.m_pMouse.MousePressed += mousePressed;
-            AdvancedMogreFramework.Singleton.m_pMouse.MouseReleased += mouseReleased;
-            AdvancedMogreFramework.Singleton.m_pKeyboard.KeyPressed += keyPressed;
-            AdvancedMogreFramework.Singleton.m_pKeyboard.KeyReleased += keyReleased;
+            AdvancedMogreFramework.Instance.mMouse.MouseMoved += mouseMoved;
+            AdvancedMogreFramework.Instance.mMouse.MousePressed += mousePressed;
+            AdvancedMogreFramework.Instance.mMouse.MouseReleased += mouseReleased;
+            AdvancedMogreFramework.Instance.mKeyboard.KeyPressed += keyPressed;
+            AdvancedMogreFramework.Instance.mKeyboard.KeyReleased += keyReleased;
 
-            AdvancedMogreFramework.Singleton.m_pRoot.FrameRenderingQueued += FrameRenderingQueued;
+            AdvancedMogreFramework.Instance.mRoot.FrameRenderingQueued += FrameRenderingQueued;
 
             buildGUI();
 
@@ -99,7 +99,7 @@ namespace AdvancedMogreFramework.States
         public void createScene()
         {
             // set background and some fog
-	        AdvancedMogreFramework.Singleton.m_pViewport.BackgroundColour=new ColourValue(1.0f, 1.0f, 0.8f);
+	        AdvancedMogreFramework.Instance.mViewport.BackgroundColour=new ColourValue(1.0f, 1.0f, 0.8f);
 	        mSceneMgr.SetFog(FogMode.FOG_LINEAR, new ColourValue(1.0f, 1.0f, 0.8f), 0, 15, 100);
 
 	        // set shadow properties
@@ -170,51 +170,51 @@ namespace AdvancedMogreFramework.States
             agents.Add(bot2);
             agents.Add(bot3);
 
-	        AdvancedMogreFramework.Singleton.m_pTrayMgr.toggleAdvancedFrameStats();
+	        AdvancedMogreFramework.Instance.mTrayMgr.toggleAdvancedFrameStats();
 
 	        StringVector items=new StringVector();
 	        items.Insert(items.Count,"Help");
-	        ParamsPanel help = AdvancedMogreFramework.Singleton.m_pTrayMgr.createParamsPanel(TrayLocation. TL_TOPLEFT, "HelpMessage", 100, items);
+	        ParamsPanel help = AdvancedMogreFramework.Instance.mTrayMgr.createParamsPanel(TrayLocation. TL_TOPLEFT, "HelpMessage", 100, items);
 	        help.setParamValue("Help", "H / F1");
         }
-        public override void exit()
+        public override void Exit()
         {
-            AdvancedMogreFramework.Singleton.m_pLog.LogMessage("Leaving SinbadState...");
+            AdvancedMogreFramework.Instance.mLog.LogMessage("Leaving SinbadState...");
 
-            AdvancedMogreFramework.Singleton.m_pMouse.MouseMoved -= mouseMoved;
-            AdvancedMogreFramework.Singleton.m_pMouse.MousePressed -= mousePressed;
-            AdvancedMogreFramework.Singleton.m_pMouse.MouseReleased -= mouseReleased;
-            AdvancedMogreFramework.Singleton.m_pKeyboard.KeyPressed -= keyPressed;
-            AdvancedMogreFramework.Singleton.m_pKeyboard.KeyReleased -= keyReleased;
-            AdvancedMogreFramework.Singleton.m_pRoot.FrameRenderingQueued -= FrameRenderingQueued;
+            AdvancedMogreFramework.Instance.mMouse.MouseMoved -= mouseMoved;
+            AdvancedMogreFramework.Instance.mMouse.MousePressed -= mousePressed;
+            AdvancedMogreFramework.Instance.mMouse.MouseReleased -= mouseReleased;
+            AdvancedMogreFramework.Instance.mKeyboard.KeyPressed -= keyPressed;
+            AdvancedMogreFramework.Instance.mKeyboard.KeyReleased -= keyReleased;
+            AdvancedMogreFramework.Instance.mRoot.FrameRenderingQueued -= FrameRenderingQueued;
 
             mSceneMgr.DestroyCamera(mCamera);
 	        if (m_pCameraMan!=null) m_pCameraMan=null;
 	
             if(mSceneMgr!=null)
-                AdvancedMogreFramework.Singleton.m_pRoot.DestroySceneManager(mSceneMgr);
+                AdvancedMogreFramework.Instance.mRoot.DestroySceneManager(mSceneMgr);
         }
-        public override bool pause()
+        public override bool Pause()
         {
-            AdvancedMogreFramework.Singleton.m_pLog.LogMessage("Pausing SinbadState...");
+            AdvancedMogreFramework.Instance.mLog.LogMessage("Pausing SinbadState...");
             return true;
         }
-        public override void resume()
+        public override void Resume()
         {
-            AdvancedMogreFramework.Singleton.m_pLog.LogMessage("Resuming SinbadState...");
+            AdvancedMogreFramework.Instance.mLog.LogMessage("Resuming SinbadState...");
  
             buildGUI();
 
-            AdvancedMogreFramework.Singleton.m_pViewport.Camera=mCamera;
+            AdvancedMogreFramework.Instance.mViewport.Camera=mCamera;
             m_bQuit = false;
         }
 
         void buildGUI()
         {
-            AdvancedMogreFramework.Singleton.m_pTrayMgr.showFrameStats(TrayLocation.TL_BOTTOMLEFT);
-	        AdvancedMogreFramework.Singleton.m_pTrayMgr.showLogo(TrayLocation.TL_BOTTOMRIGHT);
-	        AdvancedMogreFramework.Singleton.m_pTrayMgr.createLabel(TrayLocation.TL_TOP, "GameLbl", "Game mode", 250);
-	        AdvancedMogreFramework.Singleton.m_pTrayMgr.showCursor();
+            AdvancedMogreFramework.Instance.mTrayMgr.showFrameStats(TrayLocation.TL_BOTTOMLEFT);
+	        AdvancedMogreFramework.Instance.mTrayMgr.showLogo(TrayLocation.TL_BOTTOMRIGHT);
+	        AdvancedMogreFramework.Instance.mTrayMgr.createLabel(TrayLocation.TL_TOP, "GameLbl", "Game mode", 250);
+	        AdvancedMogreFramework.Instance.mTrayMgr.showCursor();
 
 
             // create a params panel for displaying sample details
@@ -231,7 +231,7 @@ namespace AdvancedMogreFramework.States
 	        items.Insert(items.Count,"Filtering");
 	        items.Insert(items.Count,"Poly Mode");
 
-            m_pDetailsPanel = AdvancedMogreFramework.Singleton.m_pTrayMgr.createParamsPanel(TrayLocation.TL_NONE, "DetailsPanel", 200, items);
+            m_pDetailsPanel = AdvancedMogreFramework.Instance.mTrayMgr.createParamsPanel(TrayLocation.TL_NONE, "DetailsPanel", 200, items);
 	        m_pDetailsPanel.hide();
 
 	        m_pDetailsPanel.setParamValue(9, "Bilinear");
@@ -240,8 +240,8 @@ namespace AdvancedMogreFramework.States
 
         public bool keyPressed(KeyEvent evt)
         {
-            if (!AdvancedMogreFramework.Singleton.m_pTrayMgr.isDialogVisible()) m_pChara.injectKeyDown(evt);
-	        if(AdvancedMogreFramework.Singleton.m_pKeyboard.IsKeyDown(KeyCode.KC_ESCAPE))
+            if (!AdvancedMogreFramework.Instance.mTrayMgr.isDialogVisible()) m_pChara.injectKeyDown(evt);
+	        if(AdvancedMogreFramework.Instance.mKeyboard.IsKeyDown(KeyCode.KC_ESCAPE))
             {
                 pushAppState(findByName("PauseState"));
                 return true;
@@ -249,26 +249,26 @@ namespace AdvancedMogreFramework.States
 
 	        if (evt.key == KeyCode.KC_H || evt.key == KeyCode.KC_F1)   // toggle visibility of help dialog
 			{
-				if (!AdvancedMogreFramework.Singleton.m_pTrayMgr.isDialogVisible() && mInfo["Help"] != "") AdvancedMogreFramework.Singleton.m_pTrayMgr.showOkDialog("Help", mInfo["Help"]);
-				else AdvancedMogreFramework.Singleton.m_pTrayMgr.closeDialog();
+				if (!AdvancedMogreFramework.Instance.mTrayMgr.isDialogVisible() && mInfo["Help"] != "") AdvancedMogreFramework.Instance.mTrayMgr.showOkDialog("Help", mInfo["Help"]);
+				else AdvancedMogreFramework.Instance.mTrayMgr.closeDialog();
 			}
 
-			if (AdvancedMogreFramework.Singleton.m_pTrayMgr.isDialogVisible()) return true;   // don't process any more keys if dialog is up
+			if (AdvancedMogreFramework.Instance.mTrayMgr.isDialogVisible()) return true;   // don't process any more keys if dialog is up
 
 			if (evt.key == KeyCode.KC_F)   // toggle visibility of advanced frame stats
 			{
-				AdvancedMogreFramework.Singleton.m_pTrayMgr.toggleAdvancedFrameStats();
+				AdvancedMogreFramework.Instance.mTrayMgr.toggleAdvancedFrameStats();
 			}
 			else if (evt.key == KeyCode.KC_G)   // toggle visibility of even rarer debugging details
 			{
 				if (m_pDetailsPanel.getTrayLocation() == TrayLocation.TL_NONE)
 				{
-					AdvancedMogreFramework.Singleton.m_pTrayMgr.moveWidgetToTray(m_pDetailsPanel, TrayLocation.TL_TOPRIGHT, 0);
+					AdvancedMogreFramework.Instance.mTrayMgr.moveWidgetToTray(m_pDetailsPanel, TrayLocation.TL_TOPRIGHT, 0);
 					m_pDetailsPanel.show();
 				}
 				else
 				{
-					AdvancedMogreFramework.Singleton.m_pTrayMgr.removeWidgetFromTray(m_pDetailsPanel);
+					AdvancedMogreFramework.Instance.mTrayMgr.removeWidgetFromTray(m_pDetailsPanel);
 					m_pDetailsPanel.hide();
 				}
 			}
@@ -336,7 +336,7 @@ namespace AdvancedMogreFramework.States
 			}
 			else if (evt.key == KeyCode.KC_SYSRQ)   // take a screenshot
 			{
-                AdvancedMogreFramework.Singleton.m_pRenderWnd.WriteContentsToTimestampedFile("screenshot", ".png");
+                AdvancedMogreFramework.Instance.mRenderWnd.WriteContentsToTimestampedFile("screenshot", ".png");
 			}
             else if (evt.key == KeyCode.KC_X)
             {
@@ -355,18 +355,18 @@ namespace AdvancedMogreFramework.States
                 agents[i].injectKeyUp(keyEventRef);
             }
 	        m_pCameraMan.injectKeyUp(keyEventRef);
-            AdvancedMogreFramework.Singleton.keyPressed(keyEventRef);
+            AdvancedMogreFramework.Instance.KeyPressed(keyEventRef);
             return true;
         }
 
         public bool mouseMoved(MouseEvent arg)
         {
-            if (!AdvancedMogreFramework.Singleton.m_pTrayMgr.isDialogVisible())
+            if (!AdvancedMogreFramework.Instance.mTrayMgr.isDialogVisible())
                 for (int i = 0; i < agents.Count; i++)
                 {
                     agents[i].injectMouseMove(arg);
                 }
-            if (AdvancedMogreFramework.Singleton.m_pTrayMgr.injectMouseMove(arg)) return true;
+            if (AdvancedMogreFramework.Instance.mTrayMgr.injectMouseMove(arg)) return true;
 	        m_pCameraMan.injectMouseMove(arg);
   
             return true;
@@ -374,13 +374,13 @@ namespace AdvancedMogreFramework.States
         public bool mousePressed(MouseEvent arg, MouseButtonID id)
         {
             // relay input events to character controller
-	        if (!AdvancedMogreFramework.Singleton.m_pTrayMgr.isDialogVisible()) m_pChara.injectMouseDown(arg, id);
-	        if (AdvancedMogreFramework.Singleton.m_pTrayMgr.injectMouseDown(arg, id)) return true;
+	        if (!AdvancedMogreFramework.Instance.mTrayMgr.isDialogVisible()) m_pChara.injectMouseDown(arg, id);
+	        if (AdvancedMogreFramework.Instance.mTrayMgr.injectMouseDown(arg, id)) return true;
             
 	        if (m_pDragLook && id == MouseButtonID.MB_Left)
 	        {
 		        m_pCameraMan.setStyle(CameraStyle.CS_FREELOOK);
-                AdvancedMogreFramework.Singleton.m_pTrayMgr.hideCursor();
+                AdvancedMogreFramework.Instance.mTrayMgr.hideCursor();
 	        }
 
             m_pCameraMan.injectMouseDown(arg, id);
@@ -388,12 +388,12 @@ namespace AdvancedMogreFramework.States
         }
         public bool mouseReleased(MouseEvent arg, MouseButtonID id)
         {
-            if (AdvancedMogreFramework.Singleton.m_pTrayMgr.injectMouseUp(arg, id)) return true;
+            if (AdvancedMogreFramework.Instance.mTrayMgr.injectMouseUp(arg, id)) return true;
             
 	        if (m_pDragLook && id == MouseButtonID.MB_Left)
 	        {
 		        m_pCameraMan.setStyle(CameraStyle.CS_MANUAL);
-                AdvancedMogreFramework.Singleton.m_pTrayMgr.showCursor();
+                AdvancedMogreFramework.Instance.mTrayMgr.showCursor();
 	        }
 
             m_pCameraMan.injectMouseUp(arg, id);
@@ -414,11 +414,11 @@ namespace AdvancedMogreFramework.States
     }
         }
 
-        public override void update(double timeSinceLastFrame)
+        public override void Update(double timeSinceLastFrame)
         {
-            m_FrameEvent.timeSinceLastFrame = (int)timeSinceLastFrame;
+            mFrameEvent.timeSinceLastFrame = (int)timeSinceLastFrame;
 
-            AdvancedMogreFramework.Singleton.m_pTrayMgr.frameRenderingQueued(m_FrameEvent);
+            AdvancedMogreFramework.Instance.mTrayMgr.frameRenderingQueued(mFrameEvent);
 
             if(m_bQuit == true)
             {
@@ -426,9 +426,9 @@ namespace AdvancedMogreFramework.States
                 return;
             }
  
-	        if (!AdvancedMogreFramework.Singleton.m_pTrayMgr.isDialogVisible())
+	        if (!AdvancedMogreFramework.Instance.mTrayMgr.isDialogVisible())
 	        {
-		        m_pCameraMan.frameRenderingQueued(m_FrameEvent);   // if dialog isn't up, then update the camera
+		        m_pCameraMan.frameRenderingQueued(mFrameEvent);   // if dialog isn't up, then update the camera
 
 		        if (m_pDetailsPanel.isVisible())   // if details panel is visible, then update its contents
 		        {

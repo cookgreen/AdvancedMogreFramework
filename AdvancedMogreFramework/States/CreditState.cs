@@ -34,9 +34,9 @@ namespace AdvancedMogreFramework.States
 {
     public class CreditState : AppState
     {
-        public override void enter()
+        public override void Enter()
         {
-            mSceneMgr = AdvancedMogreFramework.Singleton.m_pRoot.CreateSceneManager(Mogre.SceneType.ST_GENERIC, "CreditSceneMgr");
+            mSceneMgr = AdvancedMogreFramework.Instance.mRoot.CreateSceneManager(Mogre.SceneType.ST_GENERIC, "CreditSceneMgr");
             ColourValue cvAmbineLight = new ColourValue(0.7f, 0.7f, 0.7f);
             mSceneMgr.AmbientLight = cvAmbineLight;
 
@@ -46,14 +46,14 @@ namespace AdvancedMogreFramework.States
             Mogre.Vector3 vectorCameraLookAt = new Mogre.Vector3(5, 20, 0);
             mCamera.LookAt(vectorCameraLookAt);
             mCamera.NearClipDistance = 5;
-            mCamera.AspectRatio = AdvancedMogreFramework.Singleton.m_pViewport.ActualWidth / AdvancedMogreFramework.Singleton.m_pViewport.ActualHeight;
+            mCamera.AspectRatio = AdvancedMogreFramework.Instance.mViewport.ActualWidth / AdvancedMogreFramework.Instance.mViewport.ActualHeight;
 
-            AdvancedMogreFramework.Singleton.m_pViewport.Camera = mCamera;
+            AdvancedMogreFramework.Instance.mViewport.Camera = mCamera;
 
             ScreenManager.Instance.ChangeScreen("Credit");
             ScreenManager.Instance.OnCurrentScreenExit += OnCurrentScreenExit;
 
-            AdvancedMogreFramework.Singleton.m_pMouse.MousePressed += MousePressed;
+            AdvancedMogreFramework.Instance.mMouse.MousePressed += MousePressed;
         }
 
         private bool MousePressed(MOIS.MouseEvent arg, MOIS.MouseButtonID id)
@@ -70,27 +70,27 @@ namespace AdvancedMogreFramework.States
             changeAppState(findByName("MenuState"));
         }
 
-        public override bool pause()
+        public override bool Pause()
         {
-            return base.pause();
+            return base.Pause();
         }
 
-        public override void resume()
+        public override void Resume()
         {
-            base.resume();
+            base.Resume();
         }
 
-        public override void update(double timeSinceLastFrame)
+        public override void Update(double timeSinceLastFrame)
         {
             ScreenManager.Instance.UpdateCurrentScreen((float)timeSinceLastFrame);
         }
 
-        public override void exit()
+        public override void Exit()
         {
             mSceneMgr.DestroyCamera(mCamera);
-            AdvancedMogreFramework.Singleton.m_pRoot.DestroySceneManager(mSceneMgr);
+            AdvancedMogreFramework.Instance.mRoot.DestroySceneManager(mSceneMgr);
             ScreenManager.Instance.Dispose();
-            AdvancedMogreFramework.Singleton.m_pMouse.MousePressed -= MousePressed;
+            AdvancedMogreFramework.Instance.mMouse.MousePressed -= MousePressed;
         }
     }
 }

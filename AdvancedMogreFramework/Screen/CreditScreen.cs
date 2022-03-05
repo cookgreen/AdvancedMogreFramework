@@ -111,7 +111,7 @@ namespace AdvancedMogreFramework
 
         public void Run()
         {
-            AdvancedMogreFramework.Singleton.m_pTrayMgr.hideCursor();
+            AdvancedMogreFramework.Instance.mTrayMgr.hideCursor();
         }
 
         public void Update(float timeSinceLastFrame)
@@ -120,7 +120,7 @@ namespace AdvancedMogreFramework
             {
                 if (!elementNames.Contains("lbCredit0"))
                 {
-                    elements.Add(AdvancedMogreFramework.Singleton.m_pTrayMgr.createStaticText(TrayLocation.TL_NONE, "lbCredit0", strCreditLst[0]));
+                    elements.Add(AdvancedMogreFramework.Instance.mTrayMgr.createStaticText(TrayLocation.TL_NONE, "lbCredit0", strCreditLst[0]));
                     elements[0].getOverlayElement().MetricsMode = GuiMetricsMode.GMM_RELATIVE;
                     elements[0].getOverlayElement().Left = 0.5f;
                     elements[0].getOverlayElement().Top = 0.5f;
@@ -144,11 +144,11 @@ namespace AdvancedMogreFramework
                 {
                     elements.Remove(elements.Find(o => o.getName() == "lbCredit0"));
                     elementNames.Remove("lbCredit0");
-                    AdvancedMogreFramework.Singleton.m_pTrayMgr.destroyWidget("lbCredit0");
+                    AdvancedMogreFramework.Instance.mTrayMgr.destroyWidget("lbCredit0");
                 }
                 if (!elementNames.Contains("lbCredit1"))
                 {
-                    elements.Add(AdvancedMogreFramework.Singleton.m_pTrayMgr.createStaticText(TrayLocation.TL_NONE, "lbCredit1", strCreditLst[1]));
+                    elements.Add(AdvancedMogreFramework.Instance.mTrayMgr.createStaticText(TrayLocation.TL_NONE, "lbCredit1", strCreditLst[1]));
                     elements[0].getOverlayElement().MetricsMode = GuiMetricsMode.GMM_RELATIVE;
                     elements[0].getOverlayElement().Left = 0.5f;
                     elements[0].getOverlayElement().Top = 0.5f;
@@ -172,11 +172,11 @@ namespace AdvancedMogreFramework
                 {
                     elements.Remove(elements.Find(o => o.getName() == "lbCredit1"));
                     elementNames.Remove("lbCredit1");
-                    AdvancedMogreFramework.Singleton.m_pTrayMgr.destroyWidget("lbCredit1");
+                    AdvancedMogreFramework.Instance.mTrayMgr.destroyWidget("lbCredit1");
                 }
                 if (!elementNames.Contains("lbCredit2"))
                 {
-                    elements.Add(AdvancedMogreFramework.Singleton.m_pTrayMgr.createStaticText(TrayLocation.TL_NONE, "lbCredit2", strCreditLst[2]));
+                    elements.Add(AdvancedMogreFramework.Instance.mTrayMgr.createStaticText(TrayLocation.TL_NONE, "lbCredit2", strCreditLst[2]));
                     elements[0].getOverlayElement().MetricsMode = GuiMetricsMode.GMM_RELATIVE;
                     elements[0].getOverlayElement().Left = 0.5f;
                     elements[0].getOverlayElement().Top = 1.0f;
@@ -199,7 +199,7 @@ namespace AdvancedMogreFramework
 
         public void Exit()
         {
-            AdvancedMogreFramework.Singleton.m_pTrayMgr.destroyAllWidgets();
+            AdvancedMogreFramework.Instance.mTrayMgr.destroyAllWidgets();
             time = 0;
             elements.Clear();
         }

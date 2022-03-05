@@ -9,11 +9,11 @@ namespace AdvancedMogreFramework.States
 {
     public class DrivingCarState : AppState
     {
-        public override void enter()
+        public override void Enter()
         {
-            AdvancedMogreFramework.Singleton.m_pLog.LogMessage("Entering GameState...");
+            AdvancedMogreFramework.Instance.mLog.LogMessage("Entering GameState...");
             AdvancedMogreFramework.lastState = "GameState";
-            mSceneMgr = AdvancedMogreFramework.Singleton.m_pRoot.CreateSceneManager(SceneType.ST_GENERIC, "GameSceneMgr");
+            mSceneMgr = AdvancedMogreFramework.Instance.mRoot.CreateSceneManager(SceneType.ST_GENERIC, "GameSceneMgr");
             ColourValue cvAmbineLight = new ColourValue(0.7f, 0.7f, 0.7f);
             mSceneMgr.AmbientLight = cvAmbineLight;//(Ogre::ColourValue(0.7f, 0.7f, 0.7f));
 
@@ -24,24 +24,24 @@ namespace AdvancedMogreFramework.States
             mCamera.LookAt(vectorCameraLookAt);
             mCamera.NearClipDistance = 5;
 
-            mCamera.AspectRatio = AdvancedMogreFramework.Singleton.m_pViewport.ActualWidth / AdvancedMogreFramework.Singleton.m_pViewport.ActualHeight;
+            mCamera.AspectRatio = AdvancedMogreFramework.Instance.mViewport.ActualWidth / AdvancedMogreFramework.Instance.mViewport.ActualHeight;
 
-            AdvancedMogreFramework.Singleton.m_pViewport.Camera = mCamera;
+            AdvancedMogreFramework.Instance.mViewport.Camera = mCamera;
         }
 
-        public override void exit()
+        public override void Exit()
         {
-            AdvancedMogreFramework.Singleton.m_pLog.LogMessage("Leaving GameState...");
+            AdvancedMogreFramework.Instance.mLog.LogMessage("Leaving GameState...");
 
-            AdvancedMogreFramework.Singleton.m_pMouse.MouseMoved -= mouseMoved;
-            AdvancedMogreFramework.Singleton.m_pMouse.MousePressed -= mousePressed;
-            AdvancedMogreFramework.Singleton.m_pMouse.MouseReleased -= mouseReleased;
-            AdvancedMogreFramework.Singleton.m_pKeyboard.KeyPressed -= keyPressed;
-            AdvancedMogreFramework.Singleton.m_pKeyboard.KeyReleased -= keyReleased;
+            AdvancedMogreFramework.Instance.mMouse.MouseMoved -= mouseMoved;
+            AdvancedMogreFramework.Instance.mMouse.MousePressed -= mousePressed;
+            AdvancedMogreFramework.Instance.mMouse.MouseReleased -= mouseReleased;
+            AdvancedMogreFramework.Instance.mKeyboard.KeyPressed -= keyPressed;
+            AdvancedMogreFramework.Instance.mKeyboard.KeyReleased -= keyReleased;
 
             if (mSceneMgr != null)
                 mSceneMgr.DestroyCamera(mCamera);
-            AdvancedMogreFramework.Singleton.m_pRoot.DestroySceneManager(mSceneMgr);
+            AdvancedMogreFramework.Instance.mRoot.DestroySceneManager(mSceneMgr);
         }
 
         public virtual bool keyPressed(KeyEvent keyEventRef)

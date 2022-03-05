@@ -7,19 +7,19 @@ namespace AdvancedMogreFramework.States
 {
     public class NetworkState : AppState
     {
-        public override void enter()
+        public override void Enter()
         {
-            base.enter();
+            base.Enter();
         }
 
-        public override void exit()
+        public override void Exit()
         {
-            base.exit();
+            base.Exit();
         }
 
-        public override void update(double timeSinceLastFrame)
+        public override void Update(double timeSinceLastFrame)
         {
-            base.update(timeSinceLastFrame);
+            base.Update(timeSinceLastFrame);
         }
     }
 }

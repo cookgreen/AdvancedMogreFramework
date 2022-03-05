@@ -38,47 +38,47 @@ namespace AdvancedMogreFramework.States
 	    public AppStateListener(){}
 	    ~AppStateListener(){}
 
-        public virtual void manageAppState(String stateName, AppState state) { }
+        public virtual void ManageAppState(string stateName, AppState state) { }
 
-        public virtual AppState findByName(String stateName) { return null; }
-        public virtual void changeAppState(AppState state) { }
-        public virtual bool pushAppState(AppState state) { return false; }
-        public virtual void popAppState() { }
-        public virtual void pauseAppState() { }
-        public virtual void shutdown() { }
-        public virtual void popAllAndPushAppState<T>(AppState state) where T:AppState { }
+        public virtual AppState FindByName(string stateName) { return null; }
+        public virtual void ChangeAppState(AppState state) { }
+        public virtual bool PushAppState(AppState state) { return false; }
+        public virtual void PopAppState() { }
+        public virtual void PauseAppState() { }
+        public virtual void Shutdown() { }
+        public virtual void PopAllAndPushAppState<T>(AppState state) where T:AppState { }
 };
     public class AppState :SdkTrayListener
     {
-        public static void create<T>(AppStateListener parent, String name) where T : AppState, new()
+        public static void Create<T>(AppStateListener parent, string name) where T : AppState, new()
         {
             T myAppState=new T();				
-	        myAppState.m_pParent = parent;					
-	        parent.manageAppState(name, myAppState);
+	        myAppState.mListener = parent;					
+	        parent.ManageAppState(name, myAppState);
         }
  
-	    public void destroy()
+	    public void Destroy()
         {
         }
  
-	    public virtual void enter(){}
-	    public virtual void exit(){}
-	    public virtual bool pause(){return false;}
-	    public virtual void resume(){}
-        public virtual void update(double timeSinceLastFrame) { }
+	    public virtual void Enter(){}
+	    public virtual void Exit(){}
+	    public virtual bool Pause(){return false;}
+	    public virtual void Resume(){}
+        public virtual void Update(double timeSinceLastFrame) { }
         public AppState(){}
  
-	    protected AppState	findByName(String stateName){return m_pParent.findByName(stateName);}
-        protected void changeAppState(AppState state) { m_pParent.changeAppState(state); }
-        protected bool pushAppState(AppState state) { return m_pParent.pushAppState(state); }
-        protected void popAppState() { m_pParent.popAppState(); }
-        protected void shutdown() { m_pParent.shutdown(); }
-        protected void popAllAndPushAppState<T>(AppState state) where T:AppState{ m_pParent.popAllAndPushAppState<T>(state); }
+	    protected AppState	findByName(String stateName){return mListener.FindByName(stateName);}
+        protected void changeAppState(AppState state) { mListener.ChangeAppState(state); }
+        protected bool pushAppState(AppState state) { return mListener.PushAppState(state); }
+        protected void popAppState() { mListener.PopAppState(); }
+        protected void shutdown() { mListener.Shutdown(); }
+        protected void popAllAndPushAppState<T>(AppState state) where T:AppState{ mListener.PopAllAndPushAppState<T>(state); }
 
-        protected AppStateListener m_pParent;
+        protected AppStateListener mListener;
 
         protected Camera mCamera;
         protected SceneManager mSceneMgr;
-        protected FrameEvent m_FrameEvent;
+        protected FrameEvent mFrameEvent;
     }
 }
