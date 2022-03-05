@@ -82,8 +82,8 @@ namespace AdvancedMogreFramework
         private AppState mWorld;
         private Physics mPhysics;
         private Scene mPhysicsScene;
-        private Actor mActor;
-        private CharacterController physicsController;
+        //private Actor mActor;
+        //private CharacterController physicsController;
         private RigidBody rigidBody;
         private enum AnimID
 	    {

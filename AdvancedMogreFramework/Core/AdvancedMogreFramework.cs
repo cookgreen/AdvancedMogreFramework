@@ -47,8 +47,8 @@ namespace AdvancedMogreFramework
 
         public SdkTrayManager mTrayMgr;
 
-        public NAudio.Vorbis.VorbisWaveReader mVorbis;
-        public NAudio.Wave.WaveOut mWaveOut;
+        //public NAudio.Vorbis.VorbisWaveReader mVorbis;
+        //public NAudio.Wave.WaveOut mWaveOut;
 
         public static string lastState;
         public AdvancedMogreFramework()
@@ -189,7 +189,7 @@ namespace AdvancedMogreFramework
         {
             return System.Math.Max(System.Math.Min(val, maxval), minval);
         }
-        public static AdvancedMogreFramework instance;
+        private static AdvancedMogreFramework instance;
         public static AdvancedMogreFramework Instance
         {
             get

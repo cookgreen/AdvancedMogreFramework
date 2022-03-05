@@ -41,8 +41,8 @@ namespace AdvancedMogreFramework.States
     {
 	    ParamsPanel		m_pDetailsPanel;   		// sample details panel
 	    bool						m_bQuit;
-	    bool						m_pCursorWasVisible;		// was cursor visible before dialog appeared
-	    bool						m_pDragLook;              // click and drag to free-look
+	    //bool						m_pCursorWasVisible;		// was cursor visible before dialog appeared
+	    bool						m_pDragLook = false;              // click and drag to free-look
         public SdkCameraMan	m_pCameraMan;
 	    SinbadCharacterController	m_pChara;
 	    NameValuePairList		mInfo=new NameValuePairList();    // custom sample info

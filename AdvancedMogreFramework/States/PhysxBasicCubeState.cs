@@ -32,7 +32,7 @@ namespace AdvancedMogreFramework.States
             defm.Restitution = 0.5f;
             defm.DynamicFriction = defm.StaticFriction = 0.6f;
 
-            trayMgr = AdvancedMogreFramework.instance.mTrayMgr;
+            trayMgr = AdvancedMogreFramework.Instance.mTrayMgr;
             cubeActorNodes = new List<ActorNode>();
         }
 

@@ -184,7 +184,7 @@ namespace AdvancedMogreFramework.States
             else if (button.getName() == "EnterBasicCubeBtn")
                 changeAppState(findByName("BasicCubeState"));
             else if (button.getName() == "EnterNewtonCradleBtn")
-                changeAppState(findByName("CreditState"));
+                changeAppState(findByName("NewtonCradleState"));
             else if (button.getName() == "EnterClothBtn")
                 changeAppState(findByName("CreditState"));
             else if (button.getName() == "EnterCharacterControllerBtn")

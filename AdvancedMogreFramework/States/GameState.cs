@@ -58,7 +58,8 @@ namespace AdvancedMogreFramework.States
         RaySceneQuery m_pRSQ;
         SceneNode m_pCurrentObject;
         Entity m_pCurrentEntity;
-        bool m_bRMouseDown, m_bLMouseDown;
+        bool m_bRMouseDown;
+        //bool m_bLMouseDown;
         bool m_bSettingsMode;
 
         private Scene physxScene;
@@ -73,7 +74,7 @@ namespace AdvancedMogreFramework.States
             m_MoveSpeed = 0.1f;
             m_RotateSpeed = 0.3f;
 
-            m_bLMouseDown = false;
+            //m_bLMouseDown = false;
             m_bRMouseDown = false;
             m_bQuit = false;
             m_bSettingsMode = false;
@@ -498,7 +499,7 @@ namespace AdvancedMogreFramework.States
             if(id == MouseButtonID.MB_Left)
             {
                 onLeftPressed(evt);
-                m_bLMouseDown = true;
+                //m_bLMouseDown = true;
             }
             else if (id == MouseButtonID.MB_Right)
             {
@@ -513,7 +514,7 @@ namespace AdvancedMogreFramework.States
  
             if(id == MouseButtonID.MB_Left)
             {
-                m_bLMouseDown = false;
+                //m_bLMouseDown = false;
             }
             else if(id == MouseButtonID.MB_Right)
             {
