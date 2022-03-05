@@ -6,7 +6,7 @@ using Mogre;
 using Mogre.PhysX;
 
 
-namespace AdvancedMogreFramework.Physx
+namespace AdvancedMogreFramework.Entities
 {
     public class CharacterController : RigidBody
     {

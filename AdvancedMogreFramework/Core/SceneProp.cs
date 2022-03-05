@@ -4,17 +4,15 @@ using System.Linq;
 using System.Text;
 using Mogre;
 using Mogre.PhysX;
-using AdvancedMogreFramework.Physx;
 using AdvancedMogreFramework.Helper;
 
-namespace AdvancedMogreFramework.States
+namespace AdvancedMogreFramework.Entities
 {
     /// <summary>
     /// Static Game Object
     /// </summary>
     public class SceneProp
     {
-        private AppState state;
         private SceneManager scm;
         private string name;
         private string meshName;
@@ -44,14 +42,12 @@ namespace AdvancedMogreFramework.States
         }
 
         public SceneProp(
-            AppState state,
             SceneManager scm, 
             SceneNode node, 
             Scene physicsScene,
             string name, 
             string meshName)
         {
-            this.state = state;
             this.scm = scm;
             this.name = name;
             this.meshName = meshName;
@@ -78,7 +74,6 @@ namespace AdvancedMogreFramework.States
                 physicsScene, 
                 physicsScene.Physics.CreateTriangleMesh(new
                 StaticMeshData(ent.GetMesh())));
-            ((SinbadState)state).AddActorNode(new ActorNode(node, Actor));
         }
 
         public void SetMaterialName(string materialName)

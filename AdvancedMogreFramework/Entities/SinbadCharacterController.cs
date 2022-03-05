@@ -32,7 +32,7 @@ using Mogre.PhysX;
 using MOIS;
 using AdvancedMogreFramework.States;
 using AdvancedMogreFramework.Helper;
-using AdvancedMogreFramework.Physx;
+using AdvancedMogreFramework.Entities;
 
 namespace AdvancedMogreFramework
 {

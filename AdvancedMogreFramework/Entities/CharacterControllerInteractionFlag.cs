@@ -1,4 +1,4 @@
-﻿namespace AdvancedMogreFramework.Physx
+﻿namespace AdvancedMogreFramework.Entities
 {
     public enum CharacterControllerInteractionFlag
     {
