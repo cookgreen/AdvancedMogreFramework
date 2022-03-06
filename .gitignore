@@ -4,7 +4,8 @@
 packages/*
 AdvancedMogreFramework/obj/*
 AdvancedMogreFramework.VC.db
-*.exe
+game.exe
+game.server.exe
 *.pdb
 *.log
 *.manifest
