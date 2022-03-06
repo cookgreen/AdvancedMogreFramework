@@ -56,7 +56,6 @@ namespace AdvancedMogreFramework.Core
             AppState.Create<PhysxClothState>(mAppStateManager, "ClothState");
             AppState.Create<PhysxNewtonCradleState>(mAppStateManager, "NewtonCradleState");
             AppState.Create<DrivingCarState>(mAppStateManager, "DrivingCarState");
-            AppState.Create<InventoryDemoState>(mAppStateManager, "InventoryDemoState");
 
             mAppStateManager.Start(mAppStateManager.FindByName("MenuState"));
         }

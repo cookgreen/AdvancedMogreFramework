@@ -179,8 +179,6 @@ namespace AdvancedMogreFramework.States
                 );
             mCamera.Pitch(new Radian(new Degree(20)));
 
-            scene.Simulate(0);
-
             Framework.Instance.mMouse.MouseMoved += mouseMoved;
             Framework.Instance.mMouse.MousePressed += mousePressed;
             Framework.Instance.mMouse.MouseReleased += mouseReleased;

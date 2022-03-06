@@ -1289,26 +1289,26 @@ namespace RMOgre
             //                                                 CompositeMapDiffuse = l.DiffuseColour
             //                                               };
 
-            TerrainGroup mTerrainGroup = new TerrainGroup(sceneManager, Terrain.Alignment.ALIGN_X_Z, usMapSize, fWorldSize)
-            {
-                Origin = Vector3.ZERO,
-                ResourceGroup = sGroupName
-            };
+            //TerrainGroup mTerrainGroup = new TerrainGroup(sceneManager, Terrain.Alignment.ALIGN_X_Z, usMapSize, fWorldSize)
+            //{
+            //    Origin = Vector3.ZERO,
+            //    ResourceGroup = sGroupName
+            //};
 
 
             // Process terrain pages (*)
-            XmlElement pElement = (XmlElement)_xmlElement.SelectSingleNode("terrainPages");
-            if (pElement != null)
-            {
-                // ReSharper disable PossibleNullReferenceException
-                foreach (XmlElement xmlElement in pElement.SelectNodes("terrainPage"))
-                // ReSharper restore PossibleNullReferenceException
-                {
-                    ProcessTerrainPage(xmlElement, _sceneNodeParent, mTerrainGroup);
-                }
-            }
-            mTerrainGroup.LoadAllTerrains(true);
-            mTerrainGroup.FreeTemporaryResources();
+            //XmlElement pElement = (XmlElement)_xmlElement.SelectSingleNode("terrainPages");
+            //if (pElement != null)
+            //{
+            //    // ReSharper disable PossibleNullReferenceException
+            //    foreach (XmlElement xmlElement in pElement.SelectNodes("terrainPage"))
+            //    // ReSharper restore PossibleNullReferenceException
+            //    {
+            //        ProcessTerrainPage(xmlElement, _sceneNodeParent, mTerrainGroup);
+            //    }
+            //}
+            //mTerrainGroup.LoadAllTerrains(true);
+            //mTerrainGroup.FreeTemporaryResources();
             //mTerrain->setPosition(mTerrainPosition);
         }
 
@@ -1318,17 +1318,17 @@ namespace RMOgre
         /// <param name="_xmlElement">XmlElement</param>
         /// <param name="_sceneNodeParent">SceneNode parent</param>
         /// <param name="_mTerrainGroup">TerrainGroup</param>
-        protected void ProcessTerrainPage(XmlElement _xmlElement, SceneNode _sceneNodeParent, TerrainGroup _mTerrainGroup)
-        {
-            string sName = GetAttrib(_xmlElement, "name");
-            int iPageX = int.Parse(_xmlElement.GetAttribute("pageX"));
-            int iPageY = int.Parse(_xmlElement.GetAttribute("pageY"));
-
-            if (ResourceGroupManager.Singleton.ResourceExists(_mTerrainGroup.ResourceGroup, sName))
-            {
-                _mTerrainGroup.DefineTerrain(iPageX, iPageY, sName);
-            }
-        }
+        //protected void ProcessTerrainPage(XmlElement _xmlElement, SceneNode _sceneNodeParent, TerrainGroup _mTerrainGroup)
+        //{
+        //    string sName = GetAttrib(_xmlElement, "name");
+        //    int iPageX = int.Parse(_xmlElement.GetAttribute("pageX"));
+        //    int iPageY = int.Parse(_xmlElement.GetAttribute("pageY"));
+        //
+        //    if (ResourceGroupManager.Singleton.ResourceExists(_mTerrainGroup.ResourceGroup, sName))
+        //    {
+        //        _mTerrainGroup.DefineTerrain(iPageX, iPageY, sName);
+        //    }
+        //}
 
         /// <summary>
         /// Chargement d'un plan
