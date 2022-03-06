@@ -71,8 +71,8 @@ namespace AdvancedMogreFramework.States
          {
             ChangeAppState(state);
  
-	        int timeSinceLastFrame = 1;
-	        int startTime = 0;
+	        uint timeSinceLastFrame = 1;
+	        uint startTime = 0;
  
 	        while(!mShutdown)
 	        {
@@ -82,20 +82,23 @@ namespace AdvancedMogreFramework.States
 
                 if (AdvancedMogreFramework.Instance.mRenderWnd.IsActive)
 		        {
-                    startTime = (int)AdvancedMogreFramework.Instance.mTimer.MicrosecondsCPU;
+                    startTime = AdvancedMogreFramework.Instance.mTimer.MillisecondsCPU;
 
                     AdvancedMogreFramework.Instance.mKeyboard.Capture();
                     AdvancedMogreFramework.Instance.mMouse.Capture();
 
                     mActiveStateStack.Last().Update(timeSinceLastFrame * 1.0 / 1000);
+
                     AdvancedMogreFramework.Instance.mKeyboard.Capture();
                     AdvancedMogreFramework.Instance.mMouse.Capture();
+
                     AdvancedMogreFramework.Instance.UpdateOgre(timeSinceLastFrame * 1.0 / 1000);
+
                     if (AdvancedMogreFramework.Instance.mRoot != null)
                     {
                         AdvancedMogreFramework.Instance.mRoot.RenderOneFrame();
                     }
-                    timeSinceLastFrame = (int)AdvancedMogreFramework.Instance.mTimer.MicrosecondsCPU - startTime;
+                    timeSinceLastFrame = AdvancedMogreFramework.Instance.mTimer.MillisecondsCPU - startTime;
 		        }
 		        else
 		        {

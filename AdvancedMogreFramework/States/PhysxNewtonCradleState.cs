@@ -27,7 +27,6 @@ namespace AdvancedMogreFramework.States
             physx = Physics.Create();
             SceneDesc desc = new SceneDesc();
             scene = physx.CreateScene(desc);
-            scene.Gravity = new Mogre.Vector3(0, -9.81f, 0);
 
             scene.Gravity = new Mogre.Vector3(0, -9.81f, 0);
             var defm = scene.Materials[0];
@@ -41,6 +40,8 @@ namespace AdvancedMogreFramework.States
 
         public override void Enter()
         {
+            //scene.Timing.MaxTimestep = 1.0f / (3 * 24);
+
             AdvancedMogreFramework.Instance.mTrayMgr.destroyAllWidgets();
 
             mSceneMgr = AdvancedMogreFramework.Instance.mRoot.CreateSceneManager(SceneType.ST_GENERIC, "PhysxNewtonCradleMgr");
@@ -56,11 +57,11 @@ namespace AdvancedMogreFramework.States
 
             var physicsMat = scene.CreateMaterial(new MaterialDesc(0.0f, 0.0f, 1.0f));
             
-            var sd = new SphereShapeDesc(radius);
-            sd.SkinWidth = 0.0f;
-            sd.MaterialIndex = physicsMat.Index;
+            var sphereShapeDesc = new SphereShapeDesc(radius);
+            sphereShapeDesc.SkinWidth = 0.0f;
+            sphereShapeDesc.MaterialIndex = physicsMat.Index;
 
-            var sphereActorDesc = new ActorDesc(new BodyDesc(0.124f, 1.0f), 150.1f, sd);
+            var sphereActorDesc = new ActorDesc(new BodyDesc(0.124f, 1.0f), 150.1f, sphereShapeDesc);
 
             for (int i = -2; i <= 2; i++)
             {
@@ -102,7 +103,6 @@ namespace AdvancedMogreFramework.States
                 manualObject.Position(2 * radius * i, stringlength + centery, -3);
                 manualObject.End();
                 manualObjectNode.AttachObject(manualObject);
-                actorNodes.Add(new ActorNode(manualObjectNode, actor));
 
                 manualObject = mSceneMgr.CreateManualObject();
                 manualObjectNode = mSceneMgr.RootSceneNode.CreateChildSceneNode();
@@ -111,9 +111,9 @@ namespace AdvancedMogreFramework.States
                 manualObject.Position(2 * radius * i, stringlength + centery, 3);
                 manualObject.End();
                 manualObjectNode.AttachObject(manualObject);
-                actorNodes.Add(new ActorNode(manualObjectNode, actor));
             }
 
+            //Panel
             ManualObject mo = mSceneMgr.CreateManualObject();
             SceneNode moNode = mSceneMgr.RootSceneNode.CreateChildSceneNode();
             mo.Begin("BaseWhiteNoLighting", RenderOperation.OperationTypes.OT_TRIANGLE_LIST);
