@@ -41,7 +41,7 @@ namespace AdvancedMogreFramework.States
         }
         public override void Enter()
         {
-            AdvancedMogreFramework.Instance.mLog.LogMessage("Entering MenuState...");
+            Framework.Instance.mLog.LogMessage("Entering MenuState...");
             m_bQuit = false;
 
             //if (AdvancedMogreFramework.Singleton.m_pVorbis == null)
@@ -52,7 +52,7 @@ namespace AdvancedMogreFramework.States
             //    AdvancedMogreFramework.Singleton.m_pWaveOut.Play();
             //}
  
-            mSceneMgr = AdvancedMogreFramework.Instance.mRoot.CreateSceneManager(Mogre.SceneType.ST_GENERIC, "MenuSceneMgr");
+            mSceneMgr = Framework.Instance.mRoot.CreateSceneManager(Mogre.SceneType.ST_GENERIC, "MenuSceneMgr");
             ColourValue cvAmbineLight=new ColourValue(0.7f,0.7f,0.7f);
             mSceneMgr.AmbientLight=cvAmbineLight;
  
@@ -62,108 +62,108 @@ namespace AdvancedMogreFramework.States
             mCamera.LookAt(vectorCameraLookat);
             mCamera.NearClipDistance=1;//setNearClipDistance(1);
  
-            mCamera.AspectRatio=AdvancedMogreFramework.Instance.mViewport.ActualWidth / AdvancedMogreFramework.Instance.mViewport.ActualHeight;
+            mCamera.AspectRatio=Framework.Instance.mViewport.ActualWidth / Framework.Instance.mViewport.ActualHeight;
  
-            AdvancedMogreFramework.Instance.mViewport.Camera=mCamera;
+            Framework.Instance.mViewport.Camera=mCamera;
 
-            AdvancedMogreFramework.Instance.mTrayMgr.showFrameStats(TrayLocation.TL_BOTTOMLEFT);
-            AdvancedMogreFramework.Instance.mTrayMgr.showLogo(TrayLocation.TL_BOTTOMRIGHT);
-            AdvancedMogreFramework.Instance.mTrayMgr.showCursor();
+            Framework.Instance.mTrayMgr.showFrameStats(TrayLocation.TL_BOTTOMLEFT);
+            Framework.Instance.mTrayMgr.showLogo(TrayLocation.TL_BOTTOMRIGHT);
+            Framework.Instance.mTrayMgr.showCursor();
 
             BuildMainMenu();
 
-            AdvancedMogreFramework.Instance.mMouse.MouseMoved += mouseMoved;
-            AdvancedMogreFramework.Instance.mMouse.MousePressed += mousePressed;
-            AdvancedMogreFramework.Instance.mMouse.MouseReleased += mouseReleased;
-            AdvancedMogreFramework.Instance.mKeyboard.KeyPressed += keyPressed;
-            AdvancedMogreFramework.Instance.mKeyboard.KeyReleased += keyReleased;
+            Framework.Instance.mMouse.MouseMoved += mouseMoved;
+            Framework.Instance.mMouse.MousePressed += mousePressed;
+            Framework.Instance.mMouse.MouseReleased += mouseReleased;
+            Framework.Instance.mKeyboard.KeyPressed += keyPressed;
+            Framework.Instance.mKeyboard.KeyReleased += keyReleased;
             createScene();
         }
 
         private void BuildMainMenu()
         {
 
-            AdvancedMogreFramework.Instance.mTrayMgr.destroyAllWidgets();
-            AdvancedMogreFramework.Instance.mTrayMgr.createButton(TrayLocation.TL_CENTER, "EnterBtn", "Enter GameState", 250);
-            AdvancedMogreFramework.Instance.mTrayMgr.createButton(TrayLocation.TL_CENTER, "EnterSinbadBtn", "Enter SinbadState", 250);
-            AdvancedMogreFramework.Instance.mTrayMgr.createButton(TrayLocation.TL_CENTER, "EnterPhysxBtn", "View Physx Demos", 250);
-            AdvancedMogreFramework.Instance.mTrayMgr.createButton(TrayLocation.TL_CENTER, "EnterGameBtn", "View Game Demos", 250);
-            AdvancedMogreFramework.Instance.mTrayMgr.createButton(TrayLocation.TL_CENTER, "EnterCreditBtn", "Credit", 250);
-            AdvancedMogreFramework.Instance.mTrayMgr.createButton(TrayLocation.TL_CENTER, "ExitBtn", "Exit", 250);
-            AdvancedMogreFramework.Instance.mTrayMgr.createLabel(TrayLocation.TL_TOP, "MenuLbl", "AdvancedMogreFramework", 250);
+            Framework.Instance.mTrayMgr.destroyAllWidgets();
+            Framework.Instance.mTrayMgr.createButton(TrayLocation.TL_CENTER, "EnterBtn", "Enter GameState", 250);
+            Framework.Instance.mTrayMgr.createButton(TrayLocation.TL_CENTER, "EnterSinbadBtn", "Enter SinbadState", 250);
+            Framework.Instance.mTrayMgr.createButton(TrayLocation.TL_CENTER, "EnterPhysxBtn", "View Physx Demos", 250);
+            Framework.Instance.mTrayMgr.createButton(TrayLocation.TL_CENTER, "EnterGameBtn", "View Game Demos", 250);
+            Framework.Instance.mTrayMgr.createButton(TrayLocation.TL_CENTER, "EnterCreditBtn", "Credit", 250);
+            Framework.Instance.mTrayMgr.createButton(TrayLocation.TL_CENTER, "ExitBtn", "Exit", 250);
+            Framework.Instance.mTrayMgr.createLabel(TrayLocation.TL_TOP, "MenuLbl", "AdvancedMogreFramework", 250);
         }
 
         private void BuildPhysxGUI()
         {
-            AdvancedMogreFramework.Instance.mTrayMgr.destroyAllWidgets();
-            AdvancedMogreFramework.Instance.mTrayMgr.createButton(TrayLocation.TL_CENTER, "EnterBasicCubeBtn", "Basic Cube", 250);
-            AdvancedMogreFramework.Instance.mTrayMgr.createButton(TrayLocation.TL_CENTER, "EnterNewtonCradleBtn", "Newton's Cradle", 250);
-            AdvancedMogreFramework.Instance.mTrayMgr.createButton(TrayLocation.TL_CENTER, "EnterClothBtn", "Cloth", 250);
-            AdvancedMogreFramework.Instance.mTrayMgr.createButton(TrayLocation.TL_CENTER, "EnterCharacterControllerBtn", "Character Controller", 250);
-            AdvancedMogreFramework.Instance.mTrayMgr.createButton(TrayLocation.TL_CENTER, "BackBtn", "Back", 250);
-            AdvancedMogreFramework.Instance.mTrayMgr.createLabel(TrayLocation.TL_TOP, "PhysxLbl", "View Physx Demos", 250);
+            Framework.Instance.mTrayMgr.destroyAllWidgets();
+            Framework.Instance.mTrayMgr.createButton(TrayLocation.TL_CENTER, "EnterBasicCubeBtn", "Basic Cube", 250);
+            Framework.Instance.mTrayMgr.createButton(TrayLocation.TL_CENTER, "EnterNewtonCradleBtn", "Newton's Cradle", 250);
+            Framework.Instance.mTrayMgr.createButton(TrayLocation.TL_CENTER, "EnterClothBtn", "Cloth", 250);
+            Framework.Instance.mTrayMgr.createButton(TrayLocation.TL_CENTER, "EnterCharacterControllerBtn", "Character Controller", 250);
+            Framework.Instance.mTrayMgr.createButton(TrayLocation.TL_CENTER, "BackBtn", "Back", 250);
+            Framework.Instance.mTrayMgr.createLabel(TrayLocation.TL_TOP, "PhysxLbl", "View Physx Demos", 250);
         }
 
         private void BuildGameGUI()
         {
-            AdvancedMogreFramework.Instance.mTrayMgr.destroyAllWidgets();
-            AdvancedMogreFramework.Instance.mTrayMgr.createButton(TrayLocation.TL_CENTER, "EnterDrivingCarBtn", "Driving Car", 250);
-            AdvancedMogreFramework.Instance.mTrayMgr.createButton(TrayLocation.TL_CENTER, "EnterInventoryBtn", "Inventory Demo", 250);
-            AdvancedMogreFramework.Instance.mTrayMgr.createButton(TrayLocation.TL_CENTER, "BackBtn", "Back", 250);
-            AdvancedMogreFramework.Instance.mTrayMgr.createLabel(TrayLocation.TL_TOP, "GameLbl", "View Game Demos", 250);
+            Framework.Instance.mTrayMgr.destroyAllWidgets();
+            Framework.Instance.mTrayMgr.createButton(TrayLocation.TL_CENTER, "EnterDrivingCarBtn", "Driving Car", 250);
+            Framework.Instance.mTrayMgr.createButton(TrayLocation.TL_CENTER, "EnterInventoryBtn", "Inventory Demo", 250);
+            Framework.Instance.mTrayMgr.createButton(TrayLocation.TL_CENTER, "BackBtn", "Back", 250);
+            Framework.Instance.mTrayMgr.createLabel(TrayLocation.TL_TOP, "GameLbl", "View Game Demos", 250);
         }
 
         public void createScene()
         { }
         public override void Exit()
         {
-            AdvancedMogreFramework.Instance.mLog.LogMessage("Leaving MenuState...");
+            Framework.Instance.mLog.LogMessage("Leaving MenuState...");
 
-            AdvancedMogreFramework.Instance.mMouse.MouseMoved -= mouseMoved;
-            AdvancedMogreFramework.Instance.mMouse.MousePressed -= mousePressed;
-            AdvancedMogreFramework.Instance.mMouse.MouseReleased -= mouseReleased;
-            AdvancedMogreFramework.Instance.mKeyboard.KeyPressed -= keyPressed;
-            AdvancedMogreFramework.Instance.mKeyboard.KeyReleased -= keyReleased;
+            Framework.Instance.mMouse.MouseMoved -= mouseMoved;
+            Framework.Instance.mMouse.MousePressed -= mousePressed;
+            Framework.Instance.mMouse.MouseReleased -= mouseReleased;
+            Framework.Instance.mKeyboard.KeyPressed -= keyPressed;
+            Framework.Instance.mKeyboard.KeyReleased -= keyReleased;
 
             mSceneMgr.DestroyCamera(mCamera);
             if(mSceneMgr!=null)
-                AdvancedMogreFramework.Instance.mRoot.DestroySceneManager(mSceneMgr);
+                Framework.Instance.mRoot.DestroySceneManager(mSceneMgr);
 
-            AdvancedMogreFramework.Instance.mTrayMgr.clearAllTrays();
-            AdvancedMogreFramework.Instance.mTrayMgr.destroyAllWidgets();
-            AdvancedMogreFramework.Instance.mTrayMgr.setListener(null);
+            Framework.Instance.mTrayMgr.clearAllTrays();
+            Framework.Instance.mTrayMgr.destroyAllWidgets();
+            Framework.Instance.mTrayMgr.setListener(null);
         }
 
         public bool keyPressed(KeyEvent keyEventRef)
         {
-            if(AdvancedMogreFramework.Instance.mKeyboard.IsKeyDown(MOIS.KeyCode.KC_ESCAPE))
+            if(Framework.Instance.mKeyboard.IsKeyDown(MOIS.KeyCode.KC_ESCAPE))
             {
                 m_bQuit = true;
                 return true;
             }
 
-            AdvancedMogreFramework.Instance.KeyPressed(keyEventRef);
+            Framework.Instance.KeyPressed(keyEventRef);
             return true;
         }
         public bool keyReleased(KeyEvent keyEventRef)
         {
-            AdvancedMogreFramework.Instance.KeyReleased(keyEventRef);
+            Framework.Instance.KeyReleased(keyEventRef);
             return true;
         }
 
         public bool mouseMoved(MouseEvent evt)
         {
-            if (AdvancedMogreFramework.Instance.mTrayMgr.injectMouseMove(evt)) return true;
+            if (Framework.Instance.mTrayMgr.injectMouseMove(evt)) return true;
             return true;
         }
         public bool mousePressed(MouseEvent evt, MouseButtonID id)
         {
-            if (AdvancedMogreFramework.Instance.mTrayMgr.injectMouseDown(evt, id)) return true;
+            if (Framework.Instance.mTrayMgr.injectMouseDown(evt, id)) return true;
             return true;
         }
         public bool mouseReleased(MouseEvent evt, MouseButtonID id)
         {
-            if (AdvancedMogreFramework.Instance.mTrayMgr.injectMouseUp(evt, id)) return true;
+            if (Framework.Instance.mTrayMgr.injectMouseUp(evt, id)) return true;
             return true;
         }
 
@@ -200,7 +200,7 @@ namespace AdvancedMogreFramework.States
         public override void Update(double timeSinceLastFrame)
         {
             mFrameEvent.timeSinceLastFrame = (float)timeSinceLastFrame;
-            AdvancedMogreFramework.Instance.mTrayMgr.frameRenderingQueued(mFrameEvent);
+            Framework.Instance.mTrayMgr.frameRenderingQueued(mFrameEvent);
  
             if(m_bQuit == true)
             {

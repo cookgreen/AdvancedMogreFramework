@@ -526,14 +526,14 @@ namespace AdvancedMogreFramework
 		        {
 			        // slowly fade this animation in until it has full weight
 			        float newWeight = mAnims[i].Weight + deltaTime * ANIM_FADE_SPEED;
-			        mAnims[i].Weight=AdvancedMogreFramework.Instance.Clamp(newWeight, 0, 1);
+			        mAnims[i].Weight=Framework.Instance.Clamp(newWeight, 0, 1);
 			        if (newWeight >= 1) mFadingIn[i] = false;
 		        }
 		        else if (mFadingOut[i])
 		        {
 			        // slowly fade this animation out until it has no weight, and then disable it
 			        float newWeight = mAnims[i].Weight - deltaTime * ANIM_FADE_SPEED;
-                    mAnims[i].Weight=AdvancedMogreFramework.Instance.Clamp(newWeight, 0, 1);
+                    mAnims[i].Weight=Framework.Instance.Clamp(newWeight, 0, 1);
 			        if (newWeight <= 0)
 			        {
 				        mAnims[i].Enabled=false;

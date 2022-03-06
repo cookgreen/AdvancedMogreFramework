@@ -76,29 +76,29 @@ namespace AdvancedMogreFramework.States
  
 	        while(!mShutdown)
 	        {
-		        if(AdvancedMogreFramework.Instance.mRenderWnd.IsClosed)mShutdown = true;
+		        if(Framework.Instance.mRenderWnd.IsClosed)mShutdown = true;
  
 		        WindowEventUtilities.MessagePump();
 
-                if (AdvancedMogreFramework.Instance.mRenderWnd.IsActive)
+                if (Framework.Instance.mRenderWnd.IsActive)
 		        {
-                    startTime = AdvancedMogreFramework.Instance.mTimer.MillisecondsCPU;
+                    startTime = Framework.Instance.mTimer.MillisecondsCPU;
 
-                    AdvancedMogreFramework.Instance.mKeyboard.Capture();
-                    AdvancedMogreFramework.Instance.mMouse.Capture();
+                    Framework.Instance.mKeyboard.Capture();
+                    Framework.Instance.mMouse.Capture();
 
                     mActiveStateStack.Last().Update(timeSinceLastFrame * 1.0 / 1000);
 
-                    AdvancedMogreFramework.Instance.mKeyboard.Capture();
-                    AdvancedMogreFramework.Instance.mMouse.Capture();
+                    Framework.Instance.mKeyboard.Capture();
+                    Framework.Instance.mMouse.Capture();
 
-                    AdvancedMogreFramework.Instance.UpdateOgre(timeSinceLastFrame * 1.0 / 1000);
+                    Framework.Instance.UpdateOgre(timeSinceLastFrame * 1.0 / 1000);
 
-                    if (AdvancedMogreFramework.Instance.mRoot != null)
+                    if (Framework.Instance.mRoot != null)
                     {
-                        AdvancedMogreFramework.Instance.mRoot.RenderOneFrame();
+                        Framework.Instance.mRoot.RenderOneFrame();
                     }
-                    timeSinceLastFrame = AdvancedMogreFramework.Instance.mTimer.MillisecondsCPU - startTime;
+                    timeSinceLastFrame = Framework.Instance.mTimer.MillisecondsCPU - startTime;
 		        }
 		        else
 		        {
@@ -106,7 +106,7 @@ namespace AdvancedMogreFramework.States
 		        }
 	        }
 
-            AdvancedMogreFramework.Instance.mLog.LogMessage("Main loop quit");
+            Framework.Instance.mLog.LogMessage("Main loop quit");
          }
          public override void ChangeAppState(AppState state)
          {
@@ -180,8 +180,8 @@ namespace AdvancedMogreFramework.States
 
          protected void init(AppState state)
          {
-             AdvancedMogreFramework.Instance.mTrayMgr.setListener(state);
-             AdvancedMogreFramework.Instance.mRenderWnd.ResetStatistics();
+             Framework.Instance.mTrayMgr.setListener(state);
+             Framework.Instance.mRenderWnd.ResetStatistics();
          }
 
          protected List<AppState> mActiveStateStack=new List<AppState>();

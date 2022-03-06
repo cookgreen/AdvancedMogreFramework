@@ -39,10 +39,10 @@ namespace AdvancedMogreFramework.Core
 
         public void Start()
         {
-            if (!AdvancedMogreFramework.Instance.InitOgre("AdvancedMogreFramework"))
+            if (!Framework.Instance.InitOgre("AdvancedMogreFramework"))
 		        return;
 
-            AdvancedMogreFramework.Instance.mLog.LogMessage("Demo initialized!");
+            Framework.Instance.mLog.LogMessage("Framework initialized!");
  
 	        mAppStateManager = new AppStateManager();
 

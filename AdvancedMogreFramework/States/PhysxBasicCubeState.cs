@@ -32,7 +32,7 @@ namespace AdvancedMogreFramework.States
             defm.Restitution = 0.5f;
             defm.DynamicFriction = defm.StaticFriction = 0.6f;
 
-            trayMgr = AdvancedMogreFramework.Instance.mTrayMgr;
+            trayMgr = Framework.Instance.mTrayMgr;
             cubeActorNodes = new List<ActorNode>();
         }
 
@@ -40,16 +40,16 @@ namespace AdvancedMogreFramework.States
         {
             trayMgr.destroyAllWidgets();
 
-            mSceneMgr = AdvancedMogreFramework.Instance.mRoot.CreateSceneManager(SceneType.ST_GENERIC, "PhysxBasicCubeMgr");
+            mSceneMgr = Framework.Instance.mRoot.CreateSceneManager(SceneType.ST_GENERIC, "PhysxBasicCubeMgr");
             ColourValue cvAmbineLight = new ColourValue(0.7f, 0.7f, 0.7f);
             mSceneMgr.AmbientLight = cvAmbineLight;//(Ogre::ColourValue(0.7f, 0.7f, 0.7f));
 
             mCamera = mSceneMgr.CreateCamera("PhysxBasicCubeCamera");
             mCamera.NearClipDistance = 5;
             mCamera.FarClipDistance = 999;
-            mCamera.AspectRatio = AdvancedMogreFramework.Instance.mViewport.ActualWidth / AdvancedMogreFramework.Instance.mViewport.ActualHeight;
+            mCamera.AspectRatio = Framework.Instance.mViewport.ActualWidth / Framework.Instance.mViewport.ActualHeight;
 
-            AdvancedMogreFramework.Instance.mViewport.Camera = mCamera;
+            Framework.Instance.mViewport.Camera = mCamera;
 
             Entity tableEnt = mSceneMgr.CreateEntity("PhysxBasicCube_Table_" + Guid.NewGuid(), "PhysxBasicCube_Table.mesh");
             tableEnt.CastShadows = false;
@@ -70,17 +70,17 @@ namespace AdvancedMogreFramework.States
 
             scene.Simulate(0);
 
-            AdvancedMogreFramework.Instance.mMouse.MouseMoved += mouseMoved;
-            AdvancedMogreFramework.Instance.mMouse.MousePressed += mousePressed;
-            AdvancedMogreFramework.Instance.mMouse.MouseReleased += mouseReleased;
-            AdvancedMogreFramework.Instance.mKeyboard.KeyPressed += keyPressed;
-            AdvancedMogreFramework.Instance.mKeyboard.KeyReleased += keyReleased;
+            Framework.Instance.mMouse.MouseMoved += mouseMoved;
+            Framework.Instance.mMouse.MousePressed += mousePressed;
+            Framework.Instance.mMouse.MouseReleased += mouseReleased;
+            Framework.Instance.mKeyboard.KeyPressed += keyPressed;
+            Framework.Instance.mKeyboard.KeyReleased += keyReleased;
         }
 
         private void AddCube()
         {
             double d = 0.1 + 0.2 * rnd.NextDouble();
-            Mogre.Vector3 pos = new Mogre.Vector3((float)(-1 * d), (float)20, 0);
+            Mogre.Vector3 pos = new Mogre.Vector3((float)(-1 * d), (float)10, 0);
 
             string cubeName = "CUSTOME_CUBE_" + Guid.NewGuid().ToString();
             Entity cubeEnt = mSceneMgr.CreateEntity(cubeName, "Cube.mesh");

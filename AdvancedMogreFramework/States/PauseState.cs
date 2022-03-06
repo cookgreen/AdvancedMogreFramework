@@ -43,10 +43,10 @@ namespace AdvancedMogreFramework.States
 
         public override void Enter()
         {
-            AdvancedMogreFramework.Instance.mLog.LogMessage("Entering PauseState...");
+            Framework.Instance.mLog.LogMessage("Entering PauseState...");
             m_bQuit = false;
  
-            mSceneMgr = AdvancedMogreFramework.Instance.mRoot.CreateSceneManager(SceneType.ST_GENERIC, "PauseSceneMgr");
+            mSceneMgr = Framework.Instance.mRoot.CreateSceneManager(SceneType.ST_GENERIC, "PauseSceneMgr");
             ColourValue cvAmbineLight=new ColourValue(0.7f,0.7f,0.7f);
             mSceneMgr.AmbientLight=cvAmbineLight;
  
@@ -57,31 +57,31 @@ namespace AdvancedMogreFramework.States
             mCamera.LookAt(vectCamLookAt);
             mCamera.NearClipDistance=1;
  
-            mCamera.AspectRatio=AdvancedMogreFramework.Instance.mViewport.ActualWidth /
-            AdvancedMogreFramework.Instance.mViewport.ActualHeight;
+            mCamera.AspectRatio=Framework.Instance.mViewport.ActualWidth /
+            Framework.Instance.mViewport.ActualHeight;
  
-            AdvancedMogreFramework.Instance.mViewport.Camera=mCamera;
+            Framework.Instance.mViewport.Camera=mCamera;
 
-            AdvancedMogreFramework.Instance.mTrayMgr.destroyAllWidgets();
-            AdvancedMogreFramework.Instance.mTrayMgr.showCursor();
-            switch(AdvancedMogreFramework.lastState)
+            Framework.Instance.mTrayMgr.destroyAllWidgets();
+            Framework.Instance.mTrayMgr.showCursor();
+            switch(Framework.lastState)
             {
                 case "GameState":
-                AdvancedMogreFramework.Instance.mTrayMgr.createButton(TrayLocation.TL_CENTER, "BackToGameBtn", "Return to GameState", 250);
+                Framework.Instance.mTrayMgr.createButton(TrayLocation.TL_CENTER, "BackToGameBtn", "Return to GameState", 250);
                 break;
                 case "SinbadState":
-                AdvancedMogreFramework.Instance.mTrayMgr.createButton(TrayLocation.TL_CENTER, "BackToSinbadBtn", "Return to SinbadState", 250);
+                Framework.Instance.mTrayMgr.createButton(TrayLocation.TL_CENTER, "BackToSinbadBtn", "Return to SinbadState", 250);
                 break;
             }
-            AdvancedMogreFramework.Instance.mTrayMgr.createButton(TrayLocation.TL_CENTER, "BackToMenuBtn", "Return to Menu", 250);
-            AdvancedMogreFramework.Instance.mTrayMgr.createButton(TrayLocation.TL_CENTER, "ExitBtn", "Exit AdvancedOgreFramework", 250);
-            AdvancedMogreFramework.Instance.mTrayMgr.createLabel(TrayLocation.TL_TOP, "PauseLbl", "Pause mode", 250);
+            Framework.Instance.mTrayMgr.createButton(TrayLocation.TL_CENTER, "BackToMenuBtn", "Return to Menu", 250);
+            Framework.Instance.mTrayMgr.createButton(TrayLocation.TL_CENTER, "ExitBtn", "Exit AdvancedOgreFramework", 250);
+            Framework.Instance.mTrayMgr.createLabel(TrayLocation.TL_TOP, "PauseLbl", "Pause mode", 250);
 
-            AdvancedMogreFramework.Instance.mMouse.MouseMoved += mouseMoved;
-            AdvancedMogreFramework.Instance.mMouse.MousePressed += mousePressed;
-            AdvancedMogreFramework.Instance.mMouse.MouseReleased += mouseReleased;
-            AdvancedMogreFramework.Instance.mKeyboard.KeyPressed += keyPressed;
-            AdvancedMogreFramework.Instance.mKeyboard.KeyReleased += keyReleased;
+            Framework.Instance.mMouse.MouseMoved += mouseMoved;
+            Framework.Instance.mMouse.MousePressed += mousePressed;
+            Framework.Instance.mMouse.MouseReleased += mouseReleased;
+            Framework.Instance.mKeyboard.KeyPressed += keyPressed;
+            Framework.Instance.mKeyboard.KeyReleased += keyReleased;
 
             m_bQuestionActive = true;
  
@@ -91,55 +91,55 @@ namespace AdvancedMogreFramework.States
         { }
         public override void Exit()
         {
-            AdvancedMogreFramework.Instance.mLog.LogMessage("Leaving PauseState...");
+            Framework.Instance.mLog.LogMessage("Leaving PauseState...");
 
-            AdvancedMogreFramework.Instance.mMouse.MouseMoved -= mouseMoved;
-            AdvancedMogreFramework.Instance.mMouse.MousePressed -= mousePressed;
-            AdvancedMogreFramework.Instance.mMouse.MouseReleased -= mouseReleased;
-            AdvancedMogreFramework.Instance.mKeyboard.KeyPressed -= keyPressed;
-            AdvancedMogreFramework.Instance.mKeyboard.KeyReleased -= keyReleased;
+            Framework.Instance.mMouse.MouseMoved -= mouseMoved;
+            Framework.Instance.mMouse.MousePressed -= mousePressed;
+            Framework.Instance.mMouse.MouseReleased -= mouseReleased;
+            Framework.Instance.mKeyboard.KeyPressed -= keyPressed;
+            Framework.Instance.mKeyboard.KeyReleased -= keyReleased;
 
             mSceneMgr.DestroyCamera(mCamera);
             if(mSceneMgr!=null)
-                AdvancedMogreFramework.Instance.mRoot.DestroySceneManager(mSceneMgr);
+                Framework.Instance.mRoot.DestroySceneManager(mSceneMgr);
 
-            AdvancedMogreFramework.Instance.mTrayMgr.clearAllTrays();
-            AdvancedMogreFramework.Instance.mTrayMgr.destroyAllWidgets();
-            AdvancedMogreFramework.Instance.mTrayMgr.setListener(null);
+            Framework.Instance.mTrayMgr.clearAllTrays();
+            Framework.Instance.mTrayMgr.destroyAllWidgets();
+            Framework.Instance.mTrayMgr.setListener(null);
         }
 
         public bool keyPressed(KeyEvent keyEventRef)
         {
-            if(AdvancedMogreFramework.Instance.mKeyboard.IsKeyDown(KeyCode.KC_ESCAPE) && !m_bQuestionActive)
+            if(Framework.Instance.mKeyboard.IsKeyDown(KeyCode.KC_ESCAPE) && !m_bQuestionActive)
             {
                 m_bQuit = true;
                 return true;
             }
 
-            AdvancedMogreFramework.Instance.KeyPressed(keyEventRef);
+            Framework.Instance.KeyPressed(keyEventRef);
  
             return true;
         }
         public bool keyReleased(KeyEvent keyEventRef)
         {
-            AdvancedMogreFramework.Instance.KeyReleased(keyEventRef);
+            Framework.Instance.KeyReleased(keyEventRef);
  
             return true;
         }
 
         public bool mouseMoved(MouseEvent evt)
         {
-            if (AdvancedMogreFramework.Instance.mTrayMgr.injectMouseMove(evt)) return true;
+            if (Framework.Instance.mTrayMgr.injectMouseMove(evt)) return true;
             return true;
         }
         public bool mousePressed(MouseEvent evt, MouseButtonID id)
         {
-            if (AdvancedMogreFramework.Instance.mTrayMgr.injectMouseDown(evt, id)) return true;
+            if (Framework.Instance.mTrayMgr.injectMouseDown(evt, id)) return true;
             return true;
         }
         public bool mouseReleased(MouseEvent evt, MouseButtonID id)
         {
-            if (AdvancedMogreFramework.Instance.mTrayMgr.injectMouseUp(evt, id)) return true;
+            if (Framework.Instance.mTrayMgr.injectMouseUp(evt, id)) return true;
             return true;
         }
 
@@ -169,7 +169,7 @@ namespace AdvancedMogreFramework.States
             if(yesHit == true)
                 shutdown();
             else
-                AdvancedMogreFramework.Instance.mTrayMgr.closeDialog();
+                Framework.Instance.mTrayMgr.closeDialog();
  
             m_bQuestionActive = false;
         }
@@ -177,7 +177,7 @@ namespace AdvancedMogreFramework.States
         public override void Update(double timeSinceLastFrame)
         {
             mFrameEvent.timeSinceLastFrame = (float)timeSinceLastFrame;
-            AdvancedMogreFramework.Instance.mTrayMgr.frameRenderingQueued(mFrameEvent);
+            Framework.Instance.mTrayMgr.frameRenderingQueued(mFrameEvent);
  
             if(m_bQuit == true)
             {

@@ -36,7 +36,7 @@ namespace AdvancedMogreFramework.States
     {
         public override void Enter()
         {
-            mSceneMgr = AdvancedMogreFramework.Instance.mRoot.CreateSceneManager(Mogre.SceneType.ST_GENERIC, "CreditSceneMgr");
+            mSceneMgr = Framework.Instance.mRoot.CreateSceneManager(Mogre.SceneType.ST_GENERIC, "CreditSceneMgr");
             ColourValue cvAmbineLight = new ColourValue(0.7f, 0.7f, 0.7f);
             mSceneMgr.AmbientLight = cvAmbineLight;
 
@@ -46,14 +46,14 @@ namespace AdvancedMogreFramework.States
             Mogre.Vector3 vectorCameraLookAt = new Mogre.Vector3(5, 20, 0);
             mCamera.LookAt(vectorCameraLookAt);
             mCamera.NearClipDistance = 5;
-            mCamera.AspectRatio = AdvancedMogreFramework.Instance.mViewport.ActualWidth / AdvancedMogreFramework.Instance.mViewport.ActualHeight;
+            mCamera.AspectRatio = Framework.Instance.mViewport.ActualWidth / Framework.Instance.mViewport.ActualHeight;
 
-            AdvancedMogreFramework.Instance.mViewport.Camera = mCamera;
+            Framework.Instance.mViewport.Camera = mCamera;
 
             ScreenManager.Instance.ChangeScreen("Credit");
             ScreenManager.Instance.OnCurrentScreenExit += OnCurrentScreenExit;
 
-            AdvancedMogreFramework.Instance.mMouse.MousePressed += MousePressed;
+            Framework.Instance.mMouse.MousePressed += MousePressed;
         }
 
         private bool MousePressed(MOIS.MouseEvent arg, MOIS.MouseButtonID id)
@@ -88,9 +88,9 @@ namespace AdvancedMogreFramework.States
         public override void Exit()
         {
             mSceneMgr.DestroyCamera(mCamera);
-            AdvancedMogreFramework.Instance.mRoot.DestroySceneManager(mSceneMgr);
+            Framework.Instance.mRoot.DestroySceneManager(mSceneMgr);
             ScreenManager.Instance.Dispose();
-            AdvancedMogreFramework.Instance.mMouse.MousePressed -= MousePressed;
+            Framework.Instance.mMouse.MousePressed -= MousePressed;
         }
     }
 }

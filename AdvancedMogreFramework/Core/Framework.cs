@@ -33,7 +33,7 @@ using Mogre_Procedural.MogreBites;
 
 namespace AdvancedMogreFramework
 {
-    class AdvancedMogreFramework 
+    class Framework 
     {
         public Root mRoot;
         public RenderWindow mRenderWnd;
@@ -51,7 +51,7 @@ namespace AdvancedMogreFramework
         //public NAudio.Wave.WaveOut mWaveOut;
 
         public static string lastState;
-        public AdvancedMogreFramework()
+        public Framework()
         {
             mRoot = null;
             mRenderWnd = null;
@@ -64,7 +64,7 @@ namespace AdvancedMogreFramework
             mMouse = null;
             mTrayMgr = null;
          }
-        ~AdvancedMogreFramework()
+        ~Framework()
         {
             //LogManager.Singleton.LogMessage("Shutdown OGRE...");
             //if (AdvancedMogreFramework.m_pTrayMgr != null) m_pTrayMgr = null;
@@ -189,14 +189,14 @@ namespace AdvancedMogreFramework
         {
             return System.Math.Max(System.Math.Min(val, maxval), minval);
         }
-        private static AdvancedMogreFramework instance;
-        public static AdvancedMogreFramework Instance
+        private static Framework instance;
+        public static Framework Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new AdvancedMogreFramework();
+                    instance = new Framework();
                 }
                 return instance;
             }
