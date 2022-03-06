@@ -108,7 +108,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\AdvancedMogreFramework.cs" />
+    <Compile Include="Core\Framework.cs" />
     <Compile Include="Helper\ActorNode.cs" />
     <Compile Include="Helper\MeshToNavmesh.cs" />
     <Compile Include="Helper\ObjToMesh.cs" />
@@ -137,7 +137,7 @@
     <Compile Include="States\PhysxNewtonCradleState.cs" />
     <Compile Include="Core\SceneProp.cs" />
     <Compile Include="States\SinbadState.cs" />
-    <Compile Include="Core\DemoApp.cs" />
+    <Compile Include="Core\FrameworkApp.cs" />
     <Compile Include="States\GameState.cs" />
     <Compile Include="States\MenuState.cs" />
     <Compile Include="States\PauseState.cs" />
