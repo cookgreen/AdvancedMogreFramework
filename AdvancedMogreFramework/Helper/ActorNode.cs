@@ -12,6 +12,15 @@ namespace AdvancedMogreFramework.Helper
         private SceneNode sceneNode;
         private Actor actor;
 
+        public SceneNode SceneNode
+        {
+            get { return sceneNode; }
+        }
+        public Actor Actor
+        {
+            get { return actor; }
+        }
+
         public ActorNode(SceneNode sceneNode, Actor actor)
         {
             this.sceneNode = sceneNode;

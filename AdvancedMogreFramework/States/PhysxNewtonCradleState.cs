@@ -75,47 +75,13 @@ namespace AdvancedMogreFramework.States
             {
                 sphereActorDesc.GlobalPosition = new Mogre.Vector3(2 * radius * i, centery, 0);
                 var sphereActor = scene.CreateActor(sphereActorDesc);
-            }
-
-            for (int i = -2; i <= 2; i++)
-            {
-                var actor = scene.Actors[i + 3];
-                var pos = actor.GlobalPosition;
-
-                ManualObject linesObject = mSceneMgr.CreateManualObject();
-                SceneNode linesObjectNode = mSceneMgr.RootSceneNode.CreateChildSceneNode();
-                linesObject.Begin(mats[i + 2], RenderOperation.OperationTypes.OT_LINE_LIST);
-
-                linesObject.Position(pos.x, pos.y, pos.z);
-                linesObject.Position(2 * radius * i, stringlength + centery, -3);
-                linesObject.Position(pos.x, pos.y, pos.z);
-                linesObject.Position(2 * radius * i, stringlength + centery, 3);
-                
-                linesObject.End();
-                linesObjectNode.AttachObject(linesObject);
-
-                var lineActorDesc = new ActorDesc();
-                lineActorDesc.Body = new BodyDesc(0.124f, 1.0f);
-                lineActorDesc.Density = 80f;
-                lineActorDesc.Shapes.Add(new BoxShapeDesc());
-                var lineActor = scene.CreateActor(lineActorDesc);
-
-                actorNodes.Add(new ActorNode(linesObjectNode, lineActor));
-
-                var fixedJointDesc = new FixedJointDesc();
-                fixedJointDesc.JointFlags = JointFlags.CollisionEnabled | JointFlags.Visualization;
-                fixedJointDesc.SetActors(lineActor, actor);
-                //fixedJointDesc.GlobalAnchor = new Mogre.Vector3();
-                //fixedJointDesc.GlobalAxis = new Mogre.Vector3(0, 0, 1);
-
-                scene.CreateJoint(fixedJointDesc);
 
                 var revoluteJointDesc = new RevoluteJointDesc();
                 revoluteJointDesc.JointFlags = JointFlags.CollisionEnabled | JointFlags.Visualization;
-                revoluteJointDesc.SetActors(null, lineActor);
+                revoluteJointDesc.SetActors(null, sphereActor);
                 revoluteJointDesc.GlobalAnchor = sphereActorDesc.GlobalPosition + new Mogre.Vector3(0, stringlength, 0);
                 revoluteJointDesc.GlobalAxis = new Mogre.Vector3(0, 0, 1);
-                
+
                 scene.CreateJoint(revoluteJointDesc);
             }
 
@@ -132,34 +98,43 @@ namespace AdvancedMogreFramework.States
                 Mogre.Vector3 pos = actor.GlobalPosition;
 
                 var sphereEnt = mSceneMgr.CreateEntity("Sphere_" + Guid.NewGuid(), "SPHERE");
+                sphereEnt.SetMaterialName(mats[2 - i]);
                 var sphereSceneNode = mSceneMgr.RootSceneNode.CreateChildSceneNode();
                 sphereSceneNode.AttachObject(sphereEnt);
                 sphereSceneNode.Position = pos;
                 actorNodes.Add(new ActorNode(sphereSceneNode, actor));
             }
 
-            //for (int i = -2; i <= 2; i++)
-            //{
-            //    var actor = scene.Actors[i + 3];
-            //    Mogre.Vector3 pos = actor.GlobalPosition;
-            //
-            //    ManualObject linesObject = mSceneMgr.CreateManualObject();
-            //    SceneNode linesObjectNode = mSceneMgr.RootSceneNode.CreateChildSceneNode();
-            //    linesObject.Begin(mats[i + 2], RenderOperation.OperationTypes.OT_LINE_LIST);
-            //    
-            //    linesObject.Position(pos.x, pos.y, pos.z);
-            //    linesObject.Position(2 * radius * i, stringlength + centery, -3);
-            //    linesObject.Position(pos.x, pos.y, pos.z);
-            //    linesObject.Position(2 * radius * i, stringlength + centery, 3);
-            //
-            //    linesObject.End();
-            //    linesObjectNode.AttachObject(linesObject);
-            //}
+            for (int i = -2; i <= 2; i++)
+            {
+                var actor = scene.Actors[i + 3];
+                var pos = actor.GlobalPosition;
+
+                SceneNode actorSceneNode = actorNodes.Where(o => o.Actor.Name == actor.Name).FirstOrDefault().SceneNode;
+
+                ManualObject lineObject = mSceneMgr.CreateManualObject();
+                SceneNode lineObjectNode = actorSceneNode.CreateChildSceneNode();
+                lineObject.Begin(mats[i + 2], RenderOperation.OperationTypes.OT_LINE_STRIP);
+
+                lineObject.Position(pos.x, pos.y, pos.z);
+                lineObject.Position(2 * radius * i, stringlength + centery, -3);
+                lineObject.Position(pos.x, pos.y, pos.z);
+                lineObject.Position(2 * radius * i, stringlength + centery, 3);
+
+                lineObject.End();
+
+                lineObjectNode.Position = new Mogre.Vector3(
+                    pos.x - 4 * radius * i, 
+                    pos.y - stringlength, 
+                    pos.z
+                );
+                lineObjectNode.AttachObject(lineObject);
+            }
 
             //Panel
             ManualObject panelObject = mSceneMgr.CreateManualObject();
             SceneNode panelObjectNode = mSceneMgr.RootSceneNode.CreateChildSceneNode();
-            panelObject.Begin("BaseWhiteNoLighting", RenderOperation.OperationTypes.OT_TRIANGLE_LIST);
+            panelObject.Begin("Examples/Rockwall", RenderOperation.OperationTypes.OT_TRIANGLE_LIST);
             panelObject.Position(planesize, stringlength + centery, planesize);
             panelObject.Position(-planesize, stringlength + centery, planesize);
             panelObject.Position(-planesize, stringlength + centery, -planesize);
@@ -178,6 +153,8 @@ namespace AdvancedMogreFramework.States
                 actorPos.z + 15
                 );
             mCamera.Pitch(new Radian(new Degree(20)));
+
+            scene.Simulate(0);
 
             Framework.Instance.mMouse.MouseMoved += mouseMoved;
             Framework.Instance.mMouse.MousePressed += mousePressed;
@@ -210,7 +187,7 @@ namespace AdvancedMogreFramework.States
             moveCamera();
 
             scene.FlushStream();
-            scene.FetchResults(SimulationStatuses.AllFinished, false);
+            scene.FetchResults(SimulationStatuses.AllFinished, true);
             scene.Simulate(timeSinceLastFrame);
 
             UpdateActorNodes((float)timeSinceLastFrame);
