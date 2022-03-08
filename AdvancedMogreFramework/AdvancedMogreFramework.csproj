@@ -109,11 +109,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Framework.cs" />
+    <Compile Include="Entities\PhysxCommon.cs" />
     <Compile Include="Helper\ActorNode.cs" />
     <Compile Include="Helper\MeshToNavmesh.cs" />
     <Compile Include="Helper\ObjToMesh.cs" />
     <Compile Include="Helper\PhysxExpansion.cs" />
-    <Compile Include="Helper\StaticMesh.cs" />
+    <Compile Include="Helper\StaticMeshData.cs" />
     <Compile Include="Entities\CharacterControllerDescription.cs" />
     <Compile Include="Entities\CharacterControllerInteractionFlag.cs" />
     <Compile Include="Entities\GroupIdentifier.cs" />

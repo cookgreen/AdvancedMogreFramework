@@ -15,16 +15,19 @@ namespace AdvancedMogreFramework.States
         private Scene scene;
         private Physics physx;
 
-        const float centery = 2;
-        const float stringlength = 4.08f;
-        const float radius = 1.0f;
-        const float planesize = 4.5f;
+        private const float centery = 2;
+        private const float stringlength = 4.08f;
+        private const float radius = 1.0f;
+        private const float planesize = 4.5f;
 
         private List<ActorNode> actorNodes;
 
         public PhysxNewtonCradleState()
         {
             physx = Physics.Create();
+
+            physx.Parameters.VisualizationScale = 2.0f;
+            physx.Parameters.VisualizeCollisionSpheres = 1;
 
             SceneDesc desc = new SceneDesc();
             scene = physx.CreateScene(desc);

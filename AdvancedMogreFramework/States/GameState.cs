@@ -41,26 +41,26 @@ namespace AdvancedMogreFramework.States
     };
     public class GameState : AppState
     {
-        SceneNode m_pOgreHeadNode;
-        Entity m_pOgreHeadEntity;
-        MaterialPtr m_pOgreHeadMat;
-        MaterialPtr m_pOgreHeadMatHigh;
+        private SceneNode mOgreHeadNode;
+        private Entity mOgreHeadEntity;
+        private MaterialPtr mOgreHeadMat;
+        private MaterialPtr mOgreHeadMatHigh;
 
-        ParamsPanel m_pDetailsPanel;
-        bool m_bQuit;
+        private ParamsPanel mDetailsPanel;
+        private bool mQuit;
 
-        Mogre.Vector3 m_TranslateVector;
-        float m_MoveSpeed;
-        Degree m_RotateSpeed;
-        float m_MoveScale;
-        Degree m_RotScale;
+        private Mogre.Vector3 mTranslateVector;
+        private float mMoveSpeed;
+        private Degree mRotateSpeed;
+        private float mMoveScale;
+        private Degree mRotScale;
 
-        RaySceneQuery m_pRSQ;
-        SceneNode m_pCurrentObject;
-        Entity m_pCurrentEntity;
-        bool m_bRMouseDown;
+        private RaySceneQuery mRSQ;
+        private SceneNode mCurrentObject;
+        private Entity mCurrentEntity;
+        private bool mRMouseDown;
         //bool m_bLMouseDown;
-        bool m_bSettingsMode;
+        private bool mSettingsMode;
 
         private Scene physxScene;
         private Physics physx;
@@ -68,15 +68,15 @@ namespace AdvancedMogreFramework.States
 
         public GameState()
         {
-            m_MoveSpeed = 0.1f;
-            m_RotateSpeed = 0.3f;
+            mMoveSpeed = 0.1f;
+            mRotateSpeed = 0.3f;
 
             //m_bLMouseDown = false;
-            m_bRMouseDown = false;
-            m_bQuit = false;
-            m_bSettingsMode = false;
+            mRMouseDown = false;
+            mQuit = false;
+            mSettingsMode = false;
 
-            m_pDetailsPanel = null;
+            mDetailsPanel = null;
 
             physx = Physics.Create();
             SceneDesc desc = new SceneDesc();
@@ -95,8 +95,8 @@ namespace AdvancedMogreFramework.States
             mSceneMgr.AmbientLight=cvAmbineLight;//(Ogre::ColourValue(0.7f, 0.7f, 0.7f));
  
             Ray r=new Ray();
-            m_pRSQ = mSceneMgr.CreateRayQuery(r);
-            m_pRSQ.QueryMask=1<<0;
+            mRSQ = mSceneMgr.CreateRayQuery(r);
+            mRSQ.QueryMask=1<<0;
  
             mCamera = mSceneMgr.CreateCamera("GameCamera");
             Mogre.Vector3 vectCameraPostion=new Mogre.Vector3(5,60,60);
@@ -108,7 +108,7 @@ namespace AdvancedMogreFramework.States
             mCamera.AspectRatio=Framework.Instance.mViewport.ActualWidth / Framework.Instance.mViewport.ActualHeight;
 
             Framework.Instance.mViewport.Camera=mCamera;
-            m_pCurrentObject = null;
+            mCurrentObject = null;
 
  
             buildGUI();
@@ -117,31 +117,30 @@ namespace AdvancedMogreFramework.States
         }
         public void createScene()
         {
-            Mogre.Vector3 vectLightPos=new Mogre.Vector3(75,75,75);
-            var l = mSceneMgr.CreateLight("Light");//(75, 75, 75);
+            Mogre.Vector3 vectLightPos = new Mogre.Vector3(75, 75, 75);
+            var l = mSceneMgr.CreateLight("Light");
             l.Position = vectLightPos;
 
-            DotSceneLoader pDotSceneLoader = new DotSceneLoader();
-            pDotSceneLoader.ParseDotScene("CubeScene.xml", "General", mSceneMgr, mSceneMgr.RootSceneNode);
-            pDotSceneLoader=null;
+            DotSceneLoader dotSceneLoader = new DotSceneLoader();
+            dotSceneLoader.ParseDotScene("CubeScene.xml", "General", mSceneMgr, mSceneMgr.RootSceneNode);
 
             mSceneMgr.GetEntity("Cube01").QueryFlags = 1 << 1;
-            mSceneMgr.GetEntity("Cube02").QueryFlags=1<<1;//(CUBE_MASK);
-            mSceneMgr.GetEntity("Cube03").QueryFlags=1<<1;//(CUBE_MASK);
+            mSceneMgr.GetEntity("Cube02").QueryFlags = 1 << 1;
+            mSceneMgr.GetEntity("Cube03").QueryFlags = 1 << 1;
 
-            m_pOgreHeadEntity = mSceneMgr.CreateEntity("Cube", "ogrehead.mesh");
-            m_pOgreHeadEntity.QueryFlags=1<<0;
-            m_pOgreHeadNode = mSceneMgr.RootSceneNode.CreateChildSceneNode("CubeNode");
-            m_pOgreHeadNode.AttachObject(m_pOgreHeadEntity);
+            mOgreHeadEntity = mSceneMgr.CreateEntity("Cube", "ogrehead.mesh");
+            mOgreHeadEntity.QueryFlags = 1 << 0;
+            mOgreHeadNode = mSceneMgr.RootSceneNode.CreateChildSceneNode("CubeNode");
+            mOgreHeadNode.AttachObject(mOgreHeadEntity);
             Mogre.Vector3 vectOgreHeadNodePos = new Mogre.Vector3(0,0,-25);
-            m_pOgreHeadNode.Position = vectOgreHeadNodePos;// (Vector3(0, 0, -25));
+            mOgreHeadNode.Position = vectOgreHeadNodePos;
 
-            m_pOgreHeadMat = m_pOgreHeadEntity.GetSubEntity(1).GetMaterial();
-            m_pOgreHeadMatHigh = m_pOgreHeadMat.Clone("OgreHeadMatHigh");
+            mOgreHeadMat = mOgreHeadEntity.GetSubEntity(1).GetMaterial();
+            mOgreHeadMatHigh = mOgreHeadMat.Clone("OgreHeadMatHigh");
             ColourValue cvAmbinet = new Mogre.ColourValue(1, 0, 0);
-            m_pOgreHeadMatHigh.GetTechnique(0).GetPass(0).Ambient = cvAmbinet;
+            mOgreHeadMatHigh.GetTechnique(0).GetPass(0).Ambient = cvAmbinet;
             ColourValue cvDiffuse = new Mogre.ColourValue(1, 0, 0,0);
-            m_pOgreHeadMatHigh.GetTechnique(0).GetPass(0).Diffuse = cvDiffuse;
+            mOgreHeadMatHigh.GetTechnique(0).GetPass(0).Diffuse = cvDiffuse;
 
             physxScene.Simulate(0);
 
@@ -180,7 +179,7 @@ namespace AdvancedMogreFramework.States
 
             if (mSceneMgr!=null)
                 mSceneMgr.DestroyCamera(mCamera);
-                mSceneMgr.DestroyQuery(m_pRSQ);
+                mSceneMgr.DestroyQuery(mRSQ);
                 Framework.Instance.mRoot.DestroySceneManager(mSceneMgr);
         }
         public override bool Pause()
@@ -196,7 +195,7 @@ namespace AdvancedMogreFramework.States
             buildGUI();
 
             Framework.Instance.mViewport.Camera=mCamera;
-            m_bQuit = false;
+            mQuit = false;
         }
  
 	    public void moveCamera()
@@ -204,33 +203,33 @@ namespace AdvancedMogreFramework.States
             if (mCamera != null)
             {
                 if (Framework.Instance.mKeyboard.IsKeyDown(KeyCode.KC_LSHIFT))
-                    mCamera.MoveRelative(m_TranslateVector);
-                mCamera.MoveRelative(m_TranslateVector / 10);
+                    mCamera.MoveRelative(mTranslateVector);
+                mCamera.MoveRelative(mTranslateVector / 10);
             }
         }
         public void getInput()
         {
-            m_TranslateVector = Mogre.Vector3.ZERO;
+            mTranslateVector = Mogre.Vector3.ZERO;
 
-            if(m_bSettingsMode == false)
+            if(mSettingsMode == false)
             {
                 if(Framework.Instance.mKeyboard.IsKeyDown(KeyCode.KC_A))
-                    m_TranslateVector.x = -2;
+                    mTranslateVector.x = -2;
  
                 if(Framework.Instance.mKeyboard.IsKeyDown(KeyCode.KC_D))
-                    m_TranslateVector.x = 2;
+                    mTranslateVector.x = 2;
  
                 if(Framework.Instance.mKeyboard.IsKeyDown(KeyCode.KC_W))
-                    m_TranslateVector.z = -2;
+                    mTranslateVector.z = -2;
  
                 if(Framework.Instance.mKeyboard.IsKeyDown(KeyCode.KC_S))
-                    m_TranslateVector.z = 2;
+                    mTranslateVector.z = 2;
  
                 if(Framework.Instance.mKeyboard.IsKeyDown(KeyCode.KC_Q))
-                    m_TranslateVector.y = -2;
+                    mTranslateVector.y = -2;
  
                 if(Framework.Instance.mKeyboard.IsKeyDown(KeyCode.KC_E))
-                    m_TranslateVector.y = 2;
+                    mTranslateVector.y = 2;
  
         //camera roll
                 if(Framework.Instance.mKeyboard.IsKeyDown(KeyCode.KC_Z))
@@ -261,8 +260,8 @@ namespace AdvancedMogreFramework.States
             items.Insert(items.Count,"cam.oZ");
             items.Insert(items.Count,"Mode");
 
-            m_pDetailsPanel = Framework.Instance.mTrayMgr.createParamsPanel(TrayLocation.TL_TOPLEFT, "DetailsPanel", 200, items.ToArray());
-            m_pDetailsPanel.show();
+            mDetailsPanel = Framework.Instance.mTrayMgr.createParamsPanel(TrayLocation.TL_TOPLEFT, "DetailsPanel", 200, items.ToArray());
+            mDetailsPanel.show();
  
             string infoText = "[TAB] - Switch input mode\n\n[W] - Forward / Mode up\n[S] - Backwards/ Mode down\n[A] - Left\n";
             infoText.Insert(infoText.Length,"[D] - Right\n\nPress [SHIFT] to move faster\n\n[O] - Toggle FPS / logo\n");
@@ -284,7 +283,7 @@ namespace AdvancedMogreFramework.States
 
         public virtual bool keyPressed(KeyEvent keyEventRef)
         {
-            if(m_bSettingsMode == true)
+            if(mSettingsMode == true)
             {
                 if(Framework.Instance.mKeyboard.IsKeyDown(KeyCode.KC_S))
                 {
@@ -309,30 +308,30 @@ namespace AdvancedMogreFramework.States
  
             if(Framework.Instance.mKeyboard.IsKeyDown(KeyCode.KC_I))
             {
-                if(m_pDetailsPanel.getTrayLocation() == TrayLocation.TL_NONE)
+                if(mDetailsPanel.getTrayLocation() == TrayLocation.TL_NONE)
                 {
-                    Framework.Instance.mTrayMgr.moveWidgetToTray(m_pDetailsPanel, TrayLocation.TL_TOPLEFT, 0);
-                    m_pDetailsPanel.show();
+                    Framework.Instance.mTrayMgr.moveWidgetToTray(mDetailsPanel, TrayLocation.TL_TOPLEFT, 0);
+                    mDetailsPanel.show();
                 }
                 else
                 {
-                    Framework.Instance.mTrayMgr.removeWidgetFromTray(m_pDetailsPanel);
-                    m_pDetailsPanel.hide();
+                    Framework.Instance.mTrayMgr.removeWidgetFromTray(mDetailsPanel);
+                    mDetailsPanel.hide();
                 }
             }
  
             if(Framework.Instance.mKeyboard.IsKeyDown(KeyCode.KC_TAB))
             {
-                m_bSettingsMode = !m_bSettingsMode;
+                mSettingsMode = !mSettingsMode;
                 return true;
             }
  
-            if(m_bSettingsMode && Framework.Instance.mKeyboard.IsKeyDown(KeyCode.KC_RETURN) ||
+            if(mSettingsMode && Framework.Instance.mKeyboard.IsKeyDown(KeyCode.KC_RETURN) ||
                 Framework.Instance.mKeyboard.IsKeyDown(KeyCode.KC_NUMPADENTER))
             {
             }
  
-            if(!m_bSettingsMode || (m_bSettingsMode && !Framework.Instance.mKeyboard.IsKeyDown(KeyCode.KC_O)))
+            if(!mSettingsMode || (mSettingsMode && !Framework.Instance.mKeyboard.IsKeyDown(KeyCode.KC_O)))
                 Framework.Instance.KeyPressed(keyEventRef);
  
                 return true;
@@ -347,7 +346,7 @@ namespace AdvancedMogreFramework.States
         {
             if (Framework.Instance.mTrayMgr.injectMouseMove(evt)) return true;
  
-            if(m_bRMouseDown)
+            if(mRMouseDown)
             {
                 Degree deCameraYaw = new Degree(evt.state.X.rel * -0.1f);
                 mCamera.Yaw(deCameraYaw);
@@ -368,7 +367,7 @@ namespace AdvancedMogreFramework.States
             }
             else if (id == MouseButtonID.MB_Right)
             {
-                m_bRMouseDown = true;
+                mRMouseDown = true;
             }
  
             return true;
@@ -383,7 +382,7 @@ namespace AdvancedMogreFramework.States
             }
             else if(id == MouseButtonID.MB_Right)
             {
-                m_bRMouseDown = false;
+                mRMouseDown = false;
             }
  
             return true;
@@ -391,22 +390,22 @@ namespace AdvancedMogreFramework.States
 
         public void onLeftPressed(MouseEvent evt)
         {
-            if(m_pCurrentObject!=null)
+            if(mCurrentObject!=null)
             {
-                m_pCurrentObject.ShowBoundingBox=false;
-                m_pCurrentEntity.GetSubEntity(1).SetMaterial(m_pOgreHeadMat);
+                mCurrentObject.ShowBoundingBox=false;
+                mCurrentEntity.GetSubEntity(1).SetMaterial(mOgreHeadMat);
             }
  
             Ray mouseRay = mCamera.GetCameraToViewportRay(Framework.Instance.mMouse.MouseState.X.abs / (float)evt.state.width,
             Framework.Instance.mMouse.MouseState.Y.abs / (float)evt.state.height);
-            if (m_pRSQ == null)
+            if (mRSQ == null)
             {
                 return;
             }
-            m_pRSQ.Ray=mouseRay;
+            mRSQ.Ray=mouseRay;
             //m_pRSQ.SortByDistance=true;
  
-            RaySceneQueryResult result = m_pRSQ.Execute();
+            RaySceneQueryResult result = mRSQ.Execute();
  
             foreach(RaySceneQueryResultEntry itr in result)
             {
@@ -418,11 +417,11 @@ namespace AdvancedMogreFramework.States
                     }
                     var ent = mSceneMgr.GetEntity(itr.movable.Name);
                     Framework.Instance.mLog.LogMessage("MovableName: " + itr.movable.Name);
-                    m_pCurrentObject = ent.ParentSceneNode;
-                    Framework.Instance.mLog.LogMessage("ObjName " + m_pCurrentObject.Name);
-                    m_pCurrentObject.ShowBoundingBox=true;
-                    m_pCurrentEntity = mSceneMgr.GetEntity(itr.movable.Name);
-                    m_pCurrentEntity.GetSubEntity(1).SetMaterial(m_pOgreHeadMatHigh);
+                    mCurrentObject = ent.ParentSceneNode;
+                    Framework.Instance.mLog.LogMessage("ObjName " + mCurrentObject.Name);
+                    mCurrentObject.ShowBoundingBox = true;
+                    mCurrentEntity = mSceneMgr.GetEntity(itr.movable.Name);
+                    mCurrentEntity.GetSubEntity(1).SetMaterial(mOgreHeadMatHigh);
                     break;
                 }
             }
@@ -450,12 +449,13 @@ namespace AdvancedMogreFramework.States
             }
 
             mFrameEvent.timeSinceLastFrame = (float)timeSinceLastFrame;
+
             if (Framework.Instance.mTrayMgr != null)
             {
                 Framework.Instance.mTrayMgr.frameRenderingQueued(mFrameEvent);
             }
  
-            if(m_bQuit == true)
+            if(mQuit == true)
             {
                 popAppState();
                 return;
@@ -464,27 +464,32 @@ namespace AdvancedMogreFramework.States
             {
                 if (!Framework.Instance.mTrayMgr.isDialogVisible())
                 {
-                    if (m_pDetailsPanel!=null && m_pDetailsPanel.isVisible())
+                    if (mDetailsPanel!=null && mDetailsPanel.isVisible())
                     {
-                        m_pDetailsPanel.setParamValue(0, mCamera.DerivedPosition.x.ToString());
-                        m_pDetailsPanel.setParamValue(1, mCamera.DerivedPosition.y.ToString());
-                        m_pDetailsPanel.setParamValue(2, mCamera.DerivedPosition.z.ToString());
-                        m_pDetailsPanel.setParamValue(3, mCamera.DerivedOrientation.w.ToString());
-                        m_pDetailsPanel.setParamValue(4, mCamera.DerivedOrientation.x.ToString());
-                        m_pDetailsPanel.setParamValue(5, mCamera.DerivedOrientation.y.ToString());
-                        m_pDetailsPanel.setParamValue(6, mCamera.DerivedOrientation.z.ToString());
-                        if (m_bSettingsMode)
-                            m_pDetailsPanel.setParamValue(7, "Buffered Input");
+                        mDetailsPanel.setParamValue(0, mCamera.DerivedPosition.x.ToString());
+                        mDetailsPanel.setParamValue(1, mCamera.DerivedPosition.y.ToString());
+                        mDetailsPanel.setParamValue(2, mCamera.DerivedPosition.z.ToString());
+                        mDetailsPanel.setParamValue(3, mCamera.DerivedOrientation.w.ToString());
+                        mDetailsPanel.setParamValue(4, mCamera.DerivedOrientation.x.ToString());
+                        mDetailsPanel.setParamValue(5, mCamera.DerivedOrientation.y.ToString());
+                        mDetailsPanel.setParamValue(6, mCamera.DerivedOrientation.z.ToString());
+
+                        if (mSettingsMode)
+                        {
+                            mDetailsPanel.setParamValue(7, "Buffered Input");
+                        }
                         else
-                            m_pDetailsPanel.setParamValue(7, "Un-Buffered Input");
+                        {
+                            mDetailsPanel.setParamValue(7, "Un-Buffered Input");
+                        }
                     }
                 }
             }
  
-            m_MoveScale = m_MoveSpeed   * (float)timeSinceLastFrame;
-            m_RotScale  = m_RotateSpeed * (float)timeSinceLastFrame;
+            mMoveScale = mMoveSpeed   * (float)timeSinceLastFrame;
+            mRotScale  = mRotateSpeed * (float)timeSinceLastFrame;
  
-            m_TranslateVector = Mogre.Vector3.ZERO;
+            mTranslateVector = Mogre.Vector3.ZERO;
  
             getInput();
             moveCamera();
