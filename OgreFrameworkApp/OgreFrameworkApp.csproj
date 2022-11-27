@@ -48,6 +48,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\Mogre_Procedural.MogreBites.dll</HintPath>
     </Reference>
+    <Reference Include="Mogre_Procedural.MogreBites.Addons, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Mogre_Procedural.MogreBites.Addons.dll</HintPath>
+    </Reference>
     <Reference Include="MOIS, Version=1.1.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\MOIS.dll</HintPath>
@@ -66,12 +70,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AIStates\SinbadAttackAIState.cs" />
+    <Compile Include="AIStates\SinbadPatrolAIState.cs" />
+    <Compile Include="AIStates\SinbadRunwayAIState.cs" />
     <Compile Include="MainMenuState.cs" />
     <Compile Include="OgreFrameworkApp.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SinbadCharacter.cs" />
+    <Compile Include="SinbadCharacterController.cs" />
+    <Compile Include="SinbadState.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FSM\FSM.csproj">
+      <Project>{e7d17c8f-c014-46e7-811b-ecda746a832f}</Project>
+      <Name>FSM</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OgreFramework\OgreFramework.csproj">
       <Project>{9386440d-7738-4dd3-a1ae-b0f1235e5c88}</Project>
       <Name>OgreFramework</Name>

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OgreFramework", "OgreFramew
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OgreFrameworkApp", "OgreFrameworkApp\OgreFrameworkApp.csproj", "{155A46F4-3A62-4980-939C-298BC59A0DE0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FSM", "FSM\FSM.csproj", "{E7D17C8F-C014-46E7-811B-ECDA746A832F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -21,6 +23,9 @@ Global
 		{155A46F4-3A62-4980-939C-298BC59A0DE0}.Debug|x86.Build.0 = Debug|x86
 		{155A46F4-3A62-4980-939C-298BC59A0DE0}.Release|x86.ActiveCfg = Release|x86
 		{155A46F4-3A62-4980-939C-298BC59A0DE0}.Release|x86.Build.0 = Release|x86
+		{E7D17C8F-C014-46E7-811B-ECDA746A832F}.Debug|x86.ActiveCfg = Debug|x86
+		{E7D17C8F-C014-46E7-811B-ECDA746A832F}.Debug|x86.Build.0 = Debug|x86
+		{E7D17C8F-C014-46E7-811B-ECDA746A832F}.Release|x86.ActiveCfg = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
