@@ -141,7 +141,7 @@ namespace org.ogre.framework.app
         public override bool Pause()
         {
             OgreFramework.Instance.log.LogMessage("Pausing SinbadState...");
-            return true;
+            return false;
         }
         public override void Resume()
         {

@@ -50,13 +50,22 @@ namespace org.ogre.framework.app
             OgreFramework.Instance.trayMgr.destroyAllWidgets();
 
             OgreFramework.Instance.trayMgr.createLabel(TrayLocation.TL_TOP, "lbTitle", "AdvancedOgreFramework", 200);
-            OgreFramework.Instance.trayMgr.createButton(TrayLocation.TL_CENTER, "btnExit", "Exit", 300);
+            OgreFramework.Instance.trayMgr.createButton(TrayLocation.TL_CENTER, "btnSinbad", "Enter Sinbad", 250);
+            OgreFramework.Instance.trayMgr.createButton(TrayLocation.TL_CENTER, "btnExit", "Exit", 250);
 
             OgreFramework.Instance.mouse.MouseMoved += mouseMoved;
             OgreFramework.Instance.mouse.MousePressed += mousePressed;
             OgreFramework.Instance.mouse.MouseReleased += mouseReleased;
             OgreFramework.Instance.keyboard.KeyPressed += keyPressed;
             OgreFramework.Instance.keyboard.KeyReleased += keyReleased;
+        }
+
+        public override void Exit()
+        {
+            OgreFramework.Instance.trayMgr.destroyAllWidgets();
+
+            sceneMgr.DestroyCamera(camera);
+            Root.Singleton.DestroySceneManager(sceneMgr);
         }
 
         public bool keyPressed(KeyEvent keyEventRef)
@@ -94,9 +103,13 @@ namespace org.ogre.framework.app
 
         public override void buttonHit(Button button)
         {
-            if(button.getName() == "btnExit")
+            if (button.getName() == "btnExit")
             {
                 m_bQuit = true;
+            }
+            else if (button.getName() == "btnSinbad")
+            {
+                changeAppState(findByName("SinbadState"));
             }
         }
 

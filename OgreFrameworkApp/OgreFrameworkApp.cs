@@ -18,6 +18,7 @@ namespace org.ogre.framework.app
             appStateManager = new AppStateManager();
 
             AppState.Create<MainMenuState>(appStateManager, "MainMenu");
+            AppState.Create<SinbadState>(appStateManager, "SinbadState");
 
             appStateManager.Start(appStateManager.FindByName("MainMenu"));
         }

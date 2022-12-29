@@ -54,5 +54,7 @@ namespace org.ogre.framework
         protected Camera camera;
         protected SceneManager sceneMgr;
         protected FrameEvent frameEvent;
+
+        public object UserData { get; set; }
     }
 }
