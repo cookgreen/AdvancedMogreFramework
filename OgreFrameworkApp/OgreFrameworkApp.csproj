@@ -45,9 +45,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\Mogre.dll</HintPath>
     </Reference>
-    <Reference Include="Mogre_Procedural.MogreBites, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="MogreBites, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\Mogre_Procedural.MogreBites.dll</HintPath>
+      <HintPath>..\Lib\MogreBites.dll</HintPath>
     </Reference>
     <Reference Include="Mogre_Procedural.MogreBites.Addons, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

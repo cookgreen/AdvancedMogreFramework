@@ -42,9 +42,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\Mogre.dll</HintPath>
     </Reference>
-    <Reference Include="Mogre_Procedural.MogreBites, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\Mogre_Procedural.MogreBites.dll</HintPath>
+    <Reference Include="MogreBites">
+      <HintPath>..\Lib\MogreBites.dll</HintPath>
     </Reference>
     <Reference Include="MOIS, Version=1.1.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
